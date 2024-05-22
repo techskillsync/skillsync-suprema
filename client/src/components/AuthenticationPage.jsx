@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthenticationPage = () => {
+    const navigate = useNavigate();
+    
     const [activeTab, setActiveTab] = useState('login');
     const [loginData, setLoginData] = useState({
         email: '',
@@ -18,15 +21,18 @@ const AuthenticationPage = () => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        // Handle login form submission
+        // @ArmanDris: Handle login form submission
         console.log('Logging in with:', loginData);
+        navigate('/');
     };
 
     const handleSignupSubmit = (e) => {
         e.preventDefault();
-        // Handle signup form submission
+        // @ArmanDris: Handle signup form submission
         console.log('Signing up with:', signupData);
+        navigate('/welcome');
     };
+
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
