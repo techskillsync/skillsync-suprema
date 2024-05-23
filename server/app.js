@@ -6,8 +6,8 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
 
-// Serve static files from the React app's build directory
-app.use(express.static(path.join(__dirname, "client/build")));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 // Add the proxy middleware to route API requests
 app.use(
@@ -26,7 +26,7 @@ app.post("/post", (req, res) => {
 
 // For any other route, serve the React frontend
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 8080;
