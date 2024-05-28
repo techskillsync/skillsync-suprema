@@ -105,7 +105,8 @@ const Navbar = ({ logIn, signUp }) => {
             <div id="nav-actions-mobile" className="md:hidden">
               <a
                 key="Log In"
-                onClick={logIn}
+                // onClick={logIn}
+                href="/login"
                 // className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r dark:from-cyan-800 from-cyan-400 dark:to-lime-800 to-lime-300  hover:text-white px-3 py-2 hover:px-4 hover:py-3 rounded-md text-sm font-medium transition-all duration-300"
                 className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
               >
@@ -113,7 +114,8 @@ const Navbar = ({ logIn, signUp }) => {
               </a>
               <a
                 key="Sign Up"
-                onClick={signUp}
+                href="/login"
+                // onClick={signUp}
                 // className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r dark:from-cyan-800 from-cyan-400 dark:to-lime-800 to-lime-300  hover:text-white px-3 py-2 hover:px-4 hover:py-3 rounded-md text-sm font-medium transition-all duration-300"
                 className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
               >
@@ -124,14 +126,16 @@ const Navbar = ({ logIn, signUp }) => {
           <div id="nav-actions" className="hidden md:block">
             <a
               key="Log In"
-              onClick={logIn}
+              href="/login"
+              // onClick={logIn}
               className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
             >
               Log In
             </a>
             <a
               key="Sign Up"
-              onClick={signUp}
+              href="/login"
+              // onClick={signUp}
               className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
             >
               Sign Up
