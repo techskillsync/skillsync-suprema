@@ -34,7 +34,7 @@ const Navbar = ({ logIn, signUp }) => {
 
   return (
     <nav
-      className={`bg-white dark:bg-black sticky top-0 z-20 transition-shadow ${
+      className={`bg-white dark:bg-black sticky top-0 z-20 transition-shadow duration-300 ${
         hasShadow ? "shadow-lg dark:shadow-white/50 dark:shadow-sm" : ""
       }`}
     >

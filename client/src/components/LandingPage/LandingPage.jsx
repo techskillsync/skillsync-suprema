@@ -3,6 +3,7 @@ import Navbar from '../Navbar';
 import Hero from './Hero';
 import PdfResumeUpload from '../arman/pdfResumeUpload';
 import Spacer from '../Spacer';
+import SimplicitySection from './SimplicitySection';
 
 const LandingPage = () => {
     return (
@@ -10,6 +11,7 @@ const LandingPage = () => {
             <Navbar></Navbar>
             <Hero></Hero>
             <Spacer></Spacer>
+            <SimplicitySection />
         </div>
     );
 };
