@@ -8,7 +8,6 @@ const LandingPage = () => {
         <div>
             <Navbar></Navbar>
             <Hero></Hero>
-            <PdfResumeUpload />
         </div>
     );
 };

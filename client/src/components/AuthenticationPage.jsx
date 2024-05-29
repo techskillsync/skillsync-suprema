@@ -23,7 +23,7 @@ const AuthenticationPage = () => {
         e.preventDefault();
         // @ArmanDris: Handle login form submission
         console.log('Logging in with:', loginData);
-        navigate('/');
+        navigate('/welcome');
     };
 
     const handleSignupSubmit = (e) => {
