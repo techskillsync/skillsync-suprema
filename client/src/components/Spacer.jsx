@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Spacer = () => {
+const Spacer = ({className}) => {
     return (
-        <div className="w-[80%] mx-auto h-1 rounded bg-white opacity-50"></div>
+        <div className={className + " w-[80%] mx-auto h-1 rounded bg-white opacity-50"}></div>
     );
 };
 
