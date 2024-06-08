@@ -8,6 +8,8 @@ import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage/LandingPage";
 
 import supabase from './backend/supabaseClient'
+import LogInPage from "./components/Authentication/LogInPage";
+import SignUpPage from "./components/Authentication/SignUpPage";
 
 
 function App() {
@@ -38,17 +40,18 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/login" element={<AuthenticationPage />} />
+          <Route path="/login" element={<LogInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/welcome" element={<AuthenticatedWelcomePage />} />
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </Router>
-      <ul>
+      {/* <ul>
         {testStrings.map((testString) => (
           <li key={testString.Data}>{testString.Data}</li>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 }
