@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./public/index.html", "./src/**/*.{html,js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     extend: {
       backgroundImage: (theme) => ({
@@ -21,4 +21,5 @@ module.exports = {
     },
   },
   plugins: [],
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 };
