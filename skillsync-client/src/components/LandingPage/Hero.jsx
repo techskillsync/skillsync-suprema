@@ -6,7 +6,7 @@ const Hero = () => {
   const byLineChars = byLine.split("");
   return (
     <div className="pt-36 p-8 text-center text-white">
-      <div className="text-6xl font-bold">
+      <div className="text-3xl font-bold">
         <h1>Today Is The Day</h1>
         <h1>
           To{" "}
