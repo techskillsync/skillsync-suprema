@@ -20,7 +20,7 @@ function App() {
 
   async function getTestStrings() {
     try {
-      const { data, error } = await supabase.from("test").select();
+      const { data, error } = await supabase.from("test").select("Data");
 
       if (error) {
         console.error("Error fetching data:", error);
@@ -46,7 +46,7 @@ function App() {
       </Router>
       <ul>
         {testStrings.map((testString) => (
-          <li key={testString.name}>{testString.name}</li>
+          <li key={testString.Data}>{testString.Data}</li>
         ))}
       </ul>
     </>
