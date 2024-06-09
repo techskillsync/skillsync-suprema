@@ -1,8 +1,13 @@
 const express = require("express");
 const pdfRoutes = require('./routes/pdfRoutes');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 // Serve static files from client
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
