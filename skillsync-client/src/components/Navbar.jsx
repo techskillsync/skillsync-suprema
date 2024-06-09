@@ -134,7 +134,7 @@ const Navbar = ({ logIn, signUp }) => {
             </a>
             <a
               key="Sign Up"
-              href="/login"
+              href="/signup"
               // onClick={signUp}
               className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
             >
