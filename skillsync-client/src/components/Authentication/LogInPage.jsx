@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Spacer from "./Spacer";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
+import EmailLogin from "../../supabase/userLogin"
 
 const LogInPage = () => {
+  
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  async function handleFormSubmit(e) {
+    e.preventDefault()
+    const userGotSignedUp = await EmailLogin(email, password)
+
+    if (userGotSignedUp) { window.location.href = "/"; }
+    else { alert("Error signing up 😵") }
+}
+
   return (
     <div className="flex h-screen dark:bg-black">
       <div className="w-1/2 bg-gray-100">{/* Empty box */}</div>
@@ -25,13 +38,14 @@ const LogInPage = () => {
             </button>
           </div>
           <Spacer text="or continue with" />
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <div className="mb-4">
               <InputField
                 icon={FaEnvelope}
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                parentOnChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-4">
@@ -40,6 +54,7 @@ const LogInPage = () => {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
+                parentOnChange={e => setPassword(e.target.value)}
               />
             </div>
             <div className="flex items-center justify-between mb-4">
