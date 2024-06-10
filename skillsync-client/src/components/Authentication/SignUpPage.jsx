@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Spacer from "./Spacer";
-import { EmailSignUp } from "../../backend/UserSignUp";
+import { EmailSignUp } from "../../supabase/userSignUp.js";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import InputField from "./InputField";
