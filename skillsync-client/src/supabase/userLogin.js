@@ -1,10 +1,10 @@
 import supabase from "./supabaseClient"
-import { useDispatch } from 'react-redux'
-import { setData } from '../redux/userSlice'
 
 /**
- * Sign in a user using email and password.
- * @returns {Promise<boolean>} - A promise that resolves to true if the user is successfully signed in, or false otherwise.
+ * Sign a user in with email and password.
+ * @returns {Promise<object>} - A promise that resolves to an object
+ *                              with a status field and a data field
+ *                              if successful.
  */
 async function EmailLogin(email, password) {
 
@@ -21,13 +21,10 @@ async function EmailLogin(email, password) {
     if (error) {
         alert("Error logging in 🙀")
         console.error('error logging user in - ' + error)
-        return false
+        return { success: false, data: error }
     }
 
-    // Store data in redux
-    dispatch(setData(data))
-
-    return true
+    return { success: true, data: data }
 }
 
 export default EmailLogin
