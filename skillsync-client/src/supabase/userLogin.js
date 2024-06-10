@@ -1,4 +1,6 @@
 import supabase from "./supabaseClient"
+import { useDispatch } from 'react-redux'
+import { setData } from '../redux/userSlice'
 
 /**
  * Sign in a user using email and password.
@@ -6,7 +8,7 @@ import supabase from "./supabaseClient"
  */
 async function EmailLogin(email, password) {
 
-    if (!email, !password) {
+    if (!email || !password) {
         console.error("error - need email and password to login")
         return
     }
@@ -23,7 +25,7 @@ async function EmailLogin(email, password) {
     }
 
     // Store data in redux
-    console.log(data)
+    dispatch(setData(data))
 
     return true
 }

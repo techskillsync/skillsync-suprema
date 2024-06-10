@@ -3,7 +3,7 @@ import Spacer from "./Spacer";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
-import EmailLogin from "../../supabase/userLogin"
+import EmailLogin from '../../supabase/userLogin'
 
 const LogInPage = () => {
   
