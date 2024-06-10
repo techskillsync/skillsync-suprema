@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const InputField = ({ icon: Icon, id, type: type_parameter, placeholder }) => {
+const InputField = ({ icon: Icon, id, type: type_parameter, placeholder, parentOnChange }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -16,6 +16,7 @@ const InputField = ({ icon: Icon, id, type: type_parameter, placeholder }) => {
             <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 pl-10 text-gray-700 dark:text-white leading-tight focus:outline-none focus:shadow-outline"
                 id={id}
+                onChange={parentOnChange}
                 type={(type_parameter === 'password' && showPassword) ? 'text' : type_parameter}
                 placeholder={placeholder}
             />

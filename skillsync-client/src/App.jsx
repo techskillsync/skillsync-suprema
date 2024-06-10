@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 
 import LogInPage from "./components/Authentication/LogInPage";
 import SignUpPage from "./components/Authentication/SignUpPage";
+import ConfirmEmailPage from "./components/Authentication/ConfirmEmailPage"
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/welcome" element={<AuthenticatedWelcomePage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/confirm" element={<ConfirmEmailPage />} />
         </Routes>
       </Router>
       {/* <ul>
