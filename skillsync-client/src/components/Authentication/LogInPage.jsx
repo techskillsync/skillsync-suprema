@@ -21,7 +21,7 @@ const LogInPage = () => {
     }
     
     dispatch(setData(loginObject.data))
-    // window.location.href = "/";
+    window.location.href = "/";
 }
 
   return (
