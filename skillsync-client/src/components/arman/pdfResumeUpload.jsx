@@ -36,7 +36,7 @@ function PdfResumeUpload() {
     };
 
     return (
-        <div className="mx-auto w-[400px] h-[200px] bg-emerald-500 rounded-2xl p-4 flex flex-col justify-center items-center text-lg">
+        <div className="w-[400px] h-[200px] bg-emerald-500 rounded-2xl flex flex-col justify-center items-center text-lg">
             <input type="file" accept=".pdf" onChange={handleFileChange} id="fileInput" className="hidden" />
             <p onClick={openFileSubmission} className="underline cursor-pointer"> {selectedFile ? selectedFile.name : 'Click to select a PDF file'} </p>
             {<button onClick={handleSubmit} className="underline p-4" > Upload to backend </button>}
