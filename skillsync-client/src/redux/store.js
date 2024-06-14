@@ -4,16 +4,21 @@ import storage from 'redux-persist/lib/storage'
 import userReducer from './userSlice'
 
 const persistConfig = {
-  key: 'user',
-  storage,
+	key: 'user',
+	storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, userReducer)
 
-const store = configureStore({ 
-  reducer: {
-    user: persistedReducer,
-  }
+const store = configureStore({
+	reducer: {
+		user: persistedReducer,
+	},
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+		serializableCheck: {
+			ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE']
+		}
+	}).concat()
 })
 
 const persistor = persistStore(store)
