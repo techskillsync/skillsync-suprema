@@ -9,6 +9,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import LogInPage from "./components/Authentication/LogInPage";
 import SignUpPage from "./components/Authentication/SignUpPage";
 import ConfirmEmailPage from "./components/Authentication/ConfirmEmailPage"
+import Interface from "./components/arman/Interface"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/welcome" element={<AuthenticatedWelcomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/confirm" element={<ConfirmEmailPage />} />
+          <Route path="/interface" element={ <Interface /> } />
         </Routes>
       </Router>
       {/* <ul>
