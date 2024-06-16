@@ -15,8 +15,6 @@ function StoredData() {
         })
     }, [])
 
-    console.log(session)
-
     return (
         <div className="w-[400px] h-[200px] border border-emerald-400 text-left rounded-lg p-8 overflow-scroll">
             {!session ? <>you need to Login</> : 

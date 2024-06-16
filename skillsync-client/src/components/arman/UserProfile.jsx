@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import supabase from '../../supabase/supabaseClient'
-import { NavigatorLockAcquireTimeoutError } from '@supabase/supabase-js'
 
 function DisplayUserData({ session }) {
 	const [loading, setLoading] = useState(true)
@@ -95,7 +94,7 @@ function DisplayUserData({ session }) {
 	}
 
 	return (
-		<form onSubmit={updateProfile} className="form-widget border border-emerald-300 rounded-md">
+		<form onSubmit={updateProfile} className="form-widget border border-emerald-300 rounded-md p-2">
 			<div>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="text" value={session.user.email} disabled className="bg-slate-200 rounded-md px-2 m-2"/>

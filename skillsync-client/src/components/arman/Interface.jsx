@@ -1,27 +1,8 @@
 import PdfResumeUpload from './pdfResumeUpload'
 import UserData from './UserData'
 import ProfileInfo from './UserProfile'
-
-/*
-User needs:
- - Location
- - Name
- - Email
- - School
- - Grad Year
- - Program + Specialization
- - Industry
- - Work Experience
- - SkillSets
- - LinkedIN
- - GitHub
- - PlumProfile 
- - Work Eligibility
- - Date of birth
- - Gender + Race
- - Profile Pic
-
-*/
+import UpdateAvatar from './UpdateAvatar'
+import Avatar from './Avatar'
 
 function Interface() {
     return (
@@ -31,6 +12,12 @@ function Interface() {
             </div>
             <div className="m-4">
                 <UserData />
+            </div>
+            <div className="m-4">
+                <UpdateAvatar />
+            </div>
+            <div>
+                <Avatar />
             </div>
             <div className="m-4">
                 <ProfileInfo />
