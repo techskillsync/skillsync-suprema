@@ -83,7 +83,7 @@ export default function Account({ session }) {
 	}
 
 	return (
-		<form onSubmit={updateProfile} className="form-widget">
+		<form onSubmit={updateProfile} className="form-widget border border-emerald-300 rounded-md">
 			<div>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="text" value={session.user.email} disabled className="bg-slate-200 rounded-md px-2 m-2"/>
