@@ -211,7 +211,7 @@ function UserProfile() {
   
     return (
       <div className="container" style={{ padding: '50px 0 100px 0' }}>
-        {!session ? <>you need to auth</> : <DisplayUserData session={session} />}
+        {!session ? <>you need to sign in</> : <DisplayUserData session={session} />}
       </div>
 	)
 }
