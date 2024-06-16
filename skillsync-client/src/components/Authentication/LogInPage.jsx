@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux'
 import Spacer from "./Spacer";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
 import EmailLogin from '../../supabase/userLogin'
-import { setData } from '../../redux/userSlice'
 
 const LogInPage = () => {
 	const dispatch = useDispatch()
@@ -21,7 +19,6 @@ const LogInPage = () => {
 			return
 		}
 
-		dispatch(setData(loginObject.data))
 		window.location.href = "/";
 	}
 
