@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 
 function StoredData() {
     const dataObj = useSelector(state => state.user)
-    console.log(dataObj)
 
     const STRuserData = JSON.stringify(dataObj.data)
 
@@ -11,7 +10,7 @@ function StoredData() {
             {dataObj.loggedIn ? (
                 <>
                     <p> Hello <span className="font-black">{dataObj.data.user.user_metadata.name}</span> </p>
-                    <p>{STRuserData}</p>
+                    <p className="break-all">{STRuserData}</p>
                 </>
             ) : (
                 <p>Does not have data 😵</p>

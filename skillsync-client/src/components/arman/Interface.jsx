@@ -1,5 +1,6 @@
 import PdfResumeUpload from './pdfResumeUpload'
 import StoredData from './StoredData'
+import ProfileInfo from './ProfileInfo'
 
 /*
 User needs:
@@ -24,12 +25,15 @@ User needs:
 
 function Interface() {
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex flex-wrap justify-center items-center">
             <div className="m-4">
                 <PdfResumeUpload />
             </div>
             <div className="m-4">
                 <StoredData />
+            </div>
+            <div className="m-4">
+                <ProfileInfo />
             </div>
         </div>
     )
