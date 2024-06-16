@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import supabase from '../../supabase/supabaseClient'
 import { NavigatorLockAcquireTimeoutError } from '@supabase/supabase-js'
 
-export default function Account({ session }) {
+function DisplayUserData({ session }) {
 	const [loading, setLoading] = useState(true)
 	const [name, setName] = useState(null)
 	const [location, setLocation] = useState(null)
@@ -30,7 +30,8 @@ export default function Account({ session }) {
 
 			const { data, error } = await supabase
 				.from('user_profiles')
-				.select(`name, location, school, grad_year`)
+				.select(`name, location, school, grad_year, program, specialization, industry, linkedin, github,
+					date_of_birth, gender, race`)
 				.eq('id', user.id)
 				.single()
 
@@ -39,6 +40,17 @@ export default function Account({ session }) {
 					console.warn(error)
 				} else if (data) {
 					setName(data.name)
+					setLocation(data.location)
+					setSchool(data.school)
+					setGradYear(data.grad_year)
+					setProgram(data.program)
+					setSpecialization(data.specialization)
+					setIndustry(data.industry)
+					setLinkedIn(data.linkedin)
+					setGithub(data.github)
+					setDateOfBirth(data.date_of_birth)
+					setGender(data.gender)
+					setRace(data.race)
 				}
 			}
 			setLoading(false)
@@ -183,3 +195,25 @@ export default function Account({ session }) {
 		</form>
 	)
 }
+
+function UserProfile() {
+	const [session, setSession] = useState(null)
+
+    useEffect(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session)
+      })
+  
+      supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session)
+      })
+    }, [])
+  
+    return (
+      <div className="container" style={{ padding: '50px 0 100px 0' }}>
+        {!session ? <>you need to auth</> : <DisplayUserData session={session} />}
+      </div>
+	)
+}
+
+export default UserProfile

@@ -1,6 +1,6 @@
 import PdfResumeUpload from './pdfResumeUpload'
-import StoredData from './StoredData'
-import ProfileInfo from './ProfileInfo'
+import UserData from './UserData'
+import ProfileInfo from './UserProfile'
 
 /*
 User needs:
@@ -30,7 +30,7 @@ function Interface() {
                 <PdfResumeUpload />
             </div>
             <div className="m-4">
-                <StoredData />
+                <UserData />
             </div>
             <div className="m-4">
                 <ProfileInfo />
