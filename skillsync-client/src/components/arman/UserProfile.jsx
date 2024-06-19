@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import supabase from '../../supabase/supabaseClient'
+import GetProfileInfo from '../../supabase/GetProfileInfo'
+import UpdateProfile from '../../supabase/UpdateProfile'
 
 function DisplayUserData({ session }) {
 	const [loading, setLoading] = useState(true)
@@ -19,7 +21,6 @@ function DisplayUserData({ session }) {
 	const [date_of_birth, setDateOfBirth] = useState(null)
 	const [gender, setGender] = useState(null)
 	const [race, setRace] = useState(null)
-	const [profilePic, setProfilePic] = useState(null)
 
 	useEffect(() => {
 		let ignore = false
@@ -27,12 +28,9 @@ function DisplayUserData({ session }) {
 			setLoading(true)
 			const { user } = session
 
-			const { data, error } = await supabase
-				.from('user_profiles')
-				.select(`name, location, school, grad_year, program, specialization, industry, linkedin, github,
-					date_of_birth, gender, race`)
-				.eq('id', user.id)
-				.single()
+			const columns = `name, location, school, grad_year, program, specialization, industry, linkedin, github,
+					date_of_birth, gender, race`
+			const { data, error } = await GetProfileInfo(columns)
 
 			if (!ignore) {
 				if (error) {
@@ -62,14 +60,11 @@ function DisplayUserData({ session }) {
 		}
 	}, [session])
 
-	async function updateProfile(event, avatarUrl) {
+	async function updateProfile(event) {
 		event.preventDefault()
-
 		setLoading(true)
-		const { user } = session
-
+		
 		const updates = {
-			id: user.id,
 			name,
 			location,
 			school,
@@ -84,11 +79,7 @@ function DisplayUserData({ session }) {
 			race,
 		}
 
-		const { error } = await supabase.from('user_profiles').upsert(updates)
-
-		if (error) {
-			alert(error.message)
-		}
+		await UpdateProfile(updates)
 
 		setLoading(false)
 	}
