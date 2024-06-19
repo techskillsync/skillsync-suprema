@@ -2,7 +2,7 @@ import supabase from './supabaseClient'
 
 // Param: image - the user's new profile picture
 // Returns: true on success, false on failure
-async function getAvatar(image) {
+async function setAvatar(image) {
     if (!image) { console.warn("I need an image to upload"); return false; }
 
     const session = await supabase.auth.getSession()
@@ -34,4 +34,4 @@ async function getAvatar(image) {
     }
 }
 
-export default getAvatar
+export default setAvatar
