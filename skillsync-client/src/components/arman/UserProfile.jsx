@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import supabase from '../../supabase/supabaseClient'
 import GetProfileInfo from '../../supabase/GetProfileInfo'
-import UpdateProfile from '../../supabase/UpdateProfile'
+import setProfile from '../../supabase/setProfile'
 
 function DisplayUserData({ session }) {
 	const [loading, setLoading] = useState(true)

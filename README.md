@@ -3,6 +3,7 @@
 ## Supabase Documentation
 
 ### Authentication:
+
 When a user creates an account they get a user ID in the auth.users table. This table is read-only so we cant add user data to it.
 For user data there is a trigger attached to the auth.users table that adds the user to the `public.user_profiles` table. This copies over the user_id as a foreign key and the user's email and the users name, if it was specified in the sign in metadata.
 ```
@@ -62,13 +63,13 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 
 `industry`: (string) user's industry
 
-`skill_sets`: (jsonb) a JSON list of string containing the user's skills
+`skill_sets`: (jsonb) a JSON list of string containing the user's skills (Supabase handles conversion to/from JSONB so we treat it like JSON)
 
 `linkedin`: (string) a link to the user's linkedin
 
 `github`: (string) a link to the user's github
 
-`work_eligibility`: (jsonb) a JSONB list of strings containing the countries the user is eligible to work from
+`work_eligibility`: (jsonb) a JSON list of strings containing the countries the user is eligible to work from (Supabase handles conversion to/from JSONB so we treat it like JSON)
 
 `date_of_birth`: (string) the birth date of the user in DD/MM/YYYY format
 
