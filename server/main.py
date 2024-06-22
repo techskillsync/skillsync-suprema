@@ -18,4 +18,7 @@ for job in scheduler_jobs:
         scheduler.add_job(**job)
 scheduler.start()
 
-app.run(debug=True)
+if __name__ == "__main__":
+        app.run()
+
+# gunicorn -b 0.0.0.0:8000 main:app
