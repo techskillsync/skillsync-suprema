@@ -33,6 +33,9 @@ const LogInPage = () => {
 						Welcome Back!
 					</h2>
 					<div className="mb-4 md:flex space-x-2">
+						{/* START AUTHENTICATE WITH GOOGLE*/}
+						<script src="https://accounts.google.com/gsi/client" async></script>
+						{/* END AUTHENTICATE WITH GOOGLE*/}
 						<button className="bg-blue-500 hover:bg-blue-600 transition-all duration-300 text-white text-lg py-2 px-4 rounded w-full md:mb-0 mb-2 flex items-center justify-center">
 							<FaGoogle className="mr-3" /> Google
 						</button>
