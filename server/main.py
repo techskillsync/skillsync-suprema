@@ -6,7 +6,7 @@ from flask_apscheduler import APScheduler
 from api.routes import main_blueprint
 from api.scheduler import scheduler_jobs
 
-app = Flask(__name__, static_folder='../../skillsync-client/dist', static_url_path='')
+app = Flask(__name__, static_folder='../skillsync-client/dist', static_url_path='')
 app.register_blueprint(main_blueprint)
 CORS(app)
 
