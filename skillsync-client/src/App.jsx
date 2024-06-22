@@ -10,6 +10,7 @@ import LogInPage from "./components/Authentication/LogInPage";
 import SignUpPage from "./components/Authentication/SignUpPage";
 import ConfirmEmailPage from "./components/Authentication/ConfirmEmailPage"
 import Interface from "./components/arman/Interface"
+import Feed from "./components/Feed/Feed"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/confirm" element={<ConfirmEmailPage />} />
           <Route path="/interface" element={ <Interface /> } />
+          <Route path="/feed" element={ <Feed /> } />
         </Routes>
       </Router>
       {/* <ul>
