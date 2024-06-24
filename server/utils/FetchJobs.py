@@ -7,18 +7,12 @@ from datetime import datetime, timezone, timedelta
 def upload_jobs_to_skillsync():
     url: str = os.environ.get("SUPABASE_URL")
     key: str = os.environ.get("SUPABASE_SERVICE_KEY")
+    
+    if key is None:
+        print("Supabase service key not found!")
+        return
+    
     supabase: Client = create_client(url, key)
-
-    # # Get the time since the last update:
-    # data, count = supabase.table('job_listings').select('*').limit(1).execute()
-    # str_last_updated = data[1][0]['created_at']
-    # last_updated = datetime.fromisoformat(str_last_updated)
-    # now = datetime.now(timezone.utc)
-    # time_difference = now - last_updated
-
-    # # If the difference in time is less than 24 hrs, return
-    # if time_difference < timedelta(hours=24):
-    #     return
 
     # Delete all rows in the table
     data, count = supabase.table('job_listings').delete().neq('id', '00000000-0000-0000-0000-000000000000').execute()
@@ -27,12 +21,11 @@ def upload_jobs_to_skillsync():
     job_postings = get_jobs_from_linkedin("Vancouver, British Columbia, Canada", "Software")
     for job in job_postings:
         data, count = supabase.table('job_listings').insert({
-            "title": job['title'], 
-            "company": job['company'], 
+            "title": job['title'],
+            "company": job['company'],
             "location": job['location'],
             "link": job['link'],
         }).execute()
-
 
 def get_jobs_from_linkedin(location, keywords):
     url = f"https://www.linkedin.com/jobs/search/?keywords={keywords}&location={location}"
@@ -60,8 +53,10 @@ def get_jobs_from_linkedin(location, keywords):
     return job_listings
 
 if __name__ == "__main__":
-    # # Example usage
-    # location = "Vancouver, British Columbia, Canada"
-    # keywords = "Software"
-    # get_jobs_from_linkedin(location, keywords)
-    upload_jobs_to_skillsync()
+    # Example usage
+    location = "Vancouver, British Columbia, Canada"
+    keywords = "Software Internship"
+    jobs = get_jobs_from_linkedin(location, keywords)
+
+    for job in jobs:
+        print(f"Title: {job['title']}\nCompany: {job['company']}\nLocation: {job['location']}\nLink: {job['link']}\n\n")
