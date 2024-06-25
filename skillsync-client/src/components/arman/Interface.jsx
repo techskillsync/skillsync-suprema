@@ -3,6 +3,7 @@ import UpdateAvatar from './UpdateAvatar'
 import Avatar from './Avatar'
 import SetEligibility from './SetEligibility.tsx'
 import GetEligibility from './GetEligibility.tsx'
+import GPT_Feedback from './GPT_Feedback.tsx'
 
 function Interface() {
     return (
@@ -10,7 +11,7 @@ function Interface() {
             <div className="m-4">
                 <UpdateAvatar />
             </div>
-            <div>
+            <div className="m-4">
                 <Avatar />
             </div>
             <div className="m-4">
@@ -21,6 +22,9 @@ function Interface() {
             </div>
             <div className="m-4">
                 <GetEligibility />
+            </div>
+            <div className="m-4">
+                <GPT_Feedback />
             </div>
         </div>
     )
