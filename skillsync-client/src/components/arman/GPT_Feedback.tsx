@@ -35,6 +35,7 @@ function GPT_Feedback() {
 
     return(
         <div className="border w-[400px] border-emerald-400 p-4 rounded-md flex flex-col items-center justify-center">
+            <h1 className="text-[24px] mb-3">GPT-Feedback generator</h1>
             <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
                 <input type="file" name="resume" accept=".pdf" 
                     onChange={(e) => {
