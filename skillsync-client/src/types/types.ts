@@ -7,4 +7,4 @@ export interface JobListing {
     link: string;
 }
 
-export type SavedJobs = Array<{ listing_id: string; date_saved: string }>;
+export type JobRecord = "saved_jobs" | "applied_jobs";

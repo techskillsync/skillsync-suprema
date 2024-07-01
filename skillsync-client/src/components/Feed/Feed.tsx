@@ -1,7 +1,6 @@
 import React from 'react'
 import GetJobListings from '../../supabase/GetJobListings'
-import SetSavedJobs from '../../supabase/AddSavedJobs'
-import GetSavedJobs from '../../supabase/GetSavedJobs'
+import { AddToSavedJobs, AddToAppliedJobs } from '../../supabase/JobListingTracker';
 import { JobListing } from '../../types/types';
 import { useState, useEffect } from 'react'
 
@@ -15,12 +14,6 @@ function Feed() {
             setListings(data)
         }
         fetchListings();
-
-        async function printSavedJobs() {
-            const savedJobs = await GetSavedJobs();
-            console.log(savedJobs);
-        }
-        printSavedJobs();
     }, [])
 
     return (
@@ -38,7 +31,8 @@ function Feed() {
                 <tbody>
                     {listings.map((item, index) => (
                         <tr key={index} className="h-[2rem]">
-                            <td className="border border-black text-emerald-700 cursor-pointer" onClick={() => SetSavedJobs(item.id)}>Save Job</td>
+                            <td className="border border-black text-sky-700 cursor-pointer" onClick={() => AddToAppliedJobs(item)}>Apply For Job</td>
+                            <td className="border border-black text-emerald-700 cursor-pointer" onClick={() => AddToSavedJobs(item)}>Save Job</td>
                             <td className="border border-black">{item.title}</td>
                             <td className="border border-black">{item.company}</td>
                             <td className="border border-black">{item.location}</td>
