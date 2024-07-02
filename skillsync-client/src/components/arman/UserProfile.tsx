@@ -1,54 +1,53 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import supabase from '../../supabase/supabaseClient'
-import GetProfileInfo from '../../supabase/GetProfileInfo'
+import { GetProfileInfo, SetProfileInfo } from '../../supabase/ProfileInfo.ts'
 import setProfile from '../../supabase/setProfile'
+import { Session } from '../../../node_modules/@supabase/auth-js/src/lib/types.ts'
 
 function DisplayUserData({ session }) {
 	const [loading, setLoading] = useState(true)
-	const [name, setName] = useState(null)
-	const [location, setLocation] = useState(null)
-	const [school, setSchool] = useState(null)
-	const [grad_year, setGradYear] = useState(null)
-	const [program, setProgram] = useState(null)
-	const [specialization, setSpecialization] = useState(null)
-	const [industry, setIndustry] = useState(null)
-	const [workExperience, setWorkExperience] = useState(null)
-	const [skillSets, setSkillSets] = useState(null)
-	const [linkedin, setLinkedIn] = useState(null)
-	const [github, setGithub] = useState(null)
-	const [plumProfile, setPlumProfile] = useState(null)
-	const [workEligibility, setWorkEligibility] = useState(null)
-	const [date_of_birth, setDateOfBirth] = useState(null)
-	const [gender, setGender] = useState(null)
-	const [race, setRace] = useState(null)
+	const [name, setName] = useState('')
+	const [location, setLocation] = useState('')
+	const [school, setSchool] = useState('')
+	const [grad_year, setGradYear] = useState('')
+	const [program, setProgram] = useState('')
+	const [specialization, setSpecialization] = useState('')
+	const [industry, setIndustry] = useState('')
+	const [workExperience, setWorkExperience] = useState('')
+	const [skillSets, setSkillSets] = useState('')
+	const [linkedin, setLinkedIn] = useState('')
+	const [github, setGithub] = useState('')
+	const [plumProfile, setPlumProfile] = useState('')
+	const [workEligibility, setWorkEligibility] = useState('')
+	const [date_of_birth, setDateOfBirth] = useState('')
+	const [gender, setGender] = useState('')
+	const [race, setRace] = useState('')
 
 	useEffect(() => {
 		let ignore = false
 		async function getProfile() {
 			setLoading(true)
-			const { user } = session
 
 			const columns = `name, location, school, grad_year, program, specialization, industry, linkedin, github,
 					date_of_birth, gender, race`
-			const { data, error } = await GetProfileInfo(columns)
+
+			const data = await GetProfileInfo(columns)
+
+			if (!data) { return; }
 
 			if (!ignore) {
-				if (error) {
-					console.warn(error)
-				} else if (data) {
-					setName(data.name)
-					setLocation(data.location)
-					setSchool(data.school)
-					setGradYear(data.grad_year)
-					setProgram(data.program)
-					setSpecialization(data.specialization)
-					setIndustry(data.industry)
-					setLinkedIn(data.linkedin)
-					setGithub(data.github)
-					setDateOfBirth(data.date_of_birth)
-					setGender(data.gender)
-					setRace(data.race)
-				}
+				setName(data.name)
+				setLocation(data.location)
+				setSchool(data.school)
+				setGradYear(data.grad_year)
+				setProgram(data.program)
+				setSpecialization(data.specialization)
+				setIndustry(data.industry)
+				setLinkedIn(data.linkedin)
+				setGithub(data.github)
+				setDateOfBirth(data.date_of_birth)
+				setGender(data.gender)
+				setRace(data.race)
 			}
 			setLoading(false)
 		}
@@ -60,10 +59,10 @@ function DisplayUserData({ session }) {
 		}
 	}, [session])
 
-	async function updateProfile(event) {
+	async function UpdateProfile(event) {
 		event.preventDefault()
 		setLoading(true)
-		
+
 		const updates = {
 			name,
 			location,
@@ -79,16 +78,16 @@ function DisplayUserData({ session }) {
 			race,
 		}
 
-		await UpdateProfile(updates)
+		await SetProfileInfo(updates)
 
 		setLoading(false)
 	}
 
 	return (
-		<form onSubmit={updateProfile} className="form-widget border border-emerald-300 rounded-md p-2">
+		<form onSubmit={UpdateProfile} className="form-widget border border-emerald-300 rounded-md p-2">
 			<div>
 				<label htmlFor="email">Email</label>
-				<input id="email" type="text" value={session.user.email} disabled className="bg-slate-200 rounded-md px-2 m-2"/>
+				<input id="email" type="text" value={session.user.email} disabled className="bg-slate-200 rounded-md px-2 m-2" />
 			</div>
 			<div>
 				<label htmlFor="username">Name</label>
@@ -160,7 +159,7 @@ function DisplayUserData({ session }) {
 				<label htmlFor="username">DOB</label>
 				<input value={date_of_birth || ''} onChange={(e) => setDateOfBirth(e.target.value)} id="dateOfBirth" type="text" required className="border border-black rounded-md px-2 mx-2" />
 			</div>
-			
+
 			<div>
 				<label htmlFor="username">Race</label>
 				<input value={race || ''} onChange={(e) => setRace(e.target.value)} id="race" type="text" required className="border border-black rounded-md px-2 mx-2" />
@@ -187,22 +186,18 @@ function DisplayUserData({ session }) {
 }
 
 function UserProfile() {
-	const [session, setSession] = useState(null)
+	const [session, setSession] = useState<Session|null>(null)
 
-    useEffect(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session)
-      })
-  
-      supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session)
-      })
-    }, [])
-  
-    return (
-      <div className="container" style={{ padding: '50px 0 100px 0' }}>
-        {!session ? <>you need to sign in</> : <DisplayUserData session={session} />}
-      </div>
+	useEffect(() => {
+		supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
+
+		supabase.auth.onAuthStateChange((_event, session) => setSession(session))
+	}, [])
+
+	return (
+		<div className="container" style={{ padding: '50px 0 100px 0' }}>
+			{!session ? <>you need to sign in</> : <DisplayUserData session={session} />}
+		</div>
 	)
 }
 

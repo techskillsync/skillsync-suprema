@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import SetAvatar from '../../supabase/SetAvatar'
+import React, { useEffect, useState } from "react";
+import { SetAvatar } from '../../supabase/ProfilePicture'
 
 function UpdateAvater() {
     const [image, setImage] = useState(null)
-    const [imageURL, setImageURL] = useState(null)
+    const [imageURL, setImageURL] = useState('')
 
     function handleImageUpdate(event) {
         const file = event.target.files[0]
@@ -27,7 +27,7 @@ function UpdateAvater() {
                 accept="image/*"
                 onChange={handleImageUpdate}
             />
-            {imageURL ? <img src={imageURL} alt='avatar' /> : <></> }
+            {imageURL !== '' ? <img src={imageURL} alt='avatar' /> : <></> }
             <button type="submit">Submit</button>
         </form>
     )

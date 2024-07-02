@@ -49,7 +49,7 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 
 `name`: (string) user's name
 
-`email`: (string) user's email. Is not currently synced with `auth.users.email` this should be fixed.
+`email`: (string) user's email. Do not let users change this
 
 `location`: (string) user's location
 
@@ -79,4 +79,4 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 
 `email_confirmed`: (bool) whether or not the user confirmed their email
 
-`avatar_url`: the filename of the user's avatar. The actual avatar is stored in the `avatars` bucket
+`avatar_url`: (string) the filename of the user's avatar. The actual avatar is stored in the `avatars` bucket

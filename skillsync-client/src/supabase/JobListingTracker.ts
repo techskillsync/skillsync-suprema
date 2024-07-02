@@ -1,13 +1,6 @@
 import supabase from './supabaseClient'
 import { JobListing } from '../types/types';
-
-async function GetUserId() {
-    const session = await supabase.auth.getSession()
-
-    if (!session.data.session) { throw new Error('unable to get session, you probably need to login') }
-
-    return session.data.session.user.id
-}
+import { GetUserId } from './GetUserId';
 
 // Fetches the user's saved jobs from supabase's public.user_listing_tracker table
 // Returns: JobListing[], an array of JSON objects representing job listings
