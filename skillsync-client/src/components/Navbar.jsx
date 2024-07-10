@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux"
 import LogoDark from "../assets/LogoDark.png";
 import LogoLight from "../assets/LogoLight.png";
 
 const Navbar = ({ logIn, signUp }) => {
-  const user = useSelector(state => state.user)
-  console.log(user)
-  // if (user.loggedIn) {
-  //   console.log("HELLO USER")
-  // } else {
-  //   console.log("YOU ARE NOT LOGGED IN")
-  // }
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
 

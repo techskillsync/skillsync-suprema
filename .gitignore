@@ -1,3 +1,5 @@
 *.env
 skillsync-client/src/backend/REACT_APP_SUPABASE_KEY.env
-Resume Enhancer/Aprameya_Aithal_Resume_WLD.pdf
+*__pycache__/
+.arman_ml
+**.DS_StoreResume Enhancer/Aprameya_Aithal_Resume_WLD.pdf
