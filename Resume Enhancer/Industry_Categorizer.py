@@ -197,6 +197,7 @@ def analyze_resume(resume_text):
         print("GPT-4 feedback generation successful.")
         return prediction, gpt_feedback
     except Exception as e:
+        print(e)
         print(f"Error in resume analysis or GPT-4 feedback generation: {e}")
         return None, None
 
@@ -215,11 +216,14 @@ def analyze():
     
     if file:
         resume_text = extract_text_from_pdf(file)
+        print(resume_text)
         prediction, feedback = analyze_resume(resume_text)
+        print(prediction)
+        print(feedback)
         if prediction is not None and feedback is not None:
             return jsonify({"prediction": prediction, "feedback": feedback})
         else:
-            return jsonify({"error": "Error in resume analysis or GPT-4 feedback generation"})
+            return jsonify({"error": "Erroxr in resume analysis or GPT-4 feedback generation"})
 
 if __name__ == '__main__':
     app.run(port=5001)  

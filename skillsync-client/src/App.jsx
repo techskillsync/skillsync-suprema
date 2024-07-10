@@ -3,7 +3,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthenticatedWelcomePage from "./components/AuthenticatedWelcomePage";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/HomePage/HomePage";
 import LandingPage from "./components/LandingPage/LandingPage";
 
 import LogInPage from "./components/Authentication/LogInPage";
