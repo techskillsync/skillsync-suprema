@@ -1,5 +1,15 @@
 # skillsync-suprema
 
+## Google Authentication
+I needed to make some changes for react. In general I followed this guide using the google pre build sign in.
+https://supabase.com/docs/guides/auth/social-login/auth-google?queryGroups=platform&platform=web
+
+Since you cannot use <script></script> tags in react jsx I needed to make the `LoadGoogleClient` function in the `supabase/userLogin.js` file. You must add the <LoadGoogleClient /> inside your component JSX for login with google to work.
+
+To customize the login with google button head to the guide above, there is a section that tells you how to use Google's HTML Code generator to make a new login component.
+
+Note that in the Google Cloud Project you need to authorize both `http://localhost` and `http://localhost:5174` for it to work in development. Only specifying the latter will not work.
+
 ## Supabase Documentation
 
 ### Authentication:

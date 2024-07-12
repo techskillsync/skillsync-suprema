@@ -15,10 +15,15 @@ Avg Key Size = 81 bytes
 Asymptotic Cache Size = (response size + key size) * p * r
                       = (1244 + 81) * 123849 * 3446
                       = 565.5 GB
+By storing the result as a 1 or 0 we can reduce the cache size to: = (1 + 81) * 123849 * 3446 
+                                                                   = 35 GB
 
 Asymptotic Runtime (assuming cache is empty): = p * r * 2.5
                                               = 123849 * 3446 * 2.5
                                               = 12349 days (33.8 years)
+We should cap off our dataset to one million rows. This will give us a runtime of 
+= 1000000 / 100 * 2.5 (since each batch request fills 100 rows)
+= 25000hrs = (2.9 years)
 
 Asymptotic Size: vectorized_resumes = (sizeof float * dimension of array) * num resumes
                                     = (512 * 4) * 3446
@@ -26,7 +31,9 @@ Asymptotic Size: vectorized_resumes = (sizeof float * dimension of array) * num 
 
 Asymptotic Size: vectorized_postings = (sizeof float * dimension of array) * num postings
                                      = (512 * 4) * 123849
-                                     = 0.25 GB
+                                     = 250 MB (0.25 GB)
+
+Asymptotic Size: resume_posting_pairs: = (vectorized_resumes * vectorized_postings) = 1.75 GB
 
 
 
