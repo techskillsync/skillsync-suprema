@@ -7,6 +7,7 @@ import GetEligibility from './GetEligibility.tsx'
 import GPT_Feedback from './GPT_Feedback.tsx'
 import ListSavedJobs from './ListSavedJobs.tsx'
 import ListAppliedJobs from './ListAppliedJobs.tsx'
+import { ArmanLogin } from './GoogleAuth.tsx'
 
 function Interface() {
     return (
@@ -34,6 +35,9 @@ function Interface() {
             </div>
             <div className="m-4">
                 <ListAppliedJobs />
+            </div>
+            <div className="m-4">
+                <ArmanLogin/>
             </div>
         </div>
     )
