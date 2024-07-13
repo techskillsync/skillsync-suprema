@@ -39,7 +39,7 @@ class SiameseNetwork(nn.Module):
 		return output
 
 model = SiameseNetwork(512)
-model.load_state_dict(torch.load('siamese_network.pth', map_location=torch.device('cpu')))     
+model.load_state_dict(torch.load('10K_50EPC_siamese_network.pth', map_location=torch.device('cpu')))     
 model.eval()
 
 def preprocess_text(text_series):
@@ -69,5 +69,4 @@ def GetResumeAndPostingSimilarity(resume: str, job_posting: str) -> float:
 
 	with torch.no_grad():
 		similarity_score = model(resume.unsqueeze(0), job_posting.unsqueeze(0)).item()
-	print(type(similarity_score))
 	return similarity_score
