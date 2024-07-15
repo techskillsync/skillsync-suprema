@@ -96,7 +96,7 @@ def get_jobs_from_linkedin(keywords: str, location: str) -> list:
     response = requests.get(url)
 
     if response.status_code != 200:
-        print("Request failed!")
+        print("Original Request failed!")
         print(response)
         return []
     
@@ -120,10 +120,10 @@ def get_jobs_from_linkedin(keywords: str, location: str) -> list:
     return job_listings
 
 if __name__ == "__main__":
-    upload_jobs_to_skillsync()
     # Example usage
-    # location = "Vancouver, British Columbia, Canada"
-    # keywords = "Software Internship"
+    location = "Vancouver, British Columbia, Canada"
+    keywords = "Software Internship"
+    upload_jobs_to_skillsync(keywords, location)
     # jobs = get_jobs_from_linkedin(keywords, location)
 
     # for job in jobs:
