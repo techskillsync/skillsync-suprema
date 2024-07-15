@@ -1,0 +1,5 @@
+requests
+python-dotenv
+bs4
+supabase
+apscheduler

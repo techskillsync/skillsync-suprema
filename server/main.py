@@ -1,5 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
 from flask import Flask
 from flask_cors import CORS
 from routes.routes import main_blueprint
