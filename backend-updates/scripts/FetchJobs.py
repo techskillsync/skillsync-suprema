@@ -1,13 +1,33 @@
+"""
+Some Notes:
+LinkedIn does not give us all the information we want from our first search.
+We need to follow each jobs link to get the rest of the information.
+The original search gives us:
+    - title
+    - company
+    - location
+    - link
+    - date_posted
+We will follow the link to get:
+    - description
+    - posting_url
+    - num applicants
+    - logo_url
+    - salary (will be null, todo)
+    - due_date (will be null, todo)
+"""
+
 import os
 from dotenv import load_dotenv
 current_file_path = os.path.abspath(__file__)
 dotenv_path = os.path.join(os.path.dirname(current_file_path), '.env')
 load_dotenv(dotenv_path)
-import time, random
+import time, random, re
 import requests
 from bs4 import BeautifulSoup
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from IpSwitcher import fetch_with_proxy
 
 
 def upload_jobs_to_skillsync(keywords:str, location:str) -> None:
@@ -37,6 +57,42 @@ def upload_jobs_to_skillsync(keywords:str, location:str) -> None:
         }).execute()
     print(f'uploaded {len(job_postings)} jobs to supabase')
 
+def get_additional_info(job: dict) -> dict|None:
+    """
+    Args:
+        job (dict): must have a 'link' key to a linkedIn job posting
+    Returns:
+        job (dict): the same dict with additional fields added
+    """
+    url = job['link']
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        raise Exception(f"Error on job {job['title']}, Response: {response.status_code}. ")
+
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Get description
+    description = soup.find("div", class_="show-more-less-html__markup").text.strip()
+
+    # Get Num Applicants
+    job_posting = soup.find("div", class_="top-card-layout__card")
+    top_card = job_posting.find_all("div", class_="topcard__flavor-row")[1]
+    num_applicants = top_card.find_all('span')[1].text.strip()
+
+    # Get Apply URL
+    posting_url = soup.find("code", id="applyUrl").contents[0].strip('"')
+
+    # Get Icon URL
+    logo_url = "https://picsum.photos/id/152/50" # The images are dynamically loaded so we cant get em easily
+
+    job['description'] = description
+    job['posting_url'] = posting_url
+    job['num applicants'] = num_applicants
+    job['logo_url'] = logo_url
+    
+    return job
+
 def fill_out_linked_in_jobs(job_listings) -> list:
     """
     Args:
@@ -44,45 +100,14 @@ def fill_out_linked_in_jobs(job_listings) -> list:
     
     Returns:
         job_listings (list): the same list with additional fields
-
-    LinkedIn does not give us all the information we want from our first search.
-    We need to follow each jobs link to get the rest of the information.
-    The original search gives us:
-     - title
-     - company
-     - location
-     - link
-     - date_posted
-    We will follow the link to get:
-     - description
-     - posting_url
-     - logo_url
-     - salary (will be null, todo)
-     - due_date (will be null, todo)
     """
 
     # Use a while loop so we can cleanly remove the current element if it throws an error
     i = 0
     while i < len(job_listings):
         job = job_listings[i]
-
-        time.sleep(2 + random.random())
-
-        url = job['link']
-        response = requests.get(url)
         try:
-            if response.status_code != 200:
-                raise Exception(f"Error on job {job['title']}, Response: {response.status_code}. ")
-
-            soup = BeautifulSoup(response.content, "html.parser")
-
-            description = soup.find("div", class_="show-more-less-html__markup").text.strip()
-            # posting_url = soup.find("a", class_="sign-up-modal__company_webiste").get('href')
-            posting_url = None
-            salary = None # Todo
-            due_date = None # Todo
-            job['description'] = description
-            job['posting_url'] = posting_url
+            job = get_additional_info(job)
             i+=1
         except Exception as e:
             print(f"{e} Removing from job_listings")
@@ -99,7 +124,7 @@ def get_jobs_from_linkedin(keywords: str, location: str) -> list:
         print("Original Request failed!")
         print(response)
         return []
-    
+
     soup = BeautifulSoup(response.content, "html.parser")
 
     job_listings_html = soup.find_all("div", class_="base-card--link")
@@ -110,21 +135,26 @@ def get_jobs_from_linkedin(keywords: str, location: str) -> list:
             'company': job.find("h4", class_="base-search-card__subtitle").text.strip(),
             'location': job.find("span", class_="job-search-card__location").text.strip(),
             'link': job.find("a", class_="base-card__full-link").get("href"),
-            'date_posted': job.find("time", class_="job-search-card__listdate").get('datetime')
+            'date_posted': job.find("time").get('datetime')
         })
 
-    job_listings = job_listings[0:5]
-
-    job_listings = fill_out_linked_in_jobs(job_listings)
-    
     return job_listings
 
 if __name__ == "__main__":
-    # Example usage
     location = "Vancouver, British Columbia, Canada"
     keywords = "Software Internship"
-    upload_jobs_to_skillsync(keywords, location)
+    jobs = get_jobs_from_linkedin(keywords, location)
+    jobs = jobs[0:3]
+    jobs = fill_out_linked_in_jobs(jobs)
+
+    for job in jobs:
+        print(f"Title {job['title']}\nDescription {job['description'][:10]}\nNum Applicants {job['num applicants']}\nPosting URL {job['posting_url']}")
+
+    # Example usage
+    # location = "Vancouver, British Columbia, Canada"
+    # keywords = "Software Internship"
     # jobs = get_jobs_from_linkedin(keywords, location)
+    # filled_out_jobs = fill_out_linked_in_jobs(jobs)
 
     # for job in jobs:
-    #     print(f"Title: {job['title']}\nCompany: {job['company']}\nLocation: {job['location']}\nLink: {job['link']}\n\n")
+    #     print(f"Title: {job['title']}\n Company: {job['company']}\n Location: {job['location']}\n Link: {job['link']}\n Date Posted: {job['date_posted']}\n")
