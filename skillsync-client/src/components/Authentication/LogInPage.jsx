@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Spacer from "./Spacer";
+import Spacer from "../common/Spacer";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
@@ -18,7 +18,7 @@ const LogInPage = () => {
 			return
 		}
 
-		window.location.href = "/";
+		window.location.href = "/home";
 	}
 
 	return (

@@ -1,40 +1,51 @@
-import { useEffect, useState } from "react";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import AuthenticatedWelcomePage from "./components/AuthenticatedWelcomePage";
 import HomePage from "./components/HomePage/HomePage";
 import LandingPage from "./components/LandingPage/LandingPage";
-
 import LogInPage from "./components/Authentication/LogInPage";
 import SignUpPage from "./components/Authentication/SignUpPage";
-import ConfirmEmailPage from "./components/Authentication/ConfirmEmailPage"
-import Interface from "./components/arman/Interface"
-import Feed from "./components/Feed/Feed"
-import { Timer } from "./components/Timer"
-
+import ConfirmEmailPage from "./components/Authentication/ConfirmEmailPage";
+import Interface from "./components/arman/Interface";
+import Feed from "./components/Feed/Feed";
+import { Timer } from "./components/Timer";
+import supabase from "./supabase/supabaseClient";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Timer Component={LogInPage} />} />
-          <Route path="/signup" element={<Timer Component={SignUpPage} />} />
-          <Route path="/" element={<Timer Component={LandingPage} />} />
-          <Route path="/welcome" element={<Timer Component={AuthenticatedWelcomePage} />} />
-          <Route path="/home" element={<Timer Component={HomePage} />} />
-          <Route path="/confirm" element={<Timer Component={ConfirmEmailPage} />} />
-          <Route path="/interface" element={<Timer Component={Interface} />} />
-          <Route path="/feed" element={<Timer Component={Feed} />} />
-        </Routes>
-      </Router>
-      {/* <ul>
-        {testStrings.map((testString) => (
-          <li key={testString.Data}>{testString.Data}</li>
-        ))}
-      </ul> */}
-    </>
+    <Router>
+      <AppRoutes />
+    </Router>
+  );
+}
+
+function AppRoutes() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await supabase.auth.getSession();
+      if (user) {
+        navigate('/home'); // Navigate to the home page if the user is logged in
+      } else {
+        navigate('/'); // Navigate to the login page if the user is not logged in
+      }
+    };
+
+    checkUser();
+  }, [navigate]);
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Timer Component={LogInPage} />} />
+      <Route path="/signup" element={<Timer Component={SignUpPage} />} />
+      <Route path="/" element={<Timer Component={LandingPage} />} />
+      <Route path="/welcome" element={<Timer Component={AuthenticatedWelcomePage} />} />
+      <Route path="/home" element={<Timer Component={HomePage} />} />
+      <Route path="/confirm" element={<Timer Component={ConfirmEmailPage} />} />
+      <Route path="/interface" element={<Timer Component={Interface} />} />
+      <Route path="/feed" element={<Timer Component={Feed} />} />
+    </Routes>
   );
 }
 

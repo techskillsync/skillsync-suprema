@@ -14,4 +14,8 @@ async function GetJobListings(): Promise<JobListing[]|false> {
     return data;
 }
 
+async function GetJobListingsPaginate(from: number, to: number) {
+    return await supabase.from('job_listings').select('*').range(from, to);
+}
+
 export default GetJobListings

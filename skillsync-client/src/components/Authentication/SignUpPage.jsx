@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Spacer from "./Spacer";
+import Spacer from "../common/Spacer";
 import { EmailSignUp } from "../../supabase/userSignUp.js";
 
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
