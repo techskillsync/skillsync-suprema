@@ -10,7 +10,7 @@ The original search gives us:
     - date_posted
 We will follow the link to get:
     - description
-    - posting_url
+    - apply_url
     - num applicants
     - logo_url
     - salary (will be null, todo)
@@ -30,7 +30,7 @@ from dotenv import load_dotenv
 from IpSwitcher import fetch_with_proxy
 
 
-def upload_jobs_to_skillsync(keywords:str, location:str) -> None:
+def upload_jobs_to_skillsync(jobs:list) -> None:
     url: str = os.environ.get("SUPABASE_URL")
     key: str = os.environ.get("SUPABASE_SERVICE_KEY")
     
@@ -40,22 +40,21 @@ def upload_jobs_to_skillsync(keywords:str, location:str) -> None:
     
     supabase: Client = create_client(url, key)
 
-    # Add ~ 60 new job postings to the table
-    job_postings = get_jobs_from_linkedin(location, keywords)
-    for job in job_postings:
+    for job in jobs:
         data, count = supabase.table('job_listings').insert({
             "title": job['title'],
             "company": job['company'],
             "location": job['location'],
             "link": job['link'],
             "description": job.get('description'),
-            "posting_url": job.get('posting_url'),
+            "apply_url": job.get('apply_url'),
+            "num_applicants": job.get('num_applicants'),
             "logo_url": job.get('logo_url'),
             "salary": job.get('salary'),
             "due_date": job.get('due_date'),
             "date_posted": job.get('date_posted')
         }).execute()
-    print(f'uploaded {len(job_postings)} jobs to supabase')
+    print(f'uploaded {len(jobs)} jobs to supabase')
 
 def get_additional_info(job: dict) -> dict|None:
     """
@@ -76,19 +75,31 @@ def get_additional_info(job: dict) -> dict|None:
     description = soup.find("div", class_="show-more-less-html__markup").text.strip()
 
     # Get Num Applicants
-    job_posting = soup.find("div", class_="top-card-layout__card")
-    top_card = job_posting.find_all("div", class_="topcard__flavor-row")[1]
-    num_applicants = top_card.find_all('span')[1].text.strip()
+    job_posting = soup.find("div", class_="top-card-layout__card").decode_contents()
+    # top_card = job_posting.find_all("div", class_="topcard__flavor-row")[1]
+    # num_applicants = top_card.find_all('span')[1].text.strip()
+    patterns = [
+        r'\b\d{1,2} people clicked Apply\b',
+        r'\bOver \d{1,3} people clicked Apply\b',
+        r'\bOver \d{1,3} applicants\b',
+        r'\b\d{1,2} applicants\b'
+    ]
+    combined_pattern = '|'.join(patterns)
+    regex = re.compile(combined_pattern)
+    # Below we find a string that matches LinkedIn's applicants text
+    num_applicants_str = regex.findall(job_posting)[0]
+    # Here we remove everything but the numbers
+    num_applicants = ''.join(re.findall(r'\d+', num_applicants_str))
 
     # Get Apply URL
-    posting_url = soup.find("code", id="applyUrl").contents[0].strip('"')
+    apply_url = soup.find("code", id="applyUrl").contents[0].strip('"')
 
     # Get Icon URL
     logo_url = "https://picsum.photos/id/152/50" # The images are dynamically loaded so we cant get em easily
 
     job['description'] = description
-    job['posting_url'] = posting_url
-    job['num applicants'] = num_applicants
+    job['apply_url'] = apply_url
+    job['num_applicants'] = num_applicants
     job['logo_url'] = logo_url
     
     return job
@@ -105,6 +116,7 @@ def fill_out_linked_in_jobs(job_listings) -> list:
     # Use a while loop so we can cleanly remove the current element if it throws an error
     i = 0
     while i < len(job_listings):
+        time.sleep(2 + random.random())
         job = job_listings[i]
         try:
             job = get_additional_info(job)
@@ -112,7 +124,6 @@ def fill_out_linked_in_jobs(job_listings) -> list:
         except Exception as e:
             print(f"{e} Removing from job_listings")
             job_listings.pop(i)
-            print(i, len(job_listings))
     
     return job_listings
 
@@ -130,7 +141,12 @@ def get_jobs_from_linkedin(keywords: str, location: str) -> list:
     job_listings_html = soup.find_all("div", class_="base-card--link")
     job_listings = []
     for job in job_listings_html:
+        job_entity = job.get('data-entity-urn')
+        # Extract the job_id. I am sorry for such an awful line.
+        linkedin_id = job_id = re.search(r'\d+', job_entity).group() if re.search(r'\d+', job_entity) else None
+
         job_listings.append({
+            'linkedin_id': linkedin_id,
             'title': job.find("span", class_="sr-only").text.strip(),
             'company': job.find("h4", class_="base-search-card__subtitle").text.strip(),
             'location': job.find("span", class_="job-search-card__location").text.strip(),
@@ -144,17 +160,11 @@ if __name__ == "__main__":
     location = "Vancouver, British Columbia, Canada"
     keywords = "Software Internship"
     jobs = get_jobs_from_linkedin(keywords, location)
-    jobs = jobs[0:3]
-    jobs = fill_out_linked_in_jobs(jobs)
-
     for job in jobs:
-        print(f"Title {job['title']}\nDescription {job['description'][:10]}\nNum Applicants {job['num applicants']}\nPosting URL {job['posting_url']}")
-
-    # Example usage
-    # location = "Vancouver, British Columbia, Canada"
-    # keywords = "Software Internship"
-    # jobs = get_jobs_from_linkedin(keywords, location)
-    # filled_out_jobs = fill_out_linked_in_jobs(jobs)
+        print(f"LinkedInId {job['linkedin_id']}\nTitle {job['title']}\n\n")
+    # jobs = jobs[0:3]
+    # jobs = fill_out_linked_in_jobs(jobs)
+    # upload_jobs_to_skillsync(jobs)
 
     # for job in jobs:
-    #     print(f"Title: {job['title']}\n Company: {job['company']}\n Location: {job['location']}\n Link: {job['link']}\n Date Posted: {job['date_posted']}\n")
+    #     print(f"LinkedInId' {job['linkedin_id']}\nTitle {job['title']}\nDescription {job['description'][:10]}\nNum Applicants {job['num_applicants']}\nApply URL {job['apply_url']}\n")
