@@ -6,7 +6,7 @@ import LogoDark from "../../assets/LogoDark.png";
 import ProfileCard from "./ProfileCard";
 
 import { MdSpaceDashboard, MdNewspaper, MdInbox } from "react-icons/md";
-import { FaSheetPlastic } from "react-icons/fa6";
+import { FaGear, FaSheetPlastic } from "react-icons/fa6";
 
 
 const menuItems = [
@@ -14,6 +14,7 @@ const menuItems = [
   { name: "Feed", component: Feed , icon: <MdNewspaper /> },
   { name: "Resume Builder", component: ResumeBuilder , icon: <FaSheetPlastic /> },
   { name: "Messages", component: Messages , icon: <MdInbox /> },
+  { name: "Settings", component: Messages , icon: <FaGear /> },
 ];
 
 const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {

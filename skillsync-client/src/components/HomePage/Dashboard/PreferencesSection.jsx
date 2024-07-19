@@ -48,7 +48,7 @@ const PreferencesSection = () => {
   };
 
   return (
-    <div className="p-4 mt-6 bg-white rounded shadow text-black w-full">
+    <div className="p-4 mt-6 bg-white rounded-lg shadow text-black w-full">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Job Search Preferences</h2>
