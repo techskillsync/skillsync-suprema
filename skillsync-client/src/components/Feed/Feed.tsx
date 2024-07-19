@@ -1,54 +1,98 @@
-import React from 'react'
-import GetJobListings from '../../supabase/GetJobListings'
+import React, { useState, useEffect } from 'react';
+import { GetJobListingsPaginate } from '../../supabase/GetJobListings';
 import { AddToSavedJobs, AddToAppliedJobs } from '../../supabase/JobListingTracker';
 import { JobListing } from '../../types/types';
-import { useState, useEffect } from 'react'
 import JobDescriptionCard from './JobDescriptionCard';
 
 function Feed() {
     const [listings, setListings] = useState<JobListing[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        async function fetchListings() {
-            const data = await GetJobListings()
-            if (!data) { console.warn('error getting job listings'); return; }
-            setListings(data)
-        }
         fetchListings();
-    }, [])
+    }, [currentPage]);
+
+    async function fetchListings() {
+        const pageSize = 3; // Number of listings per page
+        const from = (currentPage - 1) * pageSize;
+        const to = currentPage * pageSize;
+        const { data, error, count } = await GetJobListingsPaginate(from, to);
+        if (error) {
+            console.warn('Error getting job listings:', error);
+            return;
+        }
+
+        setListings(data || []);
+        setTotalPages(Math.ceil(count ? count / pageSize : 0));
+    }
+
+    function handlePageChange(page: number) {
+        setCurrentPage(page);
+    }
 
     return (
-        listings.map((item, index) => (
-            <div className='mb-3'>
-                <JobDescriptionCard key={index} jobDescription={item} />
+        <div>
+            <div className='pagination text-black'>
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className='bg-transparent'
+                >
+                    Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, index) => {
+                    if (totalPages <= 5) {
+                        return (
+                            <button
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}
+                                className={`${currentPage === index + 1 ? 'active' : ''} bg-transparent`}
+                            >
+                                {index + 1}
+                            </button>
+                        );
+                    } else {
+                        if (index === 0 || index === totalPages - 1 || (index >= currentPage - 2 && index <= currentPage + 2)) {
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handlePageChange(index + 1)}
+                                    className={`${currentPage === index + 1 ? 'active' : ''} bg-transparent`}
+                                >
+                                    {index + 1}
+                                </button>
+                            );
+                        } else if (index === currentPage - 3 || index === currentPage + 3) {
+                            return (
+                                <button
+                                    key={index}
+                                    disabled
+                                    className='bg-transparent'
+                                >
+                                    ...
+                                </button>
+                            );
+                        } else {
+                            return null;
+                        }
+                    }
+                })}
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className='bg-transparent'
+                >
+                    Next
+                </button>
             </div>
-        ))
-        // <div className="w-[50%] mx-auto text-[24px]">
-        //     <table className="w-full border-collapse table-fixed">
-        //         <thead>
-        //             <tr>
-        //                 <th className="border border-black">.</th>
-        //                 <th className="border border-black">Title</th>
-        //                 <th className="border border-black">Company</th>
-        //                 <th className="border border-black">Location</th>
-        //                 <th className="border border-black">Link</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {listings.map((item, index) => (
-        //                 <tr key={index} className="h-[2rem]">
-        //                     <td className="border border-black text-sky-700 cursor-pointer" onClick={() => AddToAppliedJobs(item)}>Apply For Job</td>
-        //                     <td className="border border-black text-emerald-700 cursor-pointer" onClick={() => AddToSavedJobs(item)}>Save Job</td>
-        //                     <td className="border border-black">{item.title}</td>
-        //                     <td className="border border-black">{item.company}</td>
-        //                     <td className="border border-black">{item.location}</td>
-        //                     <td className="border border-black"><a className="truncate block overflow-scroll" href={item.link}>{item.link}</a></td>
-        //                 </tr>
-        //             ))}
-        //         </tbody>
-        //     </table>
-        // </div>
+            {listings.map((item, index) => (
+                <div className='mb-3' key={index}>
+                    <JobDescriptionCard jobDescription={item} />
+                </div>
+            ))}
+        </div>
     );
 }
 
-export default Feed
+export default Feed;

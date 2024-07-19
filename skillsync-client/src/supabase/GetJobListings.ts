@@ -1,5 +1,6 @@
 import supabase from "./supabaseClient";
 import { JobListing } from "../types/types";
+import { PostgrestTransformBuilder } from "@supabase/postgrest-js";
 
 // Fetches JobListings from Supabase.
 // Returns false on error and the job listings on success
@@ -14,8 +15,15 @@ async function GetJobListings(): Promise<JobListing[]|false> {
     return data;
 }
 
-async function GetJobListingsPaginate(from: number, to: number) {
-    return await supabase.from('job_listings').select('*').range(from, to);
+async function GetFirstJobListings(to: number) {
+    return await GetJobListingsPaginate(0, to);
 }
 
-export default GetJobListings
+async function GetJobListingsPaginate(from: number, to: number) {
+    return await supabase
+        .from('job_listings')
+        .select('*', { count: 'exact' }) // Include count in the query
+        .range(from, to);
+}
+
+export {GetJobListings, GetJobListingsPaginate, GetFirstJobListings}
