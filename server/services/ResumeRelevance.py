@@ -1,3 +1,5 @@
+__all__ = ['resume_relevance']
+
 import pandas as pd
 import tensorflow_hub as hub
 import torch
@@ -7,9 +9,9 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-universal_sentence_encoder = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
-nltk.download('stopwords')
-nltk.download('wordnet')
+universal_sentence_encoder = hub.load("https://www.kaggle.com/models/google/universal-sentence-encoder/TensorFlow2/universal-sentence-encoder/2")
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
 
 class SiameseNetwork(nn.Module):
 	def __init__(self, input_size):
@@ -41,6 +43,7 @@ class SiameseNetwork(nn.Module):
 model = SiameseNetwork(512)
 model.load_state_dict(torch.load('10K_50EPC_siamese_network.pth', map_location=torch.device('cpu')))     
 model.eval()
+print(' - 🤖 Resume relevance model loaded')
 
 def preprocess_text(text_series):
 	text_series = text_series.fillna("")  # Replace NaN with empty strings
@@ -57,7 +60,7 @@ def vectorize_text(text_series):
 	return embeddings
 
 
-def GetResumeAndPostingSimilarity(resume: str, job_posting: str) -> float:
+def resume_relevance(resume: str, job_posting: str) -> float:
 	resume = preprocess_text(pd.Series(resume))
 	job_posting = preprocess_text(pd.Series(job_posting))
 
