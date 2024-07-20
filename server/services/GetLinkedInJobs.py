@@ -55,7 +55,7 @@ from dotenv import load_dotenv
 
 def get_linkedin_jobs(keywords:str, location:str) -> list[dict]:
     jobs = _shallow_linkedin_search(keywords, location)
-    jobs = jobs[0:3]
+    jobs = jobs[0:5]
     jobs = _fill_shallow_jobs(jobs)
     _upload_to_supabase(jobs)
     return jobs
@@ -64,8 +64,8 @@ def _shallow_linkedin_search(keywords:str, location:str) -> list[dict]:
     url = f"https://www.linkedin.com/jobs/search/?keywords={keywords}&location={location}"
     response = _custom_get(url)
     if not response.ok:
-        logging.warn(" - 😵 shallow linkedin search failed, aborting search")
-        logging.debug(response)
+        logging.warning(" - 😵 shallow linkedin search failed, aborting search")
+        logging.info(response)
         return []
     soup = BeautifulSoup(response.content, "html.parser")
     job_listings_html = soup.find_all("div", class_="base-card--link")
@@ -102,9 +102,13 @@ def _fill_shallow_jobs(job_listings:list) -> list[dict]:
         try:
             job = _fill_job(job)
             i+=1
+        except requests.exceptions.HTTPError as http_err:
+            logging.warning(' - ✋ linked refused all job requests')
+            job_listings.pop(i)
         except Exception as e:
-            logging.warn(' - 🗑️ error filling job, removing')
-            logging.debug(e)
+            logging.warning(f' - 🗑️ error parsing html, removing {job['title']}, {job['linkedin_id']}')
+            logging.info(' - 🏃‍♂️‍➡️ fixing this parsing will make the script faster')
+            logging.info(e)
             job_listings.pop(i)
 
     return job_listings
@@ -120,7 +124,7 @@ def _fill_job(job:dict) -> dict:
     response = _custom_get(url)
 
     if response.status_code != 200:
-        raise Exception(f"Error on job {job['title']}, Response: {response.status_code}. ")
+        raise response.raise_for_status()
 
     soup = BeautifulSoup(response.content, "html.parser")
 
@@ -130,20 +134,28 @@ def _fill_job(job:dict) -> dict:
     # Get Num Applicants
     job_posting = soup.find("div", class_="top-card-layout__card").decode_contents()
     patterns = [
-        r'\b\d{1,2} people clicked Apply\b',
+        r'\b\d{1,3} people clicked Apply\b',
         r'\bOver \d{1,3} people clicked Apply\b',
         r'\bOver \d{1,3} applicants\b',
-        r'\b\d{1,2} applicants\b'
+        r'\b\d{1,3} applicants\b'
     ]
     combined_pattern = '|'.join(patterns)
     regex = re.compile(combined_pattern)
     # Below we find a string that matches LinkedIn's applicants text
-    num_applicants_str = regex.findall(job_posting)[0]
-    # Here we remove everything but the numbers
-    num_applicants = ''.join(re.findall(r'\d+', num_applicants_str))
+    num_applicants_str_arr = regex.findall(job_posting)
+    if len(num_applicants_str_arr) != 0:
+        num_applicants_str = num_applicants_str_arr[0]
+        # Here we remove everything but the numbers
+        num_applicants = ''.join(re.findall(r'\d+', num_applicants_str))
+    else:
+        num_applicants = None
 
     # Get Apply URL
-    apply_url = soup.find("code", id="applyUrl").contents[0].strip('"')
+    apply_tag = soup.find("code", id="applyUrl")
+    if apply_tag == None:
+        apply_url = job['link']
+    else:
+        apply_url = apply_tag.contents[0].strip('"')
 
     # Get Icon URL
     logo_url = "https://picsum.photos/id/152/50" # The images are dynamically loaded so we cant get em easily
@@ -193,9 +205,9 @@ def _upload_to_supabase(jobs:list) -> int:
     return len(jobs)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     keywords = "Software Internship"
-    location = "Vancouver, British Columbia, Canada"
+    location = "Toronto, Canada"
     jobs = get_linkedin_jobs(keywords, location)
 
     # for job in jobs:

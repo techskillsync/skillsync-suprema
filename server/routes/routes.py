@@ -17,7 +17,7 @@ def serve(path='index.html'):
 		return send_from_directory(static_folder, 'index.html')
 
 @main_blueprint.route('/api/linkedin-jobs', methods=['POST'])
-def linkedin_jobs():
+def api_linkedin_jobs():
 	"""
 	Fetches 3 jobs from LinkedIn and returns the successfully fetched jobs.
 
@@ -46,8 +46,8 @@ def linkedin_jobs():
 
 	return jsonify(jobs)
 
-@main_blueprint.route('/api/resume-enhancer', methods=['POST'])
-def resume_enhancer():
+@main_blueprint.route('/api/resume-relevance', methods=['POST'])
+def api_resume_relevance():
 	"""
 	Returns a value between 0 and 1 based on how qualified the applicant is.
 
@@ -79,7 +79,7 @@ def resume_enhancer():
 
 
 @main_blueprint.route('/api/GPT-resume-feedback', methods=['POST'])
-def GPT_resume_feedback():
+def api_GPT_resume_feedback():
 	"""
 	Handle file upload for resume feedback.
 
