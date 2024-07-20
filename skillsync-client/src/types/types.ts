@@ -20,11 +20,18 @@ export interface UserProfile {
 
 export interface JobListing {
     id: string;
-    created_at: string;
-    title: string;
-    company: string;
-    location: string;
-    link: string;
+    created_at: string | null;
+    title: string | null;
+    company: string | null;
+    location: string | null;
+    link: string | null;
+    description: string | null;
+    due_date: string | null;
+    salary: string | null;
+    logo_url: string | null;
+    date_posted: string | null;
+    num_applicants: string | null;
+    apply_url: string | null;
 }
 
 export type JobRecord = "saved_jobs" | "applied_jobs";

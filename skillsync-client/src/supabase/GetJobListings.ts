@@ -15,6 +15,29 @@ async function GetJobListings(): Promise<JobListing[]|false> {
     return data;
 }
 
+/*
+ * First returns jobs with the query words in the title,
+ * then jobs with the query words in the description,
+ * then returns the rest of the jobs
+ * @param {string} query - Space separated list of words to match
+ * @returns {Promise<PostgrestSingleResponse<any[]>>}
+ */
+async function SearchJobs(keywords: string, from: number, to: number) {
+    const { data, error } = await supabase
+        .from('job_listings')
+        .select('*')
+        .ilike('description', `%${keywords}%`)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+    
+    if (error) {
+        console.error(error)
+        return null;
+    }
+
+    return data
+}
+
 async function GetFirstJobListings(to: number) {
     return await GetJobListingsPaginate(0, to);
 }
@@ -26,4 +49,4 @@ async function GetJobListingsPaginate(from: number, to: number) {
         .range(from, to);
 }
 
-export {GetJobListings, GetJobListingsPaginate, GetFirstJobListings}
+export {SearchJobs, GetJobListings, GetJobListingsPaginate, GetFirstJobListings}

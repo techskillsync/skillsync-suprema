@@ -1,7 +1,7 @@
 """
 Some Notes:
 LinkedIn does not give us all the information we want from our first search.
-We need to follow each jobs link to get the rest of the information.
+We need to follow each job's link to get the rest of the information.
 The original search gives us:
     - title
     - company
@@ -18,7 +18,6 @@ We will follow the link to get:
 
 Now the problem is that it is too slow. In the future I should first return the results of the 
 initial request then return the details as they come in.
-
 
 The key to this problem is that LinkedIn randomly gives errors when sending GET requests.
 This file has emphasis on measures to handle failed GET requests to LinkedIn.
