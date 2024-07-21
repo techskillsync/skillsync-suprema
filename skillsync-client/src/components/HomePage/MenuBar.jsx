@@ -11,7 +11,7 @@ import { FaGear, FaSheetPlastic } from "react-icons/fa6";
 
 const menuItems = [
   { name: "Dashboard", component: Dashboard , icon: <MdSpaceDashboard /> },
-  { name: "Feed", component: Feed , icon: <MdNewspaper /> },
+  { name: "Jobs", component: Feed , icon: <MdNewspaper /> },
   { name: "Resume Builder", component: ResumeBuilder , icon: <FaSheetPlastic /> },
   { name: "Messages", component: Messages , icon: <MdInbox /> },
   { name: "Settings", component: Messages , icon: <FaGear /> },
@@ -19,7 +19,7 @@ const menuItems = [
 
 const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
   return (
-    <div className="w-1/5 bg-[#1e1e1e] text-white flex flex-col py-3 justify-between">
+    <div className="w-full h-full bg-[#1e1e1e] text-white flex flex-col py-3 justify-between">
       <div className="w-full p-8">
         <img
           className="mx-auto"

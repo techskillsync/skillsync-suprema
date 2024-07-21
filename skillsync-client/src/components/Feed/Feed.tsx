@@ -1,98 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { GetJobListingsPaginate } from '../../supabase/GetJobListings';
-import { AddToSavedJobs, AddToAppliedJobs } from '../../supabase/JobListingTracker';
-import { JobListing } from '../../types/types';
-import JobDescriptionCard from './JobDescriptionCard';
+import React, { useState, useEffect } from "react";
+import { GetJobListingsPaginate } from "../../supabase/GetJobListings";
+import {
+  AddToSavedJobs,
+  AddToAppliedJobs,
+} from "../../supabase/JobListingTracker";
+import { JobListing } from "../../types/types";
+import JobDescriptionCard from "./JobDescriptionCard";
+import PaginationController from "./PaginationController";
+import SearchBar from "./SearchBar";
+import Spacer from "../common/Spacer";
 
 function Feed() {
-    const [listings, setListings] = useState<JobListing[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
-    useEffect(() => {
-        fetchListings();
-    }, [currentPage]);
+  const [listings, setListings] = useState<JobListing[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-    async function fetchListings() {
-        const pageSize = 3; // Number of listings per page
-        const from = (currentPage - 1) * pageSize;
-        const to = currentPage * pageSize;
-        const { data, error, count } = await GetJobListingsPaginate(from, to);
-        if (error) {
-            console.warn('Error getting job listings:', error);
-            return;
-        }
+  const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
 
-        setListings(data || []);
-        setTotalPages(Math.ceil(count ? count / pageSize : 0));
+  useEffect(() => {
+    fetchListings();
+  }, [currentPage]);
+
+  async function fetchListings() {
+    const pageSize = 3; // Number of listings per page
+    const from = (currentPage - 1) * pageSize;
+    const to = currentPage * pageSize;
+    const { data, error, count } = await GetJobListingsPaginate(from, to);
+    if (error) {
+      console.warn("Error getting job listings:", error);
+      return;
     }
 
-    function handlePageChange(page: number) {
-        setCurrentPage(page);
-    }
+    setListings(data || []);
+    setTotalPages(Math.ceil(count ? count / pageSize : 0));
+  }
 
-    return (
-        <div>
-            <div className='pagination text-black'>
-                <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className='bg-transparent'
-                >
-                    Previous
-                </button>
-                {Array.from({ length: totalPages }, (_, index) => {
-                    if (totalPages <= 5) {
-                        return (
-                            <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                className={`${currentPage === index + 1 ? 'active' : ''} bg-transparent`}
-                            >
-                                {index + 1}
-                            </button>
-                        );
-                    } else {
-                        if (index === 0 || index === totalPages - 1 || (index >= currentPage - 2 && index <= currentPage + 2)) {
-                            return (
-                                <button
-                                    key={index}
-                                    onClick={() => handlePageChange(index + 1)}
-                                    className={`${currentPage === index + 1 ? 'active' : ''} bg-transparent`}
-                                >
-                                    {index + 1}
-                                </button>
-                            );
-                        } else if (index === currentPage - 3 || index === currentPage + 3) {
-                            return (
-                                <button
-                                    key={index}
-                                    disabled
-                                    className='bg-transparent'
-                                >
-                                    ...
-                                </button>
-                            );
-                        } else {
-                            return null;
-                        }
-                    }
-                })}
-                <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className='bg-transparent'
-                >
-                    Next
-                </button>
-            </div>
-            {listings.map((item, index) => (
-                <div className='mb-3' key={index}>
-                    <JobDescriptionCard jobDescription={item} />
-                </div>
-            ))}
+  function handlePageChange(page: number) {
+    setCurrentPage(page);
+  }
+
+  return (
+    <div className="flex flex-row bg-black w-full h-full min-h-screen">
+      <div className="px-10 py-8 h-full w-2/3">
+        <SearchBar setSearchValue={setSearchValue} />
+        <div className="my-3">
+          {PaginationController(handlePageChange, currentPage, totalPages)}
         </div>
-    );
+        {listings.map((item, index) => (
+          <div
+            className="mb-4"
+            key={index}
+            onClick={() => setSelectedJob(item)}
+          >
+            <JobDescriptionCard
+              className="cursor-pointer"
+              jobDescription={item}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="w-1/3 bg-[#1e1e1e]">
+        <div className="fixed right-0 top-0 h-screen w-1/5">
+          <div className="p-3">
+            <h1 className="text-white text-2xl">Job Details</h1>
+            {selectedJob?.title}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Feed;

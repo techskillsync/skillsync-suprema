@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { IoCashOutline } from "react-icons/io5";
+import { FaBookmark, FaLink, FaMapMarkerAlt, FaSave } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
+import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
 
 // import getGlassDoorRating from '../utilities/get_glassdoor_rating.js';
 
-const JobDescriptionCard = ({ jobDescription }) => {
+const JobDescriptionCard = ({ jobDescription, className = "" }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
+
+  const actions = [
+    {
+      title: "Save",
+      icon: <IoBookmark />,
+    },
+    {
+      title: "Copy Link",
+      icon: <FaLink />,
+      action: () => {
+        navigator.clipboard.writeText(window.location.href);
+      }
+    },
+    {
+      title: "Share",
+      icon: <FaUserGroup />,
+    },
+  ];
 
   // console.log('Job Description Card');
   // console.log(jobDescription);
@@ -21,13 +40,18 @@ const JobDescriptionCard = ({ jobDescription }) => {
   // }, []);
 
   return (
-    <div className="job-description-card bg-white max-w-[400px] !text-black rounded-lg shadow-md flex">
+    <div
+      className={
+        className +
+        " job-description-card bg-white !text-black rounded-lg shadow-md flex"
+      }
+    >
       {jobDescription.logo_url && (
-        <div className="company-logo w-1/3 bg-white rounded-lg">
+        <div className="company-logo w-[182px] bg-white rounded-lg">
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className="h-full rounded-lg object-contain"
+            className="h-full rounded-s-lg object-cover"
           />
         </div>
       )}
@@ -44,7 +68,7 @@ const JobDescriptionCard = ({ jobDescription }) => {
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className="text-sm">{jobDescription.title}</p>
+          <p className="text-lg">{jobDescription.title}</p>
         </div>
         {jobDescription.salary &&
           (jobDescription.salary.toString().length > 0 ||
@@ -74,6 +98,20 @@ const JobDescriptionCard = ({ jobDescription }) => {
             />
           </a>
         </div> */}
+        <div>
+          <div className="flex mt-4">
+            {actions.map((action) => (
+              <button
+                key={action.title}
+                onClick={action.action}
+                className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2 mr-4"
+              >
+                {action.icon}
+                <span className="ml-2">{action.title}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

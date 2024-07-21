@@ -20,20 +20,20 @@ function App() {
 }
 
 function AppRoutes() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const user = await supabase.auth.getSession();
-      if (user) {
-        navigate('/home'); // Navigate to the home page if the user is logged in
-      } else {
-        navigate('/'); // Navigate to the login page if the user is not logged in
-      }
-    };
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     const user = await supabase.auth.getSession();
+  //     if (user) {
+  //       navigate('/home'); // Navigate to the home page if the user is logged in
+  //     } else {
+  //       navigate('/'); // Navigate to the login page if the user is not logged in
+  //     }
+  //   };
 
-    checkUser();
-  }, [navigate]);
+  //   checkUser();
+  // }, [navigate]);
 
   return (
     <Routes>

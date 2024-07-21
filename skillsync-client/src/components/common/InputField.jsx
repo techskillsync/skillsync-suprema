@@ -2,21 +2,32 @@ import React from "react";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 
-function InputField({ item, onChange }) {
+function InputField({
+  item,
+  onChange,
+  placeholder = "",
+  showLabel = true,
+  className = "",
+}) {
   return (
-    <div className="mb-4 w-full">
-      <label
-        className="block text-sm font-bold mb-2"
-        htmlFor={item.toLowerCase()}
-      >
-        {item}
-      </label>
+    <div className="w-full">
+      {showLabel && (
+        <label
+          className="block text-sm font-bold mb-2"
+          htmlFor={item.toLowerCase()}
+        >
+          {item}
+        </label>
+      )}
       <input
-        className="shadow appearance-none border rounded w-full focus:ring py-2 px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
+        className={
+          className +
+          " shadow appearance-none border rounded w-full focus:ring py-2 px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
+        }
         id={item}
         onChange={onChange}
         type="text"
-        placeholder={"Enter your " + item.toLowerCase()}
+        placeholder={placeholder ?? "Enter your " + item.toLowerCase()}
       />
     </div>
   );
