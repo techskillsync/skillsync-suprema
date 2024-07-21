@@ -1,14 +1,13 @@
 from flask import Flask
-from utils.FetchJobs import upload_jobs_to_skillsync
 from flask_apscheduler import APScheduler
 
 scheduler_jobs = [
-    {
-        "id": "update_job_listings",
-        "func": upload_jobs_to_skillsync,
-        "trigger": "cron",
-        "hour": 12 # run at noon
-    },
+    # {
+    #     "id": "update_job_listings",
+    #     "func": upload_jobs_to_skillsync,
+    #     "trigger": "cron",
+    #     "hour": 12 # run at noon
+    # },
 ]
 
 def register_scheduler(app: Flask):

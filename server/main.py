@@ -2,6 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 from routes.routes import main_blueprint
 from utils.scheduler import register_scheduler
+import logging
+logging.basicConfig(level=logging.WARNING)
 
 app = Flask(__name__)
 app.register_blueprint(main_blueprint)

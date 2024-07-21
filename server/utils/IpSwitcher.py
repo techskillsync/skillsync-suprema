@@ -3,12 +3,14 @@ from itertools import cycle
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 
-# https://ca.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/linkedin-jobs?original_referer=https%3A%2F%2Fwww.google.com%2F&start=50
-# https://ca.linkedin.com/jobs-guest/jobs/api/jobPosting/3963959943
-
 proxies = []
+proxy_pool = cycle(proxies)
+last_updated = None
 
 def refresh_proxies():
+    global proxies
+    global proxy_pool
+
     proxies = []
     # proxyscrape.com
     response = requests.get('https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&country=us,ca&protocol=socks4,socks5&proxy_format=protocolipport&format=text&anonymity=Elite&timeout=2218')
@@ -30,29 +32,34 @@ def refresh_proxies():
         # Make it look like: socks4://XX.XX.XX.X:PORT
         p = "socks4://" + row[0] + ":" + row[1]
         proxies.append(p)
-
-proxy_pool = cycle(proxies)
-datetime = datetime.now()
+    proxy_pool = cycle(proxies)
 
 def fetch_with_proxy(url) -> requests.Response|None:
-    proxy = next(proxy_pool)
-    print(f"Using proxy: {proxy}")
+    global last_updated
 
-    try:
-        response = requests.get(url, proxies={"http": proxy, "https": proxy}, timeout=3)
-        return response
-    except requests.exceptions.ProxyError as e:
-        # print(f"Proxy error with {proxy}: {e}")
-        return None
-    except requests.exceptions.RequestException as e:
-        # print(f"Request error: {e}")
-        return None
+    if last_updated is None:
+        last_updated = datetime.now()
+        refresh_proxies()
+    if datetime.now() - last_updated > timedelta(minutes=5):
+        last_updated = datetime.now()
+        refresh_proxies()
+
+    proxy_index = 0
+    while True:
+        proxy = next(proxy_pool)
+        print(f"Using proxy: {proxy}")
+        try:
+            response = requests.get(url, proxies={"http": proxy, "https": proxy}, timeout=3)
+            return response
+        except Exception as e:
+            pass
+        proxy_index += 1
+        if proxy_index >= len(proxies):
+            proxy_index = 0
+            refresh_proxies()
 
 if __name__ == "__main__":
-    i = 0
-    for p in proxies:
-        resp = fetch_with_proxy('https://icanhazip.com/')
-        if resp is not None:
-            print(resp.content)
-            i+=1
-    print(f"{i} of the proxies worked")
+    # Example usage
+    resp = fetch_with_proxy('https://ca.linkedin.com/jobs/view/software-dev-engineer-ii-candidate-generation-cangen-at-amazon-3971537046?position=52&pageNum=0&refId=RGziekpWqtQ0anajMsrqkw%3D%3D&trackingId=oKZ8fq7tbctxVGI5oLLEcw%3D%3D&trk=public_jobs_jserp-result_search-card')
+    if resp is not None:
+        print(resp.content)

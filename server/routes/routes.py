@@ -1,8 +1,9 @@
 from flask import request, jsonify
 from flask import Blueprint, send_from_directory
 import os
-from services.Resume_Analysis import GPT_feedback
-from services.ResumeEnhancer import GetResumeAndPostingSimilarity
+from services import get_linkedin_jobs
+from services import GPT_feedback
+from services import resume_relevance
 
 main_blueprint = Blueprint('main', __name__, static_folder='../../skillsync-client/dist')
 
@@ -15,22 +16,48 @@ def serve(path='index.html'):
 	else:
 		return send_from_directory(static_folder, 'index.html')
 
-@main_blueprint.route('/api/resume-enhancer', methods=['POST'])
-def resume_enhancer():
+@main_blueprint.route('/api/linkedin-jobs', methods=['POST'])
+def api_linkedin_jobs():
 	"""
-	Handle resume and job posting upload for resume enhancer.
+	Fetches 3 jobs from LinkedIn and returns the successfully fetched jobs.
 
-	Request Requirements:
+	Post Request Requirements:
 		- Content-Type: application/json
-		- Body:
-			- json object with two fields: 'resume', and 'job_posting'.
-			  'resume' and 'job_posting' must be a string.
-		
-		- Returns:
-			- A JSON object with a string in its message feild,
-			  indicating either the similarity or the error message.
-			  ie.
-			  	{ "message": "error"/"0.13413435" }
+		- Body: json object with the fields 'keywords' and 'location'
+				{ "keywords": "Software", "location": "Canada" }
+	Returns:
+		- A list of 0-3 job postings or error
+		  [ {'title': 'Dev', ...}, {'title': 'PenTest', ...} ]
+		  { "message": "Invalid Content-Type" }
+	"""
+	if request.headers.get('Content-Type') != 'application/json':
+		return jsonify({"error": "Invalid Content-Type"}), 400
+
+	data = request.get_json()
+
+	keywords = data.get('keywords')
+	location = data.get('location')
+
+	# Check if the required fields are present
+	if not keywords or not location:
+		return jsonify({"error": "Missing required fields"}), 400
+	
+	jobs = get_linkedin_jobs(keywords, location)
+
+	return jsonify(jobs)
+
+@main_blueprint.route('/api/resume-relevance', methods=['POST'])
+def api_resume_relevance():
+	"""
+	Returns a value between 0 and 1 based on how qualified the applicant is.
+
+	Post Request Requirements:
+		- Content-Type: application/json
+		- Body: json object with two fields: 'resume' (string), and 'job_posting' (string).
+				{ "resume": "John...", "job_posting": "We a..." }
+	Returns:
+		- A JSON object with a 'message' field indicating the similarity or an error message
+		  { "message": "Invalid Content-Type" }, { "message": "0.314159" }
 
 	"""
 	if request.headers.get('Content-Type') != 'application/json':
@@ -46,19 +73,19 @@ def resume_enhancer():
 	if not resume or not job_posting:
 		return jsonify({"error": "Missing required fields"}), 400
 
-	similarity_score = GetResumeAndPostingSimilarity(resume, job_posting)
+	similarity_score = resume_relevance(resume, job_posting)
 	return jsonify({"message": str(similarity_score)})
 
-@main_blueprint.route('/api/upload-resume-feedback', methods=['POST'])
-def upload_resume_feedback():
+
+
+@main_blueprint.route('/api/GPT-resume-feedback', methods=['POST'])
+def api_GPT_resume_feedback():
 	"""
 	Handle file upload for resume feedback.
 
 	Request Requirements:
 		- Content-Type: multipart/form-data
-		- Form Data:
-			- file input with name 'resume' (file must be a PDF)
-
+		- Form Data: file input with name 'resume' (file must be a PDF)
 	Returns:
 		- JSON object with feedback or error in the 'message' field.
 	"""

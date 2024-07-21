@@ -1,9 +1,11 @@
+__all__ = ['GPT_feedback']
+
 from flask import jsonify
 from openai import OpenAI
 import fitz
 
 # Function to extract text from a PDF file
-def extract_text_from_pdf(pdf_file):
+def _extract_text_from_pdf(pdf_file):
     try:
         doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
         text = ""
@@ -15,7 +17,7 @@ def extract_text_from_pdf(pdf_file):
         return ""
 
 # Analyze a new resume using GPT-4
-def analyze_resume(resume_text):
+def _analyze_resume(resume_text):
     client = OpenAI(api_key = 'sk-proj-sScFMZr4GK3XaQ5mcYFYT3BlbkFJ1orIjm1gKSNT0q30KBMZ')
     
     try:
@@ -34,8 +36,8 @@ def analyze_resume(resume_text):
         return None, None 
 
 def GPT_feedback(file):
-    resume_text = extract_text_from_pdf(file)
-    feedback = analyze_resume(resume_text)
+    resume_text = _extract_text_from_pdf(file)
+    feedback = _analyze_resume(resume_text)
     if feedback is not None:
         return feedback
     else:
