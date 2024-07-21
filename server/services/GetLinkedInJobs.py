@@ -54,7 +54,7 @@ from dotenv import load_dotenv
 
 def get_linkedin_jobs(keywords:str, location:str) -> list[dict]:
     jobs = _shallow_linkedin_search(keywords, location)
-    jobs = jobs[0:5]
+    jobs = jobs[0:3]
     jobs = _fill_shallow_jobs(jobs)
     _upload_to_supabase(jobs)
     return jobs
