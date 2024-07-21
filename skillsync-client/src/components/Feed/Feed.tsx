@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { GetJobListingsPaginate } from "../../supabase/GetJobListings";
+import {
+  GetJobListingsPaginate,
+  SearchJobs,
+} from "../../supabase/GetJobListings";
 import {
   AddToSavedJobs,
   AddToAppliedJobs,
@@ -24,11 +27,25 @@ function Feed() {
     fetchListings();
   }, [currentPage]);
 
+  useEffect(() => {
+    console.log("Search value changed", searchValue);
+  }, [searchValue]);
+
   async function fetchListings() {
-    const pageSize = 3; // Number of listings per page
+    console.log(searchValue);
+    const pageSize = 3; // ? Number of listings per page minus 1
     const from = (currentPage - 1) * pageSize;
     const to = currentPage * pageSize;
-    const { data, error, count } = await GetJobListingsPaginate(from, to);
+    // Todo: add location searching (parameter currently empty string)
+    let response;
+    if (searchValue) {
+      response = await SearchJobs(searchValue, "", from, to);
+    } else {
+      response = await GetJobListingsPaginate(from, to);
+    }
+    console.log("Response from search:", response);
+    const { data, error, count } = response || {};
+
     if (error) {
       console.warn("Error getting job listings:", error);
       return;
@@ -42,12 +59,28 @@ function Feed() {
     setCurrentPage(page);
   }
 
+  function handleSearch() {
+    setCurrentPage(1);
+    setTotalPages(0);
+    setListings([]);
+    fetchListings();
+  }
+
   return (
     <div className="flex flex-row bg-black w-full h-full min-h-screen">
       <div className="px-10 py-8 h-full w-2/3">
-        <SearchBar setSearchValue={setSearchValue} />
+        <SearchBar
+          handleSearch={handleSearch}
+          setSearchValue={setSearchValue}
+        />
         <div className="my-3">
-          {PaginationController(handlePageChange, currentPage, totalPages)}
+          {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
+          <PaginationController
+            key={listings.toString()}
+            handlePageChange={handlePageChange}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
         </div>
         {listings.map((item, index) => (
           <div
@@ -64,7 +97,7 @@ function Feed() {
       </div>
       <div className="w-1/3 bg-[#1e1e1e]">
         <div className="fixed right-0 top-0 h-screen w-[26.66%]">
-         <JobDetailsSlide jobDescription={selectedJob} />
+          <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>
     </div>
