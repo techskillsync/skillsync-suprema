@@ -9,6 +9,7 @@ import JobDescriptionCard from "./JobDescriptionCard";
 import PaginationController from "./PaginationController";
 import SearchBar from "./SearchBar";
 import Spacer from "../common/Spacer";
+import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
   const [searchValue, setSearchValue] = useState("");
@@ -17,7 +18,7 @@ function Feed() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
+  const [selectedJob, setSelectedJob] = useState<JobListing | null>();
 
   useEffect(() => {
     fetchListings();
@@ -52,21 +53,18 @@ function Feed() {
           <div
             className="mb-4"
             key={index}
-            onClick={() => setSelectedJob(item)}
+            // onClick={() => setSelectedJob(item)}
           >
             <JobDescriptionCard
-              className="cursor-pointer"
               jobDescription={item}
+              action={() => setSelectedJob(item)}
             />
           </div>
         ))}
       </div>
       <div className="w-1/3 bg-[#1e1e1e]">
-        <div className="fixed right-0 top-0 h-screen w-1/5">
-          <div className="p-3">
-            <h1 className="text-white text-2xl">Job Details</h1>
-            {selectedJob?.title}
-          </div>
+        <div className="fixed right-0 top-0 h-screen w-[26.66%]">
+         <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>
     </div>
