@@ -16,23 +16,20 @@ async function GetJobListings(): Promise<JobListing[]|false> {
 }
 
 /*
- * First returns jobs with the query words in the title,
- * then jobs with the query words in the description,
- * then returns the rest of the jobs
+ * First returns jobs with any of the query words in the description,
  * @param {string} query - Space separated list of words to match
  * @returns {Promise<PostgrestSingleResponse<any[]>>}
  */
-async function SearchJobs(keywords: string, from: number, to: number) {
+async function SearchJobs(query: string, from: number, to: number) {
+    let terms = query.replace(/ /g, ' | ').trim().replace(/^\|+|\|+$/g, '');
     const { data, error } = await supabase
-        .from('job_listings')
-        .select('*')
-        .ilike('description', `%${keywords}%`)
-        .order('created_at', { ascending: false })
+        .rpc('ts_rank_search', {search_terms: terms})
+        .order('rank', { ascending: false })
         .range(from, to);
-    
+
     if (error) {
-        console.error(error)
-        return null;
+        console.error('Error fetching job listings:', error)
+        return
     }
 
     return data

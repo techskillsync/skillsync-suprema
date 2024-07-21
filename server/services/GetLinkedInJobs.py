@@ -29,7 +29,7 @@ Wrap get requests in IpSwitcher's fetch_with_proxy().
 This is not a good solution because the requests fail anyway and 96% of proxies are broken 
 resulting in very long request times.
 
-Measure 2: Flurry of GET requests (untested)
+Measure 2: Flurry of GET requests
 Send 7 GET requests at random short intervals and home one goes through.
 This seems like it should not work but it actually works really well.
 
