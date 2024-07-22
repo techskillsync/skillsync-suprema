@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrapeThenSearch } from "../../supabase/GetJobListings";
+import { SearchJobs } from "../../supabase/GetJobListings";
 import { JobListing } from "../../types/types";
 
 
@@ -8,7 +8,15 @@ function GetJobs() {
     const [jobs, setJobs] = useState<Array<JobListing>>([]);
 
     async function initJobs() {
-        setJobs(await ScrapeThenSearch(searchValue, "Vancouver", 0, 10));
+        const response = await SearchJobs(searchValue, "Vancouver", 0, 10)
+        const { data, error, count } = response || {};
+
+        if (error) {
+            console.warn("Error getting job listings:", error);
+            return;
+        }
+
+        setJobs(data || []);
     }
 
     return (
