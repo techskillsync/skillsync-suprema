@@ -61,7 +61,7 @@ async function ScrapeThenSearch(
  *  - Uses word stems to find any variation of the same word
  *  - Prioritizes matching words in the title than in the description
  * @param {string} query - Space separated list of words to match
- * @param {string} location - location we want to search (Vancouver BC, Canada)
+ * @param {string} location - Must only contain keywords and spaces. eg: (Vancouver BC Canada)
  * @param {number} from - pagination start index
  * @param {number} to - pagination end index
  * @returns {Promise<PostgrestSingleResponse<any[]>>}
@@ -77,13 +77,18 @@ async function SearchJobs(
     return;
   }
   console.log("Searching jobs...");
-  let terms = query
+  let query_terms = query
     .replace(/ /g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");
-  console.log(terms);
+  let location_terms = location
+    .replace(/ /g, " | ")
+    .trim()
+    .replace(/^\|+|\|+$/g, "");
+  console.log(query_terms);
+  console.log(location_terms);
   const { data, error, count } = await supabase
-    .rpc("ts_rank_search", { search_terms: terms }, { count: "exact" })
+    .rpc("ts_rank_search", { search_terms: query_terms, location_search_terms: location_terms }, { count: "exact" })
     .order("rank", { ascending: false })
     .range(from, to)
 
