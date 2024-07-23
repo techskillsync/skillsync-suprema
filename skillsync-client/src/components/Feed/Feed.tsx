@@ -11,10 +11,12 @@ import { JobListing } from "../../types/types";
 import JobDescriptionCard from "./JobDescriptionCard";
 import PaginationController from "./PaginationController";
 import SearchBar from "./SearchBar";
+import SearchFilters from './SearchFilters' // <---- Arman
 import Spacer from "../common/Spacer";
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
+  const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
   const [searchValue, setSearchValue] = useState("");
 
   const [listings, setListings] = useState<JobListing[]>([]);
@@ -73,6 +75,11 @@ function Feed() {
           handleSearch={handleSearch}
           setSearchValue={setSearchValue}
         />
+        { /*  ------------- Arman ------------- */ }
+        <SearchFilters
+          setLocationKeys={setLocationKeys}
+          />
+        { /*  ------------- Arman ------------- */ }
         <div className="my-3">
           {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
           <PaginationController
