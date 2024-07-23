@@ -10,10 +10,10 @@ function InputField({
   className = "",
 }) {
   return (
-    <div className="w-full">
+    <div className="flex items-center w-full">
       {showLabel && (
         <label
-          className="block text-sm font-bold mb-2"
+          className="block text-base font-semibold bg-green-200 px-2 py-2 rounded-l whitespace-nowrap"
           htmlFor={item.toLowerCase()}
         >
           {item}
@@ -22,12 +22,12 @@ function InputField({
       <input
         className={
           className +
-          " shadow appearance-none border rounded w-full focus:ring py-2 px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
+          "!w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] rounded-r w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
         }
-        id={item}
+        id={item.toLowerCase()}
         onChange={onChange}
         type="text"
-        placeholder={placeholder ?? "Enter your " + item.toLowerCase()}
+        placeholder={placeholder !== '' ? placeholder : "Enter your " + item.toLowerCase()}
       />
     </div>
   );
@@ -37,6 +37,7 @@ const selectFieldStyle = {
   control: (base, state) => ({
     ...base,
     textAlign: "left",
+    borderRadius: "0 3px 3px 0",
     // backgroundColor:
     //   window.matchMedia &&
     // window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -60,10 +61,11 @@ const selectFieldStyle = {
     // window.matchMedia("(prefers-color-scheme: dark)").matches
     //   ? ""
     //   : "0.5px solid #f5f5f5",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   }),
   input: (base) => ({
     ...base,
+    borderRadius: 7
     // color:
     //   window.matchMedia &&
     //   window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -193,33 +195,37 @@ function SelectField({
   }));
   return (
     <div className="mb-4 w-full" style={{ position: "relative" }}>
-      <label
-        className="block text-sm font-bold mb-2"
-        htmlFor={item.toLowerCase()}
-      >
-        {item}
-      </label>
-      {creatable ? (
-        <CreatableSelect
-          onChange={onChange}
-          id={item}
-          options={options}
-          isSearchable
-          isMulti={allowMultiple}
-          placeholder={"Enter your " + item.toLowerCase()}
-          styles={selectFieldStyle}
-        />
-      ) : (
-        <Select
-          onChange={onChange}
-          id={item}
-          options={options}
-          isSearchable
-          isMulti={allowMultiple}
-          placeholder={"Select your " + item.toLowerCase()}
-          styles={selectFieldStyle}
-        />
-      )}
+      <div className="flex items-center">
+        <label
+            className="block text-base font-semibold bg-green-200 px-2 py-2 rounded-l whitespace-nowrap"
+            htmlFor={item.toLowerCase()}
+        >
+          {item}
+        </label>
+        {creatable ? (
+          <CreatableSelect
+          className="w-full"
+            onChange={onChange}
+            id={item}
+            options={options}
+            isSearchable
+            isMulti={allowMultiple}
+            placeholder={"Enter your " + item.toLowerCase()}
+            styles={selectFieldStyle}
+          />
+        ) : (
+          <Select
+          className="w-full"
+            onChange={onChange}
+            id={item}
+            options={options}
+            isSearchable
+            isMulti={allowMultiple}
+            placeholder={"Select your " + item.toLowerCase()}
+            styles={selectFieldStyle}
+          />
+        )}
+      </div>
     </div>
   );
 }
