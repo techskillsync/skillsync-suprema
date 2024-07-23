@@ -16,7 +16,7 @@ const ProfileCard = ({name, school}) => {
           </div>
         </div>
         <div className="absolute bottom-1 right-2">
-          <a href="">
+          <a href="/profile">
             <p className="text-xs !font-normal text-gray-400">Edit Profile</p>
           </a>
         </div>
