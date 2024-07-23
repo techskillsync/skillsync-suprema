@@ -157,7 +157,7 @@ def _fill_job(job:dict) -> dict:
         apply_url = apply_tag.contents[0].strip('"')
 
     # Get Icon URL
-    logo_url = "https://picsum.photos/id/152/50" # The images are dynamically loaded so we cant get em easily
+    logo_url = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
 
     job['description'] = description
     job['apply_url'] = apply_url
