@@ -4,30 +4,41 @@ import Select from "react-select";
 
 function InputField({
   item,
+  value,
   onChange,
   placeholder = "",
   showLabel = true,
   className = "",
+  type = "text",
+  id = "",
+  required = false,
 }) {
   return (
     <div className="flex items-center w-full">
       {showLabel && (
-        <label
-          className="block text-base font-semibold bg-green-200 px-2 py-2 rounded-l whitespace-nowrap"
-          htmlFor={item.toLowerCase()}
-        >
-          {item}
-        </label>
+        <div className="max-w-1/2">
+          <label
+            className="block text-base font-semibold min-w-[120px] !text-white bg-emerald-600 px-3 py-2 rounded-l whitespace-nowrap"
+            htmlFor={item.toLowerCase()}
+          >
+            {item}
+          </label>
+        </div>
       )}
       <input
+        id={id ?? item.toLowerCase()}
+        value={value}
+        itemType={type}
         className={
           className +
           "!w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] rounded-r w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
         }
-        id={item.toLowerCase()}
+        required={required}
         onChange={onChange}
         type="text"
-        placeholder={placeholder !== '' ? placeholder : "Enter your " + item.toLowerCase()}
+        placeholder={
+          placeholder !== "" ? placeholder : "Enter your " + item.toLowerCase()
+        }
       />
     </div>
   );
@@ -65,7 +76,7 @@ const selectFieldStyle = {
   }),
   input: (base) => ({
     ...base,
-    borderRadius: 7
+    borderRadius: 7,
     // color:
     //   window.matchMedia &&
     //   window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -185,9 +196,15 @@ const selectFieldStyle = {
 function SelectField({
   item,
   list,
+  value,
   onChange,
   allowMultiple = false,
   creatable = true,
+  placeholder = "",
+  showLabel = true,
+  className = "",
+  id = "",
+  required = false,
 }) {
   const options = list.map((item) => ({
     value: item,
@@ -196,32 +213,49 @@ function SelectField({
   return (
     <div className="mb-4 w-full" style={{ position: "relative" }}>
       <div className="flex items-center">
-        <label
-            className="block text-base font-semibold bg-green-200 px-2 py-2 rounded-l whitespace-nowrap"
-            htmlFor={item.toLowerCase()}
-        >
-          {item}
-        </label>
+        {showLabel && (
+          <div className="max-w-1/2">
+            <label
+              className="block text-base font-semibold min-w-[120px] !text-white bg-emerald-600 px-3 py-2 rounded-l whitespace-nowrap"
+              htmlFor={item.toLowerCase()}
+            >
+              {item}
+            </label>
+          </div>
+        )}
         {creatable ? (
           <CreatableSelect
-          className="w-full"
+            className={className + " w-full"}
             onChange={onChange}
             id={item}
+            inputValue={value}
+            required={required}
             options={options}
             isSearchable
             isMulti={allowMultiple}
-            placeholder={"Enter your " + item.toLowerCase()}
+            placeholder={
+              placeholder !== ""
+              ? placeholder
+              : "Enter your " + item.toLowerCase()
+            }
             styles={selectFieldStyle}
           />
         ) : (
           <Select
-          className="w-full"
-            onChange={onChange}
-            id={item}
-            options={options}
+          
+          className={className + " w-full"}
+          onChange={onChange}
+          id={item}
+          inputValue={value}
+          required={required}
+          options={options}
             isSearchable
             isMulti={allowMultiple}
-            placeholder={"Select your " + item.toLowerCase()}
+            placeholder={
+              placeholder !== ""
+                ? placeholder
+                : "Select your " + item.toLowerCase()
+            }
             styles={selectFieldStyle}
           />
         )}
