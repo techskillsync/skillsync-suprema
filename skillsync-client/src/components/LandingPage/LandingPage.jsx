@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '../Navbar';
+import Navbar from './Navbar';
 import Hero from './Hero';
 import PdfResumeUpload from '../arman/pdfResumeUpload';
-import Spacer from '../Spacer';
+import Spacer from '../common/Spacer';
 import SimplicitySection from './SimplicitySection';
 import Partners from './Partners';
 

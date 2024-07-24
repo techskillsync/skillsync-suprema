@@ -1,4 +1,4 @@
-import Navbar from '../Navbar';
+import Navbar from '../LandingPage/Navbar';
 
 function ConfirmEmailPage() {
     return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LogoDark from "../assets/LogoDark.png";
-import LogoLight from "../assets/LogoLight.png";
+import LogoDark from "../../assets/LogoDark.png";
+import LogoLight from "../../assets/LogoLight.png";
 
 const Navbar = ({ logIn, signUp }) => {
 

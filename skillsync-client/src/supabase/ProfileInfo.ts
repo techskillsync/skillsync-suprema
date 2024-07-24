@@ -25,6 +25,17 @@ async function GetProfileInfo(columns): Promise<UserProfile | null> {
     }
 }
 
+async function GetUserEmail(): Promise<string | null> {
+    try {
+        const session = await supabase.auth.getSession();
+        const email = session?.data?.session?.user?.email || null;
+        return email;
+    } catch (error) {
+        console.warn(error);
+        return null;
+    }
+}
+
 // Param: updates - a dictionary where the keys are column names and the values are the new values, eg:
 // { name: "Jeff", location: "NewYork" }
 // Returns: { data, error } pair
@@ -45,4 +56,4 @@ async function SetProfileInfo(updates): Promise<true | false> {
     }
 }
 
-export { GetProfileInfo, SetProfileInfo }
+export { GetProfileInfo, GetUserEmail, SetProfileInfo }
