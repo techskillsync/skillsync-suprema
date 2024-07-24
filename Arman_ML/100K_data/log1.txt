@@ -1,0 +1,2140 @@
+Found 13600 tasks already in the cache and removed them.
+Number of batches: 864
+FileObject(id='file-b06fBpgdCHmYSNzcjgEekl5e', bytes=894091, created_at=1721120101, filename='0_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-txpzusFYZcG37khaGGhzGgVe', bytes=682495, created_at=1721120224, filename='1_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-nko0XSFT3y7Lxsa2nQfICSkI', bytes=595748, created_at=1721120286, filename='2_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-cKHpuWdkgnCZwu4IF7bK56uR', bytes=805091, created_at=1721120349, filename='3_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-GInGlAuP8yWBNEaSSMSPi4ji', bytes=710845, created_at=1721120532, filename='4_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-hbPjlokR05Tq9MKul87yMJY3', bytes=741448, created_at=1721120895, filename='5_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-pGR2kDMPd0Nl58O0HhAEWLTw', bytes=948191, created_at=1721120958, filename='6_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yn4jq54bmhHbOpq6eOK0TmjL', bytes=676745, created_at=1721121020, filename='7_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-R0Yn4A0BSsy2UbiWicgZYi1V', bytes=530148, created_at=1721121083, filename='8_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-XtbcN3xJyM1QrlYrWcuWjthC', bytes=1005391, created_at=1721121145, filename='9_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Gk1NuDlhtCO8NgpmOMxxG5lu', bytes=777395, created_at=1721121207, filename='10_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-cHNC8r3Axl3gXhSQDeDm9oGm', bytes=674248, created_at=1721121329, filename='11_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ql0QeD5I8n02YJDlDEfEKwfj', bytes=725691, created_at=1721121392, filename='12_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-WNX5FpLAMyuIIVpZFTZb6TDT', bytes=560145, created_at=1721121514, filename='13_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-SPfPi5gesacBmAYEZ6eKKkDn', bytes=519448, created_at=1721121577, filename='14_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-yWlGzf4LYh906XVRXWKJJYlA', bytes=800091, created_at=1721121745, filename='15_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-pEhhcPhBsvTpzEocspzidoN2', bytes=836845, created_at=1721121807, filename='16_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-RRmbTMNQPgd1ZkHEPvcj9OZ8', bytes=998448, created_at=1721121871, filename='17_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: finalizing
+Current status: completed
+FileObject(id='file-YSXXLs0HBDxl8r0r1TcObQc8', bytes=760091, created_at=1721122114, filename='18_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3FhFbthLebTJT1gRzGkeX6w4', bytes=600395, created_at=1721122176, filename='19_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-XLKPGGgFIF7MSwO5XDFqzTMF', bytes=565548, created_at=1721122238, filename='20_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-cPJvrZZwZswp6tC97YQD8TO6', bytes=662691, created_at=1721122301, filename='21_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-O295nq8mVHH4fgceccQwm0ng', bytes=669745, created_at=1721122363, filename='22_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Ft9iW6OZTTFiHi32zGPkMttR', bytes=801648, created_at=1721122425, filename='23_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-DPf7ithkROLKuVCO9q0khonG', bytes=985491, created_at=1721122488, filename='24_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-6R8gbUAs7BrZiP9WgeE1hRbQ', bytes=842095, created_at=1721122551, filename='25_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-gIcORrNq7KHr1AS8GJXWjhYG', bytes=823548, created_at=1721122613, filename='26_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-KrixElsGJ951OLSdqiT8mYHd', bytes=755691, created_at=1721122676, filename='27_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-CBI1AtV3kGmn3k3nmWewsKM9', bytes=571245, created_at=1721122738, filename='28_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Wf6sC1q0lOLYPZr2NDil2944', bytes=511648, created_at=1721122800, filename='29_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8jrtAC9NsWWy54Z75jaVrUoe', bytes=1301491, created_at=1721122863, filename='30_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-7L3PA1xJcl8O8veAq5vEuK4J', bytes=866645, created_at=1721122926, filename='31_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3Q5rMy44WmhHernd23GEhNbe', bytes=556648, created_at=1721122988, filename='32_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-StQi5eXvd43cliydaO8mrpYj', bytes=797791, created_at=1721123051, filename='33_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-CTDcXRIzk8J1oa7tptSmN2iS', bytes=685745, created_at=1721123113, filename='34_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8iuzP9Eh8nDM2BhEzn4sHPRR', bytes=698548, created_at=1721123176, filename='35_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oNvBAORToSWJUFzaqbkNJWhf', bytes=654891, created_at=1721123238, filename='36_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-kuTw9OESFRwfmeF7dTwdwHzr', bytes=593695, created_at=1721123300, filename='37_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Ii5wCs0ToZ7TWiMACmp4HUuU', bytes=657348, created_at=1721123362, filename='38_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-E24tQ8pWQ8hyX68ng3ORnHJO', bytes=760691, created_at=1721123485, filename='39_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-tay3aPFUXVQbrU9dM3S0qDdg', bytes=780145, created_at=1721123547, filename='40_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-sJQA3WGHzaLBCRSdZtMzaBWV', bytes=924448, created_at=1721123670, filename='41_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-U3sVKtwwbF1d2ykNB7W4iaHO', bytes=979291, created_at=1721123732, filename='42_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ukJzX78drRej9onoSvJUFlKY', bytes=759045, created_at=1721123794, filename='43_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EhCKJ23MXNt7KAgPNzKSbz1S', bytes=663648, created_at=1721123856, filename='44_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0nNKJHxoOevOYCyloRrqodI0', bytes=1072891, created_at=1721123919, filename='45_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-6kdjfQrcD4VrfRro9GsqZZzx', bytes=794345, created_at=1721124042, filename='46_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-2bSN1ndQrYjmRA1Q6PgBDfaO', bytes=640648, created_at=1721124104, filename='47_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-VqESDjFIjmYRcUUJMoBZ3rCi', bytes=899891, created_at=1721124166, filename='48_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-9yJz4hW2hnpFRRxeYTps0tKk', bytes=788295, created_at=1721124228, filename='49_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HCpwZYWzbbcVdAtzBd56sNH8', bytes=801548, created_at=1721124291, filename='50_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dDkLs5fGZwiDQd3C81X5N6sn', bytes=827291, created_at=1721124353, filename='51_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Fcoox6PEmVbMGwec0rh2gbn6', bytes=647645, created_at=1721124415, filename='52_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-NP69YXPr4DJlR7KYJomQxsmX', bytes=592848, created_at=1721124539, filename='53_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Xa9lisoSVeIIWGHGiVb7K55l', bytes=696191, created_at=1721124601, filename='54_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EkfxTgVFvu7Yt35wCtPLPWAn', bytes=565845, created_at=1721124663, filename='55_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-XuDQAu3H5RfcDIC7slP0Xw73', bytes=560348, created_at=1721124726, filename='56_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OAo6bgX6wthjOEOFymBffNjx', bytes=1191991, created_at=1721124788, filename='57_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Mo1f65oriBe2Gq1rnsxYnGeb', bytes=926595, created_at=1721124850, filename='58_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yNlwiozZM5ZSCERJXAJUoFdH', bytes=786048, created_at=1721124913, filename='59_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GcFm7KQ0lkuYSy7QvKJFTumj', bytes=993391, created_at=1721124975, filename='60_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wcxkCjARocDjD0xORcOKQDzU', bytes=744845, created_at=1721125037, filename='61_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-u0UCChBvaJ8qvFFHhuL9Dtwx', bytes=621148, created_at=1721125099, filename='62_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-UUw3PCiL0fhCagvJVhttajoI', bytes=1029791, created_at=1721125161, filename='63_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4h24cHpw9KXa9YzRoWKJ7Bcs', bytes=971495, created_at=1721125223, filename='64_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-wILreoT5lRr25Zfcl79ORbAW', bytes=1038048, created_at=1721125346, filename='65_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-gFLaPkMBGxXlzI4eEwAfBBfC', bytes=886791, created_at=1721125408, filename='66_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-iAMNYZ8uIsRPOu0UQPDjivVH', bytes=876595, created_at=1721125471, filename='67_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yXfqc35srFsuEsq6uLpB6cy6', bytes=991248, created_at=1721125533, filename='68_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-jnnYVieHhB277snd30JHyHfj', bytes=772391, created_at=1721125595, filename='69_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rwrAJUVdeDdAzhcb8bF4KMUR', bytes=829695, created_at=1721125657, filename='70_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-zwluUP4E0FW8VrvqnoeC3nSc', bytes=1011848, created_at=1721125720, filename='71_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-JOThlDMzMj2jLy0PeHiu9WKr', bytes=1269091, created_at=1721125782, filename='72_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-73xA3mipbwyA3r8b2e7KoHUy', bytes=924995, created_at=1721125844, filename='73_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ZtPSG6X4Y0uQcYtxFDBbqlu9', bytes=705748, created_at=1721125907, filename='74_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-kNrPQezL983ERfEygfMTu4Al', bytes=841091, created_at=1721125969, filename='75_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-8IPW4kVRxiXPcUJqk14rESaG', bytes=901245, created_at=1721126092, filename='76_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dE9FXRkIDIxDNNBjVxmsQs90', bytes=1086248, created_at=1721126155, filename='77_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-WI9CQ6RuGHbp9ztqlnQk2qiH', bytes=915791, created_at=1721126217, filename='78_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-YBICazbUmLDAAtYN6GcUp4HV', bytes=935145, created_at=1721126279, filename='79_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-fbctUezppZSRRQIYotM3La1g', bytes=1079348, created_at=1721126402, filename='80_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-scSwHhWsmVw6SKiCDRMVrXq7', bytes=1006691, created_at=1721126464, filename='81_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-IQtddH95NVMu4bzAX8Ji78pB', bytes=715095, created_at=1721126526, filename='82_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rgUuZttwGtHxG1lKJfX0rQQK', bytes=548348, created_at=1721126589, filename='83_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-crRnUGk93dehKt76ZDdzwzRP', bytes=800791, created_at=1721126651, filename='84_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oY84R3Sf7X319VkxG39eJlF3', bytes=751445, created_at=1721126713, filename='85_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ZjcQV7YaeC91OhSVqtgVxu5K', bytes=826948, created_at=1721127558, filename='86_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-1BzBgv8qZx5Ml5oazWOt2NzR', bytes=868891, created_at=1721127621, filename='87_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-s8ko8cD8wjAmlmZSqFIQxTww', bytes=693695, created_at=1721127684, filename='88_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Bchv8FKstpSulRt9vySpxfR3', bytes=643348, created_at=1721127746, filename='89_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-B0XQXDcpHo4voDxE13G8Jz5i', bytes=1144691, created_at=1721127808, filename='90_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-1yeWNHCLYoUzCcu9ZBumwzOK', bytes=859695, created_at=1721127870, filename='91_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Jn77ki6Uh6RLaVubJX3wcHr8', bytes=699548, created_at=1721127933, filename='92_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-zjKBvfIYzxFJA4aTOjQUCiAY', bytes=817891, created_at=1721128115, filename='93_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Fa4h6rYLRy2Ofl35Mkcukobb', bytes=939495, created_at=1721128177, filename='94_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-UHezihzDvtcY9lijzw9LAbji', bytes=1185948, created_at=1721128240, filename='95_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-HPX4DozkdJhM7JhbMn23vx3w', bytes=864391, created_at=1721128422, filename='96_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-vMNtAogAj0t4nuFN5XqjzWSD', bytes=879445, created_at=1721128485, filename='97_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-8Ho11ID7M1VyuCHBEsXFz7Uc', bytes=1019348, created_at=1721128849, filename='98_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-HIuFCgyhfIe41SMHNPsph6zG', bytes=1099891, created_at=1721128976, filename='99_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-mnutNz0ItO5GbVCoL3D7WwTV', bytes=835545, created_at=1721129110, filename='100_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-7CCgIOegRjxGVZBL1PF2KC2d', bytes=696048, created_at=1721129233, filename='101_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-U24QPPeI5DXTTYQpmcoz4D6l', bytes=1250791, created_at=1721129356, filename='102_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-b6jOyxZ9lFblDYaoh1HIR4GO', bytes=887995, created_at=1721129478, filename='103_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OVt3L3gjtyljqXivw2TJ6WgS', bytes=650048, created_at=1721129541, filename='104_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-eRRQAnidd0YJtUqAaQy0gMYy', bytes=1018991, created_at=1721129603, filename='105_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-yUHG9MrzEMGPxvOeaGFN54sM', bytes=892445, created_at=1721129730, filename='106_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Sl9jF9AQKCdYbAQzRFrvcGt3', bytes=890748, created_at=1721129793, filename='107_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-fsQziSrJuZmjon0qweTWxoTj', bytes=866191, created_at=1721129855, filename='108_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-SAqrnfmShNJjaF0RSl6qn05D', bytes=685845, created_at=1721129919, filename='109_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8afNxtF05IU2BmhZj3L4E7Kr', bytes=630348, created_at=1721129990, filename='110_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-JlFydUYHDpFEPHGnbpwKQMWt', bytes=819291, created_at=1721130113, filename='111_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-MR2NkePl8TdMIOXIwPzTRaqu', bytes=766145, created_at=1721130237, filename='112_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-kSgkGJznW6OjZATWf1cNwMd7', bytes=837848, created_at=1721130299, filename='113_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-FGw5CmVCeqTsqnrGZvehwXeW', bytes=865389, created_at=1721130423, filename='114_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-xMNkdAOtFLg9vUOqWzgRVb9h', bytes=739191, created_at=1721130485, filename='115_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-KiytsCmeTcOHghXXj7pLmhTM', bytes=646323, created_at=1721130548, filename='116_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-JK0xJpTK3LRphbTQmgj302TQ', bytes=824261, created_at=1721130610, filename='117_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-SUsH4W4Kt7ryBeWIi055Yb4f', bytes=595048, created_at=1721130732, filename='118_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8BRFaiHGSNOTZVRrPN6R9Sv2', bytes=979789, created_at=1721130795, filename='119_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-XjPNRifzARysei9IciFXzsoS', bytes=853591, created_at=1721134228, filename='120_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-QOLUZKM2Y95CfcMmFMwij9ZT', bytes=767373, created_at=1721137433, filename='121_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-k6KC0sjCvNIVfr9elrJiCNyH', bytes=951961, created_at=1721137556, filename='122_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-QZsV3TAdGIdtZ3DrsFyM4ZUK', bytes=722748, created_at=1721137618, filename='123_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Xr3BeRnLh93LCnvRhoB5G4LW', bytes=840289, created_at=1721137680, filename='124_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-bYo28j53hMubniLs93HG19Vd', bytes=714091, created_at=1721137743, filename='125_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ev7g4Um5Q9gjnCro11drtajx', bytes=674573, created_at=1721137805, filename='126_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-7o1Rbwom1cXRy5xsEFrrHVkb', bytes=905861, created_at=1721137988, filename='127_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-UVA2OFpiJculpH2hMrMyZvhj', bytes=676648, created_at=1721138112, filename='128_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-5VvdeUWhJuXvjrcs8zSBnFYg', bytes=982289, created_at=1721138176, filename='129_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4XBsEy5l3c2qFJtXoJuizGoZ', bytes=856091, created_at=1721138242, filename='130_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-3CkrMZMvBd17v2wYdp64chlE', bytes=1127323, created_at=1721138365, filename='131_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-fe4jy6FBX3heAz3uFcXs86R6', bytes=1669361, created_at=1721138427, filename='132_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-BED0cBE2N1cNz93fJLkbNQKQ', bytes=1440148, created_at=1721138550, filename='133_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-2BzgbsPLcTghLiKhWuwa2fVl', bytes=845389, created_at=1721138614, filename='134_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-UAWTq61alzjEs07PZPM7mB0v', bytes=719191, created_at=1721138683, filename='135_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-No0JMVkKyB2X7mBIZZIIfQFc', bytes=654723, created_at=1721138745, filename='136_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qVVuYmGG5WJ8JP8RCqUX9FZU', bytes=861061, created_at=1721138808, filename='137_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qBotZLY5837Bqu50XYqcANI2', bytes=631848, created_at=1721138870, filename='138_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-h57fUD2wovBwyxveeh9GPPQQ', bytes=1256389, created_at=1721138934, filename='139_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OXKeeL3OOIXwonOqlOAVKPio', bytes=1130191, created_at=1721138996, filename='140_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ch1wTgJTpwbZ9PpGoa5hrdHM', bytes=989523, created_at=1721139059, filename='141_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-1UpsUEHcmD5GFjPrqzGaoCeK', bytes=1119661, created_at=1721139121, filename='142_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Lz4KmpPc1chmU2f3UA3ns9Z9', bytes=890448, created_at=1721139197, filename='143_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-FOEGVphni7jChHgnro8qxiQr', bytes=1156689, created_at=1721139259, filename='144_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yVrd264pod0qH0e0pEu9bjTV', bytes=1030491, created_at=1721139322, filename='145_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-rYT6XIlkL9Uibbks8o4QogOC', bytes=943773, created_at=1721139444, filename='146_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ex0emwGxdPAMKRzd0vhg3H6l', bytes=1127861, created_at=1721139507, filename='147_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ok7gfAW5TiEcAWQGiysY9L7C', bytes=898648, created_at=1721139630, filename='148_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-inCYL9sSEvVlR8M6iHivNtsx', bytes=958089, created_at=1721139692, filename='149_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ghjiiaJUPigo6lCMsDnwpSJB', bytes=831891, created_at=1721139755, filename='150_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-iSMTArkxAOlHwjHdrH2CLsN7', bytes=774223, created_at=1721139877, filename='151_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-u7S5Mxe7S772zCtm503KfiWH', bytes=987361, created_at=1721139939, filename='152_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-gndpWVjELxHpKmnwnkcxfaRO', bytes=758148, created_at=1721140062, filename='153_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-jljJyOQBPaTyCVu2jJkAl81J', bytes=799189, created_at=1721140125, filename='154_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Vxgz651CoY5yBvrbvzTD5BWH', bytes=672991, created_at=1721140248, filename='155_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-cNcxV23czJvP1wDS6hORmgKv', bytes=598473, created_at=1721140370, filename='156_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-pLerSOkd2WgM4i9RaK43OjJ7', bytes=794761, created_at=1721140433, filename='157_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-GFFdGgitq00b9zWDLUykd58o', bytes=565548, created_at=1721140555, filename='158_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-hKmavHdnwnA1qsQK6ULXCPix', bytes=1389489, created_at=1721141520, filename='159_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ESmYnpajpiNxHDul5eUotZsH', bytes=1263291, created_at=1721141643, filename='160_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-yCv5FcGUKQGyuKntSX6YqueU', bytes=985023, created_at=1721141766, filename='161_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-p7STaAVV31FBAC10sjShvT0t', bytes=977561, created_at=1721141829, filename='162_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-E6kUumM6GoMlOMCByHtUNUuP', bytes=748348, created_at=1721141891, filename='163_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-urOsKFykjdLeO0xfOXsHFLJU', bytes=914489, created_at=1721141958, filename='164_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-lXOQKiNNKP8fT9TBInTmEoxZ', bytes=788291, created_at=1721142027, filename='165_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-WRTKFShPsWAWU94ncgFpRRS3', bytes=831723, created_at=1721142090, filename='166_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-maPDf9pN3fL9E46YMhOPVPq2', bytes=1145961, created_at=1721142212, filename='167_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sIeRyJd0uXPhz0im3KIEuGma', bytes=916748, created_at=1721142275, filename='168_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-U3UfzYhR5k5xWtNenTRAjpfe', bytes=1213889, created_at=1721142338, filename='169_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-lnbf9cxjg97aSPtLPQGzfUmj', bytes=1087691, created_at=1721142400, filename='170_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-bJxJuYQbh1EnIqfU25ZbwaOC', bytes=871873, created_at=1721142536, filename='171_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-YMc0eDd4VT6XJIM4vQKp7eX4', bytes=926861, created_at=1721142599, filename='172_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Jx9xT54vMZIz5pKPV3iiyKUI', bytes=697648, created_at=1721142661, filename='173_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-2dTqSDcFoj6QlCfra2uBQpAY', bytes=1006589, created_at=1721142783, filename='174_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-l0vaduQgV4s9FSpnDs358MIu', bytes=880391, created_at=1721142846, filename='175_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-xTcviIq0YwbwTFw4C64qvXge', bytes=910973, created_at=1721142908, filename='176_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-RwQf12gSM857cGKtNQqS1YFm', bytes=1212361, created_at=1721143108, filename='177_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EnAoxje9FjoGSbuvfI8QWswQ', bytes=983148, created_at=1721143171, filename='178_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-x1W7UY7i7pq3uqiLlsGGE84m', bytes=940889, created_at=1721143233, filename='179_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5NeXJfoAYOcDRLiBHSQga6nu', bytes=814691, created_at=1721143356, filename='180_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-H0bahW2WvLYY7Ro7Pwg6330F', bytes=915173, created_at=1721143479, filename='181_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Nt6NYQHCOgMkWLJcPweFyaln', bytes=1286461, created_at=1721143602, filename='182_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-G0cPlZFuEaRs79jShz067yWk', bytes=1057248, created_at=1721143665, filename='183_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-CjZpNh4r7Nfb64idyAfSzhgZ', bytes=921389, created_at=1721143727, filename='184_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-9THmQNP0OiwFEMGmy6KNvRye', bytes=795191, created_at=1721143790, filename='185_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-27glOEdsRhcFYB6nPfL4g6Da', bytes=817173, created_at=1721143852, filename='186_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-2Ku9LxitQ0jpvQ1lyOh3H99Y', bytes=1109961, created_at=1721143915, filename='187_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-d28SAeL0IqjhCcY9maF5RNiP', bytes=880748, created_at=1721143979, filename='188_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-q6JQDrfYErs5hzoTo6OCTdFm', bytes=994089, created_at=1721144041, filename='189_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-jNeZO4HyNYZD0Z3CZbxjXYGw', bytes=867891, created_at=1721144164, filename='190_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-M4JiRHHBVr1kGwM8VQQF58gR', bytes=778823, created_at=1721144288, filename='191_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-SINRJPxXQ1rcFk5eOyt5XtvE', bytes=960561, created_at=1721144410, filename='192_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GAfJKHFkCs3X5L0oD4UwOE8a', bytes=731348, created_at=1721144473, filename='193_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-6jBCir7vGRWZks81Zdnykzzc', bytes=1162389, created_at=1721144535, filename='194_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-vQT8Pb0di65gaw0ooHk8IlAR', bytes=1036191, created_at=1721144598, filename='195_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-OEFNCxXSBWxdAPELCExHB7g5', bytes=805223, created_at=1721144841, filename='196_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-QHCbMHtp98C893PoBY0VkArH', bytes=845061, created_at=1721145087, filename='197_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-B0hdE6QaCZlkyTsQYhSWBos2', bytes=615848, created_at=1721145214, filename='198_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-4hUqLNtU5GRCsV8iaf2uOgC9', bytes=921789, created_at=1721145337, filename='199_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: in_progress
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-WXo59Rge2qvZsaUvQQep0M53', bytes=795591, created_at=1721145524, filename='200_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-0eCPqB0xIQhpLPdkBLToZTYB', bytes=679623, created_at=1721145646, filename='201_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Cs2Cy29P8zs4KK0PTftjU1Hb', bytes=834461, created_at=1721145769, filename='202_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-CcrvUITVNVOCH5yl9qNb0wuW', bytes=605248, created_at=1721145831, filename='203_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-aIWrSLfsTDgavQdZ8K8bc22V', bytes=1042289, created_at=1721145893, filename='204_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-AovbZKu3DHJyagVBwxo3nIY8', bytes=916091, created_at=1721145956, filename='205_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-q9Sx4NPZhljUr8WfomtndPaw', bytes=784323, created_at=1721146079, filename='206_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-utQj9vOd74pymr8l0uCM2Q7l', bytes=923361, created_at=1721146202, filename='207_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-MsNzG1gWNAjNrfgiOFnP8rpr', bytes=694148, created_at=1721146265, filename='208_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-kibP8RLIJdRnUuILRKDzqCGx', bytes=1044989, created_at=1721146327, filename='209_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-hAHg7i379xrkK2I4fJEn264h', bytes=918791, created_at=1721146450, filename='210_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-CF9oHwWLOwrJCdxGh6X5zmdN', bytes=754773, created_at=1721146573, filename='211_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-P6ui40v1plTmDOpqiGfB6JZX', bytes=861561, created_at=1721146635, filename='212_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-II1MnmSFa5nQyVkqy2HSy7bN', bytes=632348, created_at=1721146697, filename='213_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-d9HF9m0U8OmpoKcD0OnBSYzD', bytes=1052789, created_at=1721146760, filename='214_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4i3TKFVdcBjaCRLyZaZTVDoQ', bytes=926591, created_at=1721146822, filename='215_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-FmYkKT0qmVC19q3drTwy7pfP', bytes=870623, created_at=1721146945, filename='216_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: finalizing
+Current status: completed
+FileObject(id='file-9nWoOTV9QruLLl2sTwGwL9tE', bytes=1085461, created_at=1721147188, filename='217_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-30JUhCzJFeDHFfohcykH1aIQ', bytes=856248, created_at=1721147250, filename='218_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-p35EyM6eAwy9YXv2IZXjMIep', bytes=845089, created_at=1721147313, filename='219_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-a0BeWVAMnh9psNRyM4H0ZUsk', bytes=718891, created_at=1721147375, filename='220_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GiOfwT7LAJHkAwNzCvs9hXz0', bytes=710123, created_at=1721147438, filename='221_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3MBoYsDymAgLEj8oySOv3BFT', bytes=972161, created_at=1721147500, filename='222_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-SasAvqQMketu3Y1JS9vBEALS', bytes=742948, created_at=1721147622, filename='223_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-xbi9GmVO5amIoazOk4M7RPSi', bytes=871689, created_at=1721147685, filename='224_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-uOIN2MQDK4Ttf0jR43h3ytib', bytes=745491, created_at=1721147747, filename='225_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-vfnY5jH633YiSYwHil3FAZui', bytes=678973, created_at=1721147869, filename='226_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ASPsSeZkKN91lsmKEyI1df2p', bytes=883261, created_at=1721147931, filename='227_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-pQ6Pud7pBTqByY33HzfSz4By', bytes=654048, created_at=1721148054, filename='228_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Am9vzoKiOoWQEyXf8hKvZuQL', bytes=1162989, created_at=1721148118, filename='229_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4WbuSjqh9yvvw9h2RBf1hbiv', bytes=1036791, created_at=1721148180, filename='230_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-DMtCObJfwI7coQ09H60U702d', bytes=1000623, created_at=1721148243, filename='231_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-FZxG4enkib7hXNlwP4o7AN6c', bytes=1235261, created_at=1721148305, filename='232_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-PvTy7QYbpojjhbhXqDPJRJVY', bytes=1006048, created_at=1721148428, filename='233_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-YhfBeOPWgzRvf4zNrJFcXhzT', bytes=968289, created_at=1721148551, filename='234_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Zum4chGP3Fo0ayZ1eJCCSxBR', bytes=842091, created_at=1721148617, filename='235_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-axKedGo02vSIFdh0AH4wiG7p', bytes=739823, created_at=1721148740, filename='236_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-f4fMkUUzooghnnoplQjXQpid', bytes=908361, created_at=1721148862, filename='237_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-PWH8xem5E5qqJK1VQuhlM7AK', bytes=679148, created_at=1721148925, filename='238_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-MQOW5sHd6ZkILU7SdVraQxWM', bytes=958189, created_at=1721148987, filename='239_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-nCTl1oOzAgR6XmHsHUYPQIck', bytes=831991, created_at=1721149049, filename='240_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-obgzzNV9MdfKt0Mgy75PzpBs', bytes=766873, created_at=1721149112, filename='241_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ATiopOUw4qLim2SwSNaxDVVV', bytes=972561, created_at=1721149174, filename='242_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-bQs7g2R0xcKVBn8pzIh5cAZm', bytes=743348, created_at=1721149297, filename='243_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-axbiIyfA08JUsu01aVLKEpBm', bytes=1021589, created_at=1721149359, filename='244_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-vUhV4m92cOdiVa85do06weNc', bytes=895391, created_at=1721149422, filename='245_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ifVKCvGftxLgLJuau0eyHejm', bytes=735073, created_at=1721149544, filename='246_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-738eDTyxsKGmHiGJEyfzqRjX', bytes=845561, created_at=1721149606, filename='247_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-aqhJ8yiOtXQLhviEoi5ldqnv', bytes=616348, created_at=1721149911, filename='248_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-klTxRdRj8TnzxFgVh4X2qPNU', bytes=842389, created_at=1721149974, filename='249_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Uy76zbFZl3FmOOgszQAUikXi', bytes=716191, created_at=1721150036, filename='250_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-73sSnCdeeOItWRQcvTaFoHip', bytes=717623, created_at=1721150098, filename='251_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-a06hzjVAG3myRFJ4AZfY6yaI', bytes=989861, created_at=1721150160, filename='252_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-RWsbBDPgX6CoWp81w8ARP1vX', bytes=760648, created_at=1721150223, filename='253_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-XPJU2Ugv7PLZDZSm733mCkLU', bytes=1041889, created_at=1721150346, filename='254_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-FtIXqxppXUR0of2AyRZUZQF6', bytes=915691, created_at=1721150541, filename='255_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0ZReTrNqD8xcMHb3gAwsjRK9', bytes=836623, created_at=1721150603, filename='256_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-lmEsGkyYX0r6Yc6EdrIoyYv7', bytes=1028361, created_at=1721150726, filename='257_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-TFsHeL4MYgEWGScJbSzi9S3R', bytes=799148, created_at=1721150789, filename='258_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-BpxwTIUQ6MaPzNd5sB2BE5cD', bytes=1161389, created_at=1721150855, filename='259_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-cAROvKDuu5htWvCwKdfEi9SW', bytes=1035191, created_at=1721150918, filename='260_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-gshRkYmq5m05oJEqzaXV6flC', bytes=802773, created_at=1721150981, filename='261_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-jFMkn0xiCIVR5DbuC6N8bVVH', bytes=841161, created_at=1721151043, filename='262_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-aJ0FdLbVnXqf0f6il7mcgIJJ', bytes=611948, created_at=1721151106, filename='263_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OiSHuLymbBu15GvsxhIhRHrt', bytes=996289, created_at=1721151168, filename='264_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-AF9rYGakoowMvkjSbjA3bf1M', bytes=870091, created_at=1721151291, filename='265_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-TcX6Q7meqMMIHDrcojnjFoKy', bytes=1006873, created_at=1721151353, filename='266_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-AtFUATaSDYejbO1jrFk7QK3L', bytes=1414461, created_at=1721151415, filename='267_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8GPTo05yvZ1YAT9VhMtYu08G', bytes=1185248, created_at=1721151478, filename='268_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qt05qdqTEgsZX1FBqucS4xTs', bytes=1126889, created_at=1721151541, filename='269_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-VWiitH1VLRrGb3l8mt6rYpu9', bytes=1000691, created_at=1721151729, filename='270_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+GPT returned invalid object for key - c0d777fa768fcc12e2e44c82fa99e1c6. This will need to be manually added
+'categorization'
+FileObject(id='file-4t9lIVKpKtAdicZmCUOL6mu4', bytes=748723, created_at=1721152393, filename='271_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-gtKqRuvyXmNp4shdMJmfpXGf', bytes=767561, created_at=1721153119, filename='272_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5X2z66LkhKdCIJks3OxsPdGv', bytes=538348, created_at=1721153663, filename='273_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-joNqQ82f4panIiaDvwD4SCGf', bytes=909189, created_at=1721154628, filename='274_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qGV0x8kU7oAipcwWe5jTxpBJ', bytes=782991, created_at=1721154691, filename='275_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-oMVzI4EIzMlFWoPTeunzZM11', bytes=638673, created_at=1721154813, filename='276_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Ufnv878hfk77ZU3XrV6vhF7X', bytes=765161, created_at=1721154876, filename='277_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-NdnsESp2SNbNryzskFf3Z8vT', bytes=535948, created_at=1721154938, filename='278_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-I5YIOhIPeSaetgeYhTWP8eC1', bytes=848289, created_at=1721155061, filename='279_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-xGdnBJdBAhxzbQx55GNZWKQ1', bytes=722091, created_at=1721155124, filename='280_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+GPT returned invalid object for key - 4d0a35020067a52f8bc274dfa1768576. This will need to be manually added
+Expecting value: line 2 column 101 (char 101)
+FileObject(id='file-wWLQkkfFTb1gKu5EvBdEyyLU', bytes=696923, created_at=1721155246, filename='281_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-J00wVgJXfXfm5VlPLDQhOelT', bytes=942561, created_at=1721155368, filename='282_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-zKynh2ezXZnh4eirsAFxR0uq', bytes=713348, created_at=1721155431, filename='283_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3eJ5jVKSdYzYR5ZsNFQvyC5y', bytes=850089, created_at=1721155494, filename='284_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-alfisZ10dR0k6Y9M69nro8gN', bytes=723891, created_at=1721155556, filename='285_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EkGx69ejz9efvnHSUDbOxbEi', bytes=741423, created_at=1721155618, filename='286_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HxBWncGSE5H137SBqUoz1cP2', bytes=1029761, created_at=1721155682, filename='287_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-V7BTGwHIP0l3O8ReqLx542pm', bytes=800548, created_at=1721155745, filename='288_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-CG5Aw8GMv51CuhsYA7vzQvV7', bytes=1066689, created_at=1721155867, filename='289_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-yjbYm9n3nGQwAeu0L3k75FOM', bytes=940491, created_at=1721155990, filename='290_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dkwT1GCltNfxHQ5BKA3Yi4kw', bytes=751523, created_at=1721156052, filename='291_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rg7bjfsbOMPU8b4df413KOe7', bytes=833361, created_at=1721156115, filename='292_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-RcxQuObSJPBT4g2IanzUIGXQ', bytes=604148, created_at=1721156177, filename='293_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-5Qi5wuLKlw40HrVBbTQNfEeH', bytes=889789, created_at=1721156239, filename='294_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-elrM2daJmuBHd5mC58gCnn7S', bytes=763591, created_at=1721156362, filename='295_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oHfUyZGguiTjkSPytQYDQiZR', bytes=714923, created_at=1721156424, filename='296_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-g5AlxnqQ47Z0y7NggottSn1k', bytes=937061, created_at=1721156487, filename='297_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-0Csv0JHpvNDakpjoT9ZQhdvD', bytes=707848, created_at=1721156610, filename='298_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-tiEY92Y2v9hCzLh3TQdD676l', bytes=819089, created_at=1721156672, filename='299_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-Wl5pNfRF7iKY0pv61LKIkNN8', bytes=692891, created_at=1721156855, filename='300_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-pAFmzJMKJmd42IDpPHblXHmL', bytes=719323, created_at=1721156977, filename='301_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-LPwlXa6nYbQcbtsDgSEYnYEw', bytes=1016561, created_at=1721157039, filename='302_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qLi3HZeB4kKM3ZlhMMqvE1aR', bytes=787348, created_at=1721157102, filename='303_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-2G4K0fIz2jcy14vh0DUFZlCX', bytes=793289, created_at=1721157164, filename='304_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+GPT returned invalid object for key - 2a602f8b44c09cbf5816aa51d8b70e2c. This will need to be manually added
+'categorization'
+FileObject(id='file-0L3r6HhnTydVRpu228AVMTWC', bytes=667091, created_at=1721157226, filename='305_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-XsU0UnEASE3fDHFG6e5lquzM', bytes=628873, created_at=1721157288, filename='306_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HDceZfbLj4L33OqGWJzhUqyw', bytes=861461, created_at=1721157350, filename='307_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-YzjKWfeBxXjONEkBeVE9MCeK', bytes=632248, created_at=1721157413, filename='308_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-hqw5mp5Q1ASYpSntzUPMNmLf', bytes=1007789, created_at=1721157475, filename='309_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-M21lHAwpDtEc11rGi1GceCcd', bytes=881591, created_at=1721157598, filename='310_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4yiLz51sNGSCW2ihheDFjU5P', bytes=718073, created_at=1721157660, filename='311_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-MRdZEMuj6SQJmXW6yn2JfPxC', bytes=825361, created_at=1721157783, filename='312_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-HOFCvC2TJd1WiPA5Cmezfqs8', bytes=596148, created_at=1721157905, filename='313_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HlE88LxSa9KkOWTK51WJodyu', bytes=1160589, created_at=1721157968, filename='314_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-LfZOHo5armnDDeguu4kQGCRO', bytes=1034391, created_at=1721158030, filename='315_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-pVMo3mhhAMQ2JNM09T2z50IS', bytes=935623, created_at=1721158092, filename='316_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-mmN8jqNV9neqAUWrDw55nzTu', bytes=1107661, created_at=1721158154, filename='317_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-giPfdriWmNntUgVtqi9fXiOJ', bytes=878448, created_at=1721158217, filename='318_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-JNPlhVQinUJw6Os3tWFVOseu', bytes=913589, created_at=1721158280, filename='319_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-JNy32lBRriTJHWuRZ1oxGuDN', bytes=787391, created_at=1721158344, filename='320_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-a9ch8hUZaGo6dAkLcVONsVnI', bytes=690473, created_at=1721158407, filename='321_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-f287cqkhpPLu1KZPk7lWNrV2', bytes=864361, created_at=1721158469, filename='322_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-k71vXEgShDkYTmsoyDSSOaVj', bytes=635148, created_at=1721158532, filename='323_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sRK7DsDLilrJ6wytP6EnvurR', bytes=937289, created_at=1721158594, filename='324_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-TmXXe6oG4mMtS64IyLQEIW0v', bytes=811091, created_at=1721158656, filename='325_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-hbodP8P6VQ5ZpqaZEUghR9Di', bytes=763423, created_at=1721158719, filename='326_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-hviI2zMd8nzroPYZWaBkYG9j', bytes=986561, created_at=1721158781, filename='327_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OhwBDYF0dp5Ozzaw6IRmLQJ1', bytes=757348, created_at=1721158843, filename='328_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-DRrNRdl932MfbmJH0LUmHTOu', bytes=1289489, created_at=1721158965, filename='329_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-TOEB5uHHsnH7tpmTmB2K2bhx', bytes=1163291, created_at=1721159089, filename='330_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-DPJCk9hscaBea5lWjHv5yy1i', bytes=1015773, created_at=1721159151, filename='331_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qTPY0n2mVD58XjxlwHpSKrRK', bytes=1139061, created_at=1721159213, filename='332_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-8IT1wEcn9FJ4m9iOUVdrR6yx', bytes=909848, created_at=1721159336, filename='333_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ODNWUQk9UOgzncsFU8gMguVg', bytes=887489, created_at=1721159459, filename='334_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wiBCObYXt0zAVR0Xp5wb6wW5', bytes=761291, created_at=1721159522, filename='335_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-TLWrK4xxlGUcur4YAPXZUoZH', bytes=800373, created_at=1721159584, filename='336_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Pzg5KUpR4RQVf7nU5yrh73rP', bytes=1110261, created_at=1721159646, filename='337_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-VXAYqxQ2JJB0MUspZgl9JwEg', bytes=881048, created_at=1721159709, filename='338_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0NVVw0kpZkhrdqiBjeXLkORs', bytes=1243189, created_at=1721159771, filename='339_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-WeqaAVTt9ve4d4zTjkzreXM6', bytes=1116991, created_at=1721159893, filename='340_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+GPT returned invalid object for key - 21881585da195d22a7a51dbd590e4e10. This will need to be manually added
+Expecting value: line 211 column 1 (char 1201)
+FileObject(id='file-vvUMR8WbmlTzt1Dqz2Lh84Rl', bytes=890473, created_at=1721160016, filename='341_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-DAbaDA1UNbmo94tNVJgbenAi', bytes=934761, created_at=1721160138, filename='342_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-7dJmwN3Ue5EurdiwbnZk9DKW', bytes=705548, created_at=1721160201, filename='343_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Lyziwx9SeIZXFfWAw1OdTzCS', bytes=1003389, created_at=1721160263, filename='344_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-NqqmHqVRMwDgHcCVhsvZjhGK', bytes=877191, created_at=1721160325, filename='345_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-h6gNLbXMruIVxdAGEozkfuaV', bytes=794723, created_at=1721160448, filename='346_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-zVmAIm996qsLGLnZsqZ1aKQK', bytes=983061, created_at=1721160510, filename='347_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-smkOXOwLgfWq9tQsJ5fZc40v', bytes=753848, created_at=1721160633, filename='348_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ItBx24cvQI4lKed9nasHDmoK', bytes=867789, created_at=1721160695, filename='349_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-RtWV1Z6lT9jC9uoq3wUqLdCZ', bytes=741591, created_at=1721160758, filename='350_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sE2mmbm8nK9cQl3iJhQLn20T', bytes=806323, created_at=1721160820, filename='351_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-OL5xmsuVIaYYLcqYhgCYuUUW', bytes=1141861, created_at=1721160943, filename='352_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dy8XUT9LfTYXR7uNcCCAZODH', bytes=912648, created_at=1721161005, filename='353_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-AItsa32H5RLNwYXI6ZLhquzh', bytes=1166489, created_at=1721161127, filename='354_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-PEVqic9rONU1jFTgh6GlJHee', bytes=1040291, created_at=1721161190, filename='355_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-XJ4qNiVRiMik0vnLMzsMxgLU', bytes=926823, created_at=1721161252, filename='356_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-OSuue0ldx9xFi0C23FUt9LYx', bytes=1084161, created_at=1721161375, filename='357_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-u6SRKezPISssfw9Pj87Ezg1D', bytes=854948, created_at=1721161498, filename='358_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-y0TS00hfWhkJGgNX45AOMpwj', bytes=987789, created_at=1721161621, filename='359_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-zYzpjMPefWnw4eM3O4417sjr', bytes=861591, created_at=1721161683, filename='360_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-borUCy724sCTV3X2TYMsQ8TF', bytes=750123, created_at=1721161747, filename='361_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3JTNCRSBwSbfL1izA50qDgWU', bytes=909461, created_at=1721161809, filename='362_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-DrQQrAHo4M7vn53qubQrr17a', bytes=680248, created_at=1721161871, filename='363_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-QeLI2qnfoXmkzmoVlGpgIfuE', bytes=813689, created_at=1721161934, filename='364_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-h2E9GiqjmoTEri5686IQhYAL', bytes=687491, created_at=1721161996, filename='365_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Dp3R5EML3YC4SLpDB3s8huXk', bytes=581723, created_at=1721162058, filename='366_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-kaMBwQ6wIre9Z1hxSaya0iuN', bytes=746761, created_at=1721162120, filename='367_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-g0K2Bgm84iW1nPi73BHhiw44', bytes=517548, created_at=1721162183, filename='368_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-x76pu3pH66mbRiwmTyi3zWjx', bytes=954889, created_at=1721162245, filename='369_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-TougHdAHmXqug9i7hrt1nAzi', bytes=828691, created_at=1721162368, filename='370_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-PZsMuYDJ86cpTret2IHjcySu', bytes=705973, created_at=1721162430, filename='371_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dZcm5XPR13vSXfZbz2t3bNBy', bytes=854061, created_at=1721162493, filename='372_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-JC15JfSyL0hk68H3C3C9f3a7', bytes=624848, created_at=1721162615, filename='373_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3gliWbDJxdiBzUcPEjKM4xqM', bytes=1088589, created_at=1721162678, filename='374_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rIPX5nLf4YI7sbgvrhv4mowc', bytes=962391, created_at=1721162740, filename='375_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-KJxvGBHZEphItrXtMMUEqE1D', bytes=847923, created_at=1721162862, filename='376_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5xEvx53zKshngaCDi8H002W8', bytes=1004261, created_at=1721162985, filename='377_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-UUHLxRL1tjRSqB3ii1Y0Iidw', bytes=775048, created_at=1721163047, filename='378_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Mv6mu9ZKn3aoa94XFflvxSlP', bytes=904389, created_at=1721163230, filename='379_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8h24kaHjd1p5jsgqCXyPIoKV', bytes=778191, created_at=1721163292, filename='380_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-5IzCUqx03z3RK2JjXwW7IvJL', bytes=788123, created_at=1721163354, filename='381_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-v77QuU28SeCfghx9oFWDNn9K', bytes=1068861, created_at=1721163418, filename='382_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-xsqg6lhnMHC28ihHAY86tRt2', bytes=839648, created_at=1721163545, filename='383_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ULW5WnR9oz89Ih0GDw2AV3HF', bytes=944689, created_at=1721163607, filename='384_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-cQLpU6buDvh9ddIsgOVAMQqi', bytes=818491, created_at=1721163669, filename='385_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-SEd3LtoH3HqO9WPZjAEm6nJn', bytes=1064923, created_at=1721163731, filename='386_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-w0HIZka8mrSPkEZj8fr9qslO', bytes=1582161, created_at=1721163794, filename='387_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-9fyNhKQwJwZSBpZxpNV0eGTl', bytes=1352948, created_at=1721163856, filename='388_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-5HJFmUFuPmT1voO0VPwCrKoQ', bytes=904189, created_at=1721163918, filename='389_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-eBvvy757dWhHUllHJM6kpTIn', bytes=777991, created_at=1721163982, filename='390_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Bfn9k5DtiPsdRtkZnNtAWc5C', bytes=1116973, created_at=1721164045, filename='391_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-7gJ2Kx7FHPfCJWz6mEMLq3GV', bytes=1726761, created_at=1721165011, filename='392_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-gZhQepvuCplh3dBn2iXVzcZ7', bytes=1497548, created_at=1721165134, filename='393_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-g9UIEjTsvc0ZdzzfwqtTwJqd', bytes=1153489, created_at=1721165197, filename='394_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-r27IYjqiV5W5MHBIEuvQsStX', bytes=1027291, created_at=1721165259, filename='395_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yHisoPdEH5OVAq2qx3eosl9U', bytes=831923, created_at=1721165321, filename='396_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-RmkB3szj5Ycg99ycLQXChOFo', bytes=907361, created_at=1721165384, filename='397_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wLsUKElogPUjeSH2wD5FVHjx', bytes=678148, created_at=1721165446, filename='398_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-QrBr86OgjOuGH2sJfxUjavL5', bytes=961289, created_at=1721165509, filename='399_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-79K7POWrsuYrYJtXJqaFSpmz', bytes=835091, created_at=1721165571, filename='400_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-dbF9x7cuZk84iF4l95t78oD7', bytes=894323, created_at=1721165633, filename='401_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0ydp5LqZu4rTfTVBlru8zXWD', bytes=1224361, created_at=1721165696, filename='402_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-KaMkbjrSYe4tVuUG8XaX7NPo', bytes=995148, created_at=1721165758, filename='403_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-3hzeqZu8b7caJdZtqh7lDWdz', bytes=928689, created_at=1721165820, filename='404_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rZdKNdmkOTgKkyD66yng9Arx', bytes=802491, created_at=1721165883, filename='405_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Tw3PA6g7m8Y4hs6oEwtdfzit', bytes=669573, created_at=1721165946, filename='406_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-W6rr4ALVm8sZFHf0VSPiwNR2', bytes=807461, created_at=1721166008, filename='407_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0i13JP5e52aG5P0yqqLZ6RlR', bytes=578248, created_at=1721166070, filename='408_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-F0T4Uyqu9YK3fZK5VTBD8FdT', bytes=927989, created_at=1721166133, filename='409_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-8XJUD2x6qOx06o3GKlCtpWY2', bytes=801791, created_at=1721166255, filename='410_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-MFy3QDzffDEi3khbgYC8m6ZR', bytes=797573, created_at=1721166438, filename='411_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5GDvtlxIO1w5cKS2JQUkEu1j', bytes=1064161, created_at=1721166560, filename='412_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-7LxQR9166CYWPMkPSoGgYoEF', bytes=834948, created_at=1721166682, filename='413_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-wSdhpv1gwxUyzqjevM04qeFt', bytes=1215689, created_at=1721166866, filename='414_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-lSmmD8g9pqQvo9TzEf0uwjf6', bytes=1089491, created_at=1721166928, filename='415_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-FLUjxJ4q7B11dQ5eG8kjAqCY', bytes=929123, created_at=1721167052, filename='416_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-0n6xxufxRcQf61yqI293k89Q', bytes=1039561, created_at=1721167174, filename='417_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sNYV8XeZ9Gb5UI1ltWdfeHFH', bytes=810348, created_at=1721167236, filename='418_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EJmjC38wFnCq1pCFrpOS7nKW', bytes=1059789, created_at=1721167299, filename='419_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-mZ51DEKVdZCaczyaIPU1InqM', bytes=933591, created_at=1721167361, filename='420_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-fOhd3ZaHhSaOHRkRudYsfNVU', bytes=789323, created_at=1721167423, filename='421_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-jpM0Oo5MgKTUeS0i5MUZ8IUR', bytes=915861, created_at=1721167486, filename='422_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GeTwuILLtzdanHrd8drXSITN', bytes=686648, created_at=1721167548, filename='423_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-UNcumilcPinIICgWlqI0Ym5b', bytes=852889, created_at=1721167610, filename='424_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-kavf3SsFkwUOqg6FPRd0s29u', bytes=726691, created_at=1721167793, filename='425_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5FgkwCAhOEJZQ1z0t61xWcxE', bytes=718323, created_at=1721167916, filename='426_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-k3ghruNSs7iu2pk219gTAQ9b', bytes=980761, created_at=1721168038, filename='427_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-qQ6FPw6qvqWoRALrHLP6RUVg', bytes=751548, created_at=1721168161, filename='428_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-dSbDPHAAJImT2zoSdVVAZjad', bytes=892189, created_at=1721168283, filename='429_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-QeYLhQn2sPEqqdL9g8GUWVjq', bytes=765991, created_at=1721168406, filename='430_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-HS0H5neWxpQDNKutk8VEyhyn', bytes=850823, created_at=1721168528, filename='431_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ilMkMVRAnd1aJbROfYP8TicF', bytes=1206461, created_at=1721168711, filename='432_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-zrDCSdPwvWkUTPhN0SuUzLCI', bytes=977248, created_at=1721168833, filename='433_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-xGKFAmhNiR5H6X1okWYZX6gf', bytes=878089, created_at=1721168956, filename='434_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8zczr2fp1RhW57sX88z6jOHg', bytes=751891, created_at=1721169018, filename='435_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-erQ8rgsJfwLkzmsDcT5HLczZ', bytes=750623, created_at=1721169140, filename='436_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Y5AzgmBTOeW8YAkNnShicSmG', bytes=1020161, created_at=1721169203, filename='437_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+GPT returned invalid object for key - 823df8797d7a40d2378db4ef7217ef38. This will need to be manually added
+Expecting value: line 413 column 1 (char 1120)
+FileObject(id='file-7QLJuUdtkU1dD6RuW4m2ROW0', bytes=790948, created_at=1721169265, filename='438_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Mup8Q9vwxrMiIjDfaqZvgqJt', bytes=1104189, created_at=1721169328, filename='439_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-H2XrS3ymJrayJkK6mXgUTG5b', bytes=977991, created_at=1721169872, filename='440_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wKaBUqygg0q8MxSut1DQZf8z', bytes=869273, created_at=1721169935, filename='441_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-fVW46NkIT1qEzJbWa2W269lV', bytes=1031361, created_at=1721169997, filename='442_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+GPT returned invalid object for key - 7d6723221d8eee3d51d9f41522e35845. This will need to be manually added
+Expecting value: line 553 column 14 (char 2131)
+FileObject(id='file-stnNLEAE4DDtKPhXmMmZ3GzN', bytes=802148, created_at=1721170180, filename='443_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-r7xgQhPa612Z6PJu6LlpOFOB', bytes=1179089, created_at=1721170242, filename='444_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-03t6hTfvyiBrAsQUk63qkT8U', bytes=1052891, created_at=1721170305, filename='445_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ePqj0hC4hrU7xuQaxqWED6EK', bytes=818923, created_at=1721172293, filename='446_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-6WaoEWSVbMGIJTwH9QoKOHfg', bytes=855761, created_at=1721172356, filename='447_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-emdmPTMAs3gncPqeu5E58LDv', bytes=626548, created_at=1721172418, filename='448_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-WyxbRQDrKp8XPANllZuzEDCJ', bytes=903189, created_at=1721172480, filename='449_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-eqhvJ6BAJXuugwkVmjT6ADrW', bytes=776991, created_at=1721172543, filename='450_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-XDFQMi5SwWHNqq9UMpJ8LvMJ', bytes=721273, created_at=1721172907, filename='451_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+FileObject(id='file-U2lOaRxL3HOTgu0DIxVeQRLT', bytes=936361, created_at=1721173030, filename='452_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-L374s4FBi1W4g84KAGDzgtqX', bytes=707148, created_at=1721173394, filename='453_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-vbyY3GVKsVNEKBQq50j7seXf', bytes=1357389, created_at=1721173456, filename='454_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-bVeigc0KMzpwSlrPLgOji6B8', bytes=1231191, created_at=1721173519, filename='455_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-cS017xOtXLvZyvHrqXOdBe2B', bytes=965523, created_at=1721173581, filename='456_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-FIl4n5KF8Oht1voaECx7jJkb', bytes=970661, created_at=1721173764, filename='457_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-9e1b4mB2IrfpTmXjUj2CDB3a', bytes=741448, created_at=1721173827, filename='458_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-xN6Jbm8VpjsQIbMpRTK9NkNz', bytes=1029789, created_at=1721173889, filename='459_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-qPGY91Q6vxPjWd1cmzMiEiXA', bytes=903591, created_at=1721174012, filename='460_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-9gXiqsOGDsJ3jfSDrDkabuxz', bytes=977773, created_at=1721174135, filename='461_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-w5znwU8yYRePUr2T0R8Aaw12', bytes=1322761, created_at=1721174198, filename='462_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-kvTtl1vNluuV8P842rs86L8Y', bytes=1093548, created_at=1721174381, filename='463_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-iOkcTYJd37tn6mjKmGlccDPN', bytes=890289, created_at=1721174445, filename='464_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-zIMiyDH0TJs4vYxuwFIi7j4j', bytes=764091, created_at=1721174507, filename='465_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5zAwzJhfqjOqklpT1peFQ3rf', bytes=783473, created_at=1721174930, filename='466_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-BVKhxbgfIEUGnJ4f51dFcdjO', bytes=1073661, created_at=1721174993, filename='467_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-6Ud3HFj2YCiIW5NxCa7zZLxp', bytes=844448, created_at=1721175056, filename='468_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-JYBf53QU3Bw2hOezX61FwmA4', bytes=1147689, created_at=1721175540, filename='469_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-5zMZ5YIHZr4aboZ7UQWpGfbU', bytes=1021491, created_at=1721175603, filename='470_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Kjl4pop9EWy8p0oGRLxRSif4', bytes=866373, created_at=1721175666, filename='471_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-1KDPwOzOeWDFPCIUErgkYvIM', bytes=982061, created_at=1721175728, filename='472_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-0zKdQkrOhqCxb8Uru1LzwAvT', bytes=752848, created_at=1721175850, filename='473_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-e1nW0hsDFLySN9PFe0bZjoyr', bytes=1115889, created_at=1721175913, filename='474_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-O7KWjLnhQnVsLXfhN7r3OBnw', bytes=989691, created_at=1721175976, filename='475_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oHuVDwqeytofpGPH5jKLQp3Y', bytes=782873, created_at=1721176038, filename='476_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-4guNSlVgk9FBgMAoTp8yZjbV', bytes=846861, created_at=1721176221, filename='477_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ZEPWX6HP1HDeARU1xOGc6mh4', bytes=617648, created_at=1721176344, filename='478_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-iSOKgmte9BAO6wB3giXY4M87', bytes=968489, created_at=1721176406, filename='479_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Kl3iv4SsptyiTlRwDkHkqeu6', bytes=842291, created_at=1721176469, filename='480_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oBcjLDk5Z4mbqIXzSJAtrFEM', bytes=682873, created_at=1721176531, filename='481_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-e2fMew6958abPD1fDjWya5V9', bytes=794261, created_at=1721176593, filename='482_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-LuQrsEB88tZ428y3wx7XwHj1', bytes=565048, created_at=1721177077, filename='483_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Qxu3ODRy3ZCtcBL6xXKR4wWh', bytes=1036689, created_at=1721178644, filename='484_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-bE101cTRVFQhF821EW2cFCpN', bytes=910491, created_at=1721178827, filename='485_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-f71bIjBy3WVA6a2sJnINo5Qn', bytes=706873, created_at=1721178889, filename='486_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-1R4mMhI4EJhgfP9MWMq5LJzT', bytes=774061, created_at=1721178951, filename='487_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-IZtT237J9GPnzx75L4d1BkZq', bytes=544848, created_at=1721179014, filename='488_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-bSKcf1WknBkxlkP4CkHIV3FS', bytes=1189589, created_at=1721179076, filename='489_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-0oIbWj2QuO1pXV0Twzk6PyYI', bytes=1063391, created_at=1721179138, filename='490_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-ff0Trl66PE7fUijKmTsGKJsP', bytes=928323, created_at=1721179201, filename='491_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-ux0LNMA5m7b1QTPRP8sPgmky', bytes=1064061, created_at=1721179324, filename='492_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GoXqHwJ7ZG1w20mx34I64G3s', bytes=834848, created_at=1721179386, filename='493_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sYWusbRAVDhNE8kuN5on4o4W', bytes=1017389, created_at=1721179449, filename='494_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-GUbG6qEUs8bBTymnDiQxSgot', bytes=891191, created_at=1721179511, filename='495_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-R0iCiHkHZlT7S5uIrx2vWHA1', bytes=781073, created_at=1721179573, filename='496_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-WJG7z33E3QZ3IFnbCE7HUUd1', bytes=941761, created_at=1721179635, filename='497_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sfhQPfherhd3OZnTKEoylwJL', bytes=712548, created_at=1721179697, filename='498_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wa8YqHwisKPwGrIXZDYg9XXe', bytes=926389, created_at=1721179760, filename='499_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-sOckUHr6naowxgcultsfFjbj', bytes=800191, created_at=1721179822, filename='500_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-e0pr0MKCZTCTQ9eGMyH6xr1M', bytes=988373, created_at=1721179885, filename='501_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-GWuXDEr8Uc16cwI83brqlmc2', bytes=1447361, created_at=1721180007, filename='502_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-LDfcDyAwAmb4YwCu9LAYWdqb', bytes=1218148, created_at=1721180130, filename='503_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-qrkASbOGOQyJD3bGFMq4OacN', bytes=1141589, created_at=1721180192, filename='504_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-r3W6W8buHkykOfMO08eceewP', bytes=1015391, created_at=1721180435, filename='505_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-QqJbUvpK91tyGr6mvwHSNQ8J', bytes=1019073, created_at=1721180617, filename='506_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-uN6TRYlkJBE5coLbbgbdav0V', bytes=1293561, created_at=1721180739, filename='507_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-r5WO9MwhwdqaVbTE5nMkWnw4', bytes=1064348, created_at=1721180802, filename='508_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-EfrdgeBHqcuGQogx1L0171Ko', bytes=908189, created_at=1721180925, filename='509_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-EygskBHoFUI8Lb7iEs0zWthQ', bytes=781991, created_at=1721180987, filename='510_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-BbPYfPS0jTj0qFfdUSmlSTj4', bytes=674623, created_at=1721181049, filename='511_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-dI8Qq1kOlvOUlpyf0jZmtB70', bytes=838061, created_at=1721181232, filename='512_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: in_progress
+Current status: finalizing
+Current status: completed
+FileObject(id='file-R94HJoLdmeqob3z6vrUQ7MMS', bytes=608848, created_at=1721181475, filename='513_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-Wzd3xabyiLCv1DGt5Q9RWdF3', bytes=835089, created_at=1721181537, filename='514_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HngEKwkzvHotTWxqwnHZ4C9E', bytes=708891, created_at=1721181600, filename='515_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-OBioFaHFtx14tnyaNr4qrYq4', bytes=644623, created_at=1721181662, filename='516_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-1BX3LtX1scYpPUdSPM3vy4yi', bytes=851161, created_at=1721181785, filename='517_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-BHpKyDDbsW3j8usR5q2Ktjbn', bytes=621948, created_at=1721181847, filename='518_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-G1HXp8MHkED8n8evFZQLCaUF', bytes=848989, created_at=1721181910, filename='519_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rt48zEmO172lfMHFCoYsppKi', bytes=722791, created_at=1721181972, filename='520_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4ZuYO66fvbLTwnVWZPRNf06M', bytes=877173, created_at=1721182035, filename='521_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-HQ3acfNoTcwT5JmUC9IruJ5a', bytes=1302361, created_at=1721182097, filename='522_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-yIoL38AhpfP9SyU57HQh3j7x', bytes=1073148, created_at=1721182159, filename='523_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-9OxgoW2VcpqPaAVZA7CP4Bjp', bytes=1340989, created_at=1721182222, filename='524_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-QsfgJRralA3KZVgwiKuV8RDi', bytes=1214791, created_at=1721182284, filename='525_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-UioBIbbNNBm8EswLJq1FjHrV', bytes=1244323, created_at=1721182407, filename='526_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-FRKNydGUMT0vEyw2nrhi3aK9', bytes=1544661, created_at=1721182469, filename='527_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-rkZcNdo0muBF8gbn1eZ2LF0D', bytes=1315448, created_at=1721182532, filename='528_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-u6IjGF9n1oFv1nSv686QfKKY', bytes=1076889, created_at=1721182594, filename='529_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-tzjZNaS9rJ3ul5pYR6LcsIem', bytes=950691, created_at=1721182657, filename='530_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-mCXp9Bal9XT8RQFkGUp54dkV', bytes=833073, created_at=1721182719, filename='531_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-4RZbyLWoO0ADivGMbrh8cWeU', bytes=986261, created_at=1721182782, filename='532_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-Z24PKmBh730Xq5ryaAjOgf1w', bytes=757048, created_at=1721182904, filename='533_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-oyEeUHDz4NRdXpW6ASxOCuj2', bytes=1098989, created_at=1721182966, filename='534_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-diak8RUuDyFRlQ1azrVYlR2O', bytes=972791, created_at=1721183089, filename='535_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-FXjppZp1vqqgWKbW4i4MyH59', bytes=1012273, created_at=1721183151, filename='536_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-x0xHTt2Ue1scbfQRxcvyfAaH', bytes=1322561, created_at=1721183213, filename='537_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-bVgREmL5OV5MPtAyLHvGoU8E', bytes=1093348, created_at=1721183275, filename='538_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+FileObject(id='file-q5qxnXC9FF3Re05WlSlV6vSC', bytes=820289, created_at=1721183458, filename='539_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-8Mls53mUJIicc0uTwmNzE8VF', bytes=694091, created_at=1721183520, filename='540_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-5e31KDZ2gjNJUO5WpL5MTrDv', bytes=581673, created_at=1721183643, filename='541_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+FileObject(id='file-tvFjEnl7S24cNns2QY0xDiau', bytes=740061, created_at=1721183765, filename='542_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+FileObject(id='file-wkWxfKfCJYXx9EftICVRbH6y', bytes=510848, created_at=1721183828, filename='543_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
