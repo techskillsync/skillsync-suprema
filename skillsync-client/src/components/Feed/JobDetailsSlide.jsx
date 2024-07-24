@@ -18,7 +18,11 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
 
   if (jobDescription?.company || jobDescription?.title) {
     return (
-      <div className={className + " job-description-card rounded-lg shadow-md px-8"}>
+      <div
+        className={
+          className + " job-description-card rounded-lg shadow-md px-8"
+        }
+      >
         {jobDescription.logo_url && (
           <div className="company-logo pt-12 pb-4 mx-auto rounded-lg">
             <img
@@ -35,9 +39,9 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           <div className="flex justify-between">
             <h2 className="text-xl font-bold mb-2">{jobDescription.company}</h2>
             <div className="flex items-center">
-            <FaMapMarkerAlt className="mr-2" />
-            <p>{jobDescription.location}</p>
-          </div>
+              <FaMapMarkerAlt className="mr-2" />
+              <p>{jobDescription.location}</p>
+            </div>
           </div>
           {jobDescription.salary &&
             (jobDescription.salary.toString().length > 0 ||

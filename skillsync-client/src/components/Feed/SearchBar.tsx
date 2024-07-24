@@ -1,5 +1,5 @@
 import React from "react";
-import { InputField } from "../common/InputField";
+import { InputField } from "../common/InputField.tsx";
 import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ setSearchValue, handleSearch }) => {

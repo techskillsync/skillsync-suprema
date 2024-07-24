@@ -1,18 +1,18 @@
 import React from "react";
 import CreatableSelect from "react-select/creatable";
-import Select from "react-select";
+import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
 
-function InputField({
+const InputField = ({
   item,
-  value,
   onChange,
+  value = '',
   placeholder = "",
   showLabel = true,
   className = "",
   type = "text",
   id = "",
   required = false,
-}) {
+}) => {
   return (
     <div className="flex items-center w-full">
       {showLabel && (
@@ -193,11 +193,25 @@ const selectFieldStyle = {
   },
 };
 
-function SelectField({
+interface SelectFieldProps {
+  id: string;
+  item: string;
+  list: string[] | number[];
+  value: { value: string; label: string } | null;
+  allowMultiple: boolean | undefined;
+  placeholder: string | undefined;
+  showLabel: boolean | undefined;
+  creatable: boolean | undefined;
+  required: boolean;
+  onChange: (newValue: MultiValue<{ value: string; label: string; }> | SingleValue<{ value: string; label: string; }>, actionMeta: ActionMeta<{ value: string; label: string; }>) => void;
+  className?: string;
+}
+
+const SelectField: React.FC<SelectFieldProps> = ({
   item,
   list,
-  value,
   onChange,
+  value=null,
   allowMultiple = false,
   creatable = true,
   placeholder = "",
@@ -205,7 +219,7 @@ function SelectField({
   className = "",
   id = "",
   required = false,
-}) {
+}) => {
   const options = list.map((item) => ({
     value: item,
     label: item,
@@ -227,9 +241,9 @@ function SelectField({
           <CreatableSelect
             className={className + " w-full"}
             onChange={onChange}
-            id={item}
-            inputValue={value}
+            id={id ?? item}
             required={required}
+            value={value}
             options={options}
             isSearchable
             isMulti={allowMultiple}
@@ -245,8 +259,8 @@ function SelectField({
           
           className={className + " w-full"}
           onChange={onChange}
-          id={item}
-          inputValue={value}
+          id={id ?? item}
+          value={value}
           required={required}
           options={options}
             isSearchable

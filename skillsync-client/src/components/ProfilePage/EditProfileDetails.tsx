@@ -5,7 +5,7 @@ import {
   GetUserEmail,
   SetProfileInfo,
 } from "../../supabase/ProfileInfo.ts";
-import { InputField, SelectField } from "../common/InputField.jsx";
+import { InputField, SelectField } from "../common/InputField.tsx";
 import universityNames from "../../constants/university_list.js";
 import specializations from "../../constants/specialization_list.js";
 import programs from "../../constants/program_list.js";
@@ -144,7 +144,7 @@ const EditProfileDetails = ({}) => {
               setState: setGradYear,
               //   Todo: add constant for earliest possible year
               list: Array.from(
-                { length: (new Date().getFullYear() + 9) - 1950 },
+                { length: new Date().getFullYear() + 9 - 1950 },
                 (_, i) => 1950 + i
               ).reverse(),
             },
@@ -166,11 +166,15 @@ const EditProfileDetails = ({}) => {
                 id={item.label}
                 item={item.label}
                 list={item.list}
+                value={{
+                  value: item.state,
+                  label: item.state,
+                }}
                 creatable={true}
                 required={true}
-                onChange={(e) => item.setState(e.target.value)}
-                className="!text-black"
-              />
+                // @ts-ignore
+                onChange={(value) => item.setState(value!.value)}
+                className="!text-black" allowMultiple={false} placeholder={undefined} showLabel={undefined}              />
             </div>
           ))}
         </div>
@@ -197,6 +201,7 @@ const EditProfileDetails = ({}) => {
               <InputField
                 id={item.label}
                 item={item.label}
+                value={item.state}
                 type="text"
                 placeholder={item.placeholder}
                 required={true}
