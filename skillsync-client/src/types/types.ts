@@ -11,7 +11,7 @@ export interface UserProfile {
     linkedin: string;
     github: string;
     work_eligibility: JSON;
-    date_of_birth: string;
+    date_of_birth: Date;
     gender: string;
     race: string;
     email_confirmed: boolean;

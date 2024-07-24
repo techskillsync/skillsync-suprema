@@ -38,19 +38,6 @@ function AppRoutes() {
     checkUser();
   }, []);
 
-  // useEffect(() => {
-  //   const checkUser = async () => {
-  //     const user = await supabase.auth.getSession();
-  //     if (user) {
-  //       navigate('/home'); // Navigate to the home page if the user is logged in
-  //     } else {
-  //       navigate('/'); // Navigate to the login page if the user is not logged in
-  //     }
-  //   };
-
-  //   checkUser();
-  // }, [navigate]);
-
   return (
     <Routes>
       <Route path="/login" element={<Timer Component={LogInPage} />} />

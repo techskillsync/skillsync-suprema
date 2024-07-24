@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Spacer from "../common/Spacer";
-
+import Spacer from './Spacer'
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
 import EmailLogin from '../../supabase/userLogin'
+import InfoCarousel from "./InfoCarousel";
 
 const LogInPage = () => {
 	const [email, setEmail] = useState('')
@@ -23,9 +23,11 @@ const LogInPage = () => {
 
 	return (
 		<div className="flex h-screen dark:bg-black">
-			<div className="w-1/2 bg-gray-100">{/* Empty box */}</div>
+			<div className="w-1/2 bg-gray-100">
+			<InfoCarousel />
+			</div>
 			<div className="w-1/2 flex items-center justify-center">
-				<div className="max-w-md w-full">
+				<div className="max-w-lg w-full">
 					<h1 className="text-3xl font-bold text-left mb-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent">
 						SkillSync.
 					</h1>
@@ -40,7 +42,7 @@ const LogInPage = () => {
 							<FaGoogle className="mr-3" /> Google
 						</button>
 						<button className="bg-blue-500 hover:bg-blue-600 transition-all duration-300 text-white text-lg py-2 px-4 rounded w-full md:mb-0 mb-2 flex items-center justify-center">
-							<FaFacebook /> Facebook
+							<FaFacebook className="mr-2" /> Facebook
 						</button>
 					</div>
 					<Spacer text="or continue with" />
