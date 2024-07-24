@@ -103,7 +103,7 @@ function Feed() {
         ))}
       </div>
       <div className="w-1/3 bg-[#1e1e1e]">
-        <div className="fixed right-0 top-0 h-screen w-[26.66%]">
+        <div className="fixed right-0 top-0 h-screen w-[26.66%] overflow-y-scroll">
           <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>

@@ -38,8 +38,7 @@ function EditProfilePicture() {
         <div className="relative">
           <img
             className="rounded-lg"
-            height={"250px"}
-            width={"250px"}
+            width={"200px"}
             src={newAvatarURL ? newAvatarURL : avatarURL}
           />
           <div className="absolute right-1 bottom-1">
@@ -70,7 +69,9 @@ function EditProfilePicture() {
           </div>
         </div>
       ) : (
-        <>profile image is null</>
+        <div className="w-[200px] h-[200px]">
+          <div className="rounded-md bg-gray-800 w-full h-full"></div>
+        </div>
       )}
     </div>
   );

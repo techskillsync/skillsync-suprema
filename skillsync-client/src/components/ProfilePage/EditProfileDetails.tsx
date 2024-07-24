@@ -9,6 +9,7 @@ import { InputField, SelectField } from "../common/InputField.tsx";
 import universityNames from "../../constants/university_list.js";
 import specializations from "../../constants/specialization_list.js";
 import programs from "../../constants/program_list.js";
+import EditProfilePicture from "./EditProfilePicture.tsx";
 
 const EditProfileDetails = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ const EditProfileDetails = ({}) => {
   const [github, setGithub] = useState("");
   const [plumProfile, setPlumProfile] = useState("");
   const [workEligibility, setWorkEligibility] = useState("");
-  const [date_of_birth, setDateOfBirth] = useState("");
+  const [date_of_birth, setDateOfBirth] = useState(null);
   const [gender, setGender] = useState("");
   const [race, setRace] = useState("");
 
@@ -105,26 +106,42 @@ const EditProfileDetails = ({}) => {
     >
       <div className="mb-4">
         <h2 className="text-xl font-bold mb-2">Personal Info</h2>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { label: "Name", state: name, setState: setName },
-            { label: "Location", state: location, setState: setLocation },
-            // { label: "DOB", state: date_of_birth, setState: setDateOfBirth },
-            { label: "Race", state: race, setState: setRace },
-            { label: "Gender", state: gender, setState: setGender },
-          ].map((item) => (
-            <div key={item.label} className="text-white">
-              <InputField
-                id={item.label}
-                item={item.label}
-                value={item.state}
-                type="text"
-                required={true}
-                onChange={(e) => item.setState(e.target.value)}
-                className=""
-              />
-            </div>
-          ))}
+        <div className="flex flex-row">
+          <div className="flex w-1/4">
+            <EditProfilePicture />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Name", state: name, setState: setName },
+              { label: "Location", state: location, setState: setLocation },
+              // { label: "DOB", state: date_of_birth, setState: setDateOfBirth },
+              { label: "Ethnicity", state: race, setState: setRace },
+              { label: "Gender", state: gender, setState: setGender },
+            ].map((item) => (
+              <div key={item.label} className="text-white">
+                <InputField
+                  id={item.label}
+                  item={item.label}
+                  value={item.state}
+                  type="text"
+                  required={true}
+                  onChange={(e) => item.setState(e.target.value)}
+                  className=""
+                />
+              </div>
+            ))}
+        <div key={'dob'} className="text-white">
+                <InputField
+                  id={'dob'}
+                  item={'Date of Birth'}
+                  value={date_of_birth}
+                  type="date"
+                  required={true}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  className=""
+                />
+              </div>
+          </div>
         </div>
       </div>
 
@@ -174,7 +191,11 @@ const EditProfileDetails = ({}) => {
                 required={true}
                 // @ts-ignore
                 onChange={(value) => item.setState(value!.value)}
-                className="!text-black" allowMultiple={false} placeholder={undefined} showLabel={undefined}              />
+                className="!text-black"
+                allowMultiple={false}
+                placeholder={undefined}
+                showLabel={undefined}
+              />
             </div>
           ))}
         </div>

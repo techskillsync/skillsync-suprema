@@ -58,6 +58,13 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           <div>
             <p className="text-justify">{jobDescription.description}</p>
           </div>
+          <div className="py-5 flex items-center w-full" target>
+            <a href={jobDescription.link} target="_blank" className="w-full" rel="noopener noreferrer">
+              <button className="w-full bg-gradient-to-r from-blue-500 to-green-500 border-none text-black font-semibold py-2 px-4 rounded">
+                Apply Now
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     );
