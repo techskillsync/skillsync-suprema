@@ -17,7 +17,7 @@ const ChartsSection = () => {
       plotOptions: {
         radialBar: {
           track: {
-            background: "#E5E7EB",
+            background: "#1e1e1e",
           },
           dataLabels: {
             show: false,
@@ -26,7 +26,13 @@ const ChartsSection = () => {
             margin: 0,
             size: "32%",
           },
+          cornerRadius: 20,
+          borderRadius: 30,
+
         },
+        bar: {
+          borderRadius: 30,
+        }
       },
       grid: {
         show: false,
@@ -38,7 +44,7 @@ const ChartsSection = () => {
           bottom: -20,
         },
       },
-      labels: ["Profile Completion", "Callback Ratio", "Applications"],
+      labels: ["Industry Rating", "Conversion Rate", "Overall Competency"],
       legend: {
         show: true,
         position: "bottom",

@@ -80,7 +80,7 @@ function Feed() {
           setLocationKeys={setLocationKeys}
           />
         { /*  ------------- Arman ------------- */ }
-        <div className="my-3">
+        <div className="my-3 ml-20">
           {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
           <PaginationController
             key={listings.toString()}

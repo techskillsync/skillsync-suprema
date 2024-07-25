@@ -62,10 +62,10 @@ const PreferencesSection = () => {
         </div>
         <div className="flex space-x-6 flex-row mb-4">
             <div className="w-1/2 flex">
-                <InputField item={"Location"} onChange={handleLocationChange}/>
+                <InputField className="rounded-r-md" item={"Location"} onChange={handleLocationChange}/>
             </div>
             <div className="w-1/2 flex">
-                <InputField item={"Salary Range"} onChange={handleSalaryRangeChange}/>
+                <InputField className="rounded-r-md" item={"Salary Range"} onChange={handleSalaryRangeChange}/>
             </div>
         </div>
         <div className="flex space-x-6 flex-row mb-4">

@@ -7,14 +7,26 @@ import ProfileCard from "./ProfileCard";
 
 import { MdSpaceDashboard, MdNewspaper, MdInbox } from "react-icons/md";
 import { FaGear, FaSheetPlastic } from "react-icons/fa6";
-
+import EditProfileDetails from "../ProfilePage/EditProfileDetails";
+import ProfilePage from "../ProfilePage/ProfilePage";
 
 const menuItems = [
-  { name: "Dashboard", component: Dashboard , icon: <MdSpaceDashboard /> },
-  { name: "Jobs", component: Feed , icon: <MdNewspaper /> },
-  { name: "Resume Builder", component: ResumeBuilder , icon: <FaSheetPlastic /> },
-  { name: "Messages", component: Messages , icon: <MdInbox /> },
-  { name: "Settings", component: Messages , icon: <FaGear /> },
+  {
+    name: "Dashboard",
+    component: Dashboard,
+    icon: <MdSpaceDashboard />,
+    show: true,
+  },
+  { name: "Jobs", component: Feed, icon: <MdNewspaper />, show: true },
+  {
+    name: "Resume Builder",
+    component: ResumeBuilder,
+    icon: <FaSheetPlastic />,
+    show: true,
+  },
+  { name: "Messages", component: Messages, icon: <MdInbox />, show: true },
+  { name: "Settings", component: Messages, icon: <FaGear />, show: true },
+  { name: "Profile", component: ProfilePage, show: false },
 ];
 
 const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
@@ -30,24 +42,31 @@ const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
       </div>
       <div>
         <ul className="text-left">
-          {menuItems.map((item) => (
-            <li
-              key={item.name}
-              className={`px-12 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 ${
-                selectedPage === item.name ? "bg-black" : ""
-              }`}
-              onClick={() => setSelectedPage(item.name)}
-            >
-              <div className="flex items-center">
-                  {item.icon && <span className="mr-2">{item.icon}</span>}
-                  {item.name}
-              </div>
-            </li>
-          ))}
+          {menuItems.map(
+            (item) =>
+              item.show && (
+                <li
+                  key={item.name}
+                  className={`px-12 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 ${
+                    selectedPage === item.name ? "bg-black" : ""
+                  }`}
+                  onClick={() => setSelectedPage(item.name)}
+                >
+                  <div className="flex items-center">
+                    {item.icon && <span className="mr-2">{item.icon}</span>}
+                    {item.name}
+                  </div>
+                </li>
+              )
+          )}
         </ul>
       </div>
       <div className="p-4">
-        <ProfileCard name={profileInfo?.name} school={profileInfo?.school} />
+        <ProfileCard
+          name={profileInfo?.name}
+          school={profileInfo?.school}
+          handleEditProfile={() => setSelectedPage("Profile")}
+        />
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const HomePage = () => {
       </div>
       <div className="flex">
         <div className="w-1/5"></div>
-        <div className="w-4/5 h-full bg-white overflow-y-auto">
+        <div className="w-4/5 h-full bg-black overflow-y-auto">
           {renderComponent()}
         </div>
       </div>

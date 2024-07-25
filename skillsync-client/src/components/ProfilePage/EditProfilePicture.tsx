@@ -37,13 +37,13 @@ function EditProfilePicture() {
       {avatarURL !== "" ? (
         <div className="relative">
           <img
-            className="rounded-lg"
+            className="rounded-full"
             width={"200px"}
             src={newAvatarURL ? newAvatarURL : avatarURL}
           />
           <div className="absolute right-1 bottom-1">
             <div className="flex space-x-2">
-              <label htmlFor="single" className="bg-[#1e1e1e] rounded-lg">
+              <label htmlFor="single" className="bg-green-500 rounded-full">
                 <div className="cursor-pointer p-3 [bg-#1e1e1e]">
                   <FaEdit />
                 </div>
@@ -59,7 +59,7 @@ function EditProfilePicture() {
                 <button
                   disabled={isLoading}
                   id="submit"
-                  className="!p-3"
+                  className="!p-3 rounded-full bg-green-500"
                   onClick={updateProfile}
                 >
                   {isLoading ? <FaHourglass /> : <FaCheck />}
@@ -70,7 +70,7 @@ function EditProfilePicture() {
         </div>
       ) : (
         <div className="w-[200px] h-[200px]">
-          <div className="rounded-md bg-gray-800 w-full h-full"></div>
+          <div className="rounded-full bg-gray-800 w-full h-full"></div>
         </div>
       )}
     </div>

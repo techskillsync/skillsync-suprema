@@ -8,7 +8,7 @@ import EditWorkExperiences from "./EditWorkExperiences";
       const [selectedTab, setSelectedTab] = useState("personalInfo");
 
       const tabOptions = [
-        { id: "personalInfo", label: "Personal Info", component: <EditProfileDetails /> },
+        { id: "personalInfo", label: "Personal Information", component: <EditProfileDetails /> },
         { id: "workExperience", label: "Work Experience", component: <EditWorkExperiences /> },
         { id: "resumes", label: "Resumes", component: <div /> },
       ];
@@ -19,8 +19,8 @@ import EditWorkExperiences from "./EditWorkExperiences";
       };
 
       return (
-        <div className="bg-black min-h-screen w-full p-12">
-          <div className="flex justify-center mb-8">
+        <div className="bg-black min-h-screen w-full pt-3">
+          <div className="flex justify-center mb-3">
             {tabOptions.map((option) => (
               <button
                 key={option.id}

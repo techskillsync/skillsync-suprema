@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import WorkExperienceCard from './WorkExperienceCard';
 
 type WorkExperience = {
     title: string;
@@ -7,6 +9,7 @@ type WorkExperience = {
     startDate: string;
     endDate: string;
 };
+
 
 const EditWorkExperiences: React.FC = () => {
     const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
@@ -44,89 +47,25 @@ const EditWorkExperiences: React.FC = () => {
     };
 
     return (
-        <div className='w-full'>
-            <h1 className="text-2xl font-bold mb-4">Add Work Experiences</h1>
-            {workExperiences.map((workExperience, index) => (
-                <div key={index} className="mb-4">
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        value={workExperience.title}
-                        onChange={(e) => handleInputChange(index, 'title', e.target.value)}
-                        className="border border-gray-300 rounded-md p-2 mb-2"
-                        disabled={editableIndex !== index}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Company"
-                        value={workExperience.company}
-                        onChange={(e) => handleInputChange(index, 'company', e.target.value)}
-                        className="border border-gray-300 rounded-md p-2 mb-2"
-                        disabled={editableIndex !== index}
-                    />
-                    <div className="flex">
-                        <input
-                            type="date"
-                            placeholder="Start Date"
-                            value={workExperience.startDate}
-                            onChange={(e) => handleInputChange(index, 'startDate', e.target.value)}
-                            className="border border-gray-300 rounded-md p-2 mr-2 text-sm"
-                            disabled={editableIndex !== index}
-                        />
-                        <input
-                            type="date"
-                            placeholder="End Date"
-                            value={workExperience.endDate}
-                            onChange={(e) => handleInputChange(index, 'endDate', e.target.value)}
-                            className="border border-gray-300 rounded-md p-2 text-sm"
-                            disabled={editableIndex !== index}
-                        />
-                    </div>
-                    <textarea
-                        placeholder="Description"
-                        value={workExperience.description}
-                        onChange={(e) => handleInputChange(index, 'description', e.target.value)}
-                        className="border border-gray-300 rounded-md p-2 h-24 resize-none"
-                        disabled={editableIndex !== index}
-                    />
-                    {editableIndex === index ? (
-                        <div className="flex">
-                            <button
-                                onClick={() => handleSaveWorkExperience(index)}
-                                className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
-                            >
-                                Save
-                            </button>
-                            <button
-                                onClick={() => setEditableIndex(null)}
-                                className="bg-red-500 text-white px-4 py-2 rounded-md"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="flex">
-                            <button
-                                onClick={() => handleEditWorkExperience(index)}
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDeleteWorkExperience(index)}
-                                className="bg-red-500 text-white px-4 py-2 rounded-md"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
-            ))}
-            <button onClick={handleAddWorkExperience} className="bg-blue-500 text-white px-4 py-2 rounded-md">
+        <div className="w-full">
+            <div className="flex items-center justify-between px-8 mb-4">
+                <h1 className="text-2xl font-bold mb-4">Work Experiences</h1>
+                <button onClick={handleAddWorkExperience} className="flex items-center bg-transparent border border-green-700 border-[2px] text-white px-4 py-2 rounded-md">
+               <FaPlus className='mr-2' />
                 Add Work Experience
             </button>
+            </div>
+            {workExperiences.map((workExperience, index) => (
+                <WorkExperienceCard
+                    key={index}
+                    workExperience={workExperience}
+                    handleDeleteWorkExperience={() => handleDeleteWorkExperience(index)}
+                />
+            ))}
+            
         </div>
     );
 };
 
+export {WorkExperience}
 export default EditWorkExperiences;
