@@ -3,8 +3,8 @@ import { FaArrowRight, FaBookmark, FaLink, FaMapMarkerAlt, FaSave } from "react-
 import { FaUserGroup } from "react-icons/fa6";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
+import getGlassDoorRating from "../../utilities/get_glassdoor_rating";
 
-// import getGlassDoorRating from '../utilities/get_glassdoor_rating.js';
 
 const JobDescriptionCard = ({
   jobDescription,

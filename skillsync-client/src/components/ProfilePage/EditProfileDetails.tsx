@@ -27,7 +27,7 @@ const EditProfileDetails = ({}) => {
   const [github, setGithub] = useState("");
   const [plumProfile, setPlumProfile] = useState("");
   const [workEligibility, setWorkEligibility] = useState("");
-  const [date_of_birth, setDateOfBirth] = useState(null);
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
   const [gender, setGender] = useState("");
   const [race, setRace] = useState("");
 
@@ -89,7 +89,7 @@ const EditProfileDetails = ({}) => {
       industry,
       linkedin,
       github,
-      date_of_birth,
+      dateOfBirth,
       gender,
       race,
     };
@@ -130,17 +130,18 @@ const EditProfileDetails = ({}) => {
                 />
               </div>
             ))}
-        <div key={'dob'} className="text-white">
-                <InputField
-                  id={'dob'}
-                  item={'Date of Birth'}
-                  value={date_of_birth}
-                  type="date"
-                  required={true}
-                  onChange={(e) => setDateOfBirth(e.target.value)}
-                  className=""
-                />
-              </div>
+            <div key={"dob"} className="text-white">
+              <InputField
+                id={"dob"}
+                item={"Date of Birth"}
+                // @ts-ignore
+                value={dateOfBirth}
+                type="date"
+                required={true}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+                className=""
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -242,7 +243,10 @@ const EditProfileDetails = ({}) => {
         <button
           className="button"
           type="button"
-          onClick={() => supabase.auth.signOut()}
+          onClick={async () => {
+            await supabase.auth.signOut();
+            window.location.href = "/";
+          }}
         >
           Sign Out
         </button>
