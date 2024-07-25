@@ -12,13 +12,14 @@ const InputField = ({
   type = "text",
   id = "",
   required = false,
+  rounded=true,
 }) => {
   return (
     <div className="flex items-center w-full">
       {showLabel && (
         <div className="max-w-1/2">
           <label
-            className="block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 rounded-l whitespace-nowrap"
+            className={"block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap " + (rounded ? "rounded-l" : "")}
             htmlFor={item.toLowerCase()}
           >
             {item}
@@ -30,7 +31,7 @@ const InputField = ({
         value={value}
         className={
           className +
-          "!w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] rounded-r w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
+          "!w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] rounded w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline " + (rounded ? "rounded-r" : "")
         }
         required={required}
         onChange={onChange}
@@ -224,7 +225,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
     label: item,
   }));
   return (
-    <div className="mb-4 w-full" style={{ position: "relative" }}>
+    <div className="w-full" style={{ position: "relative" }}>
       <div className="flex items-center">
         {showLabel && (
           <div className="max-w-1/2">
