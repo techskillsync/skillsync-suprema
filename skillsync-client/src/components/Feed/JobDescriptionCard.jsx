@@ -10,6 +10,11 @@ import { FaUserGroup } from "react-icons/fa6";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
 import getGlassDoorRating from "../../utilities/get_glassdoor_rating";
+import {
+  CheckExists,
+  RemoveJob,
+  SaveJob,
+} from "../../supabase/JobApplicationTracker.ts";
 
 const JobDescriptionCard = ({
   jobDescription,
@@ -18,12 +23,36 @@ const JobDescriptionCard = ({
   action = () => {},
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async () => {
+    if (saved) {
+      // Remove from saved
+      if (await RemoveJob(jobDescription.id)) {
+        setSaved(false);
+      }
+    } else {
+      // Add to saved
+      if (await SaveJob(jobDescription.id)) {
+        setSaved(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    async function checkExists(id) {
+      const saved = await CheckExists(id);
+      setSaved(saved);
+    }
+    checkExists(jobDescription.id);
+  }, []);
 
   const actions = [
-    {
-      title: "Save",
-      icon: <IoBookmark />,
-    },
+    // {
+    //   title: !saved ? "Save" : "Saved",
+    //   icon: <IoBookmark />,
+    //   action: handleSave,
+    // },
     {
       title: "Copy Link",
       icon: <FaLink />,
@@ -53,7 +82,8 @@ const JobDescriptionCard = ({
     <div
       className={
         className +
-        " job-description-card bg-white !text-black rounded-lg shadow-md flex " + (mini ? "w-500px" : "")
+        " job-description-card bg-white !text-black rounded-lg shadow-md flex " +
+        (mini ? "w-500px" : "")
       }
     >
       {jobDescription.logo_url && !mini && (
@@ -90,7 +120,8 @@ const JobDescriptionCard = ({
           <p className="text-lg">
             {" "}
             {mini
-              ? jobDescription.title.substring(0, 26) + (jobDescription.title.length > 26 ? "..." : '')
+              ? jobDescription.title.substring(0, 26) +
+                (jobDescription.title.length > 26 ? "..." : "")
               : jobDescription.title}
           </p>
         </div>
@@ -124,6 +155,14 @@ const JobDescriptionCard = ({
         </div> */}
         <div>
           <div className="flex mt-4">
+          <button
+                key="save"
+                onClick={handleSave}
+                className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${saved ? 'bg-blue-200 hover:bg-red-200' : 'bg-gray-200 hover:bg-gray-400'}`}
+              >
+                <IoBookmark />
+                {!mini && <span className="ml-2">{saved ? "Saved" : "Save"}</span>}
+              </button>
             {actions.map((action) => (
               <button
                 key={action.title}

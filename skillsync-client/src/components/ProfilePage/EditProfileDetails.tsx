@@ -22,8 +22,6 @@ const EditProfileDetails = ({}) => {
   const [program, setProgram] = useState("");
   const [specialization, setSpecialization] = useState("");
   const [industry, setIndustry] = useState("");
-  const [workExperience, setWorkExperience] = useState("");
-  const [skillSets, setSkillSets] = useState("");
   const [linkedin, setLinkedIn] = useState("");
   const [github, setGithub] = useState("");
   const [plumProfile, setPlumProfile] = useState("");

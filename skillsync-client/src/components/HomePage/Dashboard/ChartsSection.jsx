@@ -84,18 +84,18 @@ const ChartsSection = () => {
 
   return (
     <div>
-      <div class="max-w-sm h-full ml-3 w-full rounded-lg shadow bg-[#1e1e1e] p-4 md:p-6">
+      <div className="max-w-sm h-full ml-3 w-full rounded-lg shadow bg-[#1e1e1e] p-4 md:p-6">
 
-        <div class="flex !text-white justify-between mb-3">
-          <div class="flex items-center">
-            <div class="flex justify-center items-center">
-              <h5 class="text-xl font-bold leading-none text-white pe-1">
+        <div className="flex !text-white justify-between mb-3">
+          <div className="flex items-center">
+            <div className="flex justify-center items-center">
+              <h5 className="text-xl font-bold leading-none text-white pe-1">
                 Your progress
               </h5>
               <svg
                 data-popover-target="chart-info"
                 data-popover-placement="bottom"
-                class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
+                className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -107,10 +107,10 @@ const ChartsSection = () => {
                 data-popover
                 id="chart-info"
                 role="tooltip"
-                class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+                className="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
               >
-                <div class="p-3 space-y-2">
-                  <h3 class="font-semibold text-gray-900 dark:text-white">
+                <div className="p-3 space-y-2">
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
                     Activity growth - Incremental
                   </h3>
                   <p>
@@ -119,7 +119,7 @@ const ChartsSection = () => {
                     as stagnating chart signifies a significant decrease of
                     community activity.
                   </p>
-                  <h3 class="font-semibold text-gray-900 dark:text-white">
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
                     Calculation
                   </h3>
                   <p>
@@ -130,11 +130,11 @@ const ChartsSection = () => {
                   </p>
                   <a
                     href="#"
-                    class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline"
+                    className="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline"
                   >
                     Read more{" "}
                     <svg
-                      class="w-2 h-2 ms-1.5 rtl:rotate-180"
+                      className="w-2 h-2 ms-1.5 rtl:rotate-180"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -142,9 +142,9 @@ const ChartsSection = () => {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 9 4-4-4-4"
                       />
                     </svg>
@@ -156,7 +156,7 @@ const ChartsSection = () => {
           </div>
         </div>
 
-        <div class="" id="radial-chart"></div>
+        <div className="" id="radial-chart"></div>
 
       </div>
     </div>

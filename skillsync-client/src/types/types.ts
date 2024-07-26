@@ -34,4 +34,14 @@ export interface JobListing {
     apply_url: string | null;
 }
 
+export interface WorkExperience {
+    id: string;
+    title: string;
+    company: string;
+    description: string | null;
+    startDate: Date | null;
+    endDate: Date | null;
+    location: string | null;
+}
+
 export type JobRecord = "saved_jobs" | "applied_jobs";
