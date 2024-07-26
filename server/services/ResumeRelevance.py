@@ -41,7 +41,7 @@ class SiameseNetwork(nn.Module):
 		return output
 
 model = SiameseNetwork(512)
-model.load_state_dict(torch.load('10K_50EPC_siamese_network.pth', map_location=torch.device('cpu')))     
+model.load_state_dict(torch.load('100K_siamese_network.pth', map_location=torch.device('cpu')))     
 model.eval()
 print(' - 🤖 Resume relevance model loaded')
 
