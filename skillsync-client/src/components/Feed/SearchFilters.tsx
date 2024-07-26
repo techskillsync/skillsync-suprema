@@ -18,9 +18,9 @@ function SearchFilters({ setLocationKeys }) {
         setLocationKeys(userLocation)
     }
 
-    useEffect(() => {
-        fetchAndSet()
-    }, [])
+    // useEffect(() => {
+    //     fetchAndSet()
+    // }, [])
 
     function removeLocation() {
         setUserLocationText("")

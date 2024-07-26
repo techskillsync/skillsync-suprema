@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowRight, FaBookmark, FaLink, FaMapMarkerAlt, FaSave } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaBookmark,
+  FaLink,
+  FaMapMarkerAlt,
+  FaSave,
+} from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
 import getGlassDoorRating from "../../utilities/get_glassdoor_rating";
 
-
 const JobDescriptionCard = ({
   jobDescription,
   className = "",
+  mini = false,
   action = () => {},
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
@@ -47,32 +53,46 @@ const JobDescriptionCard = ({
     <div
       className={
         className +
-        " job-description-card bg-white !text-black rounded-lg shadow-md flex"
+        " job-description-card bg-white !text-black rounded-lg shadow-md flex " + (mini ? "w-500px" : "")
       }
     >
-      {jobDescription.logo_url && (
-        <div className="company-logo w-[182px] bg-white rounded-lg">
+      {jobDescription.logo_url && !mini && (
+        <div className={`company-logo bg-white rounded-lg`}>
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className="h-full rounded-s-lg object-cover"
+            className="h-full rounded-s-lg object-cover w-[182px]"
           />
         </div>
       )}
-      <div className="job-details w-full py-4 pl-8 pr-5">
+      <div className=" relative job-details w-full py-4 pl-8 pr-5">
+        {mini && jobDescription.logo_url && (
+          <img
+            src={jobDescription.logo_url}
+            alt={jobDescription.company}
+            className="absolute top-3 right-3 h-16 w-16 rounded"
+          />
+        )}
         <div className="flex justify-between">
           <h2 className="text-xl font-bold mb-2">{jobDescription.company}</h2>
-          <div className="flex">
-            <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
-              Glassdoor rating:
-            </h3>
-            {glassdoorRating ? glassdoorRating : "Loading..."}
-          </div>
+          {!mini && (
+            <div className="flex">
+              <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
+                Glassdoor rating:
+              </h3>
+              {glassdoorRating ? glassdoorRating : "Loading..."}
+            </div>
+          )}
         </div>
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className="text-lg">{jobDescription.title}</p>
+          <p className="text-lg">
+            {" "}
+            {mini
+              ? jobDescription.title.substring(0, 26) + (jobDescription.title.length > 26 ? "..." : '')
+              : jobDescription.title}
+          </p>
         </div>
         {jobDescription.salary &&
           (jobDescription.salary.toString().length > 0 ||
@@ -111,7 +131,7 @@ const JobDescriptionCard = ({
                 className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2 mr-4"
               >
                 {action.icon}
-                <span className="ml-2">{action.title}</span>
+                {!mini && <span className="ml-2">{action.title}</span>}
               </button>
             ))}
             {action && (

@@ -20,6 +20,10 @@ module.exports = {
       backgroundClip: ["hover", "focus"],
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')({
+        charts: true,
+    }),
+  ],
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 };

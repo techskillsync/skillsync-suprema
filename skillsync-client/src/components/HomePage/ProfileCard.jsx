@@ -2,7 +2,7 @@ import React from "react";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import ProfilePicture from "../common/UserProfilePicture";
 
-const ProfileCard = ({name, school}) => {
+const ProfileCard = ({name, school, handleEditProfile}) => {
   return (
     <div className="p-[1.5px] bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 rounded-lg">
       <div className="relative">
@@ -16,7 +16,8 @@ const ProfileCard = ({name, school}) => {
           </div>
         </div>
         <div className="absolute bottom-1 right-2">
-          <a href="/profile">
+          {/* <a href="/profile"> */}
+          <a onClick={handleEditProfile} className="cursor-pointer">
             <p className="text-xs !font-normal text-gray-400">Edit Profile</p>
           </a>
         </div>

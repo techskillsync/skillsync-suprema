@@ -12,36 +12,29 @@ const InputField = ({
   type = "text",
   id = "",
   required = false,
-}) => {
-  return (
-    <div className="flex items-center w-full">
-      {showLabel && (
-        <div className="max-w-1/2">
-          <label
-            className="block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 rounded-l whitespace-nowrap"
-            htmlFor={item.toLowerCase()}
-          >
-            {item}
-          </label>
-        </div>
-      )}
-      <input
-        id={id ?? item.toLowerCase()}
-        value={value}
-        className={
-          className +
-          "!w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] rounded-r w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline"
-        }
-        required={required}
-        onChange={onChange}
-        type={type}
-        placeholder={
-          placeholder !== "" ? placeholder : "Enter your " + item.toLowerCase()
-        }
-      />
-    </div>
-  );
-}
+}) => (
+  <div className="flex items-center w-full">
+    {showLabel && (
+      <div className="max-w-1/2">
+        <label
+          className={"rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
+          htmlFor={item.toLowerCase()}
+        >
+          {item}
+        </label>
+      </div>
+    )}
+    <input
+      id={id ?? item.toLowerCase()}
+      // value={value ?? null}
+      className={className +
+        " !w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline "}
+      required={required}
+      onChange={onChange}
+      type={type}
+      placeholder={placeholder !== "" ? placeholder : "Enter your " + item.toLowerCase()} />
+  </div>
+)
 
 const selectFieldStyle = {
   control: (base, state) => ({
@@ -224,12 +217,12 @@ const SelectField: React.FC<SelectFieldProps> = ({
     label: item,
   }));
   return (
-    <div className="mb-4 w-full" style={{ position: "relative" }}>
+    <div className="w-full" style={{ position: "relative" }}>
       <div className="flex items-center">
         {showLabel && (
           <div className="max-w-1/2">
             <label
-              className="block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 rounded-l whitespace-nowrap"
+              className="rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap"
               htmlFor={item.toLowerCase()}
             >
               {item}

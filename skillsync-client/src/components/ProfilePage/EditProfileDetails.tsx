@@ -5,11 +5,12 @@ import {
   GetUserEmail,
   SetProfileInfo,
 } from "../../supabase/ProfileInfo.ts";
-import { InputField, SelectField } from "../common/InputField.tsx";
+import { InputField, SelectField } from "./InputField.tsx";
 import universityNames from "../../constants/university_list.js";
 import specializations from "../../constants/specialization_list.js";
 import programs from "../../constants/program_list.js";
 import EditProfilePicture from "./EditProfilePicture.tsx";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EditProfileDetails = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -102,51 +103,66 @@ const EditProfileDetails = ({}) => {
   return (
     <form
       onSubmit={UpdateProfile}
-      className="form-widget bg-[#1e1e1e] rounded-md p-6"
+      className="form-widget bg-black rounded-md p-6"
     >
       <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Personal Info</h2>
-        <div className="flex flex-row">
-          <div className="flex w-1/4">
-            <EditProfilePicture />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { label: "Name", state: name, setState: setName },
-              { label: "Location", state: location, setState: setLocation },
-              // { label: "DOB", state: date_of_birth, setState: setDateOfBirth },
-              { label: "Ethnicity", state: race, setState: setRace },
-              { label: "Gender", state: gender, setState: setGender },
-            ].map((item) => (
-              <div key={item.label} className="text-white">
-                <InputField
-                  id={item.label}
-                  item={item.label}
-                  value={item.state}
-                  type="text"
-                  required={true}
-                  onChange={(e) => item.setState(e.target.value)}
-                  className=""
-                />
-              </div>
-            ))}
-            <div key={"dob"} className="text-white">
+        {/* <div className="flex space-x-3 items-center mb-4">
+          <FaArrowLeft  />
+          <h2 className="text-xl font-bold">
+            Personal Information
+          </h2>
+        </div> */}
+        <div className="mx-auto pb-4">
+          <EditProfilePicture />
+          <div key={"Name"} className="text-white w-[300px] mx-auto mt-2">
               <InputField
-                id={"dob"}
-                item={"Date of Birth"}
-                // @ts-ignore
-                value={dateOfBirth}
-                type="date"
+                id={"Name"}
+                item={"Name"}
+                value={name}
+                type="text"
                 required={true}
-                onChange={(e) => setDateOfBirth(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
+                className="!text-center"
+                showLabel={false}
+              />
+            </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4 mt-3">
+          {[
+            // { label: "Name", state: name, setState: setName },
+            { label: "Location", state: location, setState: setLocation },
+            // { label: "DOB", state: date_of_birth, setState: setDateOfBirth },
+            { label: "Ethnicity", state: race, setState: setRace },
+            { label: "Gender", state: gender, setState: setGender },
+          ].map((item) => (
+            <div key={item.label} className="text-white">
+              <InputField
+                id={item.label}
+                item={item.label}
+                value={item.state}
+                type="text"
+                required={true}
+                onChange={(e) => item.setState(e.target.value)}
                 className=""
               />
             </div>
+          ))}
+          <div key={"dob"} className="text-white">
+            <InputField
+              id={"dob"}
+              item={"Date of Birth"}
+              // @ts-ignore
+              value={dateOfBirth}
+              type="date"
+              required={true}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+              className=""
+            />
           </div>
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 mt-8">
         <h2 className="text-xl font-bold mb-2">School Info</h2>
         <div className="grid grid-cols-2 gap-4">
           {[
@@ -202,7 +218,7 @@ const EditProfileDetails = ({}) => {
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 mt-8">
         <h2 className="text-xl font-bold mb-2">Links</h2>
         <div className="grid grid-cols-2 gap-4">
           {[
