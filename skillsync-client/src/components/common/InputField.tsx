@@ -13,11 +13,11 @@ const InputField = ({
   id = "",
   required = false,
 }) => (
-  <div className="flex items-center w-full">
+  <div className="flex items-center w-full h-[40px]">
     {showLabel && (
       <div className="max-w-1/2">
         <label
-          className={"rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
+          className={"h-full rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
           htmlFor={item.toLowerCase()}
         >
           {item}

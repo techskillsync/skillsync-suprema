@@ -28,7 +28,7 @@ function SpotLightJobsSection() {
 
   return (
     <div className="p-5 rounded-lg bg-[#1e1e1e] mt-6">
-      <h1 className="text-xl">Spotlight Jobs</h1>
+      <h1 className="text-xl text-white">Spotlight Jobs</h1>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
       <div className="flex w-full space-x-2">
           {listings.map((item, index) => (

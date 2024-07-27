@@ -31,8 +31,8 @@ function AppRoutes() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const user = await supabase.auth.getSession();
-      setUser(user);
+      const session = await supabase.auth.getSession();
+      setUser(session.data?.user ?? null);
     };
 
     checkUser();
