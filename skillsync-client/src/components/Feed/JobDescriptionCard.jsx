@@ -15,6 +15,7 @@ import {
   RemoveJob,
   SaveJob,
 } from "../../supabase/JobApplicationTracker.ts";
+import SharePopup from "./SharePopup.jsx";
 
 const JobDescriptionCard = ({
   jobDescription,
@@ -59,10 +60,10 @@ const JobDescriptionCard = ({
       action: () => {
         navigator.clipboard.writeText(jobDescription.link);
       },
-    },
-    {
-      title: "Share",
-      icon: <FaUserGroup />,
+    // },
+    // {
+    //   title: "Share",
+    //   icon: <FaUserGroup />,
     },
   ];
 
@@ -173,6 +174,12 @@ const JobDescriptionCard = ({
                 {!mini && <span className="ml-2">{action.title}</span>}
               </button>
             ))}
+            <SharePopup >
+              <button className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2">
+                <FaUserGroup />
+                <span className="ml-2">Share</span>
+              </button>
+            </SharePopup>
             {action && (
               <button
                 onClick={action}
