@@ -1,8 +1,7 @@
 import React, { useState } from "react";
     import EditProfileDetails from "./EditProfileDetails";
 import EditWorkExperiences from "./EditWorkExperiences";
-    // import EditWorkExperience from "./EditWorkExperience";
-    // import EditResumes from "./EditResumes";
+    import EditResumes from "./EditResumes";
 
     const ProfilePage = () => {
       const [selectedTab, setSelectedTab] = useState("personalInfo");
@@ -10,7 +9,7 @@ import EditWorkExperiences from "./EditWorkExperiences";
       const tabOptions = [
         { id: "personalInfo", label: "Personal Information", component: <EditProfileDetails /> },
         { id: "workExperience", label: "Work Experience", component: <EditWorkExperiences /> },
-        { id: "resumes", label: "Resumes", component: <div /> },
+        { id: "resumes", label: "Resumes", component: <EditResumes/> },
       ];
 
       const renderTabContent = () => {
@@ -24,7 +23,7 @@ import EditWorkExperiences from "./EditWorkExperiences";
             {tabOptions.map((option) => (
               <button
                 key={option.id}
-                className={`mr-4 ${
+                className={`mr-4 bg-[#1e1e1e] ${
                   selectedTab === option.id ? "text-white" : "text-gray-400"
                 }`}
                 onClick={() => setSelectedTab(option.id)}

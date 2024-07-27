@@ -42,7 +42,7 @@ const EditWorkExperiences: React.FC = () => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between px-8 mb-4">
-        <h1 className="text-2xl font-bold mb-4">Work Experiences</h1>
+        <h1 className="text-white text-2xl font-bold mb-4">Work Experiences</h1>
         <button
           onClick={handleAddWorkExperience}
           className="flex items-center bg-transparent border border-green-700 border-[2px] text-white px-4 py-2 rounded-md"

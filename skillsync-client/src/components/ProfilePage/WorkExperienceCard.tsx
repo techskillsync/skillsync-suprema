@@ -44,7 +44,7 @@ const WorkExperienceCard: React.FC<{
   };
 
   return (
-    <div className="mx-8 mb-4 rounded-lg bg-[#1e1e1e] p-4">
+    <div className="!text=white mx-8 mb-4 rounded-lg bg-[#1e1e1e] p-4">
       <div className="flex flex-col">
         {WorkExperienceInputField({
           item: "title",
@@ -72,9 +72,9 @@ const WorkExperienceCard: React.FC<{
             className: "mr-2",
             type: "date",
           })}
-          <span className="mb-2 mr-8">--</span>
+          <span className="mb-2 mr-8 text-white">--</span>
           {!editable && !workExperience.endDate ? (
-            <span className="text-xl mb-2 font-medium">Present</span>
+            <span className="text-xl text-white mb-2 font-medium">Present</span>
           ) : (
             WorkExperienceInputField({
               item: "endDate",
@@ -177,7 +177,7 @@ function WorkExperienceInputField({
       placeholder={placeholder}
       defaultValue={value}
       onChange={onChange}
-      className={`bg-transparent rounded-md p-2 mb-2 ${
+      className={`bg-transparent rounded-md p-2 mb-2 text-white ${
         editable ? "border-green-700" : "border-none bg-[#282828]"
       } ${className}`}
       disabled={!editable}
@@ -188,7 +188,7 @@ function WorkExperienceInputField({
       placeholder={placeholder}
       defaultValue={value}
       onChange={onChange}
-      className={`bg-transparent rounded-md p-1 mb-1 ${
+      className={`bg-transparent rounded-md p-1 mb-1 text-white ${
         editable ? "border-green-700" : "border-none"
       } ${className}`}
       disabled={!editable}
