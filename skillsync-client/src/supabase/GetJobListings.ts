@@ -15,6 +15,19 @@ async function GetJobListings(): Promise<JobListing[] | false> {
   return data;
 }
 
+async function GetJobListingById(id: string): Promise<JobListing | false> {
+  const { data, error } = await supabase
+    .from("job_listings")
+    .select()
+    .eq("id", id);
+
+  if (error) {
+    return false;
+  }
+
+  return data[0];
+}
+
 /*
  ! ------- WARNING ------- WARNING --------- WARNING ------- 
  * THIS IS SUPER SLOW. IF SPEED IS A CONCERN HANDLE SCRAPING AND 
@@ -88,9 +101,13 @@ async function SearchJobs(
   console.log(query_terms);
   console.log(location_terms);
   const { data, error, count } = await supabase
-    .rpc("ts_rank_search", { search_terms: query_terms, location_search_terms: location_terms }, { count: "exact" })
+    .rpc(
+      "ts_rank_search",
+      { search_terms: query_terms, location_search_terms: location_terms },
+      { count: "exact" }
+    )
     .order("rank", { ascending: false })
-    .range(from, to)
+    .range(from, to);
 
   if (error) {
     console.error("Error fetching job listings:", error);
@@ -115,6 +132,7 @@ export {
   ScrapeThenSearch,
   SearchJobs,
   GetJobListings,
+  GetJobListingById,
   GetJobListingsPaginate,
   GetFirstJobListings,
 };

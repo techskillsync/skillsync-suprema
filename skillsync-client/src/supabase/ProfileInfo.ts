@@ -41,6 +41,8 @@ async function GetUserEmail(): Promise<string | null> {
 // { name: "Jeff", location: "NewYork" }
 // Returns: { data, error } pair
 async function SetProfileInfo(updates): Promise<true | false> {
+    console.log('Updating profile info...')
+    console.log(updates)
     try {
         if (!updates) { throw new Error('no updates passed') }
 

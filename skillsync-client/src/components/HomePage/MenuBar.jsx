@@ -1,7 +1,7 @@
 import Dashboard from "./Dashboard/Dashboard";
 import Feed from "../Feed/Feed";
 import ResumeBuilder from "./ResumeBuilder";
-import Messages from "./Messages";
+import Messages from "./Messages.tsx";
 import LogoDark from "../../assets/LogoDark.png";
 import ProfileCard from "./ProfileCard";
 

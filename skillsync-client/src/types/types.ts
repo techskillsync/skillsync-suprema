@@ -52,4 +52,16 @@ export interface WorkExperience {
     location: string | null;
 }
 
+export interface Message {
+    id: string | null;
+    sender: string;
+    receiver: string;
+    // Todo: add more types
+    content: {
+        type: "text" | "job description" ;
+        payload: string;
+    };
+    timestamp: Date;
+}
+
 export type JobRecord = "saved_jobs" | "applied_jobs";
