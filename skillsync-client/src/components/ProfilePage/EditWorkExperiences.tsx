@@ -2,11 +2,22 @@ import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import WorkExperienceCard from "./WorkExperienceCard";
 import { WorkExperience } from "../../types/types";
-import { DeleteWorkExperience, GetWorkExperiences } from "../../supabase/WorkExperience";
+import {
+  DeleteWorkExperience,
+  GetWorkExperiences,
+} from "../../supabase/WorkExperience";
 
 const EditWorkExperiences: React.FC = () => {
   const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
-  const [editableIndex, setEditableIndex] = useState<number | null>(null);
+
+  const handleDeleteWorkExperienceCallback = (workExperienceId: string) => {
+    console.log('Callback to delete work experience', workExperienceId);
+    const newWorkExperiences = workExperiences.filter(
+      (workExperience) => workExperience.id !== workExperienceId
+    );
+    console.log(newWorkExperiences)
+    setWorkExperiences(newWorkExperiences);
+  };
 
   const handleAddWorkExperience = () => {
     const newWorkExperience: WorkExperience = {
@@ -32,13 +43,6 @@ const EditWorkExperiences: React.FC = () => {
     getWorkExperiences();
   }, []);
 
-  const handleDeleteWorkExperience = async (index: number) => {
-    const updatedWorkExperiences = [...workExperiences];
-    updatedWorkExperiences.splice(index, 1);
-    await DeleteWorkExperience(workExperiences[index]);
-    setWorkExperiences(updatedWorkExperiences);
-  };
-
   return (
     <div className="w-full">
       <div className="flex items-center justify-between px-8 mb-4">
@@ -51,13 +55,19 @@ const EditWorkExperiences: React.FC = () => {
           Add Work Experience
         </button>
       </div>
-      {workExperiences.map((workExperience, index) => (
-        <WorkExperienceCard
-          key={index}
-          workExperience={workExperience}
-          handleDeleteWorkExperience={() => handleDeleteWorkExperience(index)}
-        />
-      ))}
+      {workExperiences
+        .sort((a, b) =>
+          a.startDate && b.startDate
+            ? new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+            : 0
+        )
+        .map((workExperience, index) => (
+          <WorkExperienceCard
+            key={workExperience.id}
+            workExperience={workExperience}
+            deleteWorkExperienceCallback={handleDeleteWorkExperienceCallback}
+          />
+        ))}
     </div>
   );
 };

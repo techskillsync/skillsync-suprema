@@ -43,5 +43,5 @@ async function SendMessage(message: Message): Promise<boolean> {
   return true;
 }
 
-export { GetMessages };
+export { GetMessages, SendMessage };
 

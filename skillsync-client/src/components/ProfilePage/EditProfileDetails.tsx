@@ -88,7 +88,7 @@ const EditProfileDetails = ({}) => {
       industry,
       linkedin,
       github,
-      dateOfBirth,
+      date_of_birth: dateOfBirth,
       gender,
       race,
     };

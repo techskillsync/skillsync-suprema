@@ -4,12 +4,13 @@ import { WorkExperience } from "../../types/types";
 import {
   UpdateWorkExperience,
   SaveNewWorkExperience,
+  DeleteWorkExperience,
 } from "../../supabase/WorkExperience";
 
 const WorkExperienceCard: React.FC<{
   workExperience: WorkExperience;
-  handleDeleteWorkExperience: () => void;
-}> = ({ workExperience, handleDeleteWorkExperience }) => {
+  deleteWorkExperienceCallback: (workExperienceId: string) => void;
+}> = ({ workExperience, deleteWorkExperienceCallback }) => {
   const [workExperienceState, setWorkExperienceState] =
     useState<WorkExperience>(workExperience);
 
@@ -21,6 +22,16 @@ const WorkExperienceCard: React.FC<{
       ...prevState,
       [field]: value,
     }));
+  };
+
+  const handleDeleteWorkExperience = async () => {
+    if (typeof deleteWorkExperienceCallback === "function") {
+      console.log("Deleting work experience", workExperienceState);
+      deleteWorkExperienceCallback(workExperienceState.id);
+    } else {
+      console.error("deleteWorkExperienceCallback is not a function");
+    }
+    DeleteWorkExperience(workExperienceState);
   };
 
   const handleSaveWorkExperience = async () => {
