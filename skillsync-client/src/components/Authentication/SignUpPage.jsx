@@ -29,7 +29,7 @@ const SignUpPage = () => {
   }
 
   return (
-    <div className="flex h-screen dark:bg-black">
+    <div className="flex h-screen bg-black">
       <div className="w-1/2 bg-gray-100">
         <InfoCarousel />
       </div>

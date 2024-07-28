@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Spacer from './Spacer'
 import { FaGoogle, FaFacebook, FaEnvelope, FaLock } from "react-icons/fa";
 import InputField from "./InputField";
-import EmailLogin from '../../supabase/userLogin'
+import EmailLogin, { LoadGoogleClient } from '../../supabase/userLogin'
 import InfoCarousel from "./InfoCarousel";
 
 const LogInPage = () => {
@@ -22,7 +22,7 @@ const LogInPage = () => {
 	}
 
 	return (
-		<div className="flex h-screen dark:bg-black">
+		<div className="flex h-screen bg-black">
 			<div className="w-1/2 bg-gray-100">
 			<InfoCarousel />
 			</div>
