@@ -14,7 +14,7 @@ const SharePopup = ({ content }) => {
 
   return (
     <div>
-        <div>{children}</div>
+        <div>{content}</div>
       {isOpen && (
         <div className="mt-4">
           <div className="flex">

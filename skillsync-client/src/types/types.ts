@@ -1,3 +1,11 @@
+// Interface for view public_user_profiles 
+export interface PublicUserProfiles {
+    name: string;
+    email: string;
+    avatar_url: string;
+    id: string;
+}
+
 export interface UserProfile {
     name: string;
     email: string;

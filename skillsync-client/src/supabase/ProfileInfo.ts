@@ -6,6 +6,7 @@ import { UserProfile } from '../types/types';
 // `name, location, school, grad_year`
 // Returns: { data, error } pair
 async function GetProfileInfo(columns): Promise<UserProfile | null> {
+
     try {
         if (!columns) { throw new Error('need columns to fetch') }
 
@@ -41,7 +42,7 @@ async function GetUserEmail(): Promise<string | null> {
 // Returns: { data, error } pair
 async function SetProfileInfo(updates): Promise<true | false> {
     try {
-        if (!updates) { throw new Error('no updates passed')}
+        if (!updates) { throw new Error('no updates passed') }
 
         updates['id'] = await GetUserId()
 

@@ -9,6 +9,7 @@ import ListSavedJobs from './ListSavedJobs.tsx'
 import ListAppliedJobs from './ListAppliedJobs.tsx'
 import { ArmanLogin } from './GoogleAuth.tsx'
 import { GetJobs } from './GetJobs.tsx'
+import { ShareJob } from './ShareJobs.tsx'
 
 function Interface() {
     return (
@@ -42,6 +43,9 @@ function Interface() {
             </div>
             <div className="m-4">
                 <GetJobs />
+            </div>
+            <div className="m-4">
+                <ShareJob />
             </div>
         </div>
     )
