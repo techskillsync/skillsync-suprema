@@ -6,7 +6,7 @@ import JobDescriptionCard from "../Feed/JobDescriptionCard";
 import { GetJobListingById } from "../../supabase/GetJobListings";
 import { FindAvatar, FindUserById } from "../../supabase/OtherUsers";
 
-const Messages = () => {
+const Messages = ({ setSelectedJob }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   useEffect(() => {
     async function fetchMessages() {
@@ -26,14 +26,17 @@ const Messages = () => {
       <h1 className="text-white text-2xl font-bold mb-4">Messages</h1>
       <div className="p-3">
         {messages.map((message, index) => (
-          <MessageCard key={index} message={message} />
+          <MessageCard key={index} message={message} setSelectedJob={setSelectedJob} />
         ))}
       </div>
     </div>
   );
 };
 
-const MessageCard = (props: { message: Message }) => {
+const MessageCard = (props: {
+  message: Message;
+  setSelectedJob: (job: JobListing) => void;
+}) => {
   const [job, setJob] = useState<JobListing>();
   const [sender, setSender] = useState<{
     id: string;
@@ -92,7 +95,7 @@ const MessageCard = (props: { message: Message }) => {
     sender?.id
   ) {
     return (
-      <div className="p-5 bg-[#1e1e1e] rounded">
+      <div className="p-5 bg-[#1e1e1e] rounded-lg mb-4">
         <div>
           <div className="flex items-center">
             <img
@@ -110,7 +113,15 @@ const MessageCard = (props: { message: Message }) => {
             </div>
           </div>
         </div>
-        <JobDescriptionCard className="mt-3" mini={false} jobDescription={job} />
+        <JobDescriptionCard
+          className="mt-3"
+          mini={false}
+          jobDescription={job}
+          action={() => {
+            console.log("Setting selected job via callback");
+            props.setSelectedJob(job);
+          }}
+        />
       </div>
     );
   }
