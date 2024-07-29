@@ -178,11 +178,6 @@ const JobDescriptionCard = ({
               <button className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2">
                 <FaUserGroup />
                 <span className="ml-2">Share</span>
-                <h1>Hello hello</h1>
-                <h1>Hello hello</h1>
-                <h1>Hello hello</h1>
-                <h1>Hello hello</h1>
-                <h1>Hello hello</h1>
               </button>
             </SharePopup>
             {action && (
