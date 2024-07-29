@@ -4,7 +4,7 @@ import PreferencesSection from "./PreferencesSection";
 import SpotLightJobsSection from "./SpotlightJobsSection";
 import ChartsSection from "./ChartsSection";
 
-const Dashboard = ({ profileInfo }) => {
+const Dashboard = ({ profileInfo, setSelectedJob }) => {
   return (
     <div className="w-full min-h-screen bg-black p-8">
       <div className="p-2 mb-3">
@@ -21,7 +21,7 @@ const Dashboard = ({ profileInfo }) => {
           <ChartsSection />
         </div>
       </div>
-      <SpotLightJobsSection />
+      <SpotLightJobsSection setSelectedJob={setSelectedJob} />
     </div>
   );
 };

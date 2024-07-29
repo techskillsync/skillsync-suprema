@@ -21,6 +21,7 @@ const JobDescriptionCard = ({
   jobDescription,
   className = "",
   mini = false,
+  showGlassdoorRating = true,
   action = () => {},
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
@@ -106,7 +107,7 @@ const JobDescriptionCard = ({
         )}
         <div className="flex justify-between">
           <h2 className="text-xl font-bold mb-2">{jobDescription.company}</h2>
-          {!mini && (
+          {showGlassdoorRating && !mini && (
             <div className="flex">
               <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
                 Glassdoor rating:

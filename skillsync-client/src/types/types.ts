@@ -40,6 +40,7 @@ export interface JobListing {
     date_posted: string | null;
     num_applicants: string | null;
     apply_url: string | null;
+    status: 'saved' | 'applied' | 'testing' | 'interviewing' | 'offer' | null;
 }
 
 export interface WorkExperience {

@@ -5,7 +5,7 @@ import JobDescriptionCard from "../../Feed/JobDescriptionCard";
 import Spacer from "../../common/Spacer";
 import { JobListing } from "../../../types/types";
 
-function SpotLightJobsSection() {
+function SpotLightJobsSection({ setSelectedJob }) {
   const [listings, setListings] = useState<JobListing[]>([]);
 
   useEffect(() => {
@@ -31,11 +31,19 @@ function SpotLightJobsSection() {
       <h1 className="text-xl text-white">Spotlight Jobs</h1>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
       <div className="flex w-full space-x-2">
-          {listings.map((item, index) => (
-            <div className="flex-col w-full" key={index}>
-              <JobDescriptionCard mini={true} jobDescription={item} />
-            </div>
-          ))}
+        {listings.map((item, index) => (
+          <div className="flex-col w-full" key={index}>
+            <JobDescriptionCard
+              mini={true}
+              jobDescription={item}
+              action={() => {
+                console.log("Setting selected job via callback");
+
+                setSelectedJob(item);
+              }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

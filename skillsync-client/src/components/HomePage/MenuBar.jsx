@@ -7,8 +7,12 @@ import ProfileCard from "./ProfileCard";
 
 import { MdSpaceDashboard, MdNewspaper, MdInbox } from "react-icons/md";
 import { FaGear, FaSheetPlastic } from "react-icons/fa6";
+import { BiSpreadsheet } from "react-icons/bi"
 import EditProfileDetails from "../ProfilePage/EditProfileDetails";
 import ProfilePage from "../ProfilePage/ProfilePage";
+import JobApplicationTracker from "../Feed/JobApplicationTracker.tsx";
+import { FaAcquisitionsIncorporated } from "react-icons/fa";
+import { BsFileSpreadsheet } from "react-icons/bs";
 
 const menuItems = [
   {
@@ -24,8 +28,8 @@ const menuItems = [
     icon: <FaSheetPlastic />,
     show: true,
   },
+  { name: "Tracker", component: JobApplicationTracker, icon: <BiSpreadsheet />, show: true },
   { name: "Messages", component: Messages, icon: <MdInbox />, show: true },
-  { name: "Settings", component: Messages, icon: <FaGear />, show: true },
   { name: "Profile", component: ProfilePage, show: false },
 ];
 

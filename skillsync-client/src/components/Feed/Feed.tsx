@@ -3,10 +3,6 @@ import {
   GetJobListingsPaginate,
   SearchJobs,
 } from "../../supabase/GetJobListings";
-import {
-  AddToSavedJobs,
-  AddToAppliedJobs,
-} from "../../supabase/JobListingTracker";
 import { JobListing } from "../../types/types";
 import JobDescriptionCard from "./JobDescriptionCard";
 import PaginationController from "./PaginationController";
@@ -96,6 +92,7 @@ function Feed() {
             // onClick={() => setSelectedJob(item)}
           >
             <JobDescriptionCard
+              key={item.id}
               jobDescription={item}
               action={() => setSelectedJob(item)}
             />
