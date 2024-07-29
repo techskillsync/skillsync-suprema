@@ -22,6 +22,7 @@ async function GetJobListingById(id: string): Promise<JobListing | false> {
     .eq("id", id);
 
   if (error) {
+    console.error(error);
     return false;
   }
 

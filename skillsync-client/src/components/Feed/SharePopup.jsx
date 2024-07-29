@@ -1,4 +1,8 @@
-import React, { Children } from "react";
+import React from "react";
+import { FindAvatar, FindUser } from "../../supabase/OtherUsers";
+import { FaUser } from "react-icons/fa";
+import { SendMessage } from "../../supabase/Messages";
+import toast, { Toaster } from 'react-hot-toast';
 
 // Share popup intended for sharing Job Descriptions to SkillSync users
 const SharePopup = ({ children, content }) => {
@@ -6,13 +10,59 @@ const SharePopup = ({ children, content }) => {
   const [searchEmail, setSearchEmail] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [fadeIn, setFadeIn] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [empty, setEmpty] = React.useState(true);
 
+  async function handleSendMessage(recepientId) {
+    const message = {
+      receiver: recepientId,
+      content: {
+        type: "job description",
+        payload: content,
+      },
+    };
 
-  const handleSearch = async () => {
-    // Fetch users from supabase
-    data = [];
-    setSearchResults(data);
-  };
+    setIsOpen(false);
+    console.log("Sending message...");
+    const messageSentPromise = SendMessage(message);
+    toast.promise(messageSentPromise, {
+      loading: 'Sending message...',
+      success: 'Message sent!',
+      error: 'Failed to send message',
+    });
+
+  }
+
+  async function handleSearch() {
+    if (searchEmail === "") {
+      setEmpty(true);
+      return;
+    }
+
+    setEmpty(false);
+
+    setLoading(true);
+
+    const user = await FindUser(searchEmail);
+    if (!user?.id) {
+      setSearchResults([]);
+      setLoading(false);
+      return;
+    }
+    console.log(user.id);
+    const pfpUrl = await FindAvatar(user.avatar_url);
+
+    setSearchResults([
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: pfpUrl,
+      },
+    ]);
+
+    setLoading(false);
+  }
 
   React.useEffect(() => {
     if (isOpen) {
@@ -22,6 +72,7 @@ const SharePopup = ({ children, content }) => {
 
   return (
     <div>
+      <Toaster />
       <div className="relative">
         {React.Children.map(children, (child) => {
           return React.cloneElement(child, {
@@ -29,7 +80,11 @@ const SharePopup = ({ children, content }) => {
           });
         })}
         {isOpen && (
-          <div className={`absolute bg-white shadow p-3 rounded-lg z-[99] top-12 left-0 ${fadeIn ? "fade-in" : ""}`}>
+          <div
+            className={`absolute bg-white shadow p-3 rounded-lg z-[99] top-12 left-0 ${
+              fadeIn ? "fade-in" : ""
+            }`}
+          >
             <div className="flex">
               <input
                 className="border border-gray-300 rounded-l py-2 px-4"
@@ -41,22 +96,46 @@ const SharePopup = ({ children, content }) => {
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 !rounded-l-none !rounded-r"
                 onClick={handleSearch}
+                // disabled={!searchEmail || loading}
               >
                 Search
               </button>
             </div>
-            <div id="search results" className="mt-4">
-              {searchResults.length > 0 ? (
+            <div id="search results" className="mt-4 p-3">
+              {loading ? (
+                <p>Loading ...</p>
+              ) : empty ? (
+                <p></p>
+              ) : searchResults.length > 0 ? (
                 searchResults.map((user) => (
                   <div
                     key={user.id}
-                    className="border border-gray-300 rounded p-4 mb-4"
+                    className="border border-gray-300 flex rounded p-4 mb-4"
                   >
-                    <p className="font-bold">{user.name}</p>
-                    <p className="text-gray-500">{user.email}</p>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-                      Share
-                    </button>
+                    <div className="w-1/5">
+                      {user.avatar ? (
+                        <img
+                          className="rounded-full w-full h-full"
+                          src={user.avatar}
+                          alt="avatar"
+                        />
+                      ) : (
+                        <div className="bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
+                          <p className="text-white text-xl">
+                            <FaUser />
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="w-4/5 px-2">
+                      <div className="flex items-center justify-between">
+                        <p className="font-bold text-lg">{user.name}</p>
+                        <button onClick={() => handleSendMessage(user.id)} className="bg-transparent border-none text-blue-500 hover:text-blue-800 !p-0 transition-all duration-200 text-sm p-0 rounded">
+                          Share
+                        </button>
+                      </div>
+                      <p className="text-gray-500">{user.email}</p>
+                    </div>
                   </div>
                 ))
               ) : (

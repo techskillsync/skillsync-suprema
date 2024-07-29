@@ -174,10 +174,10 @@ const JobDescriptionCard = ({
                 {!mini && <span className="ml-2">{action.title}</span>}
               </button>
             ))}
-            <SharePopup >
+            <SharePopup content={jobDescription.id}>
               <button className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2">
                 <FaUserGroup />
-                <span className="ml-2">Share</span>
+                {!mini && <span className="ml-2">Share</span>}
               </button>
             </SharePopup>
             {action && (

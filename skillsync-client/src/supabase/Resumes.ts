@@ -4,13 +4,13 @@ import { GetUserId } from './GetUserId'
 
 async function AddResume(resume_file, resume_label): Promise<Boolean> {
     if (!resume_file) { console.warn("Resume file missing"); return false; }
-    alert("Adding reumse")
+    console.log("Adding reumse")
 
     const user_id = await GetUserId();
     const fileExtension = resume_file.name.split('.').pop()
     const fileName = `${user_id}_${Math.random()}.${fileExtension}`
 
-alert("1")
+console.log("1")
 
     try {
         const updates = {
@@ -21,19 +21,19 @@ alert("1")
 
         // First upload the avatar to supabase storage
         const { error: upload_error } = await supabase.storage.from('resumes').upload(fileName, resume_file)
-        if (upload_error) { throw new Error(upload_error.message); alert(upload_error?.message) }
+        if (upload_error) { throw new Error(upload_error.message); console.log(upload_error?.message) }
 
         // Then update the user profile to link to the image
         const { error } = await supabase.from('user_resumes').insert(updates)
-        if (error) { throw error.message; alert(error?.message) }
+        if (error) { throw error.message; console.log(error?.message) }
 
-        alert("Done")
+        console.log("Done")
 
         return true
 
     } catch (error) {
         console.warn(error)
-        alert(error)
+        console.log(error)
         return false
     }
 }
@@ -43,7 +43,7 @@ async function GetResumes(): Promise<any> {
     const { data, error } = await supabase
         .from('user_resumes')
         .select('id, resume_label, resume_url')
-        .eq('id', user_id)
+        .eq('user_id', user_id)
     if (error) { console.warn(error) }
     return data
 }

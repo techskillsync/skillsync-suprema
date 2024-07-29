@@ -1,4 +1,5 @@
 import { Message } from "../types/types";
+import { GetUserId } from "./GetUserId";
 import supabase from "./supabaseClient";
 
 // Fetches messages from Supabase.
@@ -28,16 +29,18 @@ async function GetMessages(): Promise<Message[] | false> {
 // Sends a message to the receiver
 // Returns false on error and true on success
 async function SendMessage(message: Message): Promise<boolean> {
+  const user_id = await GetUserId();
   const { error } = await supabase.from("messages").insert([
     {
-      sender_id: message.sender,
+      sender_id: user_id,
       receiver_id: message.receiver,
       content: message.content,
     },
   ]);
 
   if (error) {
-    return false;
+    console.error("Error sending message:", error);
+    throw(error);
   }
 
   return true;
