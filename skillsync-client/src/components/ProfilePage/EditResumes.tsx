@@ -11,7 +11,7 @@ import { FaSheetPlastic } from "react-icons/fa6";
 
 const EditResumes = () => {
   const [resumes, setResumes] = React.useState<any[]>([]);
-  const [file, setFile] = React.useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [label, setLabel] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
@@ -28,7 +28,7 @@ const EditResumes = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      setFile(files[0]);
+      setSelectedFile(files[0]);
     }
   };
 
@@ -40,13 +40,24 @@ const EditResumes = () => {
     const resumeData = await GetResume(resume.resume_id);
     console.log("resumeData", resumeData);
     if (resumeData) {
-      console.log(resumeData.resume_url)
+      console.log(resumeData.resume_url);
       window.open(resumeData.resume_url, "_blank");
     }
-  }
+  };
+
+  const handleDownloadResume = async (resume: any) => {
+    const resumeData = await GetResume(resume.resume_id);
+    console.log("resumeData", resumeData);
+    if (resumeData) {
+      const a = document.createElement("a");
+      a.href = resumeData.resume_url;
+      a.download = resume.resume_label;
+      a.click();
+    }
+  };
 
   const handleAddResume = async () => {
-    if (!file) {
+    if (!selectedFile) {
       setError("Please select a file");
       return;
     }
@@ -56,10 +67,10 @@ const EditResumes = () => {
     }
     setLoading(true);
     try {
-      await AddResume(file, label);
+      await AddResume(selectedFile, label);
       const resumes = await GetResumes();
       setResumes(resumes);
-      setFile(null);
+      setSelectedFile(null);
       setLabel("");
     } catch (error) {
       setError("Error adding resume");
@@ -81,73 +92,112 @@ const EditResumes = () => {
     }
   };
 
-return (
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+      setSelectedFile(event.dataTransfer.files[0]);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  return (
     <div className="bg-black min-h-screen w-full pt-3">
-        <div className="flex justify-center mb-3">
-            <h1 className="text-white">Resumes</h1>
+      <div className="file-upload-container p-6 m-8 bg-[#301a8b] rounded-lg">
+      <div className="mb-4 ml-1">
+          <h1 className="text-white text-2xl font-bold">Upload new resume</h1>
         </div>
-        <div className="flex justify-center mb-3">
-            <div className="file-upload">
-                <input type="file" onChange={handleFileChange} />
-                <div className="file-upload-icon">
-                    <i className="fas fa-cloud-upload-alt"></i>
-                </div>
-                <div className="file-upload-text">
-                    Drag and drop or click to upload
-                </div>
+        <div className="flex h-full">
+          <div className="flex flex-col w-1/2">
+            <div
+              className="file-upload-dropzone h-full"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+            >
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="file-input h-full"
+              />
+              <div className="file-upload-icon">
+                <i className="fas fa-cloud-upload-alt"></i>
+              </div>
+              <div className="file-upload-text">
+                {selectedFile
+                  ? selectedFile.name
+                  : "Drag and drop or click to upload"}
+              </div>
             </div>
+            {selectedFile && (
+              <div className="file-preview">
+                <p>Selected File: {selectedFile.name}</p>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col w-1/2">
             <input
-                type="text"
-                placeholder="Label"
-                value={label}
-                onChange={handleLabelChange}
-                className="ml-3 px-2 py-1 border border-gray-300 rounded"
+              type="text"
+              placeholder="Label"
+              value={label}
+              onChange={handleLabelChange}
+              className="ml-3 px-2 py-3 border-none shadow text-lg mb-3 bg-[#2e2067]  rounded"
             />
             <button
-                onClick={handleAddResume}
-                className="ml-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={handleAddResume}
+              className="ml-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-                Add Resume
+              Add Resume
             </button>
+          </div>
         </div>
-        {loading && <div className="text-white">Loading...</div>}
-        {/* {error && <div className="text-red-500">{error}</div>} */}
-        <div className="flex justify-center">
-            {resumes &&
-                resumes.map((resume) => (
-                    <div
-                        key={resume.id}
-                        className="resume-card bg-[#1e1e1e] rounded shadow-md p-3 m-3 cursor-pointer"
-                        onClick={() => handleOpenResume(resume)}
+      </div>
+      {loading && <div className="text-white">Loading...</div>}
+      {/* {error && <div className="text-red-500">{error}</div>} */}
+      <div className="border-solid border-gray-600 border-2 m-8 rounded-lg p-6">
+        <div className="mb-4 ml-1">
+          <h1 className="text-white text-2xl font-bold">Your resumes</h1>
+        </div>
+        <div className="flex space-x-4 flex-wrap">
+          {resumes &&
+            resumes.map((resume) => (
+              <div
+                key={resume.id}
+                className="resume-card min-w-48 bg-[#1e1e1e] rounded shadow-md p-3 cursor-pointer"
+                onClick={() => handleOpenResume(resume)}
+              >
+                <div className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded">
+                  <IoDocument className="text-4xl" />
+                </div>
+                <div className="resume-details mt-3">
+                  <div className="resume-filename text-lg text-center font-medium">
+                    {resume.resume_label}
+                  </div>
+                  <div className="resume-actions mt-2 flex space-x-2 items-center justify-center">
+                    <button
+                      onClick={() => handleDeleteResume(resume.id)}
+                      className="p-0 bg-transparent text-red-700 rounded"
                     >
-                        <div className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded">
-                            <IoDocument className="text-4xl" />
-                        </div>
-                        <div className="resume-details mt-3">
-                            <div className="resume-filename text-lg text-center font-medium">
-                                {resume.resume_label}
-                            </div>
-                            <div className="resume-actions mt-2 flex space-x-2 items-center justify-center">
-                                <button
-                                    onClick={() => handleDeleteResume(resume.id)}
-                                    className="p-0 bg-transparent text-red-700 rounded"
-                                >
-                                    <FaTrash />
-                                </button>
-                                <a
-                                    href={resume.resume_url}
-                                    download
-                                    className="p-0 bg-transparent text-green-500 rounded text-xl"
-                                >
-                                    <IoDownload />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                      <FaTrash />
+                    </button>
+                    <a
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDownloadResume(resume);
+                      }}
+                      className="p-0 bg-transparent text-green-500 rounded text-xl"
+                    >
+                      <IoDownload />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
+      </div>
     </div>
-);
+  );
 };
 
 export default EditResumes;
