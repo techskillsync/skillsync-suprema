@@ -10,7 +10,9 @@ async function AddResume(resume_file, resume_label): Promise<Boolean> {
 
   const user_id = await GetUserId();
   const fileExtension = resume_file.name.split(".").pop();
-  const fileName = `${Math.random()}.${fileExtension}`;
+  const fileName = `${Math.random()
+    .toString()
+    .replace(".", "")}.${fileExtension}`;
 
   console.log(
     `Uploading resume for user ${user_id} with label ${resume_label} and file name ${fileName}`
@@ -67,25 +69,32 @@ async function GetResume(resume_id): Promise<any> {
   const { data, error } = await supabase
     .from("user_resumes")
     .select("resume_id, resume_label, resume_url")
-    .eq("id", user_id)
+    .eq("user_id", user_id)
     .eq("resume_id", resume_id)
     .single();
   if (error) {
     console.warn(error);
   }
+  console.log("Trying to get resume: ", `${user_id}/${data?.resume_url}`);
   const { data: resume_file, error: downloadError } = await supabase.storage
     .from("resumes")
-    .download(data?.resume_url);
+    .download(`${user_id}/${data?.resume_url}`);
 
   if (downloadError) {
-    console.warn(downloadError.message);
-    return "";
+    console.warn(downloadError);
+    return null;
   }
+  console.log(resume_file);
+
+  if (!resume_file) {
+    console.warn("Resume file not found");
+    return null;
+  }
+
   return {
     id: data?.resume_id,
     resume_label: data?.resume_label,
-    resume_url: resume_file,
-    resume_file: URL.createObjectURL(resume_file),
+    resume_url: URL.createObjectURL(resume_file!),
   };
 }
 

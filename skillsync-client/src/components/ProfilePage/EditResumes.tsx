@@ -5,6 +5,9 @@ import {
   AddResume,
   DeleteResume,
 } from "../../supabase/Resumes";
+import { FaDownload, FaPagelines, FaTrash } from "react-icons/fa";
+import { IoDocument, IoDownload } from "react-icons/io5";
+import { FaSheetPlastic } from "react-icons/fa6";
 
 const EditResumes = () => {
   const [resumes, setResumes] = React.useState<any[]>([]);
@@ -32,6 +35,15 @@ const EditResumes = () => {
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLabel(e.target.value);
   };
+
+  const handleOpenResume = async (resume: any) => {
+    const resumeData = await GetResume(resume.resume_id);
+    console.log("resumeData", resumeData);
+    if (resumeData) {
+      console.log(resumeData.resume_url)
+      window.open(resumeData.resume_url, "_blank");
+    }
+  }
 
   const handleAddResume = async () => {
     if (!file) {
@@ -99,35 +111,35 @@ return (
             </button>
         </div>
         {loading && <div className="text-white">Loading...</div>}
-        {error && <div className="text-red-500">{error}</div>}
+        {/* {error && <div className="text-red-500">{error}</div>} */}
         <div className="flex justify-center">
             {resumes &&
                 resumes.map((resume) => (
                     <div
                         key={resume.id}
-                        className="resume-card bg-white rounded shadow-md p-3 m-3 cursor-pointer"
-                        onClick={() => window.open(resume.resume_file, "_blank")}
+                        className="resume-card bg-[#1e1e1e] rounded shadow-md p-3 m-3 cursor-pointer"
+                        onClick={() => handleOpenResume(resume)}
                     >
-                        <div className="resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded-full">
-                            <i className="far fa-file-pdf"></i>
+                        <div className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded">
+                            <IoDocument className="text-4xl" />
                         </div>
-                        <div className="resume-details ml-3">
-                            <div className="resume-filename text-lg font-medium">
+                        <div className="resume-details mt-3">
+                            <div className="resume-filename text-lg text-center font-medium">
                                 {resume.resume_label}
                             </div>
-                            <div className="resume-actions mt-2">
+                            <div className="resume-actions mt-2 flex space-x-2 items-center justify-center">
                                 <button
                                     onClick={() => handleDeleteResume(resume.id)}
-                                    className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                                    className="p-0 bg-transparent text-red-700 rounded"
                                 >
-                                    Delete
+                                    <FaTrash />
                                 </button>
                                 <a
                                     href={resume.resume_url}
                                     download
-                                    className="ml-2 px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                                    className="p-0 bg-transparent text-green-500 rounded text-xl"
                                 >
-                                    <i className="fas fa-download"></i>
+                                    <IoDownload />
                                 </a>
                             </div>
                         </div>

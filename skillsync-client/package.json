@@ -24,7 +24,8 @@
     "react-router-dom": "^6.23.1",
     "react-select": "^5.8.0",
     "react-swipeable": "^7.0.1",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "resume-parser-simple": "^1.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
