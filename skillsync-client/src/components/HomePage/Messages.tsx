@@ -26,7 +26,11 @@ const Messages = ({ setSelectedJob }) => {
       <h1 className="text-white text-2xl font-bold mb-4">Messages</h1>
       <div className="p-3">
         {messages.map((message, index) => (
-          <MessageCard key={index} message={message} setSelectedJob={setSelectedJob} />
+          <MessageCard
+            key={index}
+            message={message}
+            setSelectedJob={setSelectedJob}
+          />
         ))}
       </div>
     </div>
@@ -44,6 +48,7 @@ const MessageCard = (props: {
     email: string;
     avatar: string | null;
   }>();
+  console.log("Message:", props.message);
 
   useEffect(() => {
     async function fetchSender() {
@@ -103,12 +108,23 @@ const MessageCard = (props: {
               alt="Profile Picture"
               className="h-10 w-10 rounded-full"
             />
-            <div className="ml-3">
+            <div className="ml-3 flex justify-between items-center w-full">
               <p className="">
                 <span className="text-lg font-semibold">
                   {sender.name ?? sender.email}
                 </span>
-                {" sent a you job listing"}
+                {" sent you a job listing"}
+              </p>
+              <p id="timestamp" className="text-right ml-auto">
+                <span className="text-sm">
+                  {new Date(props.message.timestamp).toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </span>
               </p>
             </div>
           </div>

@@ -1,10 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { GetJobsCount } from "../../../supabase/JobApplicationTracker";
 import ApexCharts from "apexcharts";
 
 const ChartsSection = () => {
+  const [conversionRate, setConversionRate] = React.useState(0);
+
+  useEffect(() => {
+    async function fetchStats() {
+      const totalAppliedCount = await GetJobsCount(["applied", "interviewing", "testing", "offered"])
+      const totalOfferedCount = await GetJobsCount(["offer"])
+      try {
+        setConversionRate(totalOfferedCount/totalAppliedCount*100);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchStats();
+  }, []);
+
+
   const getChartOptions = () => {
     return {
-      series: [90, 85, 70],
+      series: [90, conversionRate, 70],
       colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
       chart: {
         height: "260px",
@@ -17,10 +34,20 @@ const ChartsSection = () => {
       plotOptions: {
         radialBar: {
           track: {
-            background: "#1e1e1e",
+            show: true,
+            background: '#1e1e1e',
+            strokeWidth: '97%',
+            opacity: 1,
+            margin: 5, // margin is in pixels
           },
           dataLabels: {
             show: false,
+            name: {
+              show: true,
+            },
+            value: {
+              show: true,
+            },
           },
           hollow: {
             margin: 0,

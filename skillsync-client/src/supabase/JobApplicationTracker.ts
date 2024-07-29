@@ -136,11 +136,27 @@ async function GetSavedJobs(): Promise<JobListing[]> {
   }
 }
 
+async function GetJobsCount(statuses: string[]): Promise<Number | null> {
+  console.log("Getting", statuses, "job count");
+  const user_id = await GetUserId();
+  const { data, error, count } = await supabase
+    .from("user_job_listing_tracker")
+    .select("*", { count: "exact" })
+    .in("status", statuses)
+    .eq("user_id", user_id);
+  if (error) {
+    console.warn(error);
+    return null;
+  }
+  console.log(statuses, "job count:", count);
+  return count;
+}
+
 export {
   SaveJob,
   RemoveJob,
   CheckExists,
   UpdateJob,
   GetSavedJobs,
-  //   GetJobsCount,
+  GetJobsCount,
 };

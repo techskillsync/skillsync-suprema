@@ -98,6 +98,7 @@ async function GetResume(resume_id): Promise<any> {
   };
 }
 
+
 async function DeleteResume(resume_id): Promise<Boolean> {
   const user_id = await GetUserId();
 
@@ -114,7 +115,7 @@ async function DeleteResume(resume_id): Promise<Boolean> {
   const { error } = await supabase
     .from("user_resumes")
     .delete()
-    .eq("id", user_id)
+    .eq("user_id", user_id)
     .eq("resume_id", resume_id);
 
   const { error: deleteError } = await supabase.storage
@@ -129,15 +130,17 @@ async function DeleteResume(resume_id): Promise<Boolean> {
 }
 
 async function GetResumeCount(): Promise<Number | null> {
+  console.log("Getting resume count");
   const user_id = await GetUserId();
   const { data, error, count } = await supabase
     .from("user_resumes")
     .select("*", { count: "exact" })
-    .eq("id", user_id);
+    .eq("user_id", user_id);
   if (error) {
     console.warn(error);
     return null;
   }
+  console.log("Resume count: ", count);
   return count;
 }
 
