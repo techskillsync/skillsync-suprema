@@ -224,13 +224,13 @@ const EditProfileDetails = ({}) => {
               label: "GitHub",
               state: github,
               setState: setGithub,
-              placeholder: "http://linkedin.com/in/john-doe-123/",
+              placeholder: "http://github.com/JohnDoe123",
             },
             {
               label: "LinkedIn",
               state: linkedin,
               setState: setLinkedIn,
-              placeholder: "http://github.com/JohnDoe123",
+              placeholder: "http://linkedin.com/in/john-doe-123/",
             },
           ].map((item) => (
             <div key={item.label}>
