@@ -34,10 +34,10 @@ async function UpdateJob(jobId: string, status: string): Promise<boolean> {
     }
     await supabase
       .from("user_job_listing_tracker")
-      .update({ status })
+      .update({ status: status })
       .eq("user_id", userID)
       .eq("job_listing_id", jobId);
-    console.log("Updated")
+    console.log("Updated");
     return true;
   } catch (error) {
     console.warn(error);

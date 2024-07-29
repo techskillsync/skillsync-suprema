@@ -1,95 +1,135 @@
-import supabase from './supabaseClient'
-import { GetUserId } from './GetUserId'
-
+import supabase from "./supabaseClient";
+import { GetUserId } from "./GetUserId";
 
 async function AddResume(resume_file, resume_label): Promise<Boolean> {
-    if (!resume_file) { console.warn("Resume file missing"); return false; }
-    console.log("Adding reumse")
+  if (!resume_file) {
+    console.warn("Resume file missing");
+    return false;
+  }
+  console.log("Adding reumse");
 
-    const user_id = await GetUserId();
-    const fileExtension = resume_file.name.split('.').pop()
-    const fileName = `${user_id}_${Math.random()}.${fileExtension}`
+  const user_id = await GetUserId();
+  const fileExtension = resume_file.name.split(".").pop();
+  const fileName = `${Math.random()}.${fileExtension}`;
 
-console.log("1")
+  console.log(
+    `Uploading resume for user ${user_id} with label ${resume_label} and file name ${fileName}`
+  );
 
-    try {
-        const updates = {
-            user_id: user_id,
-            resume_label: resume_label,
-            resume_url: fileName
-        }
+  try {
+    const updates = {
+      user_id: user_id,
+      resume_url: fileName,
+      resume_label: resume_label,
+    };
 
-        // First upload the avatar to supabase storage
-        const { error: upload_error } = await supabase.storage.from('resumes').upload(fileName, resume_file)
-        if (upload_error) { throw new Error(upload_error.message); console.log(upload_error?.message) }
+    console.log(updates);
 
-        // Then update the user profile to link to the image
-        const { error } = await supabase.from('user_resumes').insert(updates)
-        if (error) { throw error.message; console.log(error?.message) }
-
-        console.log("Done")
-
-        return true
-
-    } catch (error) {
-        console.warn(error)
-        console.log(error)
-        return false
+    // First upload the avatar to supabase storage
+    const { error: upload_error } = await supabase.storage
+      .from(`resumes/${user_id}`)
+      .upload(fileName, resume_file, { cacheControl: "max-age=31536000" });
+    if (upload_error) {
+      throw new Error(upload_error.message);
     }
+
+    // Then update the user profile to link to the image
+    const { error } = await supabase.from("user_resumes").insert(updates);
+    if (error) {
+      throw error.message;
+    }
+
+    console.log("Done");
+
+    return true;
+  } catch (error) {
+    console.warn(error);
+    console.log(error);
+    return false;
+  }
 }
 
 async function GetResumes(): Promise<any> {
-    const user_id = await GetUserId();
-    const { data, error } = await supabase
-        .from('user_resumes')
-        .select('id, resume_label, resume_url')
-        .eq('user_id', user_id)
-    if (error) { console.warn(error) }
-    return data
+  const user_id = await GetUserId();
+  const { data, error } = await supabase
+    .from("user_resumes")
+    .select("resume_id, resume_label, resume_url")
+    .eq("user_id", user_id);
+  if (error) {
+    console.warn(error);
+  }
+  return data;
 }
 
 // Rturn the resume id, label, and file url
 async function GetResume(resume_id): Promise<any> {
-    const user_id = await GetUserId();
-    const { data, error } = await supabase
-        .from('user_resumes')
-        .select('id, resume_label, resume_url')
-        .eq('id', user_id)
-        .eq('resume_id', resume_id).single()
-    if (error) { console.warn(error) }
-    const { data: resume_file, error: downloadError } = await supabase
-            .storage
-            .from('resumes')
-            .download(data?.resume_url)
+  const user_id = await GetUserId();
+  const { data, error } = await supabase
+    .from("user_resumes")
+    .select("resume_id, resume_label, resume_url")
+    .eq("id", user_id)
+    .eq("resume_id", resume_id)
+    .single();
+  if (error) {
+    console.warn(error);
+  }
+  const { data: resume_file, error: downloadError } = await supabase.storage
+    .from("resumes")
+    .download(data?.resume_url);
 
-        if (downloadError) { console.warn(downloadError.message); return ''; }
-        return {
-            id: data?.id,
-            resume_label: data?.resume_label,
-            resume_file: URL.createObjectURL(resume_file)
-        }
+  if (downloadError) {
+    console.warn(downloadError.message);
+    return "";
+  }
+  return {
+    id: data?.resume_id,
+    resume_label: data?.resume_label,
+    resume_url: resume_file,
+    resume_file: URL.createObjectURL(resume_file),
+  };
 }
 
 async function DeleteResume(resume_id): Promise<Boolean> {
-    const user_id = await GetUserId();
-    const { error } = await supabase
-        .from('user_resumes')
-        .delete()
-        .eq('id', user_id)
-        .eq('resume_id', resume_id)
-    if (error) { console.warn(error) 
-        return false;
-    }
-    return true;
+  const user_id = await GetUserId();
+
+  const storage_path = await supabase
+    .from("user_resumes")
+    .select()
+    .eq("id", user_id)
+    .eq("resume_id", resume_id)
+    .single()
+    .then((res) => {
+      return res.data.resume_url;
+    });
+
+  const { error } = await supabase
+    .from("user_resumes")
+    .delete()
+    .eq("id", user_id)
+    .eq("resume_id", resume_id);
+
+  const { error: deleteError } = await supabase.storage
+    .from(`resumes/${user_id}`)
+    .remove([storage_path]);
+
+  if (error) {
+    console.warn(error);
+    return false;
+  }
+  return true;
 }
 
 async function GetResumeCount(): Promise<Number | null> {
-    const user_id = await GetUserId();
-    const { data, error, count } = await supabase
-        .from('user_resumes')
-        .select('*', { count: 'exact' })
-        .eq('id', user_id)
-    if (error) { console.warn(error); return null;}
-    return count;}
+  const user_id = await GetUserId();
+  const { data, error, count } = await supabase
+    .from("user_resumes")
+    .select("*", { count: "exact" })
+    .eq("id", user_id);
+  if (error) {
+    console.warn(error);
+    return null;
+  }
+  return count;
+}
 
-export { GetResumeCount, GetResumes, GetResume, AddResume, DeleteResume }
+export { GetResumeCount, GetResumes, GetResume, AddResume, DeleteResume };
