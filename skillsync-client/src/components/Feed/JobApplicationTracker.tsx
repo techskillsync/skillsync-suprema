@@ -10,6 +10,7 @@ import { GetSavedJobs } from "../../supabase/JobApplicationTracker";
 import Spacer from "../common/Spacer";
 import JobDescriptionCard from "./JobDescriptionCard";
 import JobDetailsSlide from "./JobDetailsSlide";
+import toast, { Toaster } from "react-hot-toast";
 
 const JobApplicationTracker = ({}) => {
   const [savedJobs, setSavedJobs] = useState<JobListing[]>([]);
@@ -19,27 +20,27 @@ const JobApplicationTracker = ({}) => {
     {
       label: "Not Applied",
       value: "saved",
-      color: 'gray'
+      color: "gray",
     },
     {
       label: "Applied",
       value: "applied",
-      color: 'blue'
+      color: "blue",
     },
     {
       label: "Testing / OA",
       value: "testing",
-      color: 'purple'
+      color: "purple",
     },
     {
       label: "Interviewing",
       value: "interviewing",
-      color: 'yellow'
+      color: "yellow",
     },
     {
       label: "Offer Received",
       value: "offer",
-      color: 'green'
+      color: "green",
     },
   ];
 
@@ -53,19 +54,40 @@ const JobApplicationTracker = ({}) => {
     fetchSavedJobs();
   }, []);
 
+  useEffect(() => {
+    console.log(savedJobs);
+  }, [savedJobs]);
+
   const handleStatusChange = async (job: JobListing, newStatus: string) => {
-    UpdateJob(job.id, newStatus);
+    // * newStatus is currently configured to be the LABEL of the actual status value.
+    // * This is because the SelectField component returns the label of the selected option. 
+    console.log(job, newStatus);
+    newStatus = jobStatusLabels.find((label) => label.label === newStatus)!.value;
+    const updateJobStatusPromise = UpdateJob(job.id, newStatus);
     const updatedJobs = savedJobs.map((item) => {
       if (item.id === job.id) {
-        return { ...item, status: newStatus as "saved" | "applied" | "testing" | "interviewing" | "offer" | null };
+        const newItem = { ...item };
+        newItem.status = newStatus as
+          | "saved"
+          | "applied"
+          | "testing"
+          | "interviewing"
+          | "offer";
+        return newItem;
       }
       return item;
+    });
+    toast.promise(updateJobStatusPromise, {
+      loading: "Updating job status...",
+      success: "Job status updated!",
+      error: "Failed to update job status.",
     });
     setSavedJobs(updatedJobs);
   };
 
   return (
     <div className="h-screen p-5">
+      <Toaster />
       {/* Div to load in all needed tailwind background color classes */}
       <div className="hidden">
         <div className="bg-gray-500"></div>
@@ -80,10 +102,7 @@ const JobApplicationTracker = ({}) => {
         </h1>
         <Spacer className={"!w-full !h-[0.5px] my-4"} />
         {savedJobs.map((item, index) => (
-          <div
-            className="mb-4"
-            key={index}
-          >
+          <div className="mb-4" key={index}>
             <div className="relative mb-4">
               <JobDescriptionCard
                 showGlassdoorRating={false}
@@ -93,18 +112,29 @@ const JobApplicationTracker = ({}) => {
               <div className="absolute text-black top-2 right-2">
                 <div className="flex items-center">
                   <div
-                  className={`rounded-l p-1 h-[38px] bg-${
-                    jobStatusLabels.find(
-                      (label) => label.value === item.status
-                    )?.color
-                  }-500`}
+                    className={`rounded-l p-1 h-[38px] bg-${
+                      jobStatusLabels.find(
+                        (label) => label.value === item.status
+                      )?.color
+                    }-500`}
                   ></div>
                   <SelectField
                     allowMultiple={false}
                     // @ts-ignore
-                    value={jobStatusLabels.find(
-                      (label) => label.value === item.status
-                    )}
+                    // value={jobStatusLabels.find(
+                    //   (label) => label.value === item.status
+                    // )}
+                    value={{
+                      value: item.status!,
+                      label: jobStatusLabels.find(
+                        (label) => label.value === item.status
+                      )?.label!,
+                    }}
+                    id={item.id}
+                    item={"Status"}
+                    required={true}
+                    className="w-40"
+                    creatable={false}
                     list={jobStatusLabels.map((label) => label.label)}
                     onChange={(newValue) => {
                       // @ts-ignore

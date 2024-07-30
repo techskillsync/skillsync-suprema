@@ -32,11 +32,18 @@ async function UpdateJob(jobId: string, status: string): Promise<boolean> {
     if (!userID) {
       throw new Error("Not signed in");
     }
-    await supabase
+    const { data, error } = await supabase
       .from("user_job_listing_tracker")
-      .update({ status: status })
+      .update({
+        status: status,
+      })
       .eq("user_id", userID)
       .eq("job_listing_id", jobId);
+
+    if (error) {
+      throw error;
+    }
+
     console.log("Updated");
     return true;
   } catch (error) {
