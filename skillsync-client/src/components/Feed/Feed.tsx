@@ -50,7 +50,9 @@ function Feed() {
     // Todo: add location searching (parameter currently empty string)
     let response;
     response = await SearchJobs((
-      searchValue + keywordKeys.map((k) => k.value).join(" ")
+      searchValue 
+      + keywordKeys.map((k) => k.value).join(" ")
+      + jobModeKeys.map((m) => m.value).join(" ")
     ), locationKeys, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
