@@ -63,7 +63,7 @@ function Feed() {
     }
 
     setListings(data || []);
-    setCurrentPage(1);
+    // setCurrentPage(1);
     setTotalPages(Math.ceil(count ? count / pageSize : 0));
   }
 

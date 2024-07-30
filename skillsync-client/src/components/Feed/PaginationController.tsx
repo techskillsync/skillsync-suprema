@@ -9,7 +9,7 @@ const PaginationController = ({
     currentPage: number;
     totalPages: number;
 }) => {
-    const renderPageNumbers = () => {
+    const renderPageNumbers = (currentPage) => {
         const pageNumbers: JSX.Element[] = [];
         const maxPageNumbersToShow = 5; // Adjust this number as needed
         const halfMaxPageNumbersToShow = Math.floor((maxPageNumbersToShow - 2) / 2); // -2 for first and last pages
@@ -21,7 +21,7 @@ const PaginationController = ({
                     <button
                         key={i}
                         onClick={() => handlePageChange(i)}
-                        className={`${currentPage === i ? "active" : ""} bg-transparent`}
+                        className={`${currentPage === i ? "bg-[#6b6bd5]" : "bg-transparent"}`}
                     >
                         {i}
                     </button>
@@ -57,7 +57,7 @@ const PaginationController = ({
                     <button
                         key={i}
                         onClick={() => handlePageChange(i)}
-                        className={`${currentPage === i ? "active" : ""} bg-transparent`}
+                        className={`${currentPage === i ? "bg-[#5252A3]" : "bg-transparent"}`}
                     >
                         {i}
                     </button>
@@ -92,7 +92,7 @@ const PaginationController = ({
             >
                 Previous
             </button>
-            {renderPageNumbers()}
+            {renderPageNumbers(currentPage)}
             <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
