@@ -3,12 +3,13 @@ import React from "react";
 import { GetProfileInfo } from '../../supabase/ProfileInfo'
 import { IoMdClose } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
+import { GetJobPreferences } from "../../supabase/JobPreferences";
 
-function SearchFilters({ setLocationKeys }) {
+function SearchFilters({ setPreferencesLoaded, setLocationKeys, refreshFunction }) {
     const [userLocationText, setUserLocationText] = useState("");
 
     async function fetchAndSet() {
-        const response = await GetProfileInfo('location, work_eligibility')
+        const response = await GetJobPreferences('location')
         if (!response) {
             console.warn('Could not get user location for Search Filter')
             return
@@ -16,15 +17,16 @@ function SearchFilters({ setLocationKeys }) {
         const userLocation = response.location;
         setUserLocationText(userLocation)
         setLocationKeys(userLocation)
+        setPreferencesLoaded(true)
     }
 
-    // useEffect(() => {
-    //     fetchAndSet()
-    // }, [])
+    useEffect(() => {
+        fetchAndSet()
+    }, [])
 
     function removeLocation() {
-        setUserLocationText("")
-        setLocationKeys("")
+        setUserLocationText("");
+        setLocationKeys("");
     }
 
     return (

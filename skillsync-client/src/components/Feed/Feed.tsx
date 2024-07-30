@@ -7,13 +7,14 @@ import { JobListing } from "../../types/types";
 import JobDescriptionCard from "./JobDescriptionCard";
 import PaginationController from "./PaginationController";
 import SearchBar from "./SearchBar";
-import SearchFilters from './SearchFilters' // <---- Arman
+import SearchFilters from "./SearchFilters"; // <---- Arman
 import Spacer from "../common/Spacer";
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
   const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
   const [searchValue, setSearchValue] = useState("");
+  const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
   const [listings, setListings] = useState<JobListing[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,25 +23,31 @@ function Feed() {
   const [selectedJob, setSelectedJob] = useState<JobListing | null>();
 
   useEffect(() => {
-    fetchListings();
-  }, [currentPage]);
+    if (preferencesLoaded) {
+      fetchListings();
+    }
+  }, [currentPage, preferencesLoaded]);
 
   useEffect(() => {
     console.log("Search value changed", searchValue);
   }, [searchValue]);
 
+  useEffect(() => {
+    if (preferencesLoaded) {
+      console.log("Location keys changed", locationKeys);
+      fetchListings();
+    }
+  }, [locationKeys]);
+
   async function fetchListings() {
+    console.log("Refreshing listings...");
     console.log(searchValue);
     const pageSize = 3; // ? Number of listings per page minus 1
     const from = (currentPage - 1) * pageSize;
     const to = currentPage * pageSize;
     // Todo: add location searching (parameter currently empty string)
     let response;
-    if (searchValue) {
-      response = await SearchJobs(searchValue, "", from, to);
-    } else {
-      response = await GetJobListingsPaginate(from, to);
-    }
+    response = await SearchJobs(searchValue, locationKeys, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
@@ -50,8 +57,13 @@ function Feed() {
     }
 
     setListings(data || []);
+    setCurrentPage(1);
     setTotalPages(Math.ceil(count ? count / pageSize : 0));
   }
+
+  useEffect(() => {
+    console.log("Listings:", listings);
+  }, [listings]);
 
   function handlePageChange(page: number) {
     setCurrentPage(page);
@@ -72,11 +84,13 @@ function Feed() {
           searchValue={searchValue}
           setSearchValue={setSearchValue}
         />
-        { /*  ------------- Arman ------------- */ }
+        {/*  ------------- Arman ------------- */}
         <SearchFilters
+          setPreferencesLoaded={setPreferencesLoaded}
           setLocationKeys={setLocationKeys}
-          />
-        { /*  ------------- Arman ------------- */ }
+          refreshFunction={fetchListings}
+        />
+        {/*  ------------- Arman ------------- */}
         <div className="my-3 ml-20">
           {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
           <PaginationController
