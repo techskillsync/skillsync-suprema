@@ -55,9 +55,11 @@ const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
           "to",
           newMessagesCount
         );
-        setTimeout(() => {
-          toast("You have new messages!", { icon: "📬" });
-        }, 2000);
+        if (newMessagesCount > prevCounts.Messages) {
+          setTimeout(() => {
+            toast("You have new messages!", { icon: "📬" });
+          }, 2000);
+        }
         return { Messages: newMessagesCount };
       }
       return prevCounts;

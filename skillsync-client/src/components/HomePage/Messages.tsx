@@ -48,10 +48,11 @@ const MessageCard = (props: {
     email: string;
     avatar: string | null;
   }>();
-  console.log("Message:", props.message);
+  // console.log("Message:", props.message);
 
   useEffect(() => {
     if (!props!.message!.is_read) {
+      console.log("Setting message", props!.message!.id , "as read");
       SetMessageRead(props!.message!.id!);
     }
   }, []);
