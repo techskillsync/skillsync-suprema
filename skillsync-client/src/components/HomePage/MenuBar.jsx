@@ -13,6 +13,8 @@ import ProfilePage from "../ProfilePage/ProfilePage";
 import JobApplicationTracker from "../Feed/JobApplicationTracker.tsx";
 import { FaAcquisitionsIncorporated } from "react-icons/fa";
 import { BsFileSpreadsheet } from "react-icons/bs";
+import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   {
@@ -34,6 +36,18 @@ const menuItems = [
 ];
 
 const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
+  const [notificationCounts, setNotificationCounts] = useState({});
+  const [collapsed, setCollapsed] = useState(false);
+  
+  useEffect(() => {
+    async function fetchMessagesCount() {
+      const messagesCount = await GetUnreadMessagesCount();
+      setNotificationCounts({ 'Messages': messagesCount });
+    }
+    fetchMessagesCount();
+  }
+  , []);
+
   return (
     <div className="w-full h-full bg-[#1e1e1e] text-white flex flex-col py-3 justify-between">
       <div className="w-full p-8">
@@ -59,6 +73,12 @@ const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
                   <div className="flex items-center">
                     {item.icon && <span className="mr-2">{item.icon}</span>}
                     {item.name}
+                    {
+                      notificationCounts[item.name] > 0 &&
+                      <span className="ml-auto bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full px-2">
+                        {notificationCounts[item.name]}
+                      </span>
+                    }
                   </div>
                 </li>
               )

@@ -27,12 +27,12 @@ function SpotLightJobsSection({ setSelectedJob }) {
   }, []);
 
   return (
-    <div className="p-5 rounded-lg bg-[#1e1e1e] mt-6">
+    <div className="p-5 rounded-lg bg-[#1e1e1e] mt-6 min-h-[17rem]">
       <h1 className="text-xl text-white">Spotlight Jobs</h1>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
       <div className="flex w-full space-x-2">
         {listings.map((item, index) => (
-          <div className="flex-col w-full" key={index}>
+          <div className="flex-col w-full fade-in" key={index}>
             <JobDescriptionCard
               mini={true}
               jobDescription={item}

@@ -39,6 +39,9 @@ const InputField = ({
 const selectFieldStyle = {
   control: (base, state) => ({
     ...base,
+    overflowX: "auto",
+    whiteSpace: "nowrap",
+    width: "100%",
     textAlign: "left",
     borderRadius: "0 3px 3px 0",
     // backgroundColor:
@@ -69,6 +72,7 @@ const selectFieldStyle = {
   input: (base) => ({
     ...base,
     borderRadius: 7,
+    
     // color:
     //   window.matchMedia &&
     //   window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -218,11 +222,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
   }));
   return (
     <div className="w-full" style={{ position: "relative" }}>
-      <div className="flex items-center">
+      <div className="flex items-center w-full">
         {showLabel && (
           <div className="max-w-1/2">
             <label
-              className="rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap"
+              className="h-full rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap"
               htmlFor={item.toLowerCase()}
             >
               {item}

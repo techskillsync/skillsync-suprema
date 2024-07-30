@@ -4,13 +4,20 @@ import ApexCharts from "apexcharts";
 
 const ChartsSection = () => {
   const [conversionRate, setConversionRate] = React.useState(0);
+  const [fetched, setFetched] = React.useState(false);
+
 
   useEffect(() => {
     async function fetchStats() {
-      const totalAppliedCount = await GetJobsCount(["applied", "interviewing", "testing", "offered"])
+      const totalAppliedCount = await GetJobsCount(["applied", "interviewing", "testing", "offer"])
       const totalOfferedCount = await GetJobsCount(["offer"])
+      console.log("Total applied count: ", totalAppliedCount)
+      console.log("Total offered count: ", totalOfferedCount)
+      const conversionRate = totalOfferedCount/totalAppliedCount*100
+      console.log("Conversion rate: ", conversionRate)
       try {
-        setConversionRate(totalOfferedCount/totalAppliedCount*100);
+        setConversionRate(conversionRate);
+        setFetched(true);
       } catch (error) {
         console.error(error);
       }
@@ -95,19 +102,21 @@ const ChartsSection = () => {
   };
 
   useEffect(() => {
-    if (
-      document.getElementById("radial-chart") &&
-      typeof ApexCharts !== "undefined"
-    ) {
-      const chart = new ApexCharts(
-        document.querySelector("#radial-chart"),
-        getChartOptions()
-      );
-      console.log("Rendering chart")
-      document.querySelector("#radial-chart").innerHTML = "";
-      chart.render();
+    if (fetched) {
+      if (
+        document.getElementById("radial-chart") &&
+        typeof ApexCharts !== "undefined"
+      ) {
+        const chart = new ApexCharts(
+          document.querySelector("#radial-chart"),
+          getChartOptions()
+        );
+        console.log("Rendering chart")
+        document.querySelector("#radial-chart").innerHTML = "";
+        chart.render();
+      }
     }
-  }, []);
+  }, [fetched]);
 
   return (
     <div>
@@ -117,7 +126,7 @@ const ChartsSection = () => {
           <div className="flex items-center">
             <div className="flex justify-center items-center">
               <h5 className="text-xl font-bold leading-none text-white pe-1">
-                Your progress
+                Your stats
               </h5>
               <svg
                 data-popover-target="chart-info"
@@ -183,7 +192,7 @@ const ChartsSection = () => {
           </div>
         </div>
 
-        <div className="" id="radial-chart"></div>
+        <div className="h-64" id="radial-chart"></div>
 
       </div>
     </div>

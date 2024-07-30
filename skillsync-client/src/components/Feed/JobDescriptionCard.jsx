@@ -16,6 +16,7 @@ import {
   SaveJob,
 } from "../../supabase/JobApplicationTracker.ts";
 import SharePopup from "./SharePopup.jsx";
+import { confirmWrapper } from "../common/Confirmation.jsx";
 
 const JobDescriptionCard = ({
   jobDescription,
@@ -30,8 +31,10 @@ const JobDescriptionCard = ({
   const handleSave = async () => {
     if (saved) {
       // Remove from saved
-      if (await RemoveJob(jobDescription.id)) {
-        setSaved(false);
+      if (await confirmWrapper('Are you sure you want to remove this job from your tracker?')) {
+        if (await RemoveJob(jobDescription.id)) {
+          setSaved(false);
+        }
       }
     } else {
       // Add to saved
@@ -84,7 +87,7 @@ const JobDescriptionCard = ({
     <div
       className={
         className +
-        " job-description-card bg-white !text-black rounded-lg shadow-md flex " +
+        " fade-in job-description-card bg-white !text-black rounded-lg shadow-md flex " +
         (mini ? "w-500px" : "")
       }
     >
@@ -119,7 +122,7 @@ const JobDescriptionCard = ({
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className="text-lg">
+          <p className={mini ? "text-base" : "text-lg"}>
             {" "}
             {mini
               ? jobDescription.title.substring(0, 26) +
@@ -141,7 +144,7 @@ const JobDescriptionCard = ({
           )}
         <div className="flex items-center">
           <FaMapMarkerAlt className="mr-2" />
-          <p>{jobDescription.location}</p>
+          <p className={mini ? "text-base" : 'text-lg'}>{jobDescription.location}</p>
         </div>
         {/* <div>
           <p>{jobDescription.description.substring(0, 100) + '...'}</p>

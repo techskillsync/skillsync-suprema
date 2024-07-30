@@ -118,7 +118,7 @@ const PreferencesSection = () => {
         <div className="flex space-x-6 flex-row mb-4">
           <div className="w-1/2 flex">
             <SelectField
-              item={"Job Modes"}
+              item={"Modes"}
               value={jobMode}
               list={["Hybrid", "Onsite", "Remote"]}
               onChange={setJobMode}
