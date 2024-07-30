@@ -250,12 +250,12 @@ const EditProfileDetails = ({}) => {
       </div>
 
       <div className="flex justify-between">
-        <button className="button primary" type="submit" disabled={loading}>
+        <button className="button primary border border-[#047857] bg-black" type="submit" disabled={loading}>
           {loading ? "Loading ..." : "Update"}
         </button>
 
         <button
-          className="button"
+          className="button bg-black border-[#047857] border"
           type="button"
           onClick={async () => {
             await supabase.auth.signOut();
