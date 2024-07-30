@@ -13,6 +13,8 @@ import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
   const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
+  const [jobModeKeys, setJobModeKeys] = useState([]);
+  const [keywordKeys, setKeywordKeys] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
@@ -34,10 +36,10 @@ function Feed() {
 
   useEffect(() => {
     if (preferencesLoaded) {
-      console.log("Location keys changed", locationKeys);
+      console.log("Keys changed", locationKeys, jobModeKeys);
       fetchListings();
     }
-  }, [locationKeys]);
+  }, [locationKeys, jobModeKeys, keywordKeys]);
 
   async function fetchListings() {
     console.log("Refreshing listings...");
@@ -47,7 +49,9 @@ function Feed() {
     const to = currentPage * pageSize;
     // Todo: add location searching (parameter currently empty string)
     let response;
-    response = await SearchJobs(searchValue, locationKeys, from, to);
+    response = await SearchJobs((
+      searchValue + keywordKeys.map((k) => k.value).join(" ")
+    ), locationKeys, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
@@ -85,11 +89,14 @@ function Feed() {
           setSearchValue={setSearchValue}
         />
         {/*  ------------- Arman ------------- */}
-        <SearchFilters
-          setPreferencesLoaded={setPreferencesLoaded}
-          setLocationKeys={setLocationKeys}
-          refreshFunction={fetchListings}
-        />
+        <div className="overflow-x-auto">
+          <SearchFilters
+            setPreferencesLoaded={setPreferencesLoaded}
+            setLocationKeys={setLocationKeys}
+            setJobModeKeys={setJobModeKeys}
+            setKeywordKeys={setKeywordKeys}
+          />
+        </div>
         {/*  ------------- Arman ------------- */}
         <div className="my-3 ml-20">
           {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
