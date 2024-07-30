@@ -30,7 +30,7 @@ async function GetMessages(): Promise<Message[] | false> {
 async function GetUnreadMessagesCount(): Promise<number | false> {
   const { data, error, count } = await supabase
     .from("messages")
-    .select("*", { count: "exact" })
+    .select("*", { count: "exact", head: true })
     .eq("receiver_id", await GetUserId())
     .eq("is_read", false);
 
