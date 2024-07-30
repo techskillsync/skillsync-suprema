@@ -1,151 +1,44 @@
-import React, { useEffect, useState } from "react";
-import LogoDark from "../../assets/LogoDark.png";
-import LogoLight from "../../assets/LogoLight.png";
+import React from 'react';
+import { IoCloseSharp } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
-const Navbar = ({ logIn, signUp }) => {
+const Navbar = ({openNav, setOpenNav}) => {
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasShadow, setHasShadow] = useState(false);
-
-  const links = [
-    { text: "Link 1", href: "#hover-card-display" },
-    { text: "Link 2", href: "#container-slide-display" },
-    { text: "Link 3", href: "#container-slide-display" },
-  ];
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHasShadow(true);
-      } else {
-        setHasShadow(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  return (
-    <nav
-      className={`bg-white dark:bg-black sticky top-0 z-20 transition-shadow duration-300 ${
-        hasShadow ? "shadow-lg dark:shadow-white/50 dark:shadow-sm" : ""
-      }`}
-    >
-      <div className="max-w-7xl mx-auto p-5 sm:px-6 lg:px-8">
-        <div className="flex justify-between">
-          <div id="nav-logo" className="flex-shrink-0">
-            <span className="text-white text-lg font-semibold">
-              <img
-                className="hidden dark:block"
-                width={150}
-                src={LogoDark}
-                alt="SkillSync. Logo"
-              />
-              <img
-                className="block dark:hidden"
-                width={150}
-                src={LogoLight}
-                alt="SkillSync. Logo"
-              />
-            </span>
-          </div>
-          <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              // className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r from-cyan-800 to-lime-800 hover:text-white px-3 py-2 hover:px-4 hover:py-3 rounded-md text-sm font-medium transition-all duration-300"
-              className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r dark:from-cyan-800 from-cyan-400 dark:to-lime-800 hover:text-white rounded-md text-sm font-medium transition-all duration-300"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-          <div
-            id="nav-links"
-            className={`${
-              isMobileMenuOpen ? "block" : "hidden"
-            } md:block w-auto px-auto ml-auto py-auto my-auto flex flex-col md:flex-row justify-content-center mx-auto`}
-          >
-            {links.map((link) => (
-              <a
-                key={link.text}
-                onClick={link.action}
-                href={link.href}
-                className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
-              >
-                {link.text}
-              </a>
-            ))}
-            <div id="nav-actions-mobile" className="md:hidden">
-              <a
-                key="Log In"
-                // onClick={logIn}
-                href="/login"
-                // className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r dark:from-cyan-800 from-cyan-400 dark:to-lime-800 to-lime-300  hover:text-white px-3 py-2 hover:px-4 hover:py-3 rounded-md text-sm font-medium transition-all duration-300"
-                className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
-              >
-                Log In
-              </a>
-              <a
-                key="Sign Up"
-                href="/signup"
-                // onClick={signUp}
-                // className="text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r dark:from-cyan-800 from-cyan-400 dark:to-lime-800 to-lime-300  hover:text-white px-3 py-2 hover:px-4 hover:py-3 rounded-md text-sm font-medium transition-all duration-300"
-                className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
-              >
-                Sign Up
-              </a>
+    return (
+        <nav className={`flex flex-col items-center justify-center gap-16 fixed md:absolute ${openNav ? 'top-0': 'top-[-150%]'} left-0 h-[100vh] w-full bg-[#161616] text-allotrix-text font-bold tracking-wide transition-all duration-500 ease-in-out md:flex-row md:justify-between md:p-4 md:h-[unset] md:top-0 md:gap-0 z-50 md:px-10`}>
+            <div className='md:hidden'>
+                <button className='text-4xl text-[white] absolute top-6 right-4' onClick={() => setOpenNav(!openNav)}>
+                    <IoCloseSharp />
+                </button>
             </div>
-          </div>
-          <div id="nav-actions" className="hidden md:block">
-            <a
-              key="Log In"
-              href="/login"
-              // onClick={logIn}
-              className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
-            >
-              Log In
-            </a>
-            <a
-              key="Sign Up"
-              href="/signup"
-              // onClick={signUp}
-              className="hover:cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-100 px-3 py-2 rounded-full text-base font-medium transition-all duration-300"
-            >
-              Sign Up
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-};
+            <div className='w-[150px]'>
+                <Link to={'/'} onClick={() => setOpenNav(!openNav)}>
+                    <img src="https://skillsync.work/assets/LogoDark-CavYDmXP.png" alt="allotrix" className='max-h-full max-w-full' />
+                </Link>
+            </div>
+            <ul className='flex flex-col items-center gap-4 font-allotrix-font px-6 py-4 rounded-xl md:flex-row md:gap-10 md:py-3 md:px-8 md:h-[55px]'>
+                {/* <li className='hover:pb-2 transition-all duration-300 ease-out hover:text-allotrix-std'>
+                    <Link to="/" onClick={() => setOpenNav(!openNav)}>Home</Link>
+                </li>
+               
+                <li className='hover:pb-2 transition-all duration-300 ease-out hover:text-allotrix-std'>
+                    <Link to="/" onClick={() => setOpenNav(!openNav)}>Contact</Link>
+                </li> */}
+            </ul>
+            <div className='flex flex-col md:flex-row gap-7 items-center'>
+                <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>
+                    <Link to='/login' onClick={() => setOpenNav(!openNav)}>
+                        Log in
+                    </Link>
+                </div>
+                <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>
+                    <Link to='/signup' onClick={() => setOpenNav(!openNav)}>
+                        Sign up
+                    </Link>
+                </div>
+            </div>
+        </nav>
+    )
+}
 
 export default Navbar;
