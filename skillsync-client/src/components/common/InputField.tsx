@@ -26,7 +26,7 @@ const InputField = ({
     )}
     <input
       id={id ?? item.toLowerCase()}
-      // value={value ?? null}
+      value={value ?? null}
       className={className +
         " !w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline "}
       required={required}

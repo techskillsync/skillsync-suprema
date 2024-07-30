@@ -16,12 +16,11 @@ const PreferencesSection = () => {
   useEffect(() => {
     async function fetchPreferences() {
       const preferencesData = await GetJobPreferences();
-      console.log(preferencesData);
       const preferences = {
-        location: preferencesData[0].location,
-        salaryRange: preferencesData[0].salary_range ?? "",
-        jobMode: preferencesData[0].job_mode ?? [],
-        keywords: preferencesData[0].keywords ?? [],
+        location: preferencesData.location,
+        salaryRange: preferencesData.salary_range ?? "",
+        jobMode: preferencesData.job_mode ?? [],
+        keywords: preferencesData.keywords ?? [],
       };
       try {
         setLocation(preferences.location);
@@ -52,6 +51,7 @@ const PreferencesSection = () => {
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
+    console.log(location)
   };
 
   const handleSalaryRangeChange = (e) => {
@@ -66,16 +66,12 @@ const PreferencesSection = () => {
     setJobMode(selectedModes);
   };
 
-  const handleKeywordsChange = (e) => {
-    setKeywords(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     
     const preferences = {
       location,
-      // salary_range: salaryRange,
+      salary_range: salaryRange,
       job_mode: jobMode,
       keywords,
     };

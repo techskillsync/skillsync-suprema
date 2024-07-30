@@ -3,7 +3,7 @@ import supabase from "./supabaseClient";
 
 
 async function GetJobPreferences(): Promise<any> {
-  const { data, error } = await supabase.from("user_job_preferences").select();
+  const { data, error } = await supabase.from("user_job_preferences").select().single();
   if (error) {
     console.error("Error fetching job preferences:", error);
     return false;
