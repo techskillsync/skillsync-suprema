@@ -15,7 +15,7 @@ async function GetMessages(): Promise<Message[] | false> {
         receiver: message.receiver_id,
         content: message.content,
         timestamp: message.time as Date,
-        is_read: message.is_read as boolean;
+        is_read: message.is_read as boolean,
       };
     });
     return messages;
