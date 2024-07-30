@@ -69,6 +69,7 @@ function Feed() {
       <div className="px-10 py-8 h-full w-2/3">
         <SearchBar
           handleSearch={handleSearch}
+          searchValue={searchValue}
           setSearchValue={setSearchValue}
         />
         { /*  ------------- Arman ------------- */ }

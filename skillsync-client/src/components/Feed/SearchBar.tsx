@@ -2,12 +2,13 @@ import React from "react";
 import { InputField } from "../common/InputField.tsx";
 import { FaSearch } from "react-icons/fa";
 
-const SearchBar = ({ setSearchValue, handleSearch }) => {
+const SearchBar = ({ searchValue, setSearchValue, handleSearch }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="search-bar h-[40px] flex items-center">
         <InputField
           className="h-[40px] !rounded-l-lg !rounded-r-none"
+          value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           item="Jobs"
           placeholder="Search for Jobs"
