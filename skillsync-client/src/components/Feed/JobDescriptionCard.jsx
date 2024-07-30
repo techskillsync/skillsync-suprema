@@ -109,7 +109,7 @@ const JobDescriptionCard = ({
           />
         )}
         <div className="flex justify-between">
-          <h2 className="text-xl font-bold mb-2">{jobDescription.company}</h2>
+          <h2 className="w-2/3 text-xl text-wrap font-bold mb-2">{jobDescription.company}</h2>
           {showGlassdoorRating && !mini && (
             <div className="flex">
               <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">

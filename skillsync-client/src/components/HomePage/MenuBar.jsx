@@ -65,7 +65,9 @@ const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
               item.show && (
                 <li
                   key={item.name}
-                  className={`px-12 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 ${
+                  className={`px-12 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300
+                    hover:bg-[#2e2e2e]
+                    ${
                     selectedPage === item.name ? "bg-black" : ""
                   }`}
                   onClick={() => setSelectedPage(item.name)}
@@ -75,7 +77,7 @@ const MenuBar = ({ selectedPage, setSelectedPage, profileInfo }) => {
                     {item.name}
                     {
                       notificationCounts[item.name] > 0 &&
-                      <span className="ml-auto bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full px-2">
+                      <span className="ml-auto bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-semibold rounded-full px-2 py-0.5">
                         {notificationCounts[item.name]}
                       </span>
                     }
