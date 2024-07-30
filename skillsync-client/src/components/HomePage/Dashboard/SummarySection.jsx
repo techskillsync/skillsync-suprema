@@ -21,8 +21,8 @@ const SummarySection = ({}) => {
   useEffect(() => {
     async function fetchStats() {
       try {
-        setJobsSavedCount(await GetJobsCount(["saved", "applied", "interviewing", "testing", "offered"]));
-        setJobsAppliedCount(await GetJobsCount(["applied", "interviewing", "testing", "offered"]));
+        setJobsSavedCount(await GetJobsCount(["saved", "applied", "interviewing", "testing", "offer"]));
+        setJobsAppliedCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
         setJobOffersCount(await GetJobsCount(["offer"]));
         setResumesCount(await GetResumeCount());
       } catch (error) {

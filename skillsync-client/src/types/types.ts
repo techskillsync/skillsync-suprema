@@ -63,6 +63,7 @@ export interface Message {
         payload: string;
     };
     timestamp: Date;
+    is_read: boolean;
 }
 
 export type JobRecord = "saved_jobs" | "applied_jobs";

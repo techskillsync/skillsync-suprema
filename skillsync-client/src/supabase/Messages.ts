@@ -15,9 +15,27 @@ async function GetMessages(): Promise<Message[] | false> {
         receiver: message.receiver_id,
         content: message.content,
         timestamp: message.time as Date,
+        is_read: message.is_read as boolean;
       };
     });
     return messages;
+  }
+  if (error) {
+    return false;
+  }
+
+  return false;
+}
+
+async function GetUnreadMessagesCount(): Promise<number | false> {
+  const { data, error, count } = await supabase
+    .from("messages")
+    .select("*", { count: "exact" })
+    .eq("receiver_id", await GetUserId())
+    .eq("is_read", false);
+
+  if (count) {
+    return count;
   }
   if (error) {
     return false;
@@ -40,11 +58,25 @@ async function SendMessage(message: Message): Promise<boolean> {
 
   if (error) {
     console.error("Error sending message:", error);
-    throw(error);
+    throw error;
   }
 
   return true;
 }
 
-export { GetMessages, SendMessage };
+async function SetMessageRead(message_id: string): Promise<boolean> {
+  console.log("Setting message as read:", message_id);
+  const { error } = await supabase
+    .from("messages")
+    .update({ is_read: true })
+    .eq("id", message_id);
 
+  if (error) {
+    console.error("Error setting message as read:", error);
+    throw error;
+  }
+
+  return true;
+}
+
+export { GetMessages, SendMessage, GetUnreadMessagesCount, SetMessageRead };

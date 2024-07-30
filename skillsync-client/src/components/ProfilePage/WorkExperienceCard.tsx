@@ -6,6 +6,7 @@ import {
   SaveNewWorkExperience,
   DeleteWorkExperience,
 } from "../../supabase/WorkExperience";
+import { confirm, confirmWrapper } from "../common/Confirmation";
 
 const WorkExperienceCard: React.FC<{
   workExperience: WorkExperience;
@@ -25,13 +26,18 @@ const WorkExperienceCard: React.FC<{
   };
 
   const handleDeleteWorkExperience = async () => {
-    if (typeof deleteWorkExperienceCallback === "function") {
-      console.log("Deleting work experience", workExperienceState);
-      deleteWorkExperienceCallback(workExperienceState.id);
+    console.log("Deleting work experience confirmation");
+    if (await confirmWrapper("Are you sure you want to delete this work experience?")) {
+      if (typeof deleteWorkExperienceCallback === "function") {
+        console.log("Deleting work experience", workExperienceState);
+        deleteWorkExperienceCallback(workExperienceState.id);
+      } else {
+        console.error("deleteWorkExperienceCallback is not a function");
+      }
+      DeleteWorkExperience(workExperienceState);
     } else {
-      console.error("deleteWorkExperienceCallback is not a function");
+
     }
-    DeleteWorkExperience(workExperienceState);
   };
 
   const handleSaveWorkExperience = async () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { GetMessages } from "../../supabase/Messages";
+import { GetMessages, SetMessageRead } from "../../supabase/Messages";
 import { JobListing, Message } from "../../types/types";
 import JobDescriptionCard from "../Feed/JobDescriptionCard";
 import { GetJobListingById } from "../../supabase/GetJobListings";
@@ -51,6 +51,12 @@ const MessageCard = (props: {
   console.log("Message:", props.message);
 
   useEffect(() => {
+    if (!props!.message!.is_read) {
+      SetMessageRead(props!.message!.id!);
+    }
+  }, []);
+
+  useEffect(() => {
     async function fetchSender() {
       console.log("Sender ID:", props.message.sender);
       const sender = await FindUserById(props.message.sender);
@@ -89,7 +95,7 @@ const MessageCard = (props: {
 
   if (props.message.content.type === "text") {
     return (
-      <div className="bg-white p-4 rounded-md mb-4">
+      <div id={props!.message!.id!} className="bg-white p-4 rounded-md mb-4">
         <p className="text-lg font-semibold">{props.message.sender}</p>
         <p className="text-sm">{props.message.content.payload}</p>
       </div>
@@ -100,7 +106,10 @@ const MessageCard = (props: {
     sender?.id
   ) {
     return (
-      <div className="p-5 bg-[#1e1e1e] rounded-lg mb-4">
+      <div
+        id={props!.message!.id!}
+        className="fade-in p-5 bg-[#1e1e1e] rounded-lg mb-4"
+      >
         <div>
           <div className="flex items-center">
             <img

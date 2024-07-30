@@ -8,6 +8,7 @@ import {
 import { FaDownload, FaPagelines, FaTrash } from "react-icons/fa";
 import { IoDocument, IoDownload } from "react-icons/io5";
 import { FaSheetPlastic } from "react-icons/fa6";
+import { confirmWrapper } from "../common/Confirmation";
 
 const EditResumes = () => {
   const [resumes, setResumes] = React.useState<any[]>([]);
@@ -80,15 +81,18 @@ const EditResumes = () => {
   };
 
   const handleDeleteResume = async (resume_id: string) => {
-    setLoading(true);
-    try {
-      await DeleteResume(resume_id);
-      const resumes = await GetResumes();
-      setResumes(resumes);
-    } catch (error) {
-      setError("Error deleting resume");
-    } finally {
-      setLoading(false);
+    if (await confirmWrapper("Are you sure you want to delete this resume?")) {
+      setLoading(true);
+      try {
+        await DeleteResume(resume_id);
+        const resumes = await GetResumes();
+        setResumes(resumes);
+      } catch (error) {
+        setError("Error deleting resume");
+      } finally {
+        setLoading(false);
+      }
+    } else {
     }
   };
 
@@ -106,7 +110,7 @@ const EditResumes = () => {
   return (
     <div className="bg-black min-h-screen w-full pt-3">
       <div className="file-upload-container p-6 m-8 bg-[#301a8b] rounded-lg">
-      <div className="mb-4 ml-1">
+        <div className="mb-4 ml-1">
           <h1 className="text-white text-2xl font-bold">Upload new resume</h1>
         </div>
         <div className="flex h-full">

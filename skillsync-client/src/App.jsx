@@ -30,6 +30,10 @@ function AppRoutes() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    document.title = 'SkillSync.';
+  }, []);
+
+  useEffect(() => {
     const checkUser = async () => {
       const session = await supabase.auth.getSession();
       setUser(session.data?.user ?? null);
