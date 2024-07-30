@@ -13,11 +13,11 @@ const InputField = ({
   id = "",
   required = false,
 }) => (
-  <div className="flex items-center w-full h-[40px]">
+  <div className="flex items-center w-full h-full">
     {showLabel && (
-      <div className="max-w-1/2">
+      <div className="max-w-1/2 h-full">
         <label
-          className={"h-full rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
+          className={" !h-full rounded-l flex items-center fblock text-sm font-semibold min-w-[60px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
           htmlFor={item.toLowerCase()}
         >
           {item}
@@ -44,6 +44,7 @@ const selectFieldStyle = {
     width: "100%",
     textAlign: "left",
     borderRadius: "0 3px 3px 0",
+    height: "100%",
     // backgroundColor:
     //   window.matchMedia &&
     // window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -222,11 +223,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
   }));
   return (
     <div className="w-full" style={{ position: "relative" }}>
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full h-full">
         {showLabel && (
-          <div className="max-w-1/2">
+          <div className="max-w-1/2 h-full">
             <label
-              className="h-full rounded-l block text-base font-semibold min-w-[90px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap"
+              className=" !h-full rounded-l flex items-center text-sm font-semibold min-w-[60px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap"
               htmlFor={item.toLowerCase()}
             >
               {item}
@@ -235,7 +236,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         )}
         {creatable ? (
           <CreatableSelect
-            className={className + " w-full"}
+            className={className + " w-full h-full"}
             onChange={onChange}
             id={id ?? item}
             required={required}
@@ -253,7 +254,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         ) : (
           <Select
           
-          className={className + " w-full"}
+          className={className + " w-full h-full"}
           onChange={onChange}
           id={id ?? item}
           value={value}

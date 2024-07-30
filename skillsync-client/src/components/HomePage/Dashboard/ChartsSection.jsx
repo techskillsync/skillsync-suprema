@@ -31,7 +31,7 @@ const ChartsSection = () => {
       series: [90, conversionRate, 70],
       colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
       chart: {
-        height: "260px",
+        height: "280px",
         width: "100%",
         type: "radialBar",
         sparkline: {
@@ -192,7 +192,7 @@ const ChartsSection = () => {
           </div>
         </div>
 
-        <div className="h-64" id="radial-chart"></div>
+        <div className="" id="radial-chart"></div>
 
       </div>
     </div>

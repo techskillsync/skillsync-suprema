@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { InputField, SelectField } from "../../common/InputField";
 import jobSearchKeywords from "../../../constants/keywords";
 import { GetJobPreferences, UpdateJobPreferences } from "../../../supabase/JobPreferences";
+import toast, { Toaster } from "react-hot-toast";
 
 const PreferencesSection = () => {
   const [location, setLocation] = useState("");
@@ -76,12 +77,18 @@ const PreferencesSection = () => {
       keywords,
     };
 
-    UpdateJobPreferences(preferences);
+    const updateJobPreferencesPromise = UpdateJobPreferences(preferences);
+    toast.promise(updateJobPreferencesPromise, {
+      loading: "Saving changes...",
+      success: "Your preferences were updated!",
+      error: "Failed to update preferences",
+    });
 
   };
 
   return (
     <div className="p-4 mt-6 bg-white rounded-lg shadow text-black w-full">
+      <Toaster />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Job Search Preferences</h2>
