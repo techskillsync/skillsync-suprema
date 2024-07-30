@@ -8,7 +8,7 @@ const MobileNavbar = ({openNav, setOpenNav}) => {
             <img src="https://skillsync.work/assets/LogoDark-CavYDmXP.png" alt="SkillSync" />
         </div>
         <div>
-            <button className='text-4xl text-[white]' onClick={() => setOpenNav(!openNav)}>
+            <button className='text-3xl p-1 text-[white] bg-[#00000000]' onClick={() => setOpenNav(!openNav)}>
                 <AiOutlineBars />
             </button>
         </div>
