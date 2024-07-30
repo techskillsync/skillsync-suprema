@@ -14,7 +14,7 @@ function ProfilePicture({height, width}) {
 
 
     return(
-            (avatarUrl && <img src={avatarUrl}  />)
+            (avatarUrl && <img className='fade-in' src={avatarUrl}  />)
     )
 }
 

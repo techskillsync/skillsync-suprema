@@ -110,14 +110,16 @@ const JobDescriptionCard = ({
         )}
         <div className="flex justify-between">
           <h2 className="w-2/3 text-xl text-wrap font-bold mb-2">{jobDescription.company}</h2>
-          {showGlassdoorRating && !mini && (
-            <div className="flex">
-              <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
-                Glassdoor rating:
-              </h3>
-              {glassdoorRating ? glassdoorRating : "Loading..."}
-            </div>
-          )}
+          <div className="w-1/3">
+            {showGlassdoorRating && !mini && glassdoorRating && (
+              <div className="flex">
+                <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
+                  Glassdoor rating:
+                </h3>
+                {glassdoorRating ? glassdoorRating : "Loading..."}
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
