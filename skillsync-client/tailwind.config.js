@@ -24,6 +24,7 @@ module.exports = {
     require('flowbite/plugin')({
         charts: true,
     }),
+    require('tailwind-scrollbar-hide'),
   ],
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 };

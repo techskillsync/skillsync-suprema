@@ -43,8 +43,8 @@ const SummarySection = ({}) => {
             <stat.icon />
           </div>
           <div className="flex flex-col text-left">
-            <p className="text-xl font-bold text-green-400">{stat.value}</p>
-            <p>{stat.title}</p>
+            <p className="text-2xl font-bold text-green-400">{stat.value}</p>
+            <p className="text-base">{stat.title}</p>
           </div>
         </div>
       ))}

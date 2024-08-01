@@ -12,13 +12,13 @@ const Footer = () => {
                         Socials
                     </h3>
                     <div className='flex items-center gap-3 text-2xl'>
-                        <a href="https://twitter.com/skillsync" target='blank'>
+                        {/* <a href="https://twitter.com/skillsync" target='blank'>
                             <FaXTwitter />
-                        </a>
-                        <a href="https://www.instagram.com/skillsync" target='blank'>
+                        </a> */}
+                        <a href="https://www.instagram.com/skillsync.work/" target='blank'>
                             <FaInstagram />
                         </a>
-                        <a href="https://www.linkedin.com/company/skillsync/" target='blank'>
+                        <a href="https://www.linkedin.com/company/skillsync1/" target='blank'>
                             <FaLinkedin />
                         </a>
                     </div>

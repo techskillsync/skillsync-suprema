@@ -32,7 +32,8 @@
     "react-select": "^5.8.0",
     "react-swipeable": "^7.0.1",
     "redux-persist": "^6.0.0",
-    "resume-parser-simple": "^1.0.3"
+    "resume-parser-simple": "^1.0.3",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

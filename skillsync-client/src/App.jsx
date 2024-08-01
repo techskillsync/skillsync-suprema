@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthenticatedWelcomePage from "./components/AuthenticatedWelcomePage";
 import HomePage from "./components/HomePage/HomePage";
 import LandingPage from "./components/LandingPage/LandingPage";
@@ -16,7 +12,6 @@ import { Timer } from "./components/Timer";
 import supabase from "./supabase/supabaseClient";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 
-
 function App() {
   return (
     <Router>
@@ -25,51 +20,54 @@ function App() {
   );
 }
 
-
-
-
 function AppRoutes() {
-
-
-
   // const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
-
-
   useEffect(() => {
-    document.title = 'SkillSync.';
+    document.title = "SkillSync.";
   }, []);
 
   useEffect(() => {
     const checkUser = async () => {
       const session = await supabase.auth.getSession();
-      setUser(session.data?.user ?? null);
+      console.log("Session:", session);
+      setUser(session?.data?.session?.user ?? null);
     };
 
     checkUser();
   }, []);
 
+  useEffect(() => {
+    console.log("Supabase User:", user);
+  }, [user]);
+
   return (
     <>
-  
-
-    <Routes>
-      <Route path="/login" element={<Timer Component={LogInPage} />} />
-      <Route path="/signup" element={<Timer Component={SignUpPage} />} />
-      <Route path="/" element={<Timer Component={user ? HomePage : LandingPage} />} />
-      <Route path="/landingpage" element={<Timer Component={LandingPage} />} />
-      <Route
-        path="/welcome"
-        element={<Timer Component={AuthenticatedWelcomePage} />}
-      />
-      <Route path="/home" element={<Timer Component={HomePage} />} />
-      <Route path="/confirm" element={<Timer Component={ConfirmEmailPage} />} />
-      <Route path="/interface" element={<Timer Component={Interface} />} />
-      <Route path="/feed" element={<Timer Component={Feed} />} />
-      <Route path="/profile" element={<Timer Component={ProfilePage} />} />
-    </Routes>
-
+      <Routes>
+        <Route path="/login" element={<Timer Component={LogInPage} />} />
+        <Route path="/signup" element={<Timer Component={SignUpPage} />} />
+        <Route
+          path="/"
+          element={<Timer Component={user ? HomePage : LandingPage} />}
+        />
+        <Route
+          path="/landingpage"
+          element={<Timer Component={LandingPage} />}
+        />
+        <Route
+          path="/welcome"
+          element={<Timer Component={AuthenticatedWelcomePage} />}
+        />
+        <Route path="/home" element={<Timer Component={HomePage} />} />
+        <Route
+          path="/confirm"
+          element={<Timer Component={ConfirmEmailPage} />}
+        />
+        <Route path="/interface" element={<Timer Component={Interface} />} />
+        <Route path="/feed" element={<Timer Component={Feed} />} />
+        <Route path="/profile" element={<Timer Component={ProfilePage} />} />
+      </Routes>
     </>
   );
 }

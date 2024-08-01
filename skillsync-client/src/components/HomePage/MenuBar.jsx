@@ -48,7 +48,7 @@ const MenuBar = ({
   setSidebarExpanded,
 }) => {
   const [notificationCounts, setNotificationCounts] = useState({});
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   const fetchMessagesCount = async () => {
@@ -90,7 +90,7 @@ const MenuBar = ({
 
   return (
     <div
-      className={`h-full bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out z-auto ${
+      className={`h-full z-[150] bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out z-auto ${
         collapsed ? "w-20" : "w-64"
       }`}
       onMouseEnter={() => {
@@ -148,6 +148,7 @@ const MenuBar = ({
             name={profileInfo?.name}
             school={profileInfo?.school}
             handleEditProfile={() => setSelectedPage("Profile")}
+            // avatarUrl={avatarUrl}
           />
         ) : (
           <img src={avatarUrl} className="w-full rounded-full" />
