@@ -26,16 +26,16 @@ const Navbar = ({openNav, setOpenNav}) => {
                 </li> */}
             </ul>
             <div className='flex flex-col md:flex-row gap-7 items-center'>
-                <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>
                     <Link to='/login' onClick={() => setOpenNav(!openNav)}>
-                        Log in
-                    </Link>
-                </div>
                 <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>
-                    <Link to='/signup' onClick={() => setOpenNav(!openNav)}>
-                        Sign up
-                    </Link>
+                        Log In
                 </div>
+                    </Link>
+                    <Link to='/signup' onClick={() => setOpenNav(!openNav)}>
+                <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>
+                        Sign Up
+                </div>
+                    </Link>
             </div>
         </nav>
     )

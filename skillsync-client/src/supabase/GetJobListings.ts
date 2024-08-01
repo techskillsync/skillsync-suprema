@@ -96,10 +96,12 @@ async function SearchJobs(
 
   console.log("Searching jobs...");
   let query_terms = query
+  .trim()
     .replace(/ /g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");
   let location_terms = location
+  .trim()
     .replace(/ /g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");

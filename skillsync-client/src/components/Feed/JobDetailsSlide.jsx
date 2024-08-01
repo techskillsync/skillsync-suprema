@@ -11,7 +11,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
       setExpanded(!expanded);
     };
 
-    const descriptionClass = expanded ? "" : "h-[250px] overflow-hidden";
+    const descriptionClass = expanded ? "" : "h-[300px] overflow-hidden";
 
     return (
       <div

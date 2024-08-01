@@ -24,9 +24,11 @@ function SearchFilters({
     console.log(response);
     const userLocation = response.location;
     setUserLocationText(userLocation);
-    setUserJobModes(response.job_mode);
     setLocationKeys(userLocation);
+    setUserJobModes(response.job_mode);
+    setJobModeKeys(response.job_mode);
     setUserKeyWords(response.keywords);
+    setKeywordKeys(response.keywords);
     setPreferencesLoaded(true);
   }
 
@@ -40,21 +42,25 @@ function SearchFilters({
   }
 
   function removeJobMode(mode) {
-    const newModes = userJobModes.filter((m) => m.value !== mode.value);
-    console.log("New modes:", newModes);
+    const newModes = userJobModes.filter(
+      (m: { label: string; value: string }) => m.value !== mode.value
+    );
+    // console.log("New modes:", newModes);
     setUserJobModes(newModes);
     setJobModeKeys(newModes);
-    setKeywordKeys(userKeyWords);
   }
 
   function removeKeyword(keyword) {
-    const newKeywords = userKeyWords.filter((k) => k.value !== keyword.value);
-    console.log("New keywords:", newKeywords);
+    const newKeywords = userKeyWords.filter(
+      (k: { label: string; value: string }) => k.value !== keyword.value
+    );
+    // console.log("New keywords:", newKeywords);
     setUserKeyWords(newKeywords);
+    setKeywordKeys(newKeywords);
   }
 
-  console.log("User job modes:", userJobModes);
-  console.log("User keywords:", userKeyWords);
+  // console.log("User job modes:", userJobModes);
+  // console.log("User keywords:", userKeyWords);
 
   return (
     <div id="filters" className="mt-4 flex">
@@ -72,7 +78,7 @@ function SearchFilters({
           />
         </div>
       )}
-      {userJobModes?.map((mode, index) => (
+      {userJobModes?.map((mode: { label: string; value: string }, index) => (
         <div
           key={index}
           className="bg-[#1E1E1E] p-2 rounded-md text-white border-[#36B7FE] border-[1px] ml-3"
@@ -84,7 +90,7 @@ function SearchFilters({
           />
         </div>
       ))}
-      {userKeyWords?.map((keyword, index) => (
+      {userKeyWords?.map((keyword: { label: string; value: string }, index) => (
         <div
           key={index}
           className="bg-[#1E1E1E] p-2 rounded-md text-white border-[#36B7FE] border-[1px] ml-3"

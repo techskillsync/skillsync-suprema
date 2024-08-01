@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
     import EditProfileDetails from "./EditProfileDetails";
 import EditWorkExperiences from "./EditWorkExperiences";
     import EditResumes from "./EditResumes";
+import { redirectUser } from "../../utilities/redirect_user";
 
     const ProfilePage = () => {
       const [selectedTab, setSelectedTab] = useState("personalInfo");
+
+      useEffect(() => {
+        redirectUser("/landingPage", false);
+        }, []);
 
       const tabOptions = [
         { id: "personalInfo", label: "Personal Information", component: <EditProfileDetails /> },

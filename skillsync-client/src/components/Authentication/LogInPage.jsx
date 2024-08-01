@@ -25,7 +25,7 @@ const LogInPage = () => {
   }
 
   useEffect(() => {
-	redirectUser("/home", true);
+    redirectUser("/home", true);
   }, []);
 
   useEffect(() => {
@@ -65,26 +65,26 @@ const LogInPage = () => {
             Welcome Back!
           </h2>
           <div className="mb-4 md:flex space-x-2">
-            <LoadGoogleClient />
-            <div
-              id="g_id_onload"
-              data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
-              data-context="signup"
-              data-ux_mode="popup"
-              data-callback="handleSignInWithGoogle"
-              data-itp_support="true"
-              data-use_fedcm_for_prompt="true"
-            ></div>
+              <LoadGoogleClient />
+              <div
+                id="g_id_onload"
+                data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
+                data-context="signup"
+                data-ux_mode="popup"
+                data-callback="handleSignInWithGoogle"
+                data-itp_support="true"
+                data-use_fedcm_for_prompt="true"
+              ></div>
 
-            <div
-              className="g_id_signin"
-              data-type="standard"
-              data-shape="rectangular"
-              data-theme="outline"
-              data-text="signin_with"
-              data-size="large"
-              data-logo_alignment="left"
-            ></div>
+              <div
+                className="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left"
+              ></div>
           </div>
           <Spacer text="or continue with" />
           <form onSubmit={handleFormSubmit}>

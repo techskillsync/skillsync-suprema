@@ -11,6 +11,7 @@ import Feed from "./components/Feed/Feed";
 import { Timer } from "./components/Timer";
 import supabase from "./supabase/supabaseClient";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import ComingSoon from "./components/common/ComingSoon";
 
 function App() {
   return (
@@ -63,6 +64,10 @@ function AppRoutes() {
         <Route
           path="/confirm"
           element={<Timer Component={ConfirmEmailPage} />}
+        />
+        <Route
+          path="/comingSoon"
+          element={<Timer Component={ComingSoon} />}
         />
         <Route path="/interface" element={<Timer Component={Interface} />} />
         <Route path="/feed" element={<Timer Component={Feed} />} />

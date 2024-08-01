@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spacer from "./Spacer";
 import { EmailSignUp } from "../../supabase/userSignUp.js";
 
@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import InputField from "./InputField";
 import InfoCarousel from "./InfoCarousel.jsx";
+import { redirectUser } from "../../utilities/redirect_user.js";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -27,6 +28,10 @@ const SignUpPage = () => {
       alert("Error signing up 😵");
     }
   }
+
+  useEffect(() => {
+    redirectUser("/home", true);
+  }, []);
 
   return (
     <div className="flex h-screen bg-black">

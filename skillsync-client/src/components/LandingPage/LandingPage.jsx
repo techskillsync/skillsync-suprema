@@ -256,7 +256,7 @@ const Home = () => {
                 <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]"></span>
               </span>{" "}
             </h3>
-            <button className="rounded-lg font-bold hover:text-[white] hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52">
+            <button className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52">
               Get Started
             </button>
           </div>
@@ -276,7 +276,12 @@ const Home = () => {
                 <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]"></span>
               </span>{" "}
             </h3>
-            <button className="rounded-lg font-bold hover:text-[white] hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52">
+            <button className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52"
+            onClick={
+              () => {window.location.href = '/comingSoon'}
+            }
+            >
+              
               Hire
             </button>
           </div>

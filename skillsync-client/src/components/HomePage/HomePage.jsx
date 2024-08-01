@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MenuBar, menuItems } from "./MenuBar";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
+import { redirectUser } from "../../utilities/redirect_user";
 
 const HomePage = () => {
   const [profileInfo, setProfileInfo] = useState(null);
@@ -9,6 +10,10 @@ const HomePage = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [popupBackground, setPopupBackground] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
+
+  useEffect(() => {
+    redirectUser("/landingPage", false);
+    }, []);
 
   useEffect(() => {
     if (selectedJob && selectedPage !== "Jobs") {

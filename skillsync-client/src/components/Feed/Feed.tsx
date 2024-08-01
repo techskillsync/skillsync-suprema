@@ -49,18 +49,19 @@ function Feed() {
     const to = currentPage * pageSize;
     // Todo: add location searching (parameter currently empty string)
     let response;
-    response = await SearchJobs(
+    console.log("Job mode keys:", jobModeKeys);
+    const queryTerms =
       searchValue +
-        keywordKeys
-          .map((k) => (k as { label: string; value: string }).value)
-          .join(" ") +
-        jobModeKeys
-          .map((m) => (m as { label: string; value: string }).value)
-          .join(" "),
-      locationKeys,
-      from,
-      to
-    );
+      " " +
+      keywordKeys
+        .map((k) => (k as { label: string; value: string }).value)
+        .join(" ") +
+      " " +
+      jobModeKeys
+        .map((m) => (m as { label: string; value: string }).value)
+        .join(" ");
+    console.log("Query terms:", queryTerms);
+    response = await SearchJobs(queryTerms, locationKeys, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
@@ -73,6 +74,10 @@ function Feed() {
     // setCurrentPage(1);
     setTotalPages(Math.ceil(count ? count / pageSize : 0));
   }
+
+  useEffect(() => {
+    setSelectedJob(listings[0]);
+  }, [listings]);
 
   useEffect(() => {
     console.log("Listings:", listings);
@@ -130,8 +135,8 @@ function Feed() {
           </div>
         ))}
       </div>
-      <div className="w-1/3 bg-[#1e1e1e]">
-        <div className="fixed right-0 top-0 h-screen w-[26.66%] overflow-y-scroll">
+      <div className="w-1/3 bg-[#1e1e1e] relative">
+        <div className="absolute right-0 top-0 h-screen w-full overflow-y-scroll">
           <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>
