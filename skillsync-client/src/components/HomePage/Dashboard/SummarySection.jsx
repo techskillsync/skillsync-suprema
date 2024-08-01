@@ -1,5 +1,5 @@
 import { FaFileAlt, FaFlag, FaHourglass, FaSave } from "react-icons/fa";
-import { BsFillSendFill } from "react-icons/bs";
+import { BsFillSendFill, BsPeopleFill } from "react-icons/bs";
 import { GetResumeCount } from "../../../supabase/Resumes";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -8,12 +8,14 @@ import { GetJobsCount } from "../../../supabase/JobApplicationTracker";
 const SummarySection = ({}) => {
   const [jobsSavedCount, setJobsSavedCount] = useState(0);
   const [jobsAppliedCount, setJobsAppliedCount] = useState(0);
+  const [jobsInterviewingCount, setJobsInterviewingCount] = useState(0);
   const [jobOffersCount, setJobOffersCount] = useState(0);
   const [resumesCount, setResumesCount] = useState(0);
 
   const stats = [
     { title: "Jobs Saved", value: jobsSavedCount, icon: FaSave },
     { title: "Jobs Applied", value: jobsAppliedCount, icon: BsFillSendFill },
+    { title: "Interviews", value: jobsInterviewingCount, icon: BsPeopleFill },
     { title: "Job Offers", value: jobOffersCount, icon: FaFlag },
     { title: "Resumes", value: resumesCount, icon: FaFileAlt },
   ];
@@ -23,6 +25,7 @@ const SummarySection = ({}) => {
       try {
         setJobsSavedCount(await GetJobsCount(["saved", "applied", "interviewing", "testing", "offer"]));
         setJobsAppliedCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
+        setJobsInterviewingCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
         setJobOffersCount(await GetJobsCount(["offer"]));
         setResumesCount(await GetResumeCount());
       } catch (error) {
