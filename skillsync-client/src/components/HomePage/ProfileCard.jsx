@@ -10,33 +10,33 @@ const ProfileCard = ({
 }) => {
   return (
     <div
-      className={`rounded-lg
+      className={`rounded-lg p-[1.5px] bg-gradient-to-r 
        ${
          collapsed
-           ? "p-2"
-           : "fade-in p-[1.5px] bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"
+           ? "from-[#1e1e1e] via-[#1e1e1e] to-[#1e1e1e]"
+           : "from-green-400 via-blue-500 to-purple-600"
        }
      `}
     >
       <div className="relative">
         <div
-          className={`w-full h-full bg-[#1e1e27] rounded-md flex flex-col items-center 
-          ${collapsed ? "p-2" : " lg:flex-row space-x-3 text-lg p-5  pb-9"}`}
+          className={`h-full transition-all duration-200 bg-[#1e1e27] rounded-md flex flex-col items-center lg:flex-row space-x-3 text-lg py-5 pb-9
+            ${collapsed ? "px-3 w-18" : "px-5 w-56 "}
+         `}
         >
+            <div
+              className={`flex flex-col items-center justify-center rounded-full overflow-hidden 
+                ${collapsed ? "w-full" : 'w-1/3'}`}
+            >
+              <ProfilePicture />
+            </div>
           <div
-            className={`flex flex-col items-center justify-center rounded-full overflow-hidden ${
-              collapsed ? "w-full" : "w-1/3"
+            className={`flex flex-col justify-center text-left fade-in ${
+              collapsed ? "hidden w-0" : "w-2/3"
             }`}
           >
-            <ProfilePicture />
-          </div>
-          <div
-            className={`flex flex-col w-2/3 justify-center text-left w-full lg:pl-2 fade-in ${
-              collapsed ? "hidden" : ""
-            }`}
-          >
-            <p className="font-semibold text-xl"> {name}</p>
-            {school && <p className="text-sm mt-1">{school}</p>}
+            <p className="font-semibold text-lg"> {name}</p>
+            {school && <p className="text-xs mt-1">{school}</p>}
           </div>
         </div>
         <div

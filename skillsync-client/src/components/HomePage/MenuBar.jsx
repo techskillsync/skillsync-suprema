@@ -128,7 +128,7 @@ const MenuBar = ({
         </ul>
       </div>
       <div className="h-1/4 flex">
-        <div className={`mt-auto transition-all duration-300 ${!collapsed && "p-4 rounded-full "}`}>
+        <div className={`mt-auto transition-all duration-300 py-4 ${!collapsed && "px-4 "}`}>
            <ProfileCard
               name={profileInfo?.name}
               school={profileInfo?.school}
