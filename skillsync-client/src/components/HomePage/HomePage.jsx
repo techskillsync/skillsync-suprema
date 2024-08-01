@@ -10,6 +10,21 @@ const HomePage = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [popupBackground, setPopupBackground] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const [isPanelSlidingOut, setIsPanelSlidingOut] = useState(false);
+
+  useEffect(() => {
+    if (selectedJob && selectedPage !== "Jobs") {
+      setIsPanelVisible(true);
+      setIsPanelSlidingOut(false);
+    } else if (isPanelVisible) {
+      setIsPanelSlidingOut(true);
+      setTimeout(() => {
+        setIsPanelVisible(false);
+      }, 300); // Match this duration with your slide-out animation duration
+    }
+  }, [selectedJob, selectedPage]);
+
 
   useEffect(() => {
     redirectUser("/landingPage", false);
@@ -62,15 +77,15 @@ const HomePage = () => {
             }}
           ></div>
         )}
-        {selectedJob && selectedPage !== "Jobs" && (
-          <div
-            className={`fixed right-0 top-0 h-screen w-[26.66%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg  ${
-              selectedJob && selectedPage !== "Jobs" ? "slide-in" : "slide-out"
-            }`}
-          >
-            <JobDetailsSlide jobDescription={selectedJob} />
-          </div>
-        )}
+        {isPanelVisible && (
+        <div
+          className={`fixed right-0 top-0 h-screen w-[33.33%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg ${
+            isPanelSlidingOut ? "slide-out" : "slide-in"
+          }`}
+        >
+          <JobDetailsSlide jobDescription={selectedJob} />
+        </div>
+      )}
        <div
         className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
        style={sidebarExpanded ? {marginLeft: "250px"}: {marginLeft: "80px"}}>        {renderComponent()}

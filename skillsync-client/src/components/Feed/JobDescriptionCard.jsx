@@ -109,8 +109,8 @@ const JobDescriptionCard = ({
           />
         )}
         <div className="flex justify-between">
-          <h2 className="w-2/3 text-xl text-wrap font-bold mb-2">{
-            mini ? jobDescription.company.substring(0, 22) + (jobDescription.company.length > 22 ? "..." : "") : jobDescription.company
+          <h2 className={"w-2/3 text-wrap !font-bold mb-2 " + mini ? "text-lg font-bold" : "text-xl" }>{
+            mini ? jobDescription.company.substring(0, 19) + (jobDescription.company.length > 19 ? "..." : "") : jobDescription.company
           }</h2>
           <div className="w-1/3">
             {showGlassdoorRating && !mini && glassdoorRating && (

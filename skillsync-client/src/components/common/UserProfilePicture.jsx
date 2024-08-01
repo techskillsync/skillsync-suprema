@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetAvatar } from "../../supabase/ProfilePicture";
 import { FaUser } from "react-icons/fa";
 
-function ProfilePicture({ height, width, avatarUrlDefault }) {
+function ProfilePicture({ height, width }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   async function fetchPfpUrl() {
@@ -10,13 +10,11 @@ function ProfilePicture({ height, width, avatarUrlDefault }) {
   }
 
   useEffect(() => {
-    if (!avatarUrlDefault) {
       fetchPfpUrl();
-    }      
   }, []);
 
   return avatarUrl ? (
-    <img className="fade-in" src={avatarUrlDefault ?? avatarUrl} />
+    <img className="fade-in" src={avatarUrl} />
   ) : (
     <div className="w-12 h-12">
       <div className="rounded-full bg-gray-800 w-full h-full">

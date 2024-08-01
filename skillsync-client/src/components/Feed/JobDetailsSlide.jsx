@@ -11,7 +11,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
       setExpanded(!expanded);
     };
 
-    const descriptionClass = expanded ? "" : "h-[300px] overflow-hidden";
+    const descriptionClass = expanded ? "" : "h-[250px] overflow-hidden";
 
     return (
       <div
@@ -20,7 +20,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
         }
       >
         {jobDescription.logo_url ? (
-          <div className="company-logo pt-12 pb-4 mx-auto rounded-lg">
+          <div className="company-logo pt-12 pb-4 mx-auto rounded-lg max-w-[100px]">
             <img
               src={jobDescription.logo_url}
               alt={jobDescription.company}
@@ -34,14 +34,20 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           {jobDescription.title}
         </h3>
         <div className={`job-details w-full pt-2 pb-4`}>
-          <div className="flex justify-between">
-            <div className="w-1/2">
-              <h2 className="text-xl font-bold mb-2">
+          <div className={jobDescription.company.length > 20
+          || jobDescription.location.length > 20
+          ? 
+            "" : "flex justify-between"
+          }>
+            <div className="w-full">
+              <h2 className="text-xl font-bold">
                 {jobDescription.company}
               </h2>
             </div>
-            <div className="w-1/2">
-              <div className="flex justify-end flex-row items-center">
+            <div className="w-full">
+              <div className={`flex flex-row items-center ${
+                (jobDescription.company.length > 20 || jobDescription.location.length > 20) ? "justify-start" :
+                "justify-end"}`}>
                 <FaMapMarkerAlt className="mr-2" />
                 <p>{jobDescription.location}</p>
               </div>
@@ -60,7 +66,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
               </div>
             )}
           <div>
-            <div className="relative">
+            <div className="relative mt-2">
               <p className={`text-sm text-justify ${descriptionClass}`}>
                 {jobDescription.description}
               </p>

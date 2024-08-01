@@ -2,7 +2,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Feed from "../Feed/Feed";
 import ResumeBuilder from "./ResumeBuilder";
 import Messages from "./Messages.tsx";
-import LogoDark from "../../assets/LogoDark.png";
+import LogoDarkText from "../../assets/LogoDarkText.png";
 import ProfileCard from "./ProfileCard";
 import { MdSpaceDashboard, MdNewspaper, MdInbox } from "react-icons/md";
 import { FaGear, FaSheetPlastic } from "react-icons/fa6";
@@ -15,7 +15,6 @@ import { BsFileSpreadsheet } from "react-icons/bs";
 import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { GetAvatar } from "../../supabase/ProfilePicture.ts";
 
 const menuItems = [
   {
@@ -49,7 +48,6 @@ const MenuBar = ({
 }) => {
   const [notificationCounts, setNotificationCounts] = useState({});
   const [collapsed, setCollapsed] = useState(true);
-  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const fetchMessagesCount = async () => {
     const newMessagesCount = await GetUnreadMessagesCount(); // Replace with your actual fetch logic
@@ -71,14 +69,6 @@ const MenuBar = ({
       return prevCounts;
     });
   };
-
-  async function fetchPfpUrl() {
-    setAvatarUrl(await GetAvatar());
-  }
-
-  useEffect(() => {
-    fetchPfpUrl();
-  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -103,14 +93,11 @@ const MenuBar = ({
       }}
     >
       <Toaster />
-      <div className="w-full p-5">
-        {!collapsed ? (
-          <img className="mx-auto" src={LogoDark} alt="SkillSync. Logo" />
-        ) : (
-          <img className="mx-auto" src="/icon-128.png" alt="SkillSync. Logo" />
-        )}
+      <div className="w-full p-5 ml-0.5 flex flex-row items-center">
+          <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
+          <img className={`h-10 fade-in ml-4 ${collapsed && 'hidden'}`} src={LogoDarkText} alt="SkillSync. Logo" />
       </div>
-      <div>
+      <div className="overflow-x-hidden">
         <ul className="text-left">
           {menuItems.map(
             (item) =>
@@ -125,34 +112,30 @@ const MenuBar = ({
                   onClick={() => setSelectedPage(item.name)}
                 >
                   {item.icon && (
-                    <span className="text-2xl mr-2">{item.icon}</span>
+                    <span className="text-2xl mr-6">{item.icon}</span>
                   )}
-                  {!collapsed && (
-                    <>
-                      {item.name}
-                      {notificationCounts[item.name] > 0 && (
-                        <span className="ml-auto  bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-semibold rounded-full px-2 py-0.5">
-                          {notificationCounts[item.name]}
-                        </span>
-                      )}
-                    </>
-                  )}
+                  <div className={`fade-in w-64 ${collapsed && "hidden"}`}>
+                    <span className="whitespace-nowrap" >{item.name}</span>
+                    {notificationCounts[item.name] > 0 && (
+                      <span className="ml-auto  bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-semibold rounded-full px-2 py-0.5">
+                        {notificationCounts[item.name]}
+                      </span>
+                    )}
+                  </div>
                 </li>
               )
           )}
         </ul>
       </div>
-      <div className="p-4 rounded-full">
-        {!collapsed ? (
-          <ProfileCard
-            name={profileInfo?.name}
-            school={profileInfo?.school}
-            handleEditProfile={() => setSelectedPage("Profile")}
-            // avatarUrl={avatarUrl}
-          />
-        ) : (
-          <img src={avatarUrl} className="w-full rounded-full" />
-        )}
+      <div className="h-1/4 flex">
+        <div className={`mt-auto transition-all duration-300 ${!collapsed && "p-4 rounded-full "}`}>
+           <ProfileCard
+              name={profileInfo?.name}
+              school={profileInfo?.school}
+              handleEditProfile={() => setSelectedPage("Profile")}
+              collapsed={collapsed}
+            />
+        </div>
       </div>
     </div>
   );

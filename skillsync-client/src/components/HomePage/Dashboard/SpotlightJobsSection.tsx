@@ -57,7 +57,7 @@ function SpotLightJobsSection({ setSelectedJob }) {
           .join(" "),
       jobPreferences.location,
       0,
-      2
+      3
     );
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
@@ -93,9 +93,9 @@ function SpotLightJobsSection({ setSelectedJob }) {
         </button>
       </div>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
-      <div className="flex w-full space-x-2">
+      <div className="flex w-full space-x-2 overflow-x-auto pb-3">
         {listings.map((item, index) => (
-          <div className="flex-col w-full fade-in" key={index}>
+          <div className="flex-col min-w-[400px] fade-in" key={index}>
             <JobDescriptionCard
               mini={true}
               jobDescription={item}
