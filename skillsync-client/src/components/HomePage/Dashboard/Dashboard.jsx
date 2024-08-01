@@ -6,23 +6,26 @@ import ChartsSection from "./ChartsSection";
 
 const Dashboard = ({ profileInfo, setSelectedJob }) => {
   return (
-    <div className="w-full min-h-screen bg-black p-8">
+    <main className="bg-allotrix-setup font-allotrix-font min-h-[100vh] md:h-[100%] w-full text-[white] overflow-y-scroll">
+      <section className="pt-20 pb-8 w-full md:h-full md:px-8 px-3 flex flex-col gap-2">
       <div className="p-2 mb-3">
         <h1 className="text-white text-left text-2xl font-medium">
           Welcome, {profileInfo?.name}
         </h1>
       </div>
-      <div className="flex flex-row !w-auto">
-        <div className="flex flex-col w-2/3">
+      <div className="flex flex-col w-full gap-4">
+        <div className="flex justify-between w-full">
           <SummarySection />
-          <PreferencesSection />
         </div>
-        <div className="flex flex-col w-1/3 px-3">
+        <div className="flex items-center min-h-[100px]">
+        <PreferencesSection />
+
           <ChartsSection />
         </div>
       </div>
       <SpotLightJobsSection setSelectedJob={setSelectedJob} />
-    </div>
+    </section>
+    </main>
   );
 };
 

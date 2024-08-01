@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
 } from "react-router-dom";
 import AuthenticatedWelcomePage from "./components/AuthenticatedWelcomePage";
 import HomePage from "./components/HomePage/HomePage";
@@ -17,6 +16,7 @@ import { Timer } from "./components/Timer";
 import supabase from "./supabase/supabaseClient";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 
+
 function App() {
   return (
     <Router>
@@ -25,9 +25,17 @@ function App() {
   );
 }
 
+
+
+
 function AppRoutes() {
+
+
+
   // const navigate = useNavigate();
   const [user, setUser] = useState(null);
+
+
 
   useEffect(() => {
     document.title = 'SkillSync.';
@@ -43,6 +51,9 @@ function AppRoutes() {
   }, []);
 
   return (
+    <>
+  
+
     <Routes>
       <Route path="/login" element={<Timer Component={LogInPage} />} />
       <Route path="/signup" element={<Timer Component={SignUpPage} />} />
@@ -58,6 +69,8 @@ function AppRoutes() {
       <Route path="/feed" element={<Timer Component={Feed} />} />
       <Route path="/profile" element={<Timer Component={ProfilePage} />} />
     </Routes>
+
+    </>
   );
 }
 

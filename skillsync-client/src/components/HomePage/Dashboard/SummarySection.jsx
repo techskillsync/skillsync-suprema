@@ -33,11 +33,11 @@ const SummarySection = ({}) => {
   }, []);
 
   return (
-    <div className="flex flex-row space-x-3 text-white">
+    <div className="flex w-full gap-4 text-white">
       {stats.map((stat) => (
         <div
           key={stat.title}
-          className="flex flex-row items-center space-x-4 p-5 bg-[#1e1e1e] rounded-lg border border-2 border-cyan-700"
+          className="flex w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700"
         >
           <div className="flex flex-col text-4xl">
             <stat.icon />
