@@ -99,6 +99,11 @@ const selectFieldStyle = {
         ? "#fff"
         : "#000",
   }),
+  placeHolder: (base) => ({
+    ...base,
+    backgroundColor: 'f00',
+    color:'f00',
+  }),
   menuList: (base) => ({
     ...base,
     borderRadius: 7,

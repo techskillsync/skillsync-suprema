@@ -43,7 +43,7 @@ const selectFieldStyle = {
     whiteSpace: "nowrap",
     width: "100%",
     textAlign: "left",
-    // borderRadius: "0 3px 3px 0",
+    borderRadius: "0 3px 3px 0",
     height: "100%",
     ...(state.isFocused && {
     }), 
@@ -142,7 +142,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
               ? placeholder
               : "Enter your " + item.toLowerCase()
             }
-            // styles={selectFieldStyle}
+            styles={selectFieldStyle}
           />
         ) : (
           <Select
@@ -160,7 +160,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
                 ? placeholder
                 : "Select your " + item.toLowerCase()
             }
-            // styles={selectFieldStyle}
+            styles={selectFieldStyle}
           />
         )}
       </div>

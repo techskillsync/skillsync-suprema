@@ -12,6 +12,7 @@ import { Timer } from "./components/Timer";
 import supabase from "./supabase/supabaseClient";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import ComingSoon from "./components/common/ComingSoon";
+import OnboardingPage from "./components/Onboarding/OnboardingPage";
 
 function App() {
   return (
@@ -58,7 +59,7 @@ function AppRoutes() {
         />
         <Route
           path="/welcome"
-          element={<Timer Component={AuthenticatedWelcomePage} />}
+          element={<Timer Component={OnboardingPage} />}
         />
         <Route path="/home" element={<Timer Component={HomePage} />} />
         <Route

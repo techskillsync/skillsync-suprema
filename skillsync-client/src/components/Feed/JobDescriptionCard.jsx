@@ -31,7 +31,11 @@ const JobDescriptionCard = ({
   const handleSave = async () => {
     if (saved) {
       // Remove from saved
-      if (await confirmWrapper('Are you sure you want to remove this job from your tracker?')) {
+      if (
+        await confirmWrapper(
+          "Are you sure you want to remove this job from your tracker?"
+        )
+      ) {
         if (await RemoveJob(jobDescription.id)) {
           setSaved(false);
         }
@@ -64,10 +68,10 @@ const JobDescriptionCard = ({
       action: () => {
         navigator.clipboard.writeText(jobDescription.link);
       },
-    // },
-    // {
-    //   title: "Share",
-    //   icon: <FaUserGroup />,
+      // },
+      // {
+      //   title: "Share",
+      //   icon: <FaUserGroup />,
     },
   ];
 
@@ -109,9 +113,18 @@ const JobDescriptionCard = ({
           />
         )}
         <div className="flex justify-between">
-          <h2 className={"w-2/3 text-wrap !font-bold mb-2 " + mini ? "text-lg font-bold" : "text-xl" }>{
-            mini ? jobDescription.company.substring(0, 19) + (jobDescription.company.length > 19 ? "..." : "") : jobDescription.company
-          }</h2>
+          <h2
+            className={
+              "w-2/3 text-wrap !font-bold mb-2 " + mini
+                ? "text-lg font-bold"
+                : "text-xl"
+            }
+          >
+            {mini
+              ? jobDescription.company.substring(0, 19) +
+                (jobDescription.company.length > 19 ? "..." : "")
+              : jobDescription.company}
+          </h2>
           <div className="w-1/3">
             {showGlassdoorRating && !mini && glassdoorRating && (
               <div className="flex">
@@ -148,7 +161,9 @@ const JobDescriptionCard = ({
           )}
         <div className="flex items-center">
           <FaMapMarkerAlt className="mr-2" />
-          <p className={mini ? "text-base" : 'text-lg'}>{jobDescription.location}</p>
+          <p className={mini ? "text-base" : "text-lg"}>
+            {jobDescription.location}
+          </p>
         </div>
         {/* <div>
           <p>{jobDescription.description.substring(0, 100) + '...'}</p>
@@ -164,14 +179,20 @@ const JobDescriptionCard = ({
         </div> */}
         <div>
           <div className="flex mt-4">
-          <button
-                key="save"
-                onClick={handleSave}
-                className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${saved ? 'bg-blue-200 hover:bg-red-200' : 'bg-gray-200 hover:bg-gray-400'}`}
-              >
-                <IoBookmark />
-                {!mini && <span className="ml-2">{saved ? "Saved" : "Save"}</span>}
-              </button>
+            <button
+              key="save"
+              onClick={handleSave}
+              className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${
+                saved
+                  ? "bg-blue-200 hover:bg-red-200"
+                  : "bg-gray-200 hover:bg-gray-400"
+              }`}
+            >
+              <IoBookmark />
+              {!mini && (
+                <span className="ml-2">{saved ? "Saved" : "Save"}</span>
+              )}
+            </button>
             {actions.map((action) => (
               <button
                 key={action.title}

@@ -170,7 +170,7 @@ const Home = () => {
         <h2 className="flex flex-col mt-10 mb-10 gap-2 text-white font-bold text-3xl md:text-6xl text-center relative">
           <span className="z-10">A 21st Century platform</span>
           <br />
-          <span className="z-10 mt-[-50px]">A 21st Century seekers</span>
+          <span className="z-10 mt-[-50px]">For 21st Century seekers</span>
           <svg
             viewBox="0 0 500 100"
             className="absolute left-1/2 z-0 transform -translate-x-1/2 md:block hidden  mt-[50px] w-[60%] md:mt-[40px]  md:w-[60%]"

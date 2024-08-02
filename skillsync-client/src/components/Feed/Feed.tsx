@@ -136,8 +136,8 @@ function Feed() {
         ))}
       </div>
       <div className="w-1/3 bg-[#1e1e1e] relative">
-        <div className="absolute right-0 top-0 h-screen w-full overflow-y-scroll">
-          <JobDetailsSlide jobDescription={selectedJob} />
+        <div className="sticky right-0 top-0 h-screen w-full overflow-y-scroll">
+            <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>
     </div>
