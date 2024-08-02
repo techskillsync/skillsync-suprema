@@ -12,9 +12,11 @@ import Spacer from "../common/Spacer";
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
-  const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
-  const [jobModeKeys, setJobModeKeys] = useState([]);
-  const [keywordKeys, setKeywordKeys] = useState([]);
+  const [preferences, setPreferences] = useState({
+    location: "",
+    jobModes: [],
+    keywords: []
+  });
   const [searchValue, setSearchValue] = useState("");
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
@@ -36,10 +38,10 @@ function Feed() {
 
   useEffect(() => {
     if (preferencesLoaded) {
-      console.log("Keys changed", locationKeys, jobModeKeys);
+      console.log("Filters changed:", preferences);
       fetchListings();
     }
-  }, [locationKeys, jobModeKeys, keywordKeys]);
+  }, [preferences]);
 
   async function fetchListings() {
     console.log("Refreshing listings...");
@@ -49,19 +51,19 @@ function Feed() {
     const to = currentPage * pageSize;
     // Todo: add location searching (parameter currently empty string)
     let response;
-    console.log("Job mode keys:", jobModeKeys);
+    console.log("Job mode keys:", preferences.jobModes);
     const queryTerms =
       searchValue +
       " " +
-      keywordKeys
+      preferences.keywords
         .map((k) => (k as { label: string; value: string }).value)
         .join(" ") +
       " " +
-      jobModeKeys
+      preferences.jobModes
         .map((m) => (m as { label: string; value: string }).value)
         .join(" ");
     console.log("Query terms:", queryTerms);
-    response = await SearchJobs(queryTerms, locationKeys, from, to);
+    response = await SearchJobs(queryTerms, preferences.location, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
@@ -106,9 +108,8 @@ function Feed() {
         <div className="overflow-x-auto">
           <SearchFilters
             setPreferencesLoaded={setPreferencesLoaded}
-            setLocationKeys={setLocationKeys}
-            setJobModeKeys={setJobModeKeys}
-            setKeywordKeys={setKeywordKeys}
+            setPreferences={setPreferences}
+            preferences={preferences}
           />
         </div>
         {/*  ------------- Arman ------------- */}
