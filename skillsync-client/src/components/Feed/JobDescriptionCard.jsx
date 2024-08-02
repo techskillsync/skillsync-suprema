@@ -17,6 +17,7 @@ import {
 } from "../../supabase/JobApplicationTracker.ts";
 import SharePopup from "./SharePopup.jsx";
 import { confirmWrapper } from "../common/Confirmation.jsx";
+import ReportPopup from "./ReportPopup.jsx";
 
 const JobDescriptionCard = ({
   jobDescription,
@@ -209,6 +210,12 @@ const JobDescriptionCard = ({
                 {!mini && <span className="ml-2">Share</span>}
               </button>
             </SharePopup>
+            <ReportPopup content={jobDescription.id}>
+              <button className="ml-4 flex items-center bg-gray-200 text-gray-700 hover:bg-red-200 transition-all duration-150 rounded-full px-4 py-2">
+                <FaUserGroup />
+                {!mini && <span className="ml-2">Report</span>}
+              </button>
+            </ReportPopup>
             {action && (
               <button
                 onClick={action}

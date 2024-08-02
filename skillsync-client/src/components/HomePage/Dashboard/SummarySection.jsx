@@ -25,7 +25,7 @@ const SummarySection = ({}) => {
       try {
         setJobsSavedCount(await GetJobsCount(["saved", "applied", "interviewing", "testing", "offer"]));
         setJobsAppliedCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
-        setJobsInterviewingCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
+        setJobsInterviewingCount(await GetJobsCount(["interviewing", "offer"]));
         setJobOffersCount(await GetJobsCount(["offer"]));
         setResumesCount(await GetResumeCount());
       } catch (error) {
