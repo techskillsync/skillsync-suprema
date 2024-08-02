@@ -8,6 +8,7 @@ export interface PublicUserProfiles {
 
 export interface UserProfile {
     name: string;
+    last_name: string;
     email: string;
     location: string;
     school: string;

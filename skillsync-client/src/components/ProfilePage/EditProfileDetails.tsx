@@ -15,6 +15,7 @@ import { FaArrowLeft } from "react-icons/fa";
 const EditProfileDetails = ({}) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [school, setSchool] = useState("");
@@ -35,7 +36,7 @@ const EditProfileDetails = ({}) => {
     async function getProfile() {
       setLoading(true);
 
-      const columns = `name, location, school, grad_year, program, specialization, industry, linkedin, github,
+      const columns = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github,
 					date_of_birth, gender, race`;
 
       const email = await GetUserEmail();
@@ -51,6 +52,7 @@ const EditProfileDetails = ({}) => {
 
       if (!ignore) {
         setName(data.name);
+        setLastName(data.last_name);
         setEmail(email);
         setLocation(data.location);
         setSchool(data.school);
@@ -80,6 +82,7 @@ const EditProfileDetails = ({}) => {
 
     const updates = {
       name,
+      last_name: lastName,
       location,
       school,
       grad_year,
@@ -112,14 +115,24 @@ const EditProfileDetails = ({}) => {
         </div> */}
         <div className="mx-auto pb-4">
           <EditProfilePicture />
-          <div key={"Name"} className="text-white w-[300px] mx-auto mt-2">
+          <div key={"Name"} className="text-white w-[500px] mx-auto mt-2 flex space-x-2">
               <InputField
                 id={"Name"}
-                item={"Name"}
+                item={"First Name"}
                 value={name}
                 type="text"
                 required={true}
                 onChange={(e) => setName(e.target.value)}
+                className="!text-center"
+                showLabel={false}
+              />
+              <InputField
+                id={"lastName"}
+                item={"Last Name"}
+                value={lastName}
+                type="text"
+                required={true}
+                onChange={(e) => setLastName(e.target.value)}
                 className="!text-center"
                 showLabel={false}
               />
@@ -208,7 +221,7 @@ const EditProfileDetails = ({}) => {
                 onChange={(value) => item.setState(value!.value)}
                 className="!text-black"
                 allowMultiple={false}
-                placeholder={undefined}
+                placeholder={'Select ' + item.label}
                 showLabel={undefined}
               />
             </div>
