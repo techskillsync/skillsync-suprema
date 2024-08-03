@@ -5,8 +5,12 @@ import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSli
 
 // @ts-ignore
 import LogoDark from "../../assets/LogoDark.png";
+import { parseResume } from "../../api/ResumeParser";
+import { UpdateJobPreferences } from "../../supabase/JobPreferences";
+import { SetProfileInfo } from "../../supabase/ProfileInfo";
+import { AddResume } from "../../supabase/Resumes";
 
-const FinishScreen = ({ preferences, page, setPage }) => {
+const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
   const [showParticles, setShowParticles] = React.useState(false);
 
   const particlesInit = useCallback(async (engine) => {
@@ -26,9 +30,27 @@ const FinishScreen = ({ preferences, page, setPage }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  async function onboardUser() {
+    console.log("Onboarding...")
+    // UpdateJobPreferences({
+    //   desired_culture: preferences.selectedNewRoleOptions,
+    //   location: preferences.location,
+    //   work_authorization: preferences.workAuthorization,
+    //   start_time: preferences.startDate,
+    //   experience_level: preferences.level,
+    // });
+    if (resumeFile) {
+      // AddResume(resumeFile, "Default Resume - " + preferences.name);
+      const resumeData = await parseResume(resumeFile);
+      console.log("Parsed resume data:", resumeData);
+    }
+  }
+
   const handleFinish = async () => {
     console.log(preferences);
-    window.location.href = "/home";
+    console.log(resumeFile);
+    onboardUser();
+    // window.location.href = "/home";
   };
 
   return (

@@ -1,12 +1,15 @@
 import supabase from "./supabaseClient";
 import { GetUserId } from "./GetUserId";
 
-async function AddResume(resume_file, resume_label): Promise<Boolean> {
+async function AddResume(
+  resume_file: File,
+  resume_label: string
+): Promise<Boolean> {
   if (!resume_file) {
     console.warn("Resume file missing");
     return false;
   }
-  console.log("Adding reumse");
+  console.log("Adding resume");
 
   const user_id = await GetUserId();
   const fileExtension = resume_file.name.split(".").pop();
@@ -97,7 +100,6 @@ async function GetResume(resume_id): Promise<any> {
     resume_url: URL.createObjectURL(resume_file!),
   };
 }
-
 
 async function DeleteResume(resume_id): Promise<Boolean> {
   const user_id = await GetUserId();

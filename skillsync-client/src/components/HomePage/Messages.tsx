@@ -22,9 +22,9 @@ const Messages = ({ setSelectedJob }) => {
   }, []);
 
   return (
-    <div className="p-3 min-h-screen">
-      <h1 className="text-white text-2xl font-bold mb-4">Messages</h1>
-      <div className="p-3">
+    <div className="px-10 py-8 min-h-screen">
+      <h1 className="text-white pl-1 text-2xl font-bold mb-4">Messages</h1>
+      <div className="">
         {messages.map((message, index) => (
           <MessageCard
             key={index}

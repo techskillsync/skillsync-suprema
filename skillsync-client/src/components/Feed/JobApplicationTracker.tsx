@@ -86,7 +86,7 @@ const JobApplicationTracker = ({}) => {
   };
 
   return (
-    <div className="h-screen p-5">
+    <div className="min-h-screen bg-black">
       <Toaster />
       {/* Div to load in all needed tailwind background color classes */}
       <div className="hidden">
@@ -102,14 +102,14 @@ const JobApplicationTracker = ({}) => {
         </h1>
         <Spacer className={"!w-full !h-[0.5px] my-4"} />
         {savedJobs.map((item, index) => (
-          <div className="mb-4" key={index}>
+          <div className="mb-4 fade-in" key={index}>
             <div className="relative mb-4">
               <JobDescriptionCard
                 showGlassdoorRating={false}
                 jobDescription={item}
                 action={() => setSelectedJob(item)}
               />
-              <div className="absolute text-black top-2 right-2">
+              <div className="absolute fade-in text-black top-2 right-2">
                 <div className="flex items-center">
                   <div
                     className={`rounded-l p-1 h-[38px] bg-${
