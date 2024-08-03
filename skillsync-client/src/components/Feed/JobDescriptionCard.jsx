@@ -4,6 +4,7 @@ import {
   FaBookmark,
   FaLink,
   FaMapMarkerAlt,
+  FaMoneyBill,
   FaSave,
 } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
@@ -28,6 +29,9 @@ const JobDescriptionCard = ({
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
   const [saved, setSaved] = useState(false);
+
+
+  const salary = parseSalary(jobDescription.description);
 
   const handleSave = async () => {
     if (saved) {
@@ -166,6 +170,12 @@ const JobDescriptionCard = ({
             {jobDescription.location}
           </p>
         </div>
+       {salary &&  <div className="flex items-center mt-2">
+          <FaMoneyBill className="mr-2" />
+          <p className={mini ? "text-base" : "text-lg"}>
+            {salary}
+          </p>
+        </div>}
         {/* <div>
           <p>{jobDescription.description.substring(0, 100) + '...'}</p>
         </div> */}
@@ -231,5 +241,40 @@ const JobDescriptionCard = ({
     </div>
   );
 };
+
+function parseSalary(jobDescription) {
+  const salaryPatterns = [
+    /CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?per\s?month/gi,
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $115,100 - $161,200 CAN Annually
+    /\$?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD - 70,000 USD (annually)
+    /\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi, // Matches $135K/yr - $195K/yr
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?/gi, // Matches $112,000 - $140,000
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars - 70,000 dollars (annually)
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $50,000 USD (annually)
+    /£\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:GBP)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches £50,000 GBP (annually)
+    /€\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:EUR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches €50,000 EUR (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|rupees|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:k|K)\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50k CAD (annually)
+    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi // Matches CA$115,000/yr - CA$150,000/yr
+];
+
+  for (const pattern of salaryPatterns) {
+    const match = jobDescription.match(pattern);
+    if (match) {
+      if (
+        /\$|\b(USD|CAD|GBP|EUR|CAN|INR)\b|\b(annually|monthly|yearly|\/yr|\/mo)\b/.test(
+          match[0]
+        )
+      ) {
+        {
+          return match[0];
+        }
+      }
+    }
+  }
+
+  return false;
+}
 
 export default JobDescriptionCard;
