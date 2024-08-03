@@ -48,16 +48,6 @@ const levelOptions = [
 const OnboardingPage = () => {
   const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    console.log("Page details:")
-    console.log(page)
-    console.log(pages.length)
-    if (page === pages.length - 1) {
-      redirectUser('home', true);
-    }
-
-  }, [page])
-
   const [preferences, setPreferences] = useState({
     name: "",
     lastName: "",
