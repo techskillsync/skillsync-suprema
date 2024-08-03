@@ -20,7 +20,7 @@ const ProfileCard = ({
     >
       <div className="relative">
         <div
-          className={`h-full transition-all duration-200 bg-[#1e1e27] rounded-md flex flex-col items-center lg:flex-row space-x-3 text-lg py-5 pb-9
+          className={`fade-in h-full transition-all duration-200 bg-[#1e1e27] rounded-md flex flex-col items-center lg:flex-row space-x-3 text-lg py-5 pb-9
             ${collapsed ? "px-3 w-18" : "px-5 w-56 "}
          `}
         >

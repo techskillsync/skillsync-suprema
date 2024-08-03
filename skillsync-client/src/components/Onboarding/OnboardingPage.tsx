@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import Select from "react-select";
 import LocationSelector from "./LocationSelector";
+import FinishScreen from "./FinishScreen";
 
 const importantInNewRoleOptions = [
   "Teamwork",
@@ -188,7 +189,7 @@ const OnboardingPage = () => {
       </p>
       <div className="flex flex-col w-1/2 mt-3 h-[200px]">
         <div
-          className="file-upload-dropzone h-full"
+          className="file-upload-dropzone h-full bg-[#0e0e1e]"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={handleDropzoneClick}
@@ -286,7 +287,7 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center pb-12">
       <p className="text-[22px]">Experience Level</p>
       <p className="text-[16px] mt-2 text-center">
-        What experience level are you looking for?
+        At what experience levels are you looking for jobs?
       </p>
       <div className="mt-3 flex flex-col justify-center space-y-2 w-1/2">
         {levelOptions.map((option) => (
@@ -303,12 +304,7 @@ const OnboardingPage = () => {
       </div>
     </div>,
 
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <p className="text-[22px]">Finish</p>
-      <p className="text-[16px] mt-2 text-center">
-        You are all set. Click finish to complete the setup.
-      </p>
-    </div>,
+    <FinishScreen preferences={preferences} page={page} setPage={setPage} />,
   ];
 
   return (
