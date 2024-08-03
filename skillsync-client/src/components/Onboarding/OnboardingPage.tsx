@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import Select from "react-select";
 import LocationSelector from "./LocationSelector";
+import { redirectUser } from "../../utilities/redirect_user";
+import { AddResume } from "../../supabase/Resumes";
+import { UpdateJobPreferences } from "../../supabase/JobPreferences";
 
 const importantInNewRoleOptions = [
   "Teamwork",
@@ -44,14 +47,20 @@ const levelOptions = [
 const OnboardingPage = () => {
   const [page, setPage] = useState(0);
 
+  useEffect(() => {
+    console.log("Page details:")
+    console.log(page)
+    console.log(pages.length)
+    if (page === pages.length - 1) {
+      redirectUser('home', true);
+    }
+
+  }, [page])
+
   const [preferences, setPreferences] = useState({
     name: "",
     lastName: "",
     email: "",
-    password: "",
-    confirmPassword: "",
-    education: "",
-    skills: [],
     location: "",
     workAuthorization: "",
     startDate: "Immediately",
@@ -110,9 +119,7 @@ const OnboardingPage = () => {
     });
   };
 
-  const [selectedResumeFile, setSelectedResumeFile] = useState<File | null>(
-    null
-  );
+  const [selectedResumeFile, setSelectedResumeFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [loadedInitialPreferences, setLoadedInitialPreferences] =
@@ -134,6 +141,11 @@ const OnboardingPage = () => {
       setSelectedResumeFile(files[0]);
     }
   };
+  useEffect(() => {
+    if (selectedResumeFile) {
+      AddResume(selectedResumeFile, selectedResumeFile.name)
+    }
+  }, [selectedResumeFile])
 
   const handleDropzoneClick = () => {
     if (fileInputRef.current) {
@@ -143,14 +155,32 @@ const OnboardingPage = () => {
 
   useEffect(() => {
     async function setInitialPreferences() {
-      setPreferences({
-        ...preferences,
-        name: (await GetProfileInfo("name"))?.name ?? "",
-      });
+      const profile = await GetProfileInfo("name, last_name")
+      if (!profile) {console.warn("could not fetch first and last name in introduction slideshow") }
+      else {
+        const name = profile.name;
+        const last_name = profile.last_name;
+
+        setPreferences({
+          ...preferences,
+          name: name,
+          lastName: last_name,
+        });
+      }
       setLoadedInitialPreferences(true);
     }
     setInitialPreferences();
   }, []);
+
+  useEffect(() => {
+    UpdateJobPreferences({
+      "desired_culture": preferences.selectedNewRoleOptions,
+      "location": preferences.location,
+      "work_authorization": preferences.workAuthorization,
+      "start_time": preferences.startDate,
+      "experience_level": preferences.level,
+    });
+  }, [preferences])
 
   const pages = [
     <div className="w-full h-full flex flex-col items-center justify-center pt-12">
@@ -225,11 +255,10 @@ const OnboardingPage = () => {
         {importantInNewRoleOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.selectedNewRoleOptions.includes(option)
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.selectedNewRoleOptions.includes(option)
                 ? "opacity-100"
                 : "opacity-50"
-            }`}
+              }`}
             onClick={() => handleNewRoleOptionClick(option)}
           >
             {option}
@@ -250,11 +279,10 @@ const OnboardingPage = () => {
         {workAuthorizationOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.workAuthorization === option
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.workAuthorization === option
                 ? "opacity-100"
                 : "opacity-50"
-            }`}
+              }`}
             onClick={() => handleWorkAuthorizationOptionClick(option)}
           >
             {option}
@@ -271,9 +299,8 @@ const OnboardingPage = () => {
         {startDateOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.startDate === option ? "opacity-100" : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.startDate === option ? "opacity-100" : "opacity-50"
+              }`}
             onClick={() => handleStartDateOptionClick(option)}
           >
             {option}
@@ -292,9 +319,8 @@ const OnboardingPage = () => {
         {levelOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.level.includes(option) ? "opacity-100" : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.level.includes(option) ? "opacity-100" : "opacity-50"
+              }`}
             onClick={() => handleLevelOptionClick(option)}
           >
             {option}
