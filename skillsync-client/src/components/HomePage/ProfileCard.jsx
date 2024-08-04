@@ -24,12 +24,12 @@ const ProfileCard = ({
             ${collapsed ? "px-3 w-18" : "px-5 w-56 "}
          `}
         >
-            <div
-              className={`flex flex-col items-center justify-center rounded-full overflow-hidden 
-                ${collapsed ? "w-full" : 'w-1/3'}`}
-            >
-              <ProfilePicture />
-            </div>
+          <div
+            className={`flex flex-col items-center justify-center rounded-full overflow-hidden 
+                ${collapsed ? "w-full" : "w-1/3"}`}
+          >
+            <ProfilePicture />
+          </div>
           <div
             className={`flex flex-col justify-center text-left fade-in ${
               collapsed ? "hidden w-0" : "w-2/3"

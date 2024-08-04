@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   FaArrowRight,
   FaBookmark,
+  FaExclamationTriangle,
   FaLink,
   FaMapMarkerAlt,
   FaMoneyBill,
   FaSave,
 } from "react-icons/fa";
-import { FaUserGroup } from "react-icons/fa6";
+import { FaExclamation, FaUserGroup } from "react-icons/fa6";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
 import getGlassDoorRating from "../../utilities/get_glassdoor_rating";
@@ -24,6 +25,7 @@ const JobDescriptionCard = ({
   jobDescription,
   className = "",
   mini = false,
+  trackerDisplay = false,
   showGlassdoorRating = true,
   action = () => {},
 }) => {
@@ -222,7 +224,7 @@ const JobDescriptionCard = ({
             </SharePopup>
             <ReportPopup content={jobDescription.id}>
               <button className="ml-4 flex items-center bg-gray-200 text-gray-700 hover:bg-red-200 transition-all duration-150 rounded-full px-4 py-2">
-                <FaUserGroup />
+                <FaExclamationTriangle />
                 {!mini && <span className="ml-2">Report</span>}
               </button>
             </ReportPopup>
