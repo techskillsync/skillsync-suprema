@@ -10,18 +10,18 @@ const ProfileCard = ({
 }) => {
   return (
     <div
-      className={`rounded-lg p-[1.5px] bg-gradient-to-r 
+      className={`rounded-lg p-[1.5px] transition-all duration-300
        ${
          collapsed
-           ? "from-[#1e1e1e] via-[#1e1e1e] to-[#1e1e1e]"
-           : "from-green-400 via-blue-500 to-purple-600"
+           ? "bg-transparent"
+           : " bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"
        }
      `}
     >
       <div className="relative">
         <div
-          className={`fade-in h-full transition-all duration-200 bg-[#1e1e27] rounded-md flex flex-col items-center lg:flex-row space-x-3 text-lg py-5 pb-9
-            ${collapsed ? "px-3 w-18" : "px-5 w-56 "}
+          className={`fade-in h-full transition-all duration-300 rounded-md flex flex-col items-center lg:flex-row space-x-3 text-lg py-5 pb-9
+            ${collapsed ? "px-3 w-18 bg-[#1e1e1e]" : "px-5 w-56 bg-[#1e1e27] "}
          `}
         >
           <div

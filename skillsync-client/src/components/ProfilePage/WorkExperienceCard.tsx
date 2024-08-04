@@ -61,7 +61,7 @@ const WorkExperienceCard: React.FC<{
   };
 
   return (
-    <div className="!text=white mx-8 mb-4 rounded-lg bg-[#1e1e1e] p-4">
+    <div className="!text=white fade-in mx-8 mb-4 rounded-lg bg-[#1e1e1e] p-4">
       <div className="flex flex-col">
         {WorkExperienceInputField({
           item: "title",

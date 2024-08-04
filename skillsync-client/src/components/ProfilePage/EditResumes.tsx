@@ -163,15 +163,18 @@ const EditResumes = () => {
         <div className="mb-4 ml-1">
           <h1 className="text-white text-2xl font-bold">Your resumes</h1>
         </div>
-        <div className="flex space-x-4 flex-wrap">
+        <div className="flex gap-4 flex-wrap">
           {resumes &&
             resumes.map((resume) => (
               <div
                 key={resume.id}
                 className="resume-card min-w-48 bg-[#1e1e1e] rounded shadow-md p-3 cursor-pointer"
-                onClick={() => handleOpenResume(resume)}
               >
-                <div className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded">
+                <div
+                  className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded
+                "
+                  onClick={() => handleOpenResume(resume)}
+                >
                   <IoDocument className="text-4xl" />
                 </div>
                 <div className="resume-details mt-3">

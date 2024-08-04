@@ -38,9 +38,33 @@ async function GetWorkExperiences(): Promise<WorkExperience[] | null> {
 async function UpdateWorkExperience(
   workExperience: WorkExperience
 ): Promise<boolean> {
-    const user_id = await GetUserId();
+  const user_id = await GetUserId();
+
+  if (typeof workExperience.startDate === "string") {
+    // Parse date by regex if in MM/YY format
+    if ((workExperience.startDate as string).match(/^\d{2}\/\d{2}$/)) {
+      const [month, year] = (workExperience.startDate as string).split("/");
+      workExperience.startDate = new Date(+year, +month - 1);
+    } else {
+      workExperience.startDate = new Date(workExperience.startDate);
+    }
+  }
+
+  if (typeof workExperience.endDate === "string") {
+    if (workExperience.endDate === "" || workExperience.endDate === "Present") {
+      workExperience.endDate = null;
+    } else {
+      if ((workExperience.endDate as string).match(/^\d{2}\/\d{2}$/)) {
+        const [month, year] = (workExperience.endDate as string).split("/");
+        workExperience.endDate = new Date(+year, +month - 1);
+      } else {
+        workExperience.endDate = new Date(workExperience.endDate);
+      }
+    }
+  }
+
   const updates = {
-    user_id:   user_id,
+    user_id: user_id,
     work_experience_id: workExperience.id,
     job_title: workExperience.title,
     company_name: workExperience.company,
@@ -50,12 +74,13 @@ async function UpdateWorkExperience(
     location: workExperience.location,
   };
   console.log("Updating existing work experience", updates);
+
   try {
     const { data, error } = await supabase
       .from("work_experiences")
       .upsert(updates);
 
-      console.log(data);
+    console.log(data);
 
     if (error) {
       throw error;
@@ -71,7 +96,20 @@ async function UpdateWorkExperience(
 async function SaveNewWorkExperience(
   workExperience: WorkExperience
 ): Promise<boolean> {
+  
+  if (typeof workExperience.startDate === "string") {
+    workExperience.startDate = new Date(workExperience.startDate);
+  }
+  
+  if (typeof workExperience.endDate === "string") {
+    if (workExperience.endDate === "") {
+      workExperience.endDate = null;
+    } else {
+      workExperience.endDate = new Date(workExperience.endDate);
+    }
+  }
   console.log("Saving NEW work experience", workExperience);
+
   try {
     const { data, error } = await supabase.from("work_experiences").insert({
       user_id: await GetUserId(),

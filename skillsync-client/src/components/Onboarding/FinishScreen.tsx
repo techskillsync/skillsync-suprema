@@ -43,16 +43,18 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
       experience_level: preferences.level,
     });
     if (resumeFile) {
-      AddResume(resumeFile, "Default Resume - " + preferences.name);
-      const resumeData = await parseResume(resumeFile);
+      await AddResume(resumeFile, "Default Resume - " + preferences.name);
+      const resumeData = await JSON.parse(await parseResume(resumeFile));
       console.log("Parsed resume data:", resumeData);
 
-      SetProfileInfo(resumeData);
+      const {work_experiences, certifications, ...profileData} = resumeData;
+      console.log("Profile data:", profileData);
+      await SetProfileInfo(profileData);
 
-      for (let i = 0; i < resumeData.work_experiences.length; i++) {
-        const workExperience = resumeData.workExperiences[i];
+      for (let i = 0; i < work_experiences.length; i++) {
+        const workExperience = work_experiences[i];
         console.log("Adding work experience:", workExperience);
-        SaveNewWorkExperience(workExperience);
+        await SaveNewWorkExperience(workExperience);
       }
     }
     setLoading(false);
@@ -62,7 +64,7 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
     console.log(preferences);
     console.log(resumeFile);
     await onboardUser();
-    window.location.href = "/home";
+    // window.location.href = "/home";
   };
 
   return (
@@ -162,11 +164,11 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
         >
           Go back
         </button>
-        <button
+        {/* <button
           onClick={() => {setLoading(!loading)}}
         >
           Test
-        </button>
+        </button> */}
       </div>
     </div>
   );
