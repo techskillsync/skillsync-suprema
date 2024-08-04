@@ -25,6 +25,21 @@ const Footer = () => {
                 </article>
                 <aside className='flex flex-wrap gap-6 px-10 justify-center my-10 md:my-[unset] md:gap-14'>
                     <article className='flex flex-col gap-3'>
+                        <h3 className='text-allotrix-std text-sm'>
+                            <Link to="/">
+                                Product
+                            </Link>
+                        </h3>
+                        <ul className='text-sm'>
+                            <li>
+                                <a onClick={() => {window.open('/SkillSyncPrivacyPolicy.html', '_blank')}}
+                                    className="cursor-pointer">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                        </ul>
+                    </article>
+                    <article className='flex flex-col gap-3'>
                         <h3 className='text-sm'>
                             <Link to="/contact">
                                 Contact
@@ -32,7 +47,7 @@ const Footer = () => {
                         </h3>
                         <ul className='text-sm'>
                             <li>
-                                <a className='flex gap-1 items-center' href="mailto:allotrixapp@gmail.com?subject=Meeting%20Request">
+                                <a className='flex gap-1 items-center' href="mailto:info@skillsync.work?subject=Meeting%20Request">
                                     <IoMdMail />
                                     info@skillsync.work
                                 </a>
