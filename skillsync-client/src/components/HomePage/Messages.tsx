@@ -5,6 +5,7 @@ import { JobListing, Message } from "../../types/types";
 import JobDescriptionCard from "../Feed/JobDescriptionCard";
 import { GetJobListingById } from "../../supabase/GetJobListings";
 import { FindAvatar, FindUserById } from "../../supabase/OtherUsers";
+import { FaEnvelope, FaMailBulk } from "react-icons/fa";
 
 const Messages = ({ setSelectedJob }) => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -24,7 +25,7 @@ const Messages = ({ setSelectedJob }) => {
   return (
     <div className="px-10 py-8 min-h-screen">
       <h1 className="text-white pl-1 text-2xl font-bold mb-4">Messages</h1>
-      <div className="">
+      {messages.length > 0 ? <div className="">
         {messages.map((message, index) => (
           <MessageCard
             key={index}
@@ -32,7 +33,12 @@ const Messages = ({ setSelectedJob }) => {
             setSelectedJob={setSelectedJob}
           />
         ))}
-      </div>
+      </div> 
+      : <div className="h-full">
+        <FaEnvelope className="mt-24 text-6xl text-white mx-auto" />
+        <p className="text-center mt-3 text-lg">You have no messages</p>
+      </div>  
+    }
     </div>
   );
 };
