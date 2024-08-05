@@ -54,7 +54,15 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
       for (let i = 0; i < work_experiences.length; i++) {
         const workExperience = work_experiences[i];
         console.log("Adding work experience:", workExperience);
-        await SaveNewWorkExperience(workExperience);
+        await SaveNewWorkExperience({
+          id: "",
+          title: workExperience.title,
+          company: workExperience.company,
+          description: workExperience.description,
+          startDate: workExperience.start_date,
+          endDate: workExperience.end_date,
+          location: workExperience.location,
+        });
       }
     }
     setLoading(false);

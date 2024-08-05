@@ -11,6 +11,7 @@ import specializations from "../../constants/specialization_list.js";
 import programs from "../../constants/program_list.js";
 import EditProfilePicture from "./EditProfilePicture.tsx";
 import { FaArrowLeft } from "react-icons/fa";
+import {toast, Toaster} from 'react-hot-toast';
 
 const EditProfileDetails = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -98,7 +99,13 @@ const EditProfileDetails = ({}) => {
       race,
     };
 
-    await SetProfileInfo(updates);
+    const updateProfilePromise = SetProfileInfo(updates);
+
+    toast.promise(updateProfilePromise, {
+      loading: "Updating profile...",
+      success: "Profile updated",
+      error: "Error updating profile",
+    });
 
     setLoading(false);
   }

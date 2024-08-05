@@ -51,9 +51,7 @@ async function SetProfileInfo(updates): Promise<true | false> {
       throw new Error("no updates passed");
     }
 
-    updates["id"] = await GetUserId();
     console.log("Updating profile info...");
-    console.log(updates);
 
     // Filter updates to only include allowed keys
     const filteredUpdates: { [key: string]: any } = Object.keys(updates)
@@ -62,6 +60,18 @@ async function SetProfileInfo(updates): Promise<true | false> {
         obj[key] = updates[key];
         return obj;
       }, {});
+
+    // print the differences between updates and filteredUpdates
+    filteredUpdates["id"] = await GetUserId();
+
+    // const filteredUpdates = {
+    //   name: updates.name,
+    //   last_name: updates.last_name,
+    //   school: updates.school,
+    // }
+
+    console.log(filteredUpdates);
+
 
     if (!filteredUpdates) {
       throw new Error("no valid updates passed");
