@@ -332,7 +332,7 @@ const OnboardingPage = () => {
         <div className="flex items-center space-x-2">
           <div className="w-full bg-[#f5f5f5] h-4 rounded-full">
             <div
-              className="h-4 bg-gradient-to-r from-blue-500 to-green-500 transition-all ease-in-out duration-500 rounded-full"
+              className="h-4 bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  transition-all ease-in-out duration-500 rounded-full"
               style={{
                 width: `${((page / (pages.length - 1)) * 100).toFixed(0)}%`,
               }}

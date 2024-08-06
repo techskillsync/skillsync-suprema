@@ -158,7 +158,7 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
           You're all set! Click finish to complete the setup.
         </p>
         <button
-          className="bg-gradient-to-r w-64 text-lg from-blue-500 to-green-500 text-white px-4 py-2 border-none rounded-md mt-4"
+          className="bg-gradient-to-r w-64 text-lg  from-[#03BD6C] to-[#36B7FE]  text-white px-4 py-2 border-none rounded-md mt-4"
           onClick={() => handleFinish()}
           disabled={loading}
         >

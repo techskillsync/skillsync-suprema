@@ -14,6 +14,8 @@ import {
   ChatBubbleLeftRightIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
 
 const Home = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -91,25 +93,26 @@ const Home = () => {
           </p>
         </div>
         <div className='w-full md:w-full overflow-hidden flex after:content[""] after:dark:from-brand-dark after:from-background after:bg-gradient-to-l after:right-0 after:top-0 after:bottom-0 after:w-20 after:z-10 after:absolute before:content[""] before:dark:from-brand-dark before:from-background before:bg-gradient-to-r before:left-0 before:top-0 before:bottom-0 before:w-20 before:z-10 before:absolute'>
-          {
-
-            [...Array(2)].map((arr, i) => (
-              <div key={i} className='flex flex-nowrap animate-slide'>
-                {
-                  CLIENTS.map((client) => (
-                    <div key={client.alt} className='relative w-[200px] m-10 shrink-0 flex items-center'>
-                      <img src={client.logo} alt={client.alt} className="object-contain max-w-none w-[100px] filter grayscale" />
-                    </div>
-                  ))
-                }
-              </div>
-            ))
-          }
+          {[...Array(2)].map((arr, i) => (
+            <div key={i} className="flex flex-nowrap animate-slide">
+              {CLIENTS.map((client) => (
+                <div
+                  key={client.alt}
+                  className="relative w-[200px] m-10 shrink-0 flex items-center"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.alt}
+                    className="object-contain max-w-none w-[100px] filter grayscale"
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
 
       {/*section 2 */}
-
 
       <section className="w-full bg-[black]  md:py-10">
         <h2 className="md:text-5xl text-4xl sm:text-2xl px-4 text-white text-center  font-bold py-10">
@@ -125,30 +128,21 @@ const Home = () => {
               title="Just Start With Registration"
               description="Quickly fill out the registration details and verify your personal documents. That's it. No bullshit."
               isExpanded={expandedTab === 1}
-              onClick={() =>
-                handleTabClick(
-                  1)
-              }
+              onClick={() => handleTabClick(1)}
             />
             <GradientTab
               number="2"
               title="Use SkillSync.’s tools to build your resume"
               description="Quickly fill out the registration details and verify your personal documents. That's it. No bullshit."
               isExpanded={expandedTab === 2}
-              onClick={() =>
-                handleTabClick(
-                  2)
-              }
+              onClick={() => handleTabClick(2)}
             />
             <GradientTab
               number="3"
               title="Finally, sit back and relax"
               description="Quickly fill out the registration details and verify your personal documents. That's it. No bullshit."
               isExpanded={expandedTab === 3}
-              onClick={() =>
-                handleTabClick(
-                  3)
-              }
+              onClick={() => handleTabClick(3)}
             />
           </aside>
           <div className="flex w-5/12 h-full items-center justify-center rounded-md">
@@ -163,10 +157,7 @@ const Home = () => {
         </article>
       </section>
 
-      <section
-        id="secretariat"
-        className=" w-full bg-[#0b0c10] py-10 "
-      >
+      <section id="secretariat" className=" w-full bg-[#0b0c10] py-10 ">
         <h2 className="flex flex-col mt-10 mb-10 gap-2 text-white font-bold text-3xl md:text-6xl text-center relative">
           <span className="z-10">A 21st Century platform</span>
           <br />
@@ -220,7 +211,17 @@ const Home = () => {
           Low success rates? You aren’t the problem. The job platforms you use
           are. SkillSync is here to change the game.{" "}
         </p>
-        <Carousel
+        <a
+          className="
+        bg-gradient-to-r font-medium flex items-center from-[#03BD6C] to-[#36B7FE] text-white  mx-auto text-2xl rounded-xl border-none p-6 hover:p-8 transition-all duration-300
+        "
+          href="https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg?authuser=0&hl=en"
+          target="_blank"
+>
+          Get the Extension
+          <FaArrowRight className="ml-2" />
+        </a>
+        {/* <Carousel
           autoPlay
           infiniteLoop
           interval={3000}
@@ -244,7 +245,7 @@ const Home = () => {
               ))}
             </div>
           ))}
-        </Carousel>
+        </Carousel> */}
       </section>
       <section className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 px-3 gap-5 text-[black] w-full md:w-[75%] mx-auto items-center">
         <div className="flex  flex-col md:flex-row w-full gap-3 md:gap-10 border rounded-xl  bg-[white] py-2 px-8 h-[240px] md:items-center mx-auto">
@@ -256,7 +257,12 @@ const Home = () => {
                 <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]"></span>
               </span>{" "}
             </h3>
-            <button className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52">
+            <button
+              className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52"
+              onClick={() => {
+                window.location.href = "/signup";
+              }}
+            >
               Get Started
             </button>
           </div>
@@ -276,12 +282,12 @@ const Home = () => {
                 <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]"></span>
               </span>{" "}
             </h3>
-            <button className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52"
-            onClick={
-              () => {window.location.href = '/comingSoon'}
-            }
+            <button
+              className="rounded-lg bg-black font-bold text-white hover:bg-gradient-to-r from-[#03BD6C] to-[#36B7FE]  border-2 outline-none p-2 w-52"
+              onClick={() => {
+                window.location.href = "/comingSoon";
+              }}
             >
-              
               Hire
             </button>
           </div>
@@ -309,11 +315,9 @@ const Home = () => {
             <p className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nam, iste optio tenetur illum facilis odio eum aperiam dolore ut! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa totam, quis qui a praesentium incidunt voluptate aliquid quam quibusdam quia.</p>
           </div>
       </section> */}
-      <Footer/>
+      <Footer />
     </main>
   );
 };
 
 export default Home;
-
-
