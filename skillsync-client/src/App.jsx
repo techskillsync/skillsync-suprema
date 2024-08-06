@@ -35,7 +35,9 @@ function AppRoutes() {
       <Route path="/signup" element={<Timer Component={SignUpPage} />} />
       <Route
         path="/"
-        element={<Timer Component={user ? HomePage : LandingPage} />}
+        element={user ? <Navigate to="/home" /> 
+          : <Navigate to="/landingpage" />
+        }
       />
       <Route path="/landingpage" element={<Timer Component={LandingPage} />} />
       <Route path="/welcome" element={<Timer Component={OnboardingPage} />} />
