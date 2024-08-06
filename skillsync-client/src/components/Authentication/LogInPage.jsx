@@ -8,6 +8,7 @@ import supabase from "../../supabase/supabaseClient";
 import { LoadGoogleClient } from "../../supabase/userLogin";
 import { GetUserId } from "../../supabase/GetUserId";
 import { redirectUser } from "../../utilities/redirect_user";
+import { toast, Toaster } from "react-hot-toast";
 
 const LogInPage = () => {
   /*
@@ -38,21 +39,29 @@ const LogInPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-    const loginObject = await EmailLogin(email, password);
-
-    if (!loginObject.success) {
-      console.log("Error signing user in - " + loginObject.data);
-      return;
-    } else {
-      window.location.href = "/home";
+    try {
+      const result = await EmailLogin(email, password);
+      if (result.success) {
+        toast.success('Login successful!');
+        window.location.href = "/home";
+      } else {
+        console.log(result)
+        toast.error('Login failed: ' + result.data.message);
+      }
+    } catch (error) {
+      toast.error('An unexpected error occurred: ' + error.message);
     }
+    setPassword("");
+    document.getElementById("password").value = "";
   }
 
   return (
     <div className="flex h-screen bg-black">
+      <Toaster />
       <div className="w-1/2 bg-gray-100">
         <InfoCarousel />
       </div>
@@ -65,26 +74,26 @@ const LogInPage = () => {
             Welcome Back!
           </h2>
           <div className="mb-4 md:flex space-x-2">
-              <LoadGoogleClient />
-              <div
-                id="g_id_onload"
-                data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
-                data-context="signup"
-                data-ux_mode="popup"
-                data-callback="handleSignInWithGoogle"
-                data-itp_support="true"
-                data-use_fedcm_for_prompt="true"
-              ></div>
+            <LoadGoogleClient />
+            <div
+              id="g_id_onload"
+              data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
+              data-context="signup"
+              data-ux_mode="popup"
+              data-callback="handleSignInWithGoogle"
+              data-itp_support="true"
+              data-use_fedcm_for_prompt="true"
+            ></div>
 
-              <div
-                className="g_id_signin"
-                data-type="standard"
-                data-shape="rectangular"
-                data-theme="outline"
-                data-text="signin_with"
-                data-size="large"
-                data-logo_alignment="left"
-              ></div>
+            <div
+              className="g_id_signin"
+              data-type="standard"
+              data-shape="rectangular"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="left"
+            ></div>
           </div>
           <Spacer text="or continue with" />
           <form onSubmit={handleFormSubmit}>
@@ -108,10 +117,22 @@ const LogInPage = () => {
             </div>
             <div className="flex items-center justify-between mb-4">
               <label className="flex items-center">
-                <input type="checkbox" className="form-checkbox" />
+                <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                value={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}
+                />
                 <span className="ml-2">Remember me</span>
               </label>
-              <a className="cursor-pointer text-gray-500 transition-all duration-150 hover:text-blue-200">
+              <a className="cursor-pointer text-gray-500 transition-all duration-150 hover:text-blue-200"
+              onClick={
+                async () => {
+                  if (!email) {
+                    toast.error('Please enter your email address first.');
+                    return;
+                  }
+                  await supabase.auth.resetPasswordForEmail(email);
+                }
+              }
+              >
                 Forgot password?
               </a>
             </div>
