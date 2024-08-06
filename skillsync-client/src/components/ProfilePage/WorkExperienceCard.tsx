@@ -70,14 +70,16 @@ const WorkExperienceCard: React.FC<{
     <div className="!text=white fade-in mx-8 mb-6 rounded-lg bg-[#1e1e1e] p-4">
       <div className="flex flex-col">
         <div className="flex justify-between">
-          {WorkExperienceInputField({
-            item: "title",
-            value: workExperience.title,
-            onChange: (e) => handleInputChange("title", e.target.value),
-            placeholder: "Title",
-            editable,
-            className: "text-2xl font-bold",
-          })}
+          <div className="flex flex-col w-[80%]">
+            {WorkExperienceInputField({
+              item: "title",
+              value: workExperience.title,
+              onChange: (e) => handleInputChange("title", e.target.value),
+              placeholder: "Title",
+              editable,
+              className: "text-2xl font-bold",
+            })}
+          </div>
           {editable ? (
             <div className="flex h-6">
               <button
