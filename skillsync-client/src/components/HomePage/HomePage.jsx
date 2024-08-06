@@ -3,6 +3,7 @@ import { MenuBar, menuItems } from "./MenuBar";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
 import { redirectUser } from "../../utilities/redirect_user";
+import { motion, AnimatePresence } from "framer-motion";
 
 const HomePage = () => {
   const [profileInfo, setProfileInfo] = useState(null);
@@ -25,10 +26,9 @@ const HomePage = () => {
     }
   }, [selectedJob, selectedPage]);
 
-
   useEffect(() => {
     redirectUser("/landingPage", false);
-    }, []);
+  }, []);
 
   useEffect(() => {
     if (selectedJob && selectedPage !== "Jobs") {
@@ -64,8 +64,7 @@ const HomePage = () => {
           setSidebarExpanded={setSidebarExpanded}
         />
       </div>
-      <div
-        className={`flex-1 transition-all duration-300 ease-in-out `} >
+      <div className={`flex-1 transition-all duration-300 ease-in-out `}>
         {popupBackground && (
           <div
             className={`fixed top-0 left-0 w-screen h-screen bg-black z-[98] transition-opacity duration-300 ${
@@ -78,18 +77,32 @@ const HomePage = () => {
           ></div>
         )}
         {isPanelVisible && (
+          <div
+            className={`fixed right-0 top-0 h-screen w-[33.33%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg ${
+              isPanelSlidingOut ? "slide-out" : "slide-in"
+            }`}
+          >
+            <JobDetailsSlide jobDescription={selectedJob} />
+          </div>
+        )}
         <div
-          className={`fixed right-0 top-0 h-screen w-[33.33%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg ${
-            isPanelSlidingOut ? "slide-out" : "slide-in"
-          }`}
+          className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
+          style={
+            sidebarExpanded ? { marginLeft: "250px" } : { marginLeft: "80px" }
+          }
         >
-          <JobDetailsSlide jobDescription={selectedJob} />
+          {" "}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedPage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {renderComponent()}
+            </motion.div>
+          </AnimatePresence>
         </div>
-      )}
-       <div
-        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
-       style={sidebarExpanded ? {marginLeft: "250px"}: {marginLeft: "80px"}}>        {renderComponent()}
-</div>
       </div>
     </div>
   );

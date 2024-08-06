@@ -8,6 +8,9 @@ import {
 } from "../../supabase/WorkExperience";
 import { confirm, confirmWrapper } from "../common/Confirmation";
 
+import { IoIosClose } from "react-icons/io";
+import { FaCross, FaPencilAlt, FaSave, FaTrash, FaXing } from "react-icons/fa";
+
 const WorkExperienceCard: React.FC<{
   workExperience: WorkExperience;
   deleteWorkExperienceCallback: (workExperienceId: string) => void;
@@ -27,7 +30,11 @@ const WorkExperienceCard: React.FC<{
 
   const handleDeleteWorkExperience = async () => {
     console.log("Deleting work experience confirmation");
-    if (await confirmWrapper("Are you sure you want to delete this work experience?")) {
+    if (
+      await confirmWrapper(
+        "Are you sure you want to delete this work experience?"
+      )
+    ) {
       if (typeof deleteWorkExperienceCallback === "function") {
         console.log("Deleting work experience", workExperienceState);
         deleteWorkExperienceCallback(workExperienceState.id);
@@ -36,7 +43,6 @@ const WorkExperienceCard: React.FC<{
       }
       DeleteWorkExperience(workExperienceState);
     } else {
-
     }
   };
 
@@ -61,16 +67,61 @@ const WorkExperienceCard: React.FC<{
   };
 
   return (
-    <div className="!text=white mx-8 mb-4 rounded-lg bg-[#1e1e1e] p-4">
+    <div className="!text=white fade-in mx-8 mb-6 rounded-lg bg-[#1e1e1e] p-4">
       <div className="flex flex-col">
-        {WorkExperienceInputField({
-          item: "title",
-          value: workExperience.title,
-          onChange: (e) => handleInputChange("title", e.target.value),
-          placeholder: "Title",
-          editable,
-          className: "text-2xl font-bold",
-        })}
+        <div className="flex justify-between">
+          <div className="flex flex-col w-[80%]">
+            {WorkExperienceInputField({
+              item: "title",
+              value: workExperience.title,
+              onChange: (e) => handleInputChange("title", e.target.value),
+              placeholder: "Title",
+              editable,
+              className: "text-2xl font-bold",
+            })}
+          </div>
+          {editable ? (
+            <div className="flex h-6">
+              <button
+              title="Save"
+                onClick={() => {
+                  handleSaveWorkExperience();
+                  setEditable(false);
+                }}
+                disabled={loading}
+                className="text-green-500 px-2 py-1 rounded-md mr-2"
+              >
+                <FaSave/>
+              </button>
+              <button
+              title="Cancel"
+                onClick={() => {
+                  setEditable(false);
+                }}
+                className="text-red-500 px-2 py-1 rounded-md flex items-center text-3xl"
+              >
+                ×
+              </button>
+            </div>
+          ) : (
+            <div className="flex h-6">
+              <button
+              title="Edit"
+                onClick={() => setEditable(true)}
+                className="text-green-400  px-2 py-1 rounded-md mr-2"
+              >
+                <FaPencilAlt/>
+              </button>
+              <button
+              title="Delete"
+                onClick={handleDeleteWorkExperience}
+                className="text-red-500  px-2 py-1 rounded-md"
+              >
+                <FaTrash/>
+              </button>
+            </div>
+          )}
+        </div>
         {WorkExperienceInputField({
           item: "company",
           value: workExperience.company,
@@ -122,44 +173,6 @@ const WorkExperienceCard: React.FC<{
         className: "w-full",
         isTextArea: true,
       })}
-
-      {editable ? (
-        <div className="flex">
-          <button
-            onClick={() => {
-              handleSaveWorkExperience();
-              setEditable(false);
-            }}
-            disabled={loading}
-            className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
-          >
-            Save
-          </button>
-          <button
-            onClick={() => {
-              setEditable(false);
-            }}
-            className="bg-red-500 text-white px-4 py-2 rounded-md"
-          >
-            Cancel
-          </button>
-        </div>
-      ) : (
-        <div className="flex">
-          <button
-            onClick={() => setEditable(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleDeleteWorkExperience}
-            className="bg-red-500 text-white px-4 py-2 rounded-md"
-          >
-            Delete
-          </button>
-        </div>
-      )}
     </div>
   );
 };

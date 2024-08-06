@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 const locationOptions = [
   { value: "Vancouver, Canada", label: "Vancouver, Canada" },
@@ -20,7 +20,7 @@ const LocationSelector = ({ onSelectLocation }) => {
   };
 
   return (
-    <Select
+    <CreatableSelect
       value={selectedLocation}
       onChange={handleChange}
       options={locationOptions}

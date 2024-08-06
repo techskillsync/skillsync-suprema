@@ -117,7 +117,7 @@ const MenuBar = ({
                   <div className={`fade-in w-64 ${collapsed && "hidden"}`}>
                     <span className="whitespace-nowrap" >{item.name}</span>
                     {notificationCounts[item.name] > 0 && (
-                      <span className="ml-auto  bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-semibold rounded-full px-2 py-0.5">
+                      <span className="ml-auto  bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  text-white text-sm font-semibold rounded-full px-2 py-0.5">
                         {notificationCounts[item.name]}
                       </span>
                     )}

@@ -9,6 +9,7 @@ import { FaDownload, FaPagelines, FaTrash } from "react-icons/fa";
 import { IoDocument, IoDownload } from "react-icons/io5";
 import { FaSheetPlastic } from "react-icons/fa6";
 import { confirmWrapper } from "../common/Confirmation";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditResumes = () => {
   const [resumes, setResumes] = React.useState<any[]>([]);
@@ -16,6 +17,8 @@ const EditResumes = () => {
   const [label, setLabel] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
+
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     async function fetchResumes() {
@@ -68,7 +71,12 @@ const EditResumes = () => {
     }
     setLoading(true);
     try {
-      await AddResume(selectedFile, label);
+      const addResumePromise = AddResume(selectedFile, label);
+      await toast.promise(addResumePromise, {
+        loading: "Adding resume...",
+        success: "Resume added",
+        error: "Error adding resume",
+      });
       const resumes = await GetResumes();
       setResumes(resumes);
       setSelectedFile(null);
@@ -84,9 +92,18 @@ const EditResumes = () => {
     if (await confirmWrapper("Are you sure you want to delete this resume?")) {
       setLoading(true);
       try {
-        await DeleteResume(resume_id);
-        const resumes = await GetResumes();
-        setResumes(resumes);
+        console.log("deleting resume", resume_id);
+        const deleteResumePromise = DeleteResume(resume_id);
+        const deleteSuccess = await toast.promise(deleteResumePromise, {
+          loading: "Deleting resume...",
+          success: "Resume deleted",
+          error: "Error deleting resume",
+        });
+        if (deleteSuccess) {
+          setResumes(
+            resumes.filter((resume) => resume.resume_id !== resume_id)
+          );
+        }
       } catch (error) {
         setError("Error deleting resume");
       } finally {
@@ -107,8 +124,15 @@ const EditResumes = () => {
     event.preventDefault();
   };
 
+  const handleDropzoneClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <div className="bg-black min-h-screen w-full pt-3">
+      <Toaster />
       <div className="file-upload-container p-6 m-8 bg-[#301a8b] rounded-lg">
         <div className="mb-4 ml-1">
           <h1 className="text-white text-2xl font-bold">Upload new resume</h1>
@@ -118,11 +142,13 @@ const EditResumes = () => {
             <div
               className="file-upload-dropzone h-full"
               onDrop={handleDrop}
+              onClick={handleDropzoneClick}
               onDragOver={handleDragOver}
             >
               <input
                 type="file"
                 onChange={handleFileChange}
+                ref={fileInputRef}
                 className="file-input h-full"
               />
               <div className="file-upload-icon">
@@ -151,28 +177,34 @@ const EditResumes = () => {
             <button
               onClick={handleAddResume}
               className="ml-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              disabled={loading}
             >
               Add Resume
             </button>
           </div>
         </div>
       </div>
-      {loading && <div className="text-white">Loading...</div>}
+      {/* {loading && <div className="text-white">Loading...</div>} */}
       {/* {error && <div className="text-red-500">{error}</div>} */}
       <div className="border-solid border-gray-600 border-2 m-8 rounded-lg p-6">
-        <div className="mb-4 ml-1">
+        <div className="mb-4 mx-1 flex justify-between">
           <h1 className="text-white text-2xl font-bold">Your resumes</h1>
+          <h1 className="text-white text-2xl font-bold">{resumes.length}</h1>
         </div>
-        <div className="flex space-x-4 flex-wrap">
+        <div className="flex gap-4 flex-wrap">
           {resumes &&
             resumes.map((resume) => (
               <div
                 key={resume.id}
                 className="resume-card min-w-48 bg-[#1e1e1e] rounded shadow-md p-3 cursor-pointer"
-                onClick={() => handleOpenResume(resume)}
               >
-                <div className="mx-auto resume-preview flex items-center justify-center h-16 w-16 bg-blue-500 text-white rounded">
-                  <IoDocument className="text-4xl" />
+                <div
+                  className="mx-auto resume-preview flex flex-col items-center justify-center h-16 w-16 bg-blue-500 text-white rounded
+                "
+                  onClick={() => handleOpenResume(resume)}
+                >
+                  <IoDocument className="text-4xl mt-0.5" />
+                  <p className="text-xs">{resume.resume_url.split('.')[1].toUpperCase() ?? ''}</p>
                 </div>
                 <div className="resume-details mt-3">
                   <div className="resume-filename text-lg text-center font-medium">
@@ -180,7 +212,9 @@ const EditResumes = () => {
                   </div>
                   <div className="resume-actions mt-2 flex space-x-2 items-center justify-center">
                     <button
-                      onClick={() => handleDeleteResume(resume.id)}
+                      onClick={() => {
+                        handleDeleteResume(resume.resume_id);
+                      }}
                       className="p-0 bg-transparent text-red-700 rounded"
                     >
                       <FaTrash />

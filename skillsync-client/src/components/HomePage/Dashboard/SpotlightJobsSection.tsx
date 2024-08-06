@@ -97,6 +97,7 @@ function SpotLightJobsSection({ setSelectedJob }) {
         {listings.map((item, index) => (
           <div className="flex-col min-w-[400px] fade-in" key={index}>
             <JobDescriptionCard
+            className="h-full"
               mini={true}
               jobDescription={item}
               action={() => {

@@ -17,15 +17,15 @@ const InputField = ({
   return (
     <div className="items-center w-full">
       {showLabel && (
-          <label
-            className={
-              "block text-sm min-w-[90px] !text-gray-200 py-1 whitespace-nowrap " +
-              (rounded ? "rounded-l" : "")
-            }
-            htmlFor={item.toLowerCase()}
-          >
-            {item}
-          </label>
+        <label
+          className={
+            "block text-sm min-w-[90px] !text-gray-200 py-1 whitespace-nowrap " +
+            (rounded ? "rounded-l" : "")
+          }
+          htmlFor={item.toLowerCase()}
+        >
+          {item + (required ? " *" : "")}
+        </label>
       )}
       <input
         id={id ?? item.toLowerCase()}
@@ -54,7 +54,7 @@ const selectFieldStyle = {
       window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "black"
         : "white",
-      padding: "0.2rem 0.4rem 0.2rem 0.4rem",
+    padding: "0.2rem 0.4rem 0.2rem 0.4rem",
     color:
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -101,8 +101,8 @@ const selectFieldStyle = {
   }),
   placeHolder: (base) => ({
     ...base,
-    backgroundColor: 'f00',
-    color:'f00',
+    backgroundColor: "f00",
+    color: "f00",
   }),
   menuList: (base) => ({
     ...base,
@@ -239,16 +239,16 @@ const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <div className="w-full" style={{ position: "relative" }}>
       <div className="items-center">
-      {showLabel && (
+        {showLabel && (
           <label
             className={
               "block text-sm min-w-[90px] !text-gray-200 py-1 whitespace-nowrap "
             }
             htmlFor={item.toLowerCase()}
           >
-            {item}
+            {item + (required ? " *" : "")}
           </label>
-      )}
+        )}
         {creatable ? (
           <CreatableSelect
             className={className + " w-full"}
