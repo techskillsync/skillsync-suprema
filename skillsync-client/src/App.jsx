@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import LandingPage from "./components/LandingPage/LandingPage";
 import LogInPage from "./components/Authentication/LogInPage";
@@ -33,10 +33,14 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<Timer Component={LogInPage} />} />
       <Route path="/signup" element={<Timer Component={SignUpPage} />} />
-      <Route path="/" element={<Timer Component={user ? HomePage : LandingPage} />} />
+      <Route
+        path="/"
+        element={<Timer Component={user ? HomePage : LandingPage} />}
+      />
       <Route path="/landingpage" element={<Timer Component={LandingPage} />} />
       <Route path="/welcome" element={<Timer Component={OnboardingPage} />} />
       <Route path="/home/*" element={<HomePage />} />
+      <Route path="/home" element={<Navigate to="/home/dashboard" />} />
       <Route path="/confirm" element={<Timer Component={ConfirmEmailPage} />} />
       <Route path="/comingSoon" element={<Timer Component={ComingSoon} />} />
       <Route path="/interface" element={<Timer Component={Interface} />} />
