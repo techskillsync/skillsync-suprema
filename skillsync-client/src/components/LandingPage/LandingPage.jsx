@@ -94,6 +94,7 @@ const Home = () => {
                 label: country,
               }))}
               placeholder="Country"
+              formatCreateLabel={(inputValue) => `${inputValue}`}
               value={selectedCountry}
               onChange={handleCountryChange}
               styles={selectFieldStyle}
@@ -102,6 +103,7 @@ const Home = () => {
             <CreatableSelect
               className="p-2 w-48 rounded border-0"
               isClearable
+              formatCreateLabel={(inputValue) => `${inputValue}`}
               options={(states[selectedCountry?.value] || []).map((state) => ({
                 value: state,
                 label: state,
@@ -116,13 +118,12 @@ const Home = () => {
               className="p-2  w-48 rounded border-0"
               styles={selectFieldStyle}
               isClearable
-              options={
-                (cities[selectedCountry?.value]?.[selectedState?.value] ||
-                []).map((city) => ({
-                  value: city,
-                  label: city,
-                }))
-              }
+              options={(
+                cities[selectedCountry?.value]?.[selectedState?.value] || []
+              ).map((city) => ({
+                value: city,
+                label: city,
+              }))}
               placeholder="Location"
               value={selectedLocation}
               onChange={handleLocationChange}
@@ -134,22 +135,23 @@ const Home = () => {
             <button
               className="px-16 bg-[#03BD6C] rounded-md py-2"
               onClick={() => {
-                
                 console.log(selectedCountry);
                 console.log(selectedState);
                 console.log(selectedLocation);
-                
+
                 const searchTerms = document.getElementById("search")?.value;
                 console.log(searchTerms);
                 const locationSearchTerm = `${
-                  selectedLocation?.value ?  (selectedLocation.value  + ", ") : "" 
-                }${selectedState?.value ?  (selectedState.value  + ", ") : "" }${
-                  selectedCountry?.value ?  selectedCountry.value : "" 
-                }`; 
-                console.log(`/home/jobs?location=${locationSearchTerm.replace(
-                  /,+$/,
-                  ""
-                )}&keywords=${searchTerms}`)
+                  selectedLocation?.value ? selectedLocation.value + ", " : ""
+                }${selectedState?.value ? selectedState.value + ", " : ""}${
+                  selectedCountry?.value ? selectedCountry.value : ""
+                }`;
+                console.log(
+                  `/home/jobs?location=${locationSearchTerm.replace(
+                    /,+$/,
+                    ""
+                  )}&keywords=${searchTerms}`
+                );
                 window.location.href = `/home/jobs?location=${locationSearchTerm.replace(
                   /,+$/,
                   ""
@@ -159,13 +161,14 @@ const Home = () => {
               Search
             </button>
             <p className="hidden md:block">Or</p>
-            <button className="px-16 bg-[#175092] rounded-md py-2"
-            onClick={
-              () => {
+            <button
+              className="px-16 bg-[#175092] rounded-md py-2"
+              onClick={() => {
                 // Scrolls down
-                document.getElementById("secretariat").scrollIntoView({ behavior: "smooth" });
-              }
-            }
+                document
+                  .getElementById("secretariat")
+                  .scrollIntoView({ behavior: "smooth" });
+              }}
             >
               Explore
             </button>
