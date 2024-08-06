@@ -42,6 +42,7 @@ async function AddResume(
     const { error } = await supabase.from("user_resumes").insert(updates);
     if (error) {
       throw error.message;
+      return false;
     }
 
     console.log("Done");
@@ -101,28 +102,46 @@ async function GetResume(resume_id): Promise<any> {
   };
 }
 
-async function DeleteResume(resume_id): Promise<Boolean> {
+async function DeleteResume(
+  resume_id,
+  resume_storage_path = null
+): Promise<Boolean> {
   const user_id = await GetUserId();
 
-  const storage_path = await supabase
-    .from("user_resumes")
-    .select()
-    .eq("id", user_id)
-    .eq("resume_id", resume_id)
-    .single()
-    .then((res) => {
-      return res.data.resume_url;
-    });
+  console.log("Getting storage URL...", resume_id);
 
-  const { error } = await supabase
+  const storage_path =
+    resume_storage_path ??
+    (await supabase
+      .from("user_resumes")
+      .select()
+      .eq("user_id", user_id)
+      .eq("resume_id", resume_id)
+      .single()
+      .then((res) => {
+        return res.data.resume_url;
+      }));
+  console.log("Storage path: ", storage_path);
+
+  console.log("Removing table record");
+  const { data, error } = await supabase
     .from("user_resumes")
     .delete()
     .eq("user_id", user_id)
     .eq("resume_id", resume_id);
+  console.log(data);
 
+  console.log("Done");
+  console.log("Removing storage file");
   const { error: deleteError } = await supabase.storage
-    .from(`resumes/${user_id}`)
-    .remove([storage_path]);
+    .from(`resumes`)
+    .remove([`${user_id}/${storage_path}`]);
+  console.log("Done");
+
+  if (deleteError) {
+    console.warn(deleteError);
+    return false;
+  }
 
   if (error) {
     console.warn(error);
