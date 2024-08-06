@@ -26,22 +26,17 @@ function Feed() {
 
   const [selectedJob, setSelectedJob] = useState<JobListing | null>();
 
-  useEffect(() => {
-    if (preferencesLoaded) {
-      fetchListings();
-    }
-  }, [currentPage, preferencesLoaded]);
 
   useEffect(() => {
     console.log("Search value changed", searchValue);
   }, [searchValue]);
 
   useEffect(() => {
+    console.log("Filter or page changed:", currentPage, preferences);
     if (preferencesLoaded) {
-      console.log("Filters changed:", preferences);
       fetchListings();
     }
-  }, [preferences]);
+  }, [currentPage, preferences]);
 
   async function fetchListings() {
     console.log("Refreshing listings...");
@@ -90,6 +85,7 @@ function Feed() {
   }
 
   function handleSearch() {
+    console.log("Handling Search...");
     setCurrentPage(1);
     setTotalPages(0);
     setListings([]);

@@ -32,10 +32,6 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
     citizenship: "",
   });
 
-  useEffect(() => {
-    console.log("Search filters changed:", userPreferences);
-  }, [userPreferences]);
-
   async function fetchAndSet() {
     const urlParams = new URLSearchParams(window.location.search);
   const location = urlParams.get('location');
