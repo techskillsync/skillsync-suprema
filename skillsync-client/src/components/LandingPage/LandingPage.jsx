@@ -7,6 +7,7 @@ import Navbar from "./Navbar.jsx";
 import MobileNavbar from "./MobileNavbar.jsx";
 import Footer from "./Footer.jsx";
 import "./LandingPage.css";
+import CreatableSelect from "react-select/creatable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -16,6 +17,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
+import { countries, states, cities } from "../../constants/location_list.js";
 
 const Home = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -23,6 +25,25 @@ const Home = () => {
 
   const [expandedTab, setExpandedTab] = useState(1);
   const [currIMG, setCurrIMG] = useState(IMGS[0]);
+
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const handleStateChange = (selectedOption) => {
+    setSelectedState(selectedOption);
+    setSelectedLocation(null);
+  };
+
+  const handleLocationChange = (selectedOption) => {
+    setSelectedLocation(selectedOption);
+  };
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setSelectedState(null);
+    setSelectedLocation(null);
+  };
 
   const handleTabClick = (number) => {
     setExpandedTab(expandedTab === number ? 1 : number);
@@ -59,28 +80,82 @@ const Home = () => {
           <div className="flex md:flex-row flex-col md:gap-2 p-1 justify-center  text-[black] md:bg-[white] w-[80%] md:w-[65%] bg-[black] rounded-md">
             <input
               type="text"
+              id="search"
               placeholder="Search job by name / type / category"
-              className="p-2 rounded w-full max-w-md border-0"
+              className="p-2 rounded w-2/3 max-w-md border-0"
             />
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
-            <select className="p-2 rounded border-0">
-              <option value="any">Country: Any</option>
-            </select>
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
-
-            <select className="p-2 rounded border-0">
-              <option value="any">State: Any</option>
-            </select>
+            <CreatableSelect
+              className="p-2  w-48 rounded border-0"
+              isClearable
+              options={countries.map((country) => ({
+                value: country,
+                label: country,
+              }))}
+              placeholder="Country"
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              styles={selectFieldStyle}
+            />
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
-
-            <select className="p-2 rounded border-0">
-              <option value="any">Location: Any</option>
-            </select>
+            <CreatableSelect
+              className="p-2 w-48 rounded border-0"
+              isClearable
+              options={(states[selectedCountry?.value] || []).map((state) => ({
+                value: state,
+                label: state,
+              }))}
+              placeholder="State"
+              value={selectedState}
+              styles={selectFieldStyle}
+              onChange={handleStateChange}
+            />
+            <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
+            <CreatableSelect
+              className="p-2  w-48 rounded border-0"
+              styles={selectFieldStyle}
+              isClearable
+              options={
+                (cities[selectedCountry?.value]?.[selectedState?.value] ||
+                []).map((city) => ({
+                  value: city,
+                  label: city,
+                }))
+              }
+              placeholder="Location"
+              value={selectedLocation}
+              onChange={handleLocationChange}
+            />
           </div>
 
           {/*buttons */}
           <div className="flex md:flex-row flex-col justify-center items-center gap-5">
-            <button className="px-16 bg-[#03BD6C] rounded-md py-2">
+            <button
+              className="px-16 bg-[#03BD6C] rounded-md py-2"
+              onClick={() => {
+                
+                console.log(selectedCountry);
+                console.log(selectedState);
+                console.log(selectedLocation);
+                
+                const searchTerms = document.getElementById("search")?.value;
+                console.log(searchTerms);
+                const locationSearchTerm = `${
+                  selectedLocation?.value ?  (selectedLocation.value  + ", ") : "" 
+                }${selectedState?.value ?  (selectedState.value  + ", ") : "" }${
+                  selectedCountry?.value ?  selectedCountry.value : "" 
+                }`; 
+                console.log(`/home/jobs?location=${locationSearchTerm.replace(
+                  /,+$/,
+                  ""
+                )}&keywords=${searchTerms}`)
+                window.location.href = `/home/jobs?location=${locationSearchTerm.replace(
+                  /,+$/,
+                  ""
+                )}&keywords=${searchTerms}`;
+              }}
+            >
               Search
             </button>
             <p className="hidden md:block">Or</p>
@@ -217,7 +292,7 @@ const Home = () => {
         "
           href="https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg?authuser=0&hl=en"
           target="_blank"
->
+        >
           Get the Extension
           <FaArrowRight className="ml-2" />
         </a>
@@ -318,6 +393,73 @@ const Home = () => {
       <Footer />
     </main>
   );
+};
+
+const selectFieldStyle = {
+  control: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    color: "black",
+    border: "none",
+    borderRadius: "5px",
+    width: "100%",
+  }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      backgroundColor: isFocused ? "#1E1E1E" : "white",
+      color: isFocused ? "white" : "black",
+    };
+  },
+  singleValue: (styles) => ({
+    ...styles,
+    color: "black",
+    width: "100%",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "black",
+  }),
+  input: (styles) => ({
+    ...styles,
+    color: "black",
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    color: "grey",
+  }),
+  indicatorSeparator: (styles) => ({
+    ...styles,
+    width: "0px",
+    backgroundColor: "transparent",
+  }),
+  clearIndicator: (styles) => ({
+    ...styles,
+    width: "0px",
+    color: "black",
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    color: "black",
+  }),
+  multiValue: (styles) => ({
+    ...styles,
+    backgroundColor: "#1E1E1E",
+    color: "white",
+  }),
+  multiValueLabel: (styles) => ({
+    ...styles,
+    color: "white",
+  }),
+  multiValueRemove: (styles) => ({
+    ...styles,
+    color: "white",
+    ":hover": {
+      backgroundColor: "#1E1E1E",
+      color: "white",
+    },
+  }),
 };
 
 export default Home;

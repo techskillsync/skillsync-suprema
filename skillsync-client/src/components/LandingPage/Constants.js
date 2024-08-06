@@ -86,10 +86,11 @@ video: "/v4.gif"
 
 
 export const CLIENTS = [
-  { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
-  { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
+  // { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
+  // { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
 
-  { logo: 'https://i.postimg.cc/9FWpFkh8/Group-197.png', alt: 'AstrapiMoney' }, 
+  // { logo: 'https://i.postimg.cc/9FWpFkh8/Group-197.png', alt: 'AstrapiMoney' }, 
+  { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'AllotrixCompany' }, 
   { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
   { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
 
