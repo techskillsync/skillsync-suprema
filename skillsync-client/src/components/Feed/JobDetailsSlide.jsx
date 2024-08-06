@@ -7,63 +7,63 @@ import { FaUserGroup } from "react-icons/fa6";
 import { CheckExists, SaveJob } from "../../supabase/JobApplicationTracker";
 
 const JobDetailsSlide = ({ jobDescription, className = "" }) => {
-  if (jobDescription?.company || jobDescription?.title) {
-    const [expanded, setExpanded] = useState(false);
-    // const [saved, setSaved] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  // const [saved, setSaved] = useState(false);
 
-    const toggleExpand = () => {
-      setExpanded(!expanded);
-    };
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
 
-    const descriptionClass = expanded ? "" : "h-[250px] overflow-hidden";
+  const descriptionClass = expanded ? "" : "h-[250px] overflow-hidden";
 
-    // const handleSave = async () => {
-    //   if (saved) {
-    //     // Remove from saved
-    //     if (
-    //       await confirmWrapper(
-    //         "Are you sure you want to remove this job from your tracker?"
-    //       )
-    //     ) {
-    //       if (await RemoveJob(jobDescription.id)) {
-    //         setSaved(false);
-    //       }
-    //     }
-    //   } else {
-    //     // Add to saved
-    //     if (await SaveJob(jobDescription.id)) {
-    //       setSaved(true);
-    //     }
-    //   }
-    // };
+  // const handleSave = async () => {
+  //   if (saved) {
+  //     // Remove from saved
+  //     if (
+  //       await confirmWrapper(
+  //         "Are you sure you want to remove this job from your tracker?"
+  //       )
+  //     ) {
+  //       if (await RemoveJob(jobDescription.id)) {
+  //         setSaved(false);
+  //       }
+  //     }
+  //   } else {
+  //     // Add to saved
+  //     if (await SaveJob(jobDescription.id)) {
+  //       setSaved(true);
+  //     }
+  //   }
+  // };
 
-    useEffect(() => {
-      async function checkExists(id) {
-        const saved = await CheckExists(id);
-        setSaved(saved);
-      }
-      checkExists(jobDescription.id);
-    }, []);
+  useEffect(() => {
+    async function checkExists(id) {
+      const saved = id && await CheckExists(id);
+      // setSaved(saved);
+    }
+    checkExists(jobDescription?.id);
+  }, [jobDescription?.id]);
 
-    const actions = [
-      // {
-      //   title: !saved ? "Save" : "Saved",
-      //   icon: <IoBookmark />,
-      //   action: handleSave,
-      // },
-      {
-        title: "Copy Link",
-        icon: <FaLink />,
-        action: () => {
-          navigator.clipboard.writeText(jobDescription.link);
-        },
-        // },
-        // {
-        //   title: "Share",
-        //   icon: <FaUserGroup />,
+  const actions = [
+    // {
+    //   title: !saved ? "Save" : "Saved",
+    //   icon: <IoBookmark />,
+    //   action: handleSave,
+    // },
+    {
+      title: "Copy Link",
+      icon: <FaLink />,
+      action: () => {
+        navigator.clipboard.writeText(jobDescription.link);
       },
-    ];
+      // },
+      // {
+      //   title: "Share",
+      //   icon: <FaUserGroup />,
+    },
+  ];
 
+  if (jobDescription?.company || jobDescription?.title) {
     return (
       <div
         className={
@@ -173,7 +173,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
               </button>
             ))}
           </div> */}
-          <div className="py-5 flex items-center w-full" target>
+          <div className="py-5 flex items-center w-full">
             <a
               href={jobDescription.link}
               target="_blank"
