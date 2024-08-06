@@ -42,12 +42,13 @@ const menuItems = [
 
 const MenuBar = ({
   selectedPage,
-  setSelectedPage,
+  handleMenuItemClick,
   profileInfo,
   setSidebarExpanded,
 }) => {
   const [notificationCounts, setNotificationCounts] = useState({});
   const [collapsed, setCollapsed] = useState(true);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(selectedPage);
 
   const fetchMessagesCount = async () => {
     const newMessagesCount = await GetUnreadMessagesCount(); // Replace with your actual fetch logic
@@ -94,8 +95,12 @@ const MenuBar = ({
     >
       <Toaster />
       <div className="w-full p-5 ml-0.5 flex flex-row items-center">
-          <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
-          <img className={`h-10 fade-in ml-4 ${collapsed && 'hidden'}`} src={LogoDarkText} alt="SkillSync. Logo" />
+        <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
+        <img
+          className={`h-10 fade-in ml-4 ${collapsed && "hidden"}`}
+          src={LogoDarkText}
+          alt="SkillSync. Logo"
+        />
       </div>
       <div className="overflow-x-hidden">
         <ul className="text-left">
@@ -105,17 +110,20 @@ const MenuBar = ({
                 <li
                   key={item.name}
                   className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${
-                    selectedPage === item.name
+                    selectedMenuItem === item.name 
                       ? "bg-black"
                       : "hover:bg-[#2e2e2e]"
                   }`}
-                  onClick={() => setSelectedPage(item.name)}
+                  onClick={() => {
+                    handleMenuItemClick(item.name);
+                    setSelectedMenuItem(item.name);
+                  }}
                 >
                   {item.icon && (
                     <span className="text-2xl mr-6">{item.icon}</span>
                   )}
                   <div className={`fade-in w-64 ${collapsed && "hidden"}`}>
-                    <span className="whitespace-nowrap" >{item.name}</span>
+                    <span className="whitespace-nowrap">{item.name}</span>
                     {notificationCounts[item.name] > 0 && (
                       <span className="ml-auto  bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  text-white text-sm font-semibold rounded-full px-2 py-0.5">
                         {notificationCounts[item.name]}
@@ -128,13 +136,17 @@ const MenuBar = ({
         </ul>
       </div>
       <div className="h-1/4 flex">
-        <div className={`mt-auto transition-all duration-300 py-4 ${!collapsed && "px-4 "}`}>
-           <ProfileCard
-              name={profileInfo?.name}
-              school={profileInfo?.school}
-              handleEditProfile={() => setSelectedPage("Profile")}
-              collapsed={collapsed}
-            />
+        <div
+          className={`mt-auto transition-all duration-300 py-4 ${
+            !collapsed && "px-4 "
+          }`}
+        >
+          <ProfileCard
+            name={profileInfo?.name}
+            school={profileInfo?.school}
+            handleEditProfile={() => handleMenuItemClick("Profile")}
+            collapsed={collapsed}
+          />
         </div>
       </div>
     </div>

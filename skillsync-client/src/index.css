@@ -148,3 +148,16 @@ button:focus-visible {
   font-size: 14px;
   color: #333;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 5s linear infinite;
+}
