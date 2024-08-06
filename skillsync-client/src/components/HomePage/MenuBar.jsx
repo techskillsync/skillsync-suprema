@@ -15,6 +15,7 @@ import { BsFileSpreadsheet } from "react-icons/bs";
 import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 
 const menuItems = [
   {
@@ -48,7 +49,8 @@ const MenuBar = ({
 }) => {
   const [notificationCounts, setNotificationCounts] = useState({});
   const [collapsed, setCollapsed] = useState(true);
-  const [selectedMenuItem, setSelectedMenuItem] = useState(selectedPage);
+
+  const location = useLocation();
 
   const fetchMessagesCount = async () => {
     const newMessagesCount = await GetUnreadMessagesCount(); // Replace with your actual fetch logic
@@ -110,13 +112,12 @@ const MenuBar = ({
                 <li
                   key={item.name}
                   className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${
-                    selectedMenuItem === item.name 
+                    location.pathname.includes(item.name.toLowerCase()) 
                       ? "bg-black"
                       : "hover:bg-[#2e2e2e]"
                   }`}
                   onClick={() => {
                     handleMenuItemClick(item.name);
-                    setSelectedMenuItem(item.name);
                   }}
                 >
                   {item.icon && (
