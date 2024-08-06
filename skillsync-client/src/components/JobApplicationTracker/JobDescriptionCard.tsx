@@ -66,7 +66,7 @@ const JobDescriptionCard = ({
     //   onClick={action}
       className={
         className +
-        " cursor-pointer job-description-card bg-white !text-black rounded-lg shadow-md flex w-500px"
+        " job-description-card bg-white !text-black rounded-lg shadow-md flex w-500px"
       }
     >
       <div className=" relative job-details w-full px-6 py-4">
