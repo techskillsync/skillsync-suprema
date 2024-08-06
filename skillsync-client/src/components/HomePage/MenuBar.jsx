@@ -9,7 +9,7 @@ import { FaGear, FaSheetPlastic } from "react-icons/fa6";
 import { BiSpreadsheet } from "react-icons/bi";
 import EditProfileDetails from "../ProfilePage/EditProfileDetails";
 import ProfilePage from "../ProfilePage/ProfilePage";
-import JobApplicationTracker from "../Feed/JobApplicationTracker.tsx";
+import JobApplicationTracker from "../JobApplicationTracker/JobApplicationTrackerNew.tsx";
 import { FaAcquisitionsIncorporated } from "react-icons/fa";
 import { BsFileSpreadsheet } from "react-icons/bs";
 import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
@@ -112,7 +112,7 @@ const MenuBar = ({
                 <li
                   key={item.name}
                   className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${
-                    location.pathname.includes(item.name.toLowerCase()) 
+                    location.pathname.includes(item.name.toLowerCase().replace(" ", ""))
                       ? "bg-black"
                       : "hover:bg-[#2e2e2e]"
                   }`}

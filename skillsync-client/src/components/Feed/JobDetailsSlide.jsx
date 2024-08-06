@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { FaLink, FaSearch } from "react-icons/fa";
+import { FaExclamationTriangle, FaLink, FaSearch } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import SharePopup from "./SharePopup";
 import { FaUserGroup } from "react-icons/fa6";
-import { CheckExists, SaveJob } from "../../supabase/JobApplicationTracker";
+import { CheckExists, RemoveJob, SaveJob } from "../../supabase/JobApplicationTracker";
+import ReportPopup from "./ReportPopup";
+import { confirmWrapper } from "../common/Confirmation";
 
 const JobDetailsSlide = ({ jobDescription, className = "" }) => {
   const [expanded, setExpanded] = useState(false);
-  // const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(false);
+
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -16,30 +19,31 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
 
   const descriptionClass = expanded ? "" : "h-[250px] overflow-hidden";
 
-  // const handleSave = async () => {
-  //   if (saved) {
-  //     // Remove from saved
-  //     if (
-  //       await confirmWrapper(
-  //         "Are you sure you want to remove this job from your tracker?"
-  //       )
-  //     ) {
-  //       if (await RemoveJob(jobDescription.id)) {
-  //         setSaved(false);
-  //       }
-  //     }
-  //   } else {
-  //     // Add to saved
-  //     if (await SaveJob(jobDescription.id)) {
-  //       setSaved(true);
-  //     }
-  //   }
-  // };
+  const handleSave = async () => {
+    if (saved) {
+      console.log("Removing job from saved");
+      // Remove from saved
+      if (
+        await confirmWrapper(
+          "Are you sure you want to remove this job from your tracker?"
+        )
+      ) {
+        if (await RemoveJob(jobDescription.id)) {
+          setSaved(false);
+        }
+      }
+    } else {
+      // Add to saved
+      if (await SaveJob(jobDescription.id)) {
+        setSaved(true);
+      }
+    }
+  };
 
   useEffect(() => {
     async function checkExists(id) {
       const saved = id && await CheckExists(id);
-      // setSaved(saved);
+      setSaved(saved);
     }
     checkExists(jobDescription?.id);
   }, [jobDescription?.id]);
@@ -142,9 +146,9 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
               </a>
             </div>
           )}
-          {/* <div className="my-2 flex">
+          <div className="my-2 grid grid-cols-2 gap-2">
             <SharePopup content={jobDescription.id}>
-              <button className="text-[14px] flex items-center bg-[#2e2e2e] text-white hover:bg-[#1e1e1e] transition-all duration-150 rounded-full px-4 py-2 mr-4">
+              <button className="text-[14px] w-full flex items-center bg-[#2e2e2e] text-white hover:bg-[#1e1e1e] transition-all duration-150 rounded-full px-4 py-2">
                 <FaUserGroup />
                 <span className="ml-2">Share</span>
               </button>
@@ -152,9 +156,9 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
             <button
               key="save"
               onClick={handleSave}
-              className={`text-[14px] flex items-center text-white transition-all duration-150 rounded-full px-4 py-2 mr-4 ${
+              className={`text-[14px] flex items-center text-white transition-all duration-150 rounded-full px-4 py-2 ${
                 saved
-                  ? "bg-blue-200 hover:bg-red-200"
+                  ? "bg-[#3e3e78] hover:bg-red-400"
                   : "bg-[#2e2e2e] hover:bg-[#2e2e68]"
               }`}
             >
@@ -166,13 +170,21 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
               <button
                 key={action.title}
                 onClick={action.action}
-                className="text-[14px] flex items-center !border-none bg-[#2e2e2e] text-white hover:bg-[#1e1e1e] transition-all duration-150 rounded-full px-4 py-2 mr-4"
+                className="text-[14px] flex items-center !border-none bg-[#2e2e2e] text-white hover:bg-[#1e1e1e] transition-all duration-150 rounded-full px-4 py-2"
               >
                 {action.icon}
                 <span className="ml-2">{action.title}</span>
               </button>
             ))}
-          </div> */}
+             <ReportPopup content={jobDescription.id}>
+              <button 
+                className="w-full text-[14px] flex items-center !border-none bg-[#2e2e2e] text-white hover:bg-[#1e1e1e] transition-all duration-150 rounded-full px-4 py-2"
+                >
+                <FaExclamationTriangle />
+                { <span className="ml-2">Report</span>}
+              </button>
+            </ReportPopup>
+          </div>
           <div className="py-5 flex items-center w-full">
             <a
               href={jobDescription.link}

@@ -9,8 +9,9 @@ import {
 import { GetSavedJobs } from "../../supabase/JobApplicationTracker";
 import Spacer from "../common/Spacer";
 import JobDescriptionCard from "./JobDescriptionCard";
-import JobDetailsSlide from "./JobDetailsSlide";
 import toast, { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
+
 
 const jobStatusLabels = [
     {
@@ -44,6 +45,43 @@ const jobStatusLabels = [
 const JobApplicationTracker = ({setSelectedJob}) => {
   const [savedJobs, setSavedJobs] = useState<JobListing[]>([]);
 
+  const handleDragEnd = (job, newStatus) => {
+    // Update the job status locally
+    const updatedJobs = savedJobs.map((item) => {
+      if (item.id === job.id) {
+        const newItem = { ...item };
+        newItem.status = newStatus;
+        return newItem;
+      }
+      return item;
+    });
+
+    setSavedJobs(updatedJobs);
+
+    // Call the backend update function
+    handleStatusChange(job, newStatus);
+  };
+
+  const determineNewStatusBasedOnPosition = (x) => {
+    console.log(x);
+    let newStatus;
+    const width = window.innerWidth;
+    const threshold = width / 5;
+    if (x < threshold) {
+      newStatus = "saved";
+    } else if (x < threshold * 2) {
+      newStatus = "applied";
+    } else if (x < threshold * 3) {
+      newStatus = "testing";
+    } else if (x < threshold * 4) {
+      newStatus = "interviewing";
+    } else {
+      newStatus = "offer";
+    }
+    console.log(newStatus);
+    return newStatus;
+  };
+
   useEffect(() => {
     async function fetchSavedJobs() {
       const jobs = await GetSavedJobs();
@@ -54,15 +92,14 @@ const JobApplicationTracker = ({setSelectedJob}) => {
     fetchSavedJobs();
   }, []);
 
-  useEffect(() => {
-    console.log(savedJobs);
-  }, [savedJobs]);
+  // useEffect(() => {
+    // console.log(savedJobs);
+  // }, [savedJobs]);
 
   const handleStatusChange = async (job: JobListing, newStatus: string) => {
     // * newStatus is currently configured to be the LABEL of the actual status value.
     // * This is because the SelectField component returns the label of the selected option. 
     console.log(job, newStatus);
-    newStatus = jobStatusLabels.find((label) => label.label === newStatus)!.value;
     const updateJobStatusPromise = UpdateJob(job.id, newStatus);
     const updatedJobs = savedJobs.map((item) => {
       if (item.id === job.id) {
@@ -90,37 +127,67 @@ const JobApplicationTracker = ({setSelectedJob}) => {
   }, [savedJobs]);
 
   const groupJobsByStatus = (jobs: JobListing[]) => {
+    // Initialize the accumulator with all statuses
+    const initialAcc = jobStatusLabels
+    .map((label) => label.value)
+    .reduce((acc, status) => {
+      acc[status] = [];
+      return acc;
+    }, {} as Record<string, JobListing[]>);
+  
     return jobs.reduce((acc, job) => {
       if (!acc[job.status!]) {
         acc[job.status!] = [];
       }
       acc[job.status!].push(job);
       return acc;
-    }, {} as Record<string, JobListing[]>);
+    }, initialAcc);
   };
 
   const groupedJobs = groupJobsByStatus(savedJobs);
 
   return (
-    <div className="px-10 py-8 h-full w-full">
+    <div className="px-10 py-8 min-h-screen h-full w-full">
       <h1 className="text-white text-2xl font-bold mb-4">
         Job Application Tracker
       </h1>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
       <div className="flex overflow-x-auto gap-4">
-        {Object.keys(groupedJobs).map((status) => (
+        {Object.keys(groupedJobs)
+        .sort((a, b) => jobStatusLabels.findIndex((label) => label.value === a) - jobStatusLabels.findIndex((label) => label.value === b))
+        .map((status) => (
           <div className="w-1/5" key={status}>
-            <h2 className="text-xl font-bold mb-2">{status}</h2>
-            {groupedJobs[status].map((job) => (
-              <div className="mb-4" key={job.id}>
-                <JobDescriptionCard
-                  showGlassdoorRating={false}
-                  jobDescription={job}
-                  action={() => setSelectedJob(job)}
-                  mini={true}
-                />
-              </div>
-            ))}
+            <div className="flex justify-between items-center mb-2 px-2">
+              <h2 className="text-xl font-bold">{jobStatusLabels.find
+                ((label) => label.value === status)!.label
+                }</h2>
+                <div
+                className={`rounded-full h-4 w-4 bg-${jobStatusLabels.find(
+                  (label) => label.value === status
+                  )!.color}-500`}
+                ></div>
+            </div>
+            <div className="fade-in">
+              {groupedJobs[status].map((job) => (
+               <motion.div
+               className="mb-4"
+               key={job.id}
+               drag
+               onDragEnd={(event, info) => {
+                 const newStatus = determineNewStatusBasedOnPosition(info.point.x); // Implement this function to determine the new status based on drop position
+                 if (newStatus && newStatus !== status) {
+                   handleDragEnd(job, newStatus);
+                 }
+               }}
+                         >
+               <JobDescriptionCard
+                 showGlassdoorRating={false}
+                 jobDescription={job}
+                 action={() => setSelectedJob(job)}
+               />
+                         </motion.div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

@@ -71,7 +71,7 @@ const SharePopup = ({ children, content }) => {
   }, [isOpen]);
 
   return (
-    <div>
+    <div className="text-black">
       <Toaster />
       <div className="relative">
         {React.Children.map(children, (child) => {
