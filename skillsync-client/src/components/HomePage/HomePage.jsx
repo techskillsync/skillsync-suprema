@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { MenuBar, menuItems } from "./MenuBar";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
@@ -14,6 +14,7 @@ const HomePage = () => {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [isPanelSlidingOut, setIsPanelSlidingOut] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const HomePage = () => {
   }, [selectedJob, selectedPage]);
 
   useEffect(() => {
-    redirectUser("/landingPage", false);
+    redirectUser("/login", false);
   }, []);
 
   useEffect(() => {
@@ -89,12 +90,12 @@ const HomePage = () => {
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={selectedPage}
+              key={location.pathname}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Routes>
+              <Routes location={location} key={location.pathname}>
                 {menuItems.map((item) => (
                   <Route
                     key={item.name}
