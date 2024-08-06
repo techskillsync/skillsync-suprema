@@ -159,7 +159,14 @@ const Home = () => {
               Search
             </button>
             <p className="hidden md:block">Or</p>
-            <button className="px-16 bg-[#175092] rounded-md py-2">
+            <button className="px-16 bg-[#175092] rounded-md py-2"
+            onClick={
+              () => {
+                // Scrolls down
+                document.getElementById("secretariat").scrollIntoView({ behavior: "smooth" });
+              }
+            }
+            >
               Explore
             </button>
           </div>
@@ -189,7 +196,7 @@ const Home = () => {
 
       {/*section 2 */}
 
-      <section className="w-full bg-[black]  md:py-10">
+      <section className="w-full bg-[black]  md:py-10" id="expose-section">
         <h2 className="md:text-5xl text-4xl sm:text-2xl px-4 text-white text-center  font-bold py-10">
           Job search meets{" "}
           <span className="text-[white] font-bold gradient-text">
