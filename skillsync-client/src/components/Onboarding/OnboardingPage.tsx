@@ -26,7 +26,7 @@ const workAuthorizationOptions = [
   "Citizen",
   "Permanent Resident",
   "Work Permit",
-  "Student Visa",
+  "Study Permit",
   "I require sponsorship",
 ];
 
@@ -168,7 +168,7 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center pt-12">
       <p className="text-[22px]">Welcome to SkillSync, {preferences.name}</p>
       <p className="text-[16px] mt-2 text-center">
-        We are excited to have you onboard. Let's get your name first.
+        We are excited to have you onboard. Let's get your full name first.
       </p>
       <div className="flex mt-4">
         <input
@@ -194,8 +194,8 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center pt-12">
       <p className="text-[22px]">Upload a resume</p>
       <p className="text-[16px] mt-2 text-center">
-        We will attempt to autofill your profile details using your resume.{" "}
-        <br />
+        We will attempt to autofill your profile details using your current
+        resume. <br />
         If you do not have one, you can skip this step for now.
       </p>
       <div className="flex flex-col w-1/2 mt-3 h-[200px]">
@@ -256,7 +256,8 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center">
       <p className="text-[22px]">Visa Requirements</p>
       <p className="text-[16px] mt-2 text-center">
-        What work authorization do you currently have to work in this location?
+        What work authorization do you currently have to work in{" "}
+        {preferences.location!}?
       </p>
       <div className="mt-3 flex flex-col justify-center space-y-2 w-1/2">
         {workAuthorizationOptions.map((option) => (
@@ -269,7 +270,12 @@ const OnboardingPage = () => {
             }`}
             onClick={() => handleWorkAuthorizationOptionClick(option)}
           >
-            {option}
+            {option +
+              (option === "I require sponsorship"
+                ? ""
+                : option === "Citizen"
+                ? ""
+                : " (or equivalent)")}
           </div>
         ))}
       </div>
@@ -314,7 +320,12 @@ const OnboardingPage = () => {
       </div>
     </div>,
 
-    <FinishScreen preferences={preferences} resumeFile={selectedResumeFile} page={page} setPage={setPage}/>,
+    <FinishScreen
+      preferences={preferences}
+      resumeFile={selectedResumeFile}
+      page={page}
+      setPage={setPage}
+    />,
   ];
 
   return (
@@ -358,9 +369,9 @@ const OnboardingPage = () => {
           </AnimatePresence>
         )}
       </div>
-      <div id="controls" className="flex justify-end space-x-2">
+      <div id="controls" className="fixed bottom-12 right-0 flex justify-end px-12 space-x-2">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="bg-gradient-to-r from-[#36B7FE] to-[#1fbabb] text-white px-4 py-2 rounded-md"
           onClick={() => {
             if (page > 0) {
               setPage(page - 1);
@@ -370,7 +381,7 @@ const OnboardingPage = () => {
           Previous
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="bg-gradient-to-r from-[#1fbabb] to-[#03BD6C] text-white px-4 py-2 rounded-md"
           onClick={() => {
             if (page < pages.length - 1) {
               console.log(page);

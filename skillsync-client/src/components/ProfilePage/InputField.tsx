@@ -258,6 +258,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
             value={value}
             options={options}
             isSearchable
+            formatCreateLabel={(inputValue) => `${inputValue}`}
             isMulti={allowMultiple}
             placeholder={
               placeholder !== ""
