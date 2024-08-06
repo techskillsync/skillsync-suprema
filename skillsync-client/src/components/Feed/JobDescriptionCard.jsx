@@ -102,7 +102,7 @@ const JobDescriptionCard = ({
         (mini ? "w-500px" : "")
       }
     >
-      {jobDescription.logo_url && !mini && (
+      {jobDescription.logo_url && !mini && false && (
         <div className={`company-logo bg-white rounded-lg`}>
           <img
             src={jobDescription.logo_url}
@@ -112,11 +112,14 @@ const JobDescriptionCard = ({
         </div>
       )}
       <div className=" relative job-details w-full py-4 pl-8 pr-5">
-        {mini && jobDescription.logo_url && (
+        {jobDescription.logo_url && (
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className="absolute top-3 right-3 h-16 w-16 rounded"
+            className={
+              mini ? "absolute top-3 right-3 h-16 w-16 rounded"
+              : "absolute top-3 right-3 h-24 w-24 rounded"
+            }
           />
         )}
         <div className="flex justify-between">
@@ -146,7 +149,7 @@ const JobDescriptionCard = ({
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className={mini ? "text-base" : "text-lg"}>
+          <p className={`max-w-[80%]  ${mini ? "text-base" : "text-lg"}`}>
             {" "}
             {mini
               ? jobDescription.title.substring(0, 26) +
