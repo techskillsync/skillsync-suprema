@@ -26,6 +26,7 @@ const LocationSelector = ({ onSelectLocation }) => {
       options={locationOptions}
       className="w-full max-w-md"
       placeholder="Eg: Vancouver, Canada, or just Canada"
+      formatCreateLabel={(inputValue) => `${inputValue}`}
       styles={{
         control: (styles) => ({ ...styles, backgroundColor: "white" }),
         option: (styles, { isFocused }) => {
@@ -35,6 +36,8 @@ const LocationSelector = ({ onSelectLocation }) => {
             color: isFocused ? "white" : "black",
           };
         },
+        input: (styles) => ({ ...styles, color: "black" }),
+        
       }}
     />
   );
