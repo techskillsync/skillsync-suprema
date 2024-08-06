@@ -116,6 +116,11 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
               color: {
                 value: ["35c0f0"],
               },
+              shadow: {
+                enable: true,
+                color: "#f9f406", // Same color as the particles
+                blur: 20, // Adjust the blur to control the glow effect
+              },
               links: {
                 enable: false,
               },
@@ -127,7 +132,7 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
                 enable: true,
                 outMode: "out",
                 random: false,
-                speed: loading ? 40 : 2,
+                speed: loading ? 100 : 0.5,
                 straight: loading ? true : false,
               },
               number: {
