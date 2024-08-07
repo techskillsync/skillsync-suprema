@@ -44,7 +44,7 @@ const JobApplicationTracker = ({ setSelectedJob }) => {
   const [savedJobs, setSavedJobs] = useState<JobListing[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleDragEnd = (job, newStatus) => {
+  const handleDragEnd = (job, newStatus, oldStatus) => {
     // Update the job status locally
     const updatedJobs = savedJobs.map((item) => {
       if (item.id === job.id) {
@@ -58,12 +58,14 @@ const JobApplicationTracker = ({ setSelectedJob }) => {
     setSavedJobs(updatedJobs);
 
     // Call the backend update function
-    handleStatusChange(job, newStatus);
+    if (newStatus !== oldStatus) {
+      handleStatusChange(job, newStatus);
+    }
   };
 
-  const determineNewStatusBasedOnPosition = (x) => {
+  const determineNewStatusBasedOnPosition = (x, oldStatus) => {
     console.log(x);
-    let newStatus;
+    let newStatus = oldStatus;
     const width = window.innerWidth;
     const threshold = width / 5;
     if (x < threshold) {
@@ -146,26 +148,27 @@ const JobApplicationTracker = ({ setSelectedJob }) => {
   const groupedJobs = groupJobsByStatus(savedJobs);
 
   return (
-    <div className="px-10 py-8 min-h-screen h-full w-full">
+    <div className="px-10 py-8 min-h-screen w-full bg-black">
+      <Toaster />
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-white text-2xl font-bold ">
+        <h1 className="text-white text-2xl font-bold">
           Job Application Tracker
         </h1>
         <p className="text-gray-500">
           Drag and drop the job cards to change their status
         </p>
       </div>
-      <Spacer className={"!w-full !h-[0.5px] my-4"} />
-      <div className="flex overflow-x-auto gap-4">
-        {Object.keys(groupedJobs)
-          .sort(
-            (a, b) =>
-              jobStatusLabels.findIndex((label) => label.value === a) -
-              jobStatusLabels.findIndex((label) => label.value === b)
-          )
-          .map((status) => (
-            <div className="w-1/5" key={status}>
-              <div className="flex justify-between items-center mb-2 px-2">
+      <Spacer className={"!w-full !h-[0.5px] mt-4"} />
+      <div className="sticky top-0 w-full bg-black bg-opacity-90 backdrop-blur z-[6] mb-2">
+        <div className="flex gap-4">
+          {Object.keys(groupedJobs)
+            .sort(
+              (a, b) =>
+                jobStatusLabels.findIndex((label) => label.value === a) -
+                jobStatusLabels.findIndex((label) => label.value === b)
+            )
+            .map((status) => (
+              <div className="flex py-2 mt-4 w-1/5 justify-between items-center pl-2 pr-4">
                 <h2 className="text-xl font-bold">
                   {
                     jobStatusLabels.find((label) => label.value === status)!
@@ -173,15 +176,30 @@ const JobApplicationTracker = ({ setSelectedJob }) => {
                   }
                 </h2>
                 <div
-                  className={`rounded-full h-4 w-4 bg-${
+                  className={`rounded-full px-3 py-1 bg-${
                     jobStatusLabels.find((label) => label.value === status)!
                       .color
                   }-500`}
-                ></div>
+                >
+                  {groupedJobs[status].length}
+                </div>
               </div>
+            ))}
+        </div>
+      </div>
+      <div className="flex gap-4">
+        {Object.keys(groupedJobs)
+          .sort(
+            (a, b) =>
+              jobStatusLabels.findIndex((label) => label.value === a) -
+              jobStatusLabels.findIndex((label) => label.value === b)
+          )
+          .map((status) => (
+            <div className="w-1/5 h-full" key={status}>
               <div className="fade-in">
                 {groupedJobs[status].map((job) => (
                   <motion.div
+                  // dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                     onClick={() => {
                       if (!isDragging) {
                         setSelectedJob(job);
@@ -194,15 +212,16 @@ const JobApplicationTracker = ({ setSelectedJob }) => {
                     onDragEnd={(event, info) => {
                       setIsDragging(false);
                       const newStatus = determineNewStatusBasedOnPosition(
-                        info.point.x
+                        info.point.x,
+                        status
                       ); // Implement this function to determine the new status based on drop position
-                      if (newStatus && newStatus !== status) {
-                        handleDragEnd(job, newStatus);
+                      if (newStatus) {
+                        handleDragEnd(job, newStatus, status);
                       }
                     }}
                   >
                     <JobDescriptionCard
-                    className="cursor-pointer"
+                      className="cursor-pointer"
                       showGlassdoorRating={false}
                       jobDescription={job}
                     />

@@ -77,6 +77,10 @@ button:focus-visible {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+.fade-in-long {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -74,7 +74,7 @@ const JobDescriptionCard = ({
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className={"absolute top-3 right-3 h-16 w-16 rounded"}
+            className={"absolute top-3 right-3 z-2 h-16 w-16 rounded"}
           />
         )}
         <div className="flex justify-between">

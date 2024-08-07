@@ -16,6 +16,8 @@ import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { IoChatbox, IoDocument } from "react-icons/io5";
+import FeedbackPage from "./FeedbackPage.jsx";
 
 const menuItems = [
   {
@@ -28,7 +30,7 @@ const menuItems = [
   {
     name: "Resume Builder",
     component: ResumeBuilder,
-    icon: <FaSheetPlastic />,
+    icon: <IoDocument />,
     show: true,
   },
   {
@@ -38,6 +40,12 @@ const menuItems = [
     show: true,
   },
   { name: "Messages", component: Messages, icon: <MdInbox />, show: true },
+  {
+    name: "Feedback",
+    icon: <IoChatbox />,
+    component: FeedbackPage,
+    show: false,
+  },
   { name: "Profile", component: ProfilePage, show: false },
 ];
 
@@ -98,11 +106,16 @@ const MenuBar = ({
       <Toaster />
       <div className="w-full p-5 ml-0.5 flex flex-row items-center">
         <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
-        <img
-          className={`h-10 fade-in ml-4 ${collapsed && "hidden"}`}
-          src={LogoDarkText}
-          alt="SkillSync. Logo"
-        />
+        <div className={`flex items-center fade-in ${collapsed && "hidden"}`}>
+          <img
+            className={`h-10 ml-4`}
+            src={LogoDarkText}
+            alt="SkillSync. Logo"
+          />
+          <div className="text-[10px] ml-2 mt-1 h-6 border-green-500 p-1 text-green-500 border border-1px rounded-lg">
+            BETA
+          </div>
+        </div>
       </div>
       <div className="overflow-x-hidden">
         <ul className="text-left">
