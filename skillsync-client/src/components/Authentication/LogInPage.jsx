@@ -73,17 +73,17 @@ const LogInPage = () => {
           <h2 className="text-3xl font-bold text-left mb-6 dark:text-white">
             Welcome Back!
           </h2>
-          <div className="mb-4 md:flex space-x-2">
-            <LoadGoogleClient />
-            <div
-              id="g_id_onload"
-              data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
-              data-context="signup"
-              data-ux_mode="popup"
-              data-callback="handleSignInWithGoogle"
-              data-itp_support="true"
-              data-use_fedcm_for_prompt="true"
-            ></div>
+          {/* <div className="mb-4 md:flex space-x-2">
+              <LoadGoogleClient />
+              <div
+                id="g_id_onload"
+                data-client_id="527302580782-7a84n93to7556e04leg1f7qi1avklj0e.apps.googleusercontent.com"
+                data-context="signup"
+                data-ux_mode="popup"
+                data-callback="handleSignInWithGoogle"
+                data-itp_support="true"
+                data-use_fedcm_for_prompt="true"
+              ></div>
 
             <div
               className="g_id_signin"
@@ -95,7 +95,7 @@ const LogInPage = () => {
               data-logo_alignment="left"
             ></div>
           </div>
-          <Spacer text="or continue with" />
+          <Spacer text="or continue with" /> */}
           <form onSubmit={handleFormSubmit}>
             <div className="mb-4">
               <InputField
