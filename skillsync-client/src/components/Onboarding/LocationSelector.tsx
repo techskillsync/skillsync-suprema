@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 const locationOptions = [
   { value: "Vancouver, Canada", label: "Vancouver, Canada" },
@@ -20,12 +20,13 @@ const LocationSelector = ({ onSelectLocation }) => {
   };
 
   return (
-    <Select
+    <CreatableSelect
       value={selectedLocation}
       onChange={handleChange}
       options={locationOptions}
       className="w-full max-w-md"
       placeholder="Eg: Vancouver, Canada, or just Canada"
+      formatCreateLabel={(inputValue) => `${inputValue}`}
       styles={{
         control: (styles) => ({ ...styles, backgroundColor: "white" }),
         option: (styles, { isFocused }) => {
@@ -35,6 +36,8 @@ const LocationSelector = ({ onSelectLocation }) => {
             color: isFocused ? "white" : "black",
           };
         },
+        input: (styles) => ({ ...styles, color: "black" }),
+        
       }}
     />
   );

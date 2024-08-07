@@ -107,6 +107,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
               // @ts-ignore
               options={jobSearchKeywords.map((k) => ({ value: k, label: k }))}
               value={localPreferences.keywords}
+              formatCreateLabel={(inputValue) => `Add ${inputValue}`}
               onChange={(selected) =>
                 setLocalPreferences({
                   ...localPreferences,

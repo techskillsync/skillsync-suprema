@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { MenuBar, menuItems } from "./MenuBar";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
 import { redirectUser } from "../../utilities/redirect_user";
+import { motion, AnimatePresence } from "framer-motion";
 
 const HomePage = () => {
-  const [profileInfo, setProfileInfo] = useState(null);
   const [selectedPage, setSelectedPage] = useState("Dashboard");
+  const [profileInfo, setProfileInfo] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [popupBackground, setPopupBackground] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [isPanelSlidingOut, setIsPanelSlidingOut] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedJob && selectedPage !== "Jobs") {
@@ -25,10 +29,9 @@ const HomePage = () => {
     }
   }, [selectedJob, selectedPage]);
 
-
   useEffect(() => {
-    redirectUser("/landingPage", false);
-    }, []);
+    redirectUser("/login", false);
+  }, []);
 
   useEffect(() => {
     if (selectedJob && selectedPage !== "Jobs") {
@@ -44,14 +47,8 @@ const HomePage = () => {
     fetchProfileInfo();
   }, []);
 
-  const renderComponent = () => {
-    const selectedItem = menuItems.find((item) => item.name === selectedPage);
-    return selectedItem ? (
-      <selectedItem.component
-        profileInfo={profileInfo}
-        setSelectedJob={setSelectedJob}
-      />
-    ) : null;
+  const handleMenuItemClick = (page) => {
+    navigate(`/home/${page.toLowerCase().replace(" ", "")}`);
   };
 
   return (
@@ -59,13 +56,12 @@ const HomePage = () => {
       <div className="fixed left-0 top-0 h-screen">
         <MenuBar
           selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
+          handleMenuItemClick={handleMenuItemClick}
           profileInfo={profileInfo}
           setSidebarExpanded={setSidebarExpanded}
         />
       </div>
-      <div
-        className={`flex-1 transition-all duration-300 ease-in-out `} >
+      <div className={`flex-1 transition-all duration-300 ease-in-out `}>
         {popupBackground && (
           <div
             className={`fixed top-0 left-0 w-screen h-screen bg-black z-[98] transition-opacity duration-300 ${
@@ -78,18 +74,44 @@ const HomePage = () => {
           ></div>
         )}
         {isPanelVisible && (
+          <div
+            className={`fixed right-0 top-0 h-screen w-[33.33%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg ${
+              isPanelSlidingOut ? "slide-out" : "slide-in"
+            }`}
+          >
+            <JobDetailsSlide jobDescription={selectedJob} />
+          </div>
+        )}
         <div
-          className={`fixed right-0 top-0 h-screen w-[33.33%] overflow-y-scroll bg-[#1e1e1e] z-[99] shadow-lg ${
-            isPanelSlidingOut ? "slide-out" : "slide-in"
-          }`}
+          className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
+          style={
+            sidebarExpanded ? { marginLeft: "250px" } : { marginLeft: "80px" }
+          }
         >
-          <JobDetailsSlide jobDescription={selectedJob} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Routes location={location} key={location.pathname}>
+                {menuItems.map((item) => (
+                  <Route
+                    key={item.name}
+                    path={item.name.toLowerCase().replace(" ", "")}
+                    element={
+                      <item.component
+                        profileInfo={profileInfo}
+                        setSelectedJob={setSelectedJob}
+                      />
+                    }
+                  />
+                ))}
+              </Routes>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      )}
-       <div
-        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
-       style={sidebarExpanded ? {marginLeft: "250px"}: {marginLeft: "80px"}}>        {renderComponent()}
-</div>
       </div>
     </div>
   );

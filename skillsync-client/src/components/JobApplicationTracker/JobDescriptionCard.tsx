@@ -17,21 +17,19 @@ import {
   RemoveJob,
   SaveJob,
 } from "../../supabase/JobApplicationTracker.ts";
-import SharePopup from "./SharePopup.jsx";
+import SharePopup from "../Feed/SharePopup.jsx";
 import { confirmWrapper } from "../common/Confirmation.jsx";
-import ReportPopup from "./ReportPopup.jsx";
+import ReportPopup from "../Feed/ReportPopup.jsx";
 
 const JobDescriptionCard = ({
   jobDescription,
   className = "",
-  mini = false,
   trackerDisplay = false,
   showGlassdoorRating = true,
   action = () => {},
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
   const [saved, setSaved] = useState(false);
-
 
   const salary = parseSalary(jobDescription.description);
 
@@ -63,98 +61,37 @@ const JobDescriptionCard = ({
     checkExists(jobDescription.id);
   }, []);
 
-  const actions = [
-    // {
-    //   title: !saved ? "Save" : "Saved",
-    //   icon: <IoBookmark />,
-    //   action: handleSave,
-    // },
-    {
-      title: "Copy Link",
-      icon: <FaLink />,
-      action: () => {
-        navigator.clipboard.writeText(jobDescription.link);
-      },
-      // },
-      // {
-      //   title: "Share",
-      //   icon: <FaUserGroup />,
-    },
-  ];
-
-  // console.log('Job Description Card');
-  // console.log(jobDescription);
-
-  // Get glassdoor rating:
-  // useEffect(() => {
-  //   const fetchGlassdoorRating = async () => {
-  //     const rating = await getGlassDoorRating(jobDescription.company);
-  //     setGlassdoorRating(rating);
-  //   };
-  //   fetchGlassdoorRating();
-  // }, []);
-
   return (
     <div
+    //   onClick={action}
       className={
         className +
-        " fade-in job-description-card bg-white !text-black rounded-lg shadow-md flex " +
-        (mini ? "w-500px" : "")
+        " job-description-card bg-white !text-black rounded-lg shadow-md flex w-500px"
       }
     >
-      {jobDescription.logo_url && !mini && false && (
-        <div className={`company-logo bg-white rounded-lg`}>
-          <img
-            src={jobDescription.logo_url}
-            alt={jobDescription.company}
-            className="h-full rounded-s-lg object-cover w-[182px]"
-          />
-        </div>
-      )}
-      <div className=" relative job-details w-full py-4 pl-8 pr-5">
+      <div className=" relative job-details w-full px-6 py-4">
         {jobDescription.logo_url && (
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className={
-              mini ? "absolute top-3 right-3 h-16 w-16 rounded"
-              : "absolute top-3 right-3 h-24 w-24 rounded"
-            }
+            className={"absolute top-3 right-3 h-16 w-16 rounded"}
           />
         )}
         <div className="flex justify-between">
-          <h2
-            className={
-              "w-2/3 text-wrap !font-bold mb-2 " + mini
-                ? "text-lg font-bold"
-                : "text-xl"
-            }
-          >
-            {mini
-              ? jobDescription.company.substring(0, 19) +
-                (jobDescription.company.length > 19 ? "..." : "")
-              : jobDescription.company}
+          <h2 className={"w-2/3 text-wrap !font-bold mb-2 text-lg font-bold"}>
+            {jobDescription.company.substring(0, 19) +
+              (jobDescription.company.length > 19 ? "..." : "")}
           </h2>
           <div className="w-1/3">
-            {showGlassdoorRating && !mini && glassdoorRating && (
-              <div className="flex">
-                <h3 className="mr-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
-                  Glassdoor rating:
-                </h3>
-                {glassdoorRating ? glassdoorRating : "Loading..."}
-              </div>
-            )}
           </div>
         </div>
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className={`max-w-[80%]  ${mini ? "text-base" : "text-lg"}`}>
+          <p className={`max-w-[80%] text-base`}>
             {" "}
-            {mini
-              ? jobDescription.title.substring(0, 26) +
-                (jobDescription.title.length > 26 ? "..." : "")
-              : jobDescription.title}
+            {jobDescription.title.substring(0, 26) +
+                (jobDescription.title.length > 26 ? "..." : "")}
           </p>
         </div>
         {jobDescription.salary &&
@@ -171,16 +108,16 @@ const JobDescriptionCard = ({
           )}
         <div className="flex items-center">
           <FaMapMarkerAlt className="mr-2" />
-          <p className={mini ? "text-base" : "text-lg"}>
+          <p className="text-base">
             {jobDescription.location}
           </p>
         </div>
-       {salary &&  <div className="flex items-center mt-2">
-          <FaMoneyBill className="mr-2" />
-          <p className={mini ? "text-base" : "text-lg"}>
-            {salary}
-          </p>
-        </div>}
+        {salary && (
+          <div className="flex items-center mt-2">
+            <FaMoneyBill className="mr-2" />
+            <p className="text-base">{salary}</p>
+          </div>
+        )}
         {/* <div>
           <p>{jobDescription.description.substring(0, 100) + '...'}</p>
         </div> */}
@@ -193,55 +130,6 @@ const JobDescriptionCard = ({
             />
           </a>
         </div> */}
-        <div>
-          <div className="flex mt-4">
-            <button
-              key="save"
-              onClick={handleSave}
-              className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${
-                saved
-                  ? "bg-blue-200 hover:bg-red-200"
-                  : "bg-gray-200 hover:bg-gray-400"
-              }`}
-            >
-              <IoBookmark />
-              {!mini && (
-                <span className="ml-2">{saved ? "Saved" : "Save"}</span>
-              )}
-            </button>
-            {actions.map((action) => (
-              <button
-                key={action.title}
-                onClick={action.action}
-                className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2 mr-4"
-              >
-                {action.icon}
-                {!mini && <span className="ml-2">{action.title}</span>}
-              </button>
-            ))}
-            <SharePopup content={jobDescription.id}>
-              <button className="flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2">
-                <FaUserGroup />
-                {!mini && <span className="ml-2">Share</span>}
-              </button>
-            </SharePopup>
-            <ReportPopup content={jobDescription.id}>
-              <button className="ml-4 flex items-center bg-gray-200 text-gray-700 hover:bg-red-200 transition-all duration-150 rounded-full px-4 py-2">
-                <FaExclamationTriangle />
-                {!mini && <span className="ml-2">Report</span>}
-              </button>
-            </ReportPopup>
-            {action && (
-              <button
-                onClick={action}
-                className="ml-auto flex items-center bg-gray-200 text-gray-700 hover:bg-gray-400 transition-all duration-150 rounded-full px-4 py-2"
-              >
-                <FaArrowRight />
-                {/* <span className="ml-2">Apply</span> */}
-              </button>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -261,8 +149,8 @@ function parseSalary(jobDescription) {
     /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD (annually)
     /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|rupees|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars (annually)
     /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:k|K)\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50k CAD (annually)
-    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi // Matches CA$115,000/yr - CA$150,000/yr
-];
+    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi, // Matches CA$115,000/yr - CA$150,000/yr
+  ];
 
   for (const pattern of salaryPatterns) {
     const match = jobDescription.match(pattern);

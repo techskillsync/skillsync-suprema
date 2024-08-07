@@ -73,7 +73,7 @@ const Footer = () => {
             </div>
             <aside className='flex justify-between items-center border-t-2 border-solid border-t-mamun-blue pt-6 md:mx-32'>
                 <div className='w-[140px] gradient-text font-bold text-xl'>
-                    SKILL SYNC.
+                    SkillSync.
                 </div>
                 <div className='bg-[#161617] text-[13px] font-light py-1 px-4 rounded-2xl text-[white] transition-all duration-300 ease-out border-[1px] border-solid hover:border-mamun-blue'>
                     <a href='/'>

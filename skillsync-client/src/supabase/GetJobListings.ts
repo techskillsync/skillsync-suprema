@@ -95,9 +95,10 @@ async function SearchJobs(
   }
 
   console.log("Searching jobs...");
+  console.log(query);
   let query_terms = query
   .trim()
-    .replace(/ /g, " | ")
+    .replace(/( )+/g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");
   let location_terms = location

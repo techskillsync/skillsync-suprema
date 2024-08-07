@@ -86,10 +86,11 @@ video: "/v4.gif"
 
 
 export const CLIENTS = [
-  { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
-  { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
+  // { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
+  // { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
 
-  { logo: 'https://i.postimg.cc/9FWpFkh8/Group-197.png', alt: 'AstrapiMoney' }, 
+  // { logo: 'https://i.postimg.cc/9FWpFkh8/Group-197.png', alt: 'AstrapiMoney' }, 
+  { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'AllotrixCompany' }, 
   { logo: 'https://i.postimg.cc/HnbQsQZC/astrapi.png', alt: 'AstrapiData' }, 
   { logo: 'https://i.postimg.cc/HssxLwP4/allotrix-logo.png', alt: 'Allotrix' }, 
 
@@ -105,7 +106,7 @@ export const USERS = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOLo9WFrasMT2Npip3oZH9iwURM4sj8DACA&s",
     designation: "hot#112233",
     message:
-      "Skill Sync. has helped me get  my dream job. I am extremely greatful.Skill Sync. has helped me get my dream job. I am extremely greatful.",
+      "SkillSync. has helped me get  my dream job. I am extremely greatful. SkillSync. has helped me get my dream job. I am extremely greatful.",
   },
   {
     name: "Xenox",
@@ -113,7 +114,7 @@ export const USERS = [
       "https://storage.ko-fi.com/cdn/useruploads/display/25e633e3-79de-4356-a87d-5e3048c1852a_chamber.jpg",
     designation: "XENOX123#",
     message:
-      "Skill Sync. has helped me get  my dream job. I am extremely greatful.Skill Sync. has helped me get my dream job. I am extremely greatful.",
+      "SkillSync. has helped me get  my dream job. I am extremely greatful. SkillSync. has helped me get my dream job. I am extremely greatful.",
   },
   
 ];

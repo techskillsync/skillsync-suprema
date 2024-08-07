@@ -5,7 +5,7 @@ import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
 const InputField = ({
   item,
   onChange,
-  value = '',
+  value = "",
   placeholder = "",
   showLabel = true,
   className = "",
@@ -17,7 +17,9 @@ const InputField = ({
     {showLabel && (
       <div className="max-w-1/2 h-full">
         <label
-          className={" !h-full rounded-l flex items-center fblock text-sm font-semibold min-w-[60px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "}
+          className={
+            " !h-full rounded-l flex items-center fblock text-sm font-semibold min-w-[60px] !text-white bg-emerald-600 px-3 py-2 whitespace-nowrap "
+          }
           htmlFor={item.toLowerCase()}
         >
           {item}
@@ -27,14 +29,19 @@ const InputField = ({
     <input
       id={id ?? item.toLowerCase()}
       value={value ?? null}
-      className={className +
-        " !w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline "}
+      className={
+        className +
+        " !w-full appearance-none !text-base border border-[#b3b3b3] border-[0.3px] w-full focus:ring py-[7px] px-3 transition-all duration-300 text-gray-700 dark:text-black dark:bg-white leading-tight focus:outline-none focus:shadow-outline "
+      }
       required={required}
       onChange={onChange}
       type={type}
-      placeholder={placeholder !== "" ? placeholder : "Enter your " + item.toLowerCase()} />
+      placeholder={
+        placeholder !== "" ? placeholder : "Enter your " + item.toLowerCase()
+      }
+    />
   </div>
-)
+);
 
 const selectFieldStyle = {
   control: (base, state) => ({
@@ -45,15 +52,14 @@ const selectFieldStyle = {
     textAlign: "left",
     borderRadius: "0 3px 3px 0",
     height: "100%",
-    ...(state.isFocused && {
-    }), 
+    ...(state.isFocused && {}),
   }),
   input: (base) => ({
     ...base,
   }),
   clearIndicator: (base) => ({
     ...base,
-    cursor: 'pointer',
+    cursor: "pointer",
   }),
   menu: (base) => ({
     ...base,
@@ -93,7 +99,12 @@ interface SelectFieldProps {
   showLabel: boolean | undefined;
   creatable: boolean | undefined;
   required: boolean;
-  onChange: (newValue: MultiValue<{ value: string; label: string; }> | SingleValue<{ value: string; label: string; }>, actionMeta: ActionMeta<{ value: string; label: string; }>) => void;
+  onChange: (
+    newValue:
+      | MultiValue<{ value: string; label: string }>
+      | SingleValue<{ value: string; label: string }>,
+    actionMeta: ActionMeta<{ value: string; label: string }>
+  ) => void;
   className?: string;
 }
 
@@ -101,7 +112,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   item,
   list,
   onChange,
-  value=null,
+  value = null,
   allowMultiple = false,
   creatable = true,
   placeholder = "",
@@ -133,26 +144,26 @@ const SelectField: React.FC<SelectFieldProps> = ({
             onChange={onChange}
             id={id ?? item}
             required={required}
+            formatCreateLabel={(inputValue) => `${inputValue}`}
             value={value}
             options={options}
             isSearchable
             isMulti={allowMultiple}
             placeholder={
               placeholder !== ""
-              ? placeholder
-              : "Enter your " + item.toLowerCase()
+                ? placeholder
+                : "Enter your " + item.toLowerCase()
             }
             styles={selectFieldStyle}
           />
         ) : (
           <Select
-          
-          className={className + " w-full h-full"}
-          onChange={onChange}
-          id={id ?? item}
-          value={value}
-          required={required}
-          options={options}
+            className={className + " w-full h-full"}
+            onChange={onChange}
+            id={id ?? item}
+            value={value}
+            required={required}
+            options={options}
             isSearchable
             isMulti={allowMultiple}
             placeholder={
@@ -166,6 +177,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
       </div>
     </div>
   );
-}
+};
 
 export { InputField, SelectField };

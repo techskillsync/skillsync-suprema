@@ -33,7 +33,7 @@ const InfoCarousel = () => {
 
 return (
     <div className="p-12 h-full bg-black">
-        <div className="h-full p-0.5 bg-gradient-to-r from-blue-500 to-green-500 rounded-md">
+        <div className="h-full p-0.5 bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  rounded-md">
             <div className="bg-black h-full p-5 text-white rounded overflow-x-hidden">
                 <div
                     id="carousel"

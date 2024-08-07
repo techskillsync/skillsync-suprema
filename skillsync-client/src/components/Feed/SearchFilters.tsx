@@ -6,28 +6,53 @@ import { GoPlus } from "react-icons/go";
 import { GetJobPreferences } from "../../supabase/JobPreferences";
 import FilterPopup from "./FilterPopup";
 
+interface UserPreferences {
+  location: string;
+  jobModes: {
+    label: string;
+    value: string;
+  }[];
+  recency: number;
+  salaryRange: number;
+  citizenship: string;
+  keywords: {
+    label: string;
+    value: string;
+  }[];
+}
+
 function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
-  const [userPreferences, setUserPreferences] = useState({
+  const [userPreferences, setUserPreferences] = useState<UserPreferences>({
     location: "",
     jobModes: [],
+    keywords: [],
+    // Todo: use below preferences too
     recency: 7,
     salaryRange: 0,
     citizenship: "",
-    keywords: [],
   });
 
-  useEffect(() => {
-    console.log("Search filters changed:", userPreferences);
-  }, [userPreferences]);
-
   async function fetchAndSet() {
+    const urlParams = new URLSearchParams(window.location.search);
+  const location = urlParams.get('location');
+  const jobModes = urlParams.get('jobModes');
+  const keywords = urlParams.get('keywords');
+
+  if (location || jobModes || keywords) {
+    setUserPreferences({
+      ...userPreferences,
+      location: location || userPreferences.location,
+      jobModes: jobModes ? jobModes.split(',').map((mode) => ({ label: mode, value: mode })) : userPreferences.jobModes,
+      keywords: keywords ? keywords.split(',').map((keyword) => ({ label: keyword, value: keyword })) : userPreferences.keywords,
+    });
+    setPreferencesLoaded(true);
+  } else {
     const response = await GetJobPreferences("location, job_mode, keywords");
     if (!response) {
       console.warn("Could not get user location for Search Filter");
       return;
     }
     console.log(response);
-    const userLocation = response.location;
     setUserPreferences({
       ...userPreferences,
       location: response.location,
@@ -35,6 +60,7 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
       keywords: response.keywords,
     });
     setPreferencesLoaded(true);
+  }
   }
 
   useEffect(() => {

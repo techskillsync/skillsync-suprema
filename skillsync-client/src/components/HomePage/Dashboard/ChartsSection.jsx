@@ -4,10 +4,13 @@ import ApexCharts from "apexcharts";
 import { GetJobPreferences } from "../../../supabase/JobPreferences";
 import { GetProfileInfo } from "../../../supabase/ProfileInfo";
 
+const bufferOffset = 2; // 10% buffer so that bars with 0% are still visible
+
 const ChartsSection = () => {
   const [conversionRate, setConversionRate] = React.useState(0);
   const [interviewRate, setInterviewRate] = React.useState(0);
-  const [profileBuildingCompletion, setProfileBuildingCompletion] = React.useState(0);
+  const [profileBuildingCompletion, setProfileBuildingCompletion] =
+    React.useState(0);
   const [fetched, setFetched] = React.useState(false);
 
   useEffect(() => {
@@ -26,8 +29,9 @@ const ChartsSection = () => {
       console.log("Total applied count: ", totalAppliedCount);
       console.log("Total interviewing count: ", totalInterviewingCount);
       console.log("Total offered count: ", totalOfferedCount);
-      const conversionRate = (totalOfferedCount / totalAppliedCount) * 100;
-      const interviewRate = (totalInterviewingCount / totalAppliedCount) * 100;
+      const conversionRate = !totalAppliedCount ? 0 : (totalOfferedCount / totalAppliedCount) * 100;
+      const interviewRate = !totalAppliedCount ? 0 : (totalInterviewingCount / totalAppliedCount) * 100;
+      console.log("Interview rate: ", interviewRate);
       console.log("Conversion rate: ", conversionRate);
 
       // Fetch Profile Building stats
@@ -36,34 +40,26 @@ const ChartsSection = () => {
       if (await GetJobPreferences()) {
         profileBuildingCompletion += 50;
       }
-      const profileInfo = await GetProfileInfo(`name, school, grad_year, program, specialization, industry, linkedin, github`);
+      const profileInfo = await GetProfileInfo(
+        `name, school, grad_year, program, specialization, industry, linkedin, github`
+      );
       console.log(profileInfo);
-        // Assign proportion of 50 for each field
+      // Assign proportion of 50 for each field
+      const requiredFields = [
+        profileInfo.name,
+        profileInfo.school,
+        profileInfo.grad_year,
+        profileInfo.program,
+        profileInfo.specialization,
+        profileInfo.industry,
+        profileInfo.linkedin,
+      ];
       profileBuildingCompletion += (() => {
         let completion = 0;
-        if (profileInfo.name) {
-          completion += 10;
-        }
-        if (profileInfo.school) {
-          completion += 10;
-        }
-        if (profileInfo.grad_year) {
-          completion += 10;
-        }
-        if (profileInfo.program) {
-          completion += 10;
-        }
-        if (profileInfo.specialization) {
-          completion += 10;
-        }
-        if (profileInfo.industry) {
-          completion += 10;
-        }
-        if (profileInfo.linkedin) {
-          completion += 10;
-        }
-        if (profileInfo.github) {
-          completion += 10;
+        for (let field of requiredFields) {
+          if (field) {
+            completion += 50 / requiredFields.length;
+          }
         }
         return completion;
       })();
@@ -82,7 +78,11 @@ const ChartsSection = () => {
 
   const getChartOptions = () => {
     return {
-      series: [interviewRate, conversionRate, profileBuildingCompletion],
+      series: [
+        interviewRate + bufferOffset,
+        conversionRate + bufferOffset,
+        profileBuildingCompletion + bufferOffset,
+      ],
       colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
       chart: {
         height: "250px",
@@ -141,6 +141,11 @@ const ChartsSection = () => {
         enabled: true,
         x: {
           show: false,
+        },
+        y: {
+          formatter: function (val) {
+            return `${(val - bufferOffset).toFixed(0)}%`;
+          },
         },
       },
       yaxis: {

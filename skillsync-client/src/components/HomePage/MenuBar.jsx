@@ -9,12 +9,13 @@ import { FaGear, FaSheetPlastic } from "react-icons/fa6";
 import { BiSpreadsheet } from "react-icons/bi";
 import EditProfileDetails from "../ProfilePage/EditProfileDetails";
 import ProfilePage from "../ProfilePage/ProfilePage";
-import JobApplicationTracker from "../Feed/JobApplicationTracker.tsx";
+import JobApplicationTracker from "../JobApplicationTracker/JobApplicationTrackerNew.tsx";
 import { FaAcquisitionsIncorporated } from "react-icons/fa";
 import { BsFileSpreadsheet } from "react-icons/bs";
 import { GetUnreadMessagesCount } from "../../supabase/Messages.ts";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 
 const menuItems = [
   {
@@ -42,12 +43,14 @@ const menuItems = [
 
 const MenuBar = ({
   selectedPage,
-  setSelectedPage,
+  handleMenuItemClick,
   profileInfo,
   setSidebarExpanded,
 }) => {
   const [notificationCounts, setNotificationCounts] = useState({});
   const [collapsed, setCollapsed] = useState(true);
+
+  const location = useLocation();
 
   const fetchMessagesCount = async () => {
     const newMessagesCount = await GetUnreadMessagesCount(); // Replace with your actual fetch logic
@@ -94,8 +97,12 @@ const MenuBar = ({
     >
       <Toaster />
       <div className="w-full p-5 ml-0.5 flex flex-row items-center">
-          <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
-          <img className={`h-10 fade-in ml-4 ${collapsed && 'hidden'}`} src={LogoDarkText} alt="SkillSync. Logo" />
+        <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
+        <img
+          className={`h-10 fade-in ml-4 ${collapsed && "hidden"}`}
+          src={LogoDarkText}
+          alt="SkillSync. Logo"
+        />
       </div>
       <div className="overflow-x-hidden">
         <ul className="text-left">
@@ -105,19 +112,21 @@ const MenuBar = ({
                 <li
                   key={item.name}
                   className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${
-                    selectedPage === item.name
+                    location.pathname.includes(item.name.toLowerCase().replace(" ", ""))
                       ? "bg-black"
                       : "hover:bg-[#2e2e2e]"
                   }`}
-                  onClick={() => setSelectedPage(item.name)}
+                  onClick={() => {
+                    handleMenuItemClick(item.name);
+                  }}
                 >
                   {item.icon && (
                     <span className="text-2xl mr-6">{item.icon}</span>
                   )}
                   <div className={`fade-in w-64 ${collapsed && "hidden"}`}>
-                    <span className="whitespace-nowrap" >{item.name}</span>
+                    <span className="whitespace-nowrap">{item.name}</span>
                     {notificationCounts[item.name] > 0 && (
-                      <span className="ml-auto  bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-semibold rounded-full px-2 py-0.5">
+                      <span className="ml-auto  bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  text-white text-sm font-semibold rounded-full px-2 py-0.5">
                         {notificationCounts[item.name]}
                       </span>
                     )}
@@ -128,13 +137,17 @@ const MenuBar = ({
         </ul>
       </div>
       <div className="h-1/4 flex">
-        <div className={`mt-auto transition-all duration-300 py-4 ${!collapsed && "px-4 "}`}>
-           <ProfileCard
-              name={profileInfo?.name}
-              school={profileInfo?.school}
-              handleEditProfile={() => setSelectedPage("Profile")}
-              collapsed={collapsed}
-            />
+        <div
+          className={`mt-auto transition-all duration-300 py-4 ${
+            !collapsed && "px-4 "
+          }`}
+        >
+          <ProfileCard
+            name={profileInfo?.name}
+            school={profileInfo?.school}
+            handleEditProfile={() => handleMenuItemClick("Profile")}
+            collapsed={collapsed}
+          />
         </div>
       </div>
     </div>

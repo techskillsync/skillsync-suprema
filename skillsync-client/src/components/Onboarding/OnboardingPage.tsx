@@ -9,6 +9,7 @@ import { redirectUser } from "../../utilities/redirect_user";
 import { AddResume } from "../../supabase/Resumes";
 import { UpdateJobPreferences } from "../../supabase/JobPreferences";
 import FinishScreen from "./FinishScreen";
+import { parseResume } from "../../api/ResumeParser";
 
 const importantInNewRoleOptions = [
   "Teamwork",
@@ -25,7 +26,7 @@ const workAuthorizationOptions = [
   "Citizen",
   "Permanent Resident",
   "Work Permit",
-  "Student Visa",
+  "Study Permit",
   "I require sponsorship",
 ];
 
@@ -110,7 +111,9 @@ const OnboardingPage = () => {
     });
   };
 
-  const [selectedResumeFile, setSelectedResumeFile] = useState<File | null>(null);
+  const [selectedResumeFile, setSelectedResumeFile] = useState<File | null>(
+    null
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [loadedInitialPreferences, setLoadedInitialPreferences] =
@@ -132,11 +135,6 @@ const OnboardingPage = () => {
       setSelectedResumeFile(files[0]);
     }
   };
-  useEffect(() => {
-    if (selectedResumeFile) {
-      AddResume(selectedResumeFile, selectedResumeFile.name)
-    }
-  }, [selectedResumeFile])
 
   const handleDropzoneClick = () => {
     if (fileInputRef.current) {
@@ -146,9 +144,12 @@ const OnboardingPage = () => {
 
   useEffect(() => {
     async function setInitialPreferences() {
-      const profile = await GetProfileInfo("name, last_name")
-      if (!profile) {console.warn("could not fetch first and last name in introduction slideshow") }
-      else {
+      const profile = await GetProfileInfo("name, last_name");
+      if (!profile) {
+        console.warn(
+          "could not fetch first and last name in introduction slideshow"
+        );
+      } else {
         const name = profile.name;
         const last_name = profile.last_name;
 
@@ -163,21 +164,11 @@ const OnboardingPage = () => {
     setInitialPreferences();
   }, []);
 
-  useEffect(() => {
-    UpdateJobPreferences({
-      "desired_culture": preferences.selectedNewRoleOptions,
-      "location": preferences.location,
-      "work_authorization": preferences.workAuthorization,
-      "start_time": preferences.startDate,
-      "experience_level": preferences.level,
-    });
-  }, [preferences])
-
   const pages = [
     <div className="w-full h-full flex flex-col items-center justify-center pt-12">
       <p className="text-[22px]">Welcome to SkillSync, {preferences.name}</p>
       <p className="text-[16px] mt-2 text-center">
-        We are excited to have you onboard. Let's get your name first.
+        We are excited to have you onboard. Let's get your full name first.
       </p>
       <div className="flex mt-4">
         <input
@@ -203,8 +194,8 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center pt-12">
       <p className="text-[22px]">Upload a resume</p>
       <p className="text-[16px] mt-2 text-center">
-        We will attempt to autofill your profile details using your resume.{" "}
-        <br />
+        We will attempt to autofill your profile details using your current
+        resume. <br />
         If you do not have one, you can skip this step for now.
       </p>
       <div className="flex flex-col w-1/2 mt-3 h-[200px]">
@@ -246,10 +237,11 @@ const OnboardingPage = () => {
         {importantInNewRoleOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.selectedNewRoleOptions.includes(option)
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
+              preferences.selectedNewRoleOptions.includes(option)
                 ? "opacity-100"
                 : "opacity-50"
-              }`}
+            }`}
             onClick={() => handleNewRoleOptionClick(option)}
           >
             {option}
@@ -264,19 +256,26 @@ const OnboardingPage = () => {
     <div className="w-full h-full flex flex-col items-center justify-center">
       <p className="text-[22px]">Visa Requirements</p>
       <p className="text-[16px] mt-2 text-center">
-        What work authorization do you currently have to work in this location?
+        What work authorization do you currently have to work in{" "}
+        {preferences.location!}?
       </p>
       <div className="mt-3 flex flex-col justify-center space-y-2 w-1/2">
         {workAuthorizationOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.workAuthorization === option
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
+              preferences.workAuthorization === option
                 ? "opacity-100"
                 : "opacity-50"
-              }`}
+            }`}
             onClick={() => handleWorkAuthorizationOptionClick(option)}
           >
-            {option}
+            {option +
+              (option === "I require sponsorship"
+                ? ""
+                : option === "Citizen"
+                ? ""
+                : " (or equivalent)")}
           </div>
         ))}
       </div>
@@ -290,14 +289,14 @@ const OnboardingPage = () => {
         {startDateOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.startDate === option ? "opacity-100" : "opacity-50"
-              }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
+              preferences.startDate === option ? "opacity-100" : "opacity-50"
+            }`}
             onClick={() => handleStartDateOptionClick(option)}
           >
             {option}
           </div>
         ))}
-
       </div>
     </div>,
 
@@ -310,8 +309,9 @@ const OnboardingPage = () => {
         {levelOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.level.includes(option) ? "opacity-100" : "opacity-50"
-              }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
+              preferences.level.includes(option) ? "opacity-100" : "opacity-50"
+            }`}
             onClick={() => handleLevelOptionClick(option)}
           >
             {option}
@@ -320,7 +320,12 @@ const OnboardingPage = () => {
       </div>
     </div>,
 
-    <FinishScreen preferences={preferences} page={page} setPage={setPage} />,
+    <FinishScreen
+      preferences={preferences}
+      resumeFile={selectedResumeFile}
+      page={page}
+      setPage={setPage}
+    />,
   ];
 
   return (
@@ -333,12 +338,12 @@ const OnboardingPage = () => {
       </div>
       <div
         id="progress-bar"
-        className="mt-2 rounded-md w-[80%] mx-auto bg-[#1e1e1e] p-6"
+        className="fade-in mt-2 rounded-md w-[80%] mx-auto bg-[#1e1e1e] p-6"
       >
         <div className="flex items-center space-x-2">
           <div className="w-full bg-[#f5f5f5] h-4 rounded-full">
             <div
-              className="h-4 bg-gradient-to-r from-blue-500 to-green-500 transition-all ease-in-out duration-500 rounded-full"
+              className="h-4 bg-gradient-to-r  from-[#03BD6C] to-[#36B7FE]  transition-all ease-in-out duration-500 rounded-full"
               style={{
                 width: `${((page / (pages.length - 1)) * 100).toFixed(0)}%`,
               }}
@@ -364,9 +369,9 @@ const OnboardingPage = () => {
           </AnimatePresence>
         )}
       </div>
-      <div id="controls" className="flex justify-end space-x-2">
+      <div id="controls" className="fixed bottom-12 right-0 flex justify-end px-12 space-x-2">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="bg-gradient-to-r from-[#36B7FE] to-[#1fbabb] text-white px-4 py-2 rounded-md"
           onClick={() => {
             if (page > 0) {
               setPage(page - 1);
@@ -376,7 +381,7 @@ const OnboardingPage = () => {
           Previous
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="bg-gradient-to-r from-[#1fbabb] to-[#03BD6C] text-white px-4 py-2 rounded-md"
           onClick={() => {
             if (page < pages.length - 1) {
               console.log(page);

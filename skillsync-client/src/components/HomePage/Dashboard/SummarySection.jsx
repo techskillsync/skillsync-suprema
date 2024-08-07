@@ -23,8 +23,18 @@ const SummarySection = ({}) => {
   useEffect(() => {
     async function fetchStats() {
       try {
-        setJobsSavedCount(await GetJobsCount(["saved", "applied", "interviewing", "testing", "offer"]));
-        setJobsAppliedCount(await GetJobsCount(["applied", "interviewing", "testing", "offer"]));
+        setJobsSavedCount(
+          await GetJobsCount([
+            "saved",
+            "applied",
+            "interviewing",
+            "testing",
+            "offer",
+          ])
+        );
+        setJobsAppliedCount(
+          await GetJobsCount(["applied", "interviewing", "testing", "offer"])
+        );
         setJobsInterviewingCount(await GetJobsCount(["interviewing", "offer"]));
         setJobOffersCount(await GetJobsCount(["offer"]));
         setResumesCount(await GetResumeCount());
@@ -40,7 +50,10 @@ const SummarySection = ({}) => {
       {stats.map((stat) => (
         <div
           key={stat.title}
-          className="flex w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700"
+          className="flex cursor-pointer w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700"
+          onClick={() => {
+            window.location.href = "/home/tracker";
+          }}
         >
           <div className="flex flex-col text-4xl">
             <stat.icon />

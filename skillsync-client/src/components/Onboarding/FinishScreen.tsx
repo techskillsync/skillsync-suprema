@@ -5,9 +5,15 @@ import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSli
 
 // @ts-ignore
 import LogoDark from "../../assets/LogoDark.png";
+import { parseResume } from "../../api/ResumeParser";
+import { UpdateJobPreferences } from "../../supabase/JobPreferences";
+import { SetProfileInfo } from "../../supabase/ProfileInfo";
+import { AddResume } from "../../supabase/Resumes";
+import { SaveNewWorkExperience } from "../../supabase/WorkExperience";
 
-const FinishScreen = ({ preferences, page, setPage }) => {
+const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
   const [showParticles, setShowParticles] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
@@ -26,9 +32,47 @@ const FinishScreen = ({ preferences, page, setPage }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  async function onboardUser() {
+    console.log("Onboarding...");
+    setLoading(true);
+    UpdateJobPreferences({
+      desired_culture: preferences.selectedNewRoleOptions,
+      location: preferences.location,
+      work_authorization: preferences.workAuthorization,
+      start_time: preferences.startDate,
+      experience_level: preferences.level,
+    });
+    if (resumeFile) {
+      await AddResume(resumeFile, "Default Resume - " + preferences.name);
+      const resumeData = await JSON.parse(await parseResume(resumeFile));
+      console.log("Parsed resume data:", resumeData);
+
+      const {work_experiences, certifications, ...profileData} = resumeData;
+      console.log("Profile data:", profileData);
+      await SetProfileInfo(profileData);
+
+      for (let i = 0; i < work_experiences.length; i++) {
+        const workExperience = work_experiences[i];
+        console.log("Adding work experience:", workExperience);
+        await SaveNewWorkExperience({
+          id: "",
+          title: workExperience.title,
+          company: workExperience.company,
+          description: workExperience.description,
+          startDate: workExperience.start_date,
+          endDate: workExperience.end_date,
+          location: workExperience.location,
+        });
+      }
+    }
+    setLoading(false);
+  }
+
   const handleFinish = async () => {
     console.log(preferences);
-    window.location.href = "/home";
+    console.log(resumeFile);
+    await onboardUser();
+    // window.location.href = "/home";
   };
 
   return (
@@ -72,6 +116,11 @@ const FinishScreen = ({ preferences, page, setPage }) => {
               color: {
                 value: ["35c0f0"],
               },
+              shadow: {
+                enable: true,
+                color: "#f9f406", // Same color as the particles
+                blur: 20, // Adjust the blur to control the glow effect
+              },
               links: {
                 enable: false,
               },
@@ -79,12 +128,12 @@ const FinishScreen = ({ preferences, page, setPage }) => {
                 enable: true,
               },
               move: {
-                direction: "bottom",
+                direction: loading ? "top" : "bottom",
                 enable: true,
                 outMode: "out",
                 random: false,
-                speed: 2,
-                straight: false,
+                speed: loading ? 100 : 0.5,
+                straight: loading ? true : false,
               },
               number: {
                 density: {
@@ -114,10 +163,11 @@ const FinishScreen = ({ preferences, page, setPage }) => {
           You're all set! Click finish to complete the setup.
         </p>
         <button
-          className="bg-gradient-to-r w-64 text-lg from-blue-500 to-green-500 text-white px-4 py-2 border-none rounded-md mt-4"
+          className="bg-gradient-to-r w-64 text-lg  from-[#03BD6C] to-[#36B7FE]  text-white px-4 py-2 border-none rounded-md mt-4"
           onClick={() => handleFinish()}
+          disabled={loading}
         >
-          Finish
+          {loading ? "Setting up..." : "Finish"}
         </button>
         <button
           className="
@@ -127,6 +177,11 @@ const FinishScreen = ({ preferences, page, setPage }) => {
         >
           Go back
         </button>
+        {/* <button
+          onClick={() => {setLoading(!loading)}}
+        >
+          Test
+        </button> */}
       </div>
     </div>
   );
