@@ -74,7 +74,7 @@ const SignUpPage = () => {
           <h2 className="text-3xl font-bold text-left mb-6 dark:text-white">
             Create your account
           </h2>
-          {/* <div className="mb-4 md:flex space-x-2">
+          <div className="mb-4 md:flex space-x-2">
             <LoadGoogleClient />
             <div
               id="g_id_onload"
@@ -94,7 +94,7 @@ const SignUpPage = () => {
               data-logo_alignment="left">
             </div>
           </div>
-          <Spacer text="or continue with" /> */}
+          <Spacer text="or continue with" />
           <form onSubmit={handleFormSubmit}>
             <div className="mb-4">
               <InputField
