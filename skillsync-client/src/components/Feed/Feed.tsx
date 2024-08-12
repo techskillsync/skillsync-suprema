@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  GetJobListingsPaginate,
   SearchJobs,
 } from "../../supabase/GetJobListings";
 import { JobListing } from "../../types/types";
 import JobDescriptionCard from "./JobDescriptionCard";
-import PaginationController from "./PaginationController";
 import SearchBar from "./SearchBar";
 import SearchFilters from "./SearchFilters"; // <---- Arman
-import Spacer from "../common/Spacer";
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
   const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
-  const [jobModeKeys, setJobModeKeys] = useState([]);
-  const [keywordKeys, setKeywordKeys] = useState([]);
+  const [jobModeKeys, setJobModeKeys] = useState<string[]>([]);
+  const [keywordKeys, setKeywordKeys] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
   const [listings, setListings] = useState<JobListing[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
-  const [selectedJob, setSelectedJob] = useState<JobListing | null>();
+  const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
 
   useEffect(() => {
     if (preferencesLoaded) {
       fetchListings();
     }
-  }, [currentPage, preferencesLoaded]);
+  }, [preferencesLoaded]);
 
   useEffect(() => {
     console.log("Search value changed", searchValue);
@@ -37,24 +35,23 @@ function Feed() {
   useEffect(() => {
     if (preferencesLoaded) {
       console.log("Keys changed", locationKeys, jobModeKeys);
-      fetchListings();
+      resetListings(); // Reset listings when filters change
     }
   }, [locationKeys, jobModeKeys, keywordKeys]);
 
   async function fetchListings() {
-    console.log("Refreshing listings...");
-    console.log(searchValue);
-    const pageSize = 3; // ? Number of listings per page minus 1
-    const from = (currentPage - 1) * pageSize;
-    const to = currentPage * pageSize;
-    // Todo: add location searching (parameter currently empty string)
-    let response;
-    response = await SearchJobs((
-      searchValue 
-      + keywordKeys.map((k) => k.value).join(" ")
-      + jobModeKeys.map((m) => m.value).join(" ")
-    ), locationKeys, from, to);
-    console.log("Response from search:", response);
+    console.log("Fetching more listings...");
+    const limit = 10; // Number of listings to load at a time
+    const from = offset;
+    const to = offset + limit;
+
+    const response = await SearchJobs(
+      searchValue + keywordKeys.join(" ") + jobModeKeys.join(" "),
+      locationKeys,
+      from,
+      to
+    );
+
     const { data, error, count } = response || {};
 
     if (error) {
@@ -62,24 +59,23 @@ function Feed() {
       return;
     }
 
-    setListings(data || []);
-    // setCurrentPage(1);
-    setTotalPages(Math.ceil(count ? count / pageSize : 0));
+    if (data && data.length > 0) {
+      setListings((prevListings) => [...prevListings, ...data]);
+      setOffset(offset + limit);
+    } else {
+      setHasMore(false); // No more items to load
+    }
   }
 
-  useEffect(() => {
-    console.log("Listings:", listings);
-  }, [listings]);
-
-  function handlePageChange(page: number) {
-    setCurrentPage(page);
+  function resetListings() {
+    setListings([]);
+    setOffset(0);
+    setHasMore(true);
+    fetchListings(); // Load the first batch with new filters
   }
 
   function handleSearch() {
-    setCurrentPage(1);
-    setTotalPages(0);
-    setListings([]);
-    fetchListings();
+    resetListings(); // Reset and load based on the search value
   }
 
   return (
@@ -100,28 +96,26 @@ function Feed() {
           />
         </div>
         {/*  ------------- Arman ------------- */}
-        <div className="my-3 ml-20">
-          {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
-          <PaginationController
-            key={listings.toString()}
-            handlePageChange={handlePageChange}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        </div>
-        {listings.map((item, index) => (
-          <div
-            className="mb-4"
-            key={index}
-            // onClick={() => setSelectedJob(item)}
-          >
-            <JobDescriptionCard
-              key={item.id}
-              jobDescription={item}
-              action={() => setSelectedJob(item)}
-            />
-          </div>
-        ))}
+        <InfiniteScroll
+          dataLength={listings.length}
+          next={fetchListings}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          endMessage={<p style={{ textAlign: "center" }}>No more jobs available</p>}
+        >
+          {listings.map((item, index) => (
+            <div
+              className="mb-4"
+              key={item.id || index}
+            >
+              <JobDescriptionCard
+                key={item.id}
+                jobDescription={item}
+                action={() => setSelectedJob(item)}
+              />
+            </div>
+          ))}
+        </InfiniteScroll>
       </div>
       <div className="w-1/3 bg-[#1e1e1e]">
         <div className="fixed right-0 top-0 h-screen w-[26.66%] overflow-y-scroll">
