@@ -237,11 +237,10 @@ const OnboardingPage = () => {
         {importantInNewRoleOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.selectedNewRoleOptions.includes(option)
-                ? "opacity-100"
-                : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.selectedNewRoleOptions.includes(option)
+              ? "opacity-100"
+              : "opacity-50"
+              }`}
             onClick={() => handleNewRoleOptionClick(option)}
           >
             {option}
@@ -263,19 +262,18 @@ const OnboardingPage = () => {
         {workAuthorizationOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.workAuthorization === option
-                ? "opacity-100"
-                : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.workAuthorization === option
+              ? "opacity-100"
+              : "opacity-50"
+              }`}
             onClick={() => handleWorkAuthorizationOptionClick(option)}
           >
             {option +
               (option === "I require sponsorship"
                 ? ""
                 : option === "Citizen"
-                ? ""
-                : " (or equivalent)")}
+                  ? ""
+                  : " (or equivalent)")}
           </div>
         ))}
       </div>
@@ -289,9 +287,8 @@ const OnboardingPage = () => {
         {startDateOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.startDate === option ? "opacity-100" : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.startDate === option ? "opacity-100" : "opacity-50"
+              }`}
             onClick={() => handleStartDateOptionClick(option)}
           >
             {option}
@@ -309,9 +306,8 @@ const OnboardingPage = () => {
         {levelOptions.map((option) => (
           <div
             key={option}
-            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${
-              preferences.level.includes(option) ? "opacity-100" : "opacity-50"
-            }`}
+            className={`p-4 border border-emerald-500 rounded cursor-pointer bg-[#1e1e1e] transition-opacity duration-200 ${preferences.level.includes(option) ? "opacity-100" : "opacity-50"
+              }`}
             onClick={() => handleLevelOptionClick(option)}
           >
             {option}
@@ -369,29 +365,31 @@ const OnboardingPage = () => {
           </AnimatePresence>
         )}
       </div>
-      <div id="controls" className="fixed bottom-12 right-0 flex justify-end px-12 space-x-2">
-        <button
-          className="bg-gradient-to-r from-[#36B7FE] to-[#1fbabb] text-white px-4 py-2 rounded-md"
-          onClick={() => {
-            if (page > 0) {
-              setPage(page - 1);
-            }
-          }}
-        >
-          Previous
-        </button>
-        <button
-          className="bg-gradient-to-r from-[#1fbabb] to-[#03BD6C] text-white px-4 py-2 rounded-md"
-          onClick={() => {
-            if (page < pages.length - 1) {
-              console.log(page);
-              setPage(page + 1);
-            }
-          }}
-        >
-          {page === pages.length - 1 ? "Finish" : "Next"}
-        </button>
-      </div>
+      {page !== pages.length - 1 &&
+        <div id="controls" className="fixed bottom-12 right-0 flex justify-end px-12 space-x-2">
+          <button
+            className="bg-gradient-to-r from-[#36B7FE] to-[#1fbabb] text-white px-4 py-2 rounded-md"
+            onClick={() => {
+              if (page > 0) {
+                setPage(page - 1);
+              }
+            }}
+          >
+            Previous
+          </button>
+          <button
+            className="bg-gradient-to-r from-[#1fbabb] to-[#03BD6C] text-white px-4 py-2 rounded-md"
+            onClick={() => {
+              if (page < pages.length - 1) {
+                console.log(page);
+                setPage(page + 1);
+              }
+            }}
+          >
+            Next
+          </button>
+        </div>
+      }
     </div>
   );
 };

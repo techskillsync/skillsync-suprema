@@ -35,11 +35,6 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
   async function onboardUser() {
     console.log("Onboarding...");
     setLoading(true);
-    await SetProfileInfo({
-      'name': preferences.name,
-      'last_name': preferences.last_name,
-      'location': preferences.location,
-    });
     UpdateJobPreferences({
       desired_culture: preferences.selectedNewRoleOptions,
       location: preferences.location,
@@ -70,6 +65,11 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
         });
       }
     }
+    await SetProfileInfo({
+      'name': preferences.name,
+      'last_name': preferences.lastName,
+      'location': preferences.location,
+    });
     setLoading(false);
   }
 
