@@ -36,11 +36,14 @@ function EditProfilePicture() {
     <div className="rounded-md flex flex-col items-center justify-center">
       <div className="relative">
         {avatarURL !== "" || newAvatarURL ? (
-          <img
-            className="rounded-full"
-            width={"200px"}
-            src={newAvatarURL ? newAvatarURL : avatarURL}
-          />
+          <div className="w-[200px] h-[200px]">
+            <img
+              className="rounded-full h-[200px] w-[200px] object-cover"
+              width={"200px"}
+              height={"200px"}
+              src={newAvatarURL ? newAvatarURL : avatarURL}
+            />
+          </div>
         ) : (
           <div className="w-[200px] h-[200px]">
             <div className="rounded-full bg-gray-800 w-full h-full flex items-center justify-center">

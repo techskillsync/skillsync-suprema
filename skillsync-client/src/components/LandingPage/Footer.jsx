@@ -12,18 +12,33 @@ const Footer = () => {
                         Socials
                     </h3>
                     <div className='flex items-center gap-3 text-2xl'>
-                        <a href="https://twitter.com/skillsync" target='blank'>
+                        {/* <a href="https://twitter.com/skillsync" target='blank'>
                             <FaXTwitter />
-                        </a>
-                        <a href="https://www.instagram.com/skillsync" target='blank'>
+                        </a> */}
+                        <a href="https://www.instagram.com/skillsync.work/" target='blank'>
                             <FaInstagram />
                         </a>
-                        <a href="https://www.linkedin.com/company/skillsync/" target='blank'>
+                        <a href="https://www.linkedin.com/company/skillsync1/" target='blank'>
                             <FaLinkedin />
                         </a>
                     </div>
                 </article>
                 <aside className='flex flex-wrap gap-6 px-10 justify-center my-10 md:my-[unset] md:gap-14'>
+                    <article className='flex flex-col gap-3'>
+                        <h3 className='text-allotrix-std text-sm'>
+                            <Link to="/">
+                                Product
+                            </Link>
+                        </h3>
+                        <ul className='text-sm'>
+                            <li>
+                                <a onClick={() => {window.open('/SkillSyncPrivacyPolicy.html', '_blank')}}
+                                    className="cursor-pointer">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                        </ul>
+                    </article>
                     <article className='flex flex-col gap-3'>
                         <h3 className='text-sm'>
                             <Link to="/contact">
@@ -32,7 +47,7 @@ const Footer = () => {
                         </h3>
                         <ul className='text-sm'>
                             <li>
-                                <a className='flex gap-1 items-center' href="mailto:allotrixapp@gmail.com?subject=Meeting%20Request">
+                                <a className='flex gap-1 items-center' href="mailto:info@skillsync.work?subject=Meeting%20Request">
                                     <IoMdMail />
                                     info@skillsync.work
                                 </a>
@@ -58,7 +73,7 @@ const Footer = () => {
             </div>
             <aside className='flex justify-between items-center border-t-2 border-solid border-t-mamun-blue pt-6 md:mx-32'>
                 <div className='w-[140px] gradient-text font-bold text-xl'>
-                    SKILL SYNC.
+                    SkillSync.
                 </div>
                 <div className='bg-[#161617] text-[13px] font-light py-1 px-4 rounded-2xl text-[white] transition-all duration-300 ease-out border-[1px] border-solid hover:border-mamun-blue'>
                     <a href='/'>

@@ -40,7 +40,7 @@ async function EmailLogin(email, password) {
 	})
 
 	if (error) {
-		alert("Error logging in 🙀")
+		// alert("Error logging in 🙀")
 		console.error('error logging user in - ' + error)
 		return { success: false, data: error }
 	}

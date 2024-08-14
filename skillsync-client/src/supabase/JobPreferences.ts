@@ -2,7 +2,7 @@ import { GetUserId } from "./GetUserId";
 import supabase from "./supabaseClient";
 
 
-async function GetJobPreferences(columns): Promise<any> {
+async function GetJobPreferences(columns?: string): Promise<any> {
   const { data, error } = await supabase.from("user_job_preferences").select(columns ?? '*').single();
   if (error) {
     console.error("Error fetching job preferences:", error);

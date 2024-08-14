@@ -9,6 +9,8 @@ const PreferencesSection = () => {
   const [salaryRange, setSalaryRange] = useState("");
   const [jobMode, setJobMode] = useState([]);
   const [keywords, setKeywords] = useState([]);
+  const [citizenship, setCitizenship] = useState([]);
+  const [recency, setRecency] = useState(null); // recency in days
 
   const [initialPreferences, setInitialPreferences] = useState({});
 
@@ -87,7 +89,7 @@ const PreferencesSection = () => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow text-black h-full w-[60%]">
+    <div className="p-4 bg-white rounded-lg shadow text-black h-72 w-[60%] overflow-y-auto scrollbar-hide">
       <Toaster />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row justify-between items-center mb-4">
@@ -135,6 +137,27 @@ const PreferencesSection = () => {
               value={keywords}
               list={jobSearchKeywords}
               onChange={setKeywords}
+              allowMultiple={true}
+            />
+          </div>
+        </div>
+        <div className="flex space-x-6 flex-row mb-4">
+          <div className="w-1/2 flex">
+            <SelectField
+              item={"Recency"}
+              value={recency}
+              list={["1 day", "7 days", "14 days", "30 days", "1 year"]}
+              onChange={setRecency}
+              creatable={false}
+            />
+          </div>
+          <div className="w-1/2 flex">
+            <SelectField
+              item={"Citizenship"}
+              value={citizenship}
+              list={["N/A", "USA", "Canada"]}
+              onChange={setCitizenship}
+              creatable={true}
               allowMultiple={true}
             />
           </div>

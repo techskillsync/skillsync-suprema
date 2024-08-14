@@ -1,22 +1,73 @@
 import React, { useEffect, useState } from "react";
 import { GetJobsCount } from "../../../supabase/JobApplicationTracker";
 import ApexCharts from "apexcharts";
+import { GetJobPreferences } from "../../../supabase/JobPreferences";
+import { GetProfileInfo } from "../../../supabase/ProfileInfo";
+
+const bufferOffset = 2; // 10% buffer so that bars with 0% are still visible
 
 const ChartsSection = () => {
   const [conversionRate, setConversionRate] = React.useState(0);
+  const [interviewRate, setInterviewRate] = React.useState(0);
+  const [profileBuildingCompletion, setProfileBuildingCompletion] =
+    React.useState(0);
   const [fetched, setFetched] = React.useState(false);
-
 
   useEffect(() => {
     async function fetchStats() {
-      const totalAppliedCount = await GetJobsCount(["applied", "interviewing", "testing", "offer"])
-      const totalOfferedCount = await GetJobsCount(["offer"])
-      console.log("Total applied count: ", totalAppliedCount)
-      console.log("Total offered count: ", totalOfferedCount)
-      const conversionRate = totalOfferedCount/totalAppliedCount*100
-      console.log("Conversion rate: ", conversionRate)
+      const totalAppliedCount = await GetJobsCount([
+        "applied",
+        "interviewing",
+        "testing",
+        "offer",
+      ]);
+      const totalInterviewingCount = await GetJobsCount([
+        "interviewing",
+        "offer",
+      ]);
+      const totalOfferedCount = await GetJobsCount(["offer"]);
+      console.log("Total applied count: ", totalAppliedCount);
+      console.log("Total interviewing count: ", totalInterviewingCount);
+      console.log("Total offered count: ", totalOfferedCount);
+      const conversionRate = !totalAppliedCount ? 0 : (totalOfferedCount / totalAppliedCount) * 100;
+      const interviewRate = !totalAppliedCount ? 0 : (totalInterviewingCount / totalAppliedCount) * 100;
+      console.log("Interview rate: ", interviewRate);
+      console.log("Conversion rate: ", conversionRate);
+
+      // Fetch Profile Building stats
+      let profileBuildingCompletion = 0;
+      // Todo: Make better
+      if (await GetJobPreferences()) {
+        profileBuildingCompletion += 50;
+      }
+      const profileInfo = await GetProfileInfo(
+        `name, school, grad_year, program, specialization, industry, linkedin, github`
+      );
+      console.log(profileInfo);
+      // Assign proportion of 50 for each field
+      const requiredFields = [
+        profileInfo.name,
+        profileInfo.school,
+        profileInfo.grad_year,
+        profileInfo.program,
+        profileInfo.specialization,
+        profileInfo.industry,
+        profileInfo.linkedin,
+      ];
+      profileBuildingCompletion += (() => {
+        let completion = 0;
+        for (let field of requiredFields) {
+          if (field) {
+            completion += 50 / requiredFields.length;
+          }
+        }
+        return completion;
+      })();
+
       try {
         setConversionRate(conversionRate);
+        setInterviewRate(interviewRate);
+        setProfileBuildingCompletion(profileBuildingCompletion);
         setFetched(true);
       } catch (error) {
         console.error(error);
@@ -25,13 +76,16 @@ const ChartsSection = () => {
     fetchStats();
   }, []);
 
-
   const getChartOptions = () => {
     return {
-      series: [90, conversionRate, 70],
+      series: [
+        interviewRate + bufferOffset,
+        conversionRate + bufferOffset,
+        profileBuildingCompletion + bufferOffset,
+      ],
       colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
       chart: {
-        height: "280px",
+        height: "250px",
         width: "100%",
         type: "radialBar",
         sparkline: {
@@ -42,8 +96,8 @@ const ChartsSection = () => {
         radialBar: {
           track: {
             show: true,
-            background: '#1e1e1e',
-            strokeWidth: '97%',
+            background: "#1e1e1e",
+            strokeWidth: "97%",
             opacity: 1,
             margin: 5, // margin is in pixels
           },
@@ -62,11 +116,10 @@ const ChartsSection = () => {
           },
           cornerRadius: 20,
           borderRadius: 30,
-
         },
         bar: {
           borderRadius: 30,
-        }
+        },
       },
       grid: {
         show: false,
@@ -78,7 +131,7 @@ const ChartsSection = () => {
           bottom: -20,
         },
       },
-      labels: ["Industry Rating", "Conversion Rate", "Overall Competency"],
+      labels: ["Interview Rate", "Conversion Rate", "Profile Building"],
       legend: {
         show: true,
         position: "bottom",
@@ -88,6 +141,11 @@ const ChartsSection = () => {
         enabled: true,
         x: {
           show: false,
+        },
+        y: {
+          formatter: function (val) {
+            return `${(val - bufferOffset).toFixed(0)}%`;
+          },
         },
       },
       yaxis: {
@@ -111,7 +169,7 @@ const ChartsSection = () => {
           document.querySelector("#radial-chart"),
           getChartOptions()
         );
-        console.log("Rendering chart")
+        console.log("Rendering chart");
         document.querySelector("#radial-chart").innerHTML = "";
         chart.render();
       }
@@ -119,9 +177,8 @@ const ChartsSection = () => {
   }, [fetched]);
 
   return (
-    <div className="w-[40%]">
-      <div className=" h-full ml-3 w-full rounded-lg shadow bg-[#1e1e1e] p-4 md:p-6">
-
+    <div className="w-[40%] h-72">
+      <div className="h-72 ml-3 w-full rounded-lg shadow bg-[#1e1e1e] !p-5 md:p-6">
         <div className="flex !text-white justify-between mb-3">
           <div className="flex items-center">
             <div className="flex justify-center items-center">
@@ -193,7 +250,6 @@ const ChartsSection = () => {
         </div>
 
         <div className="" id="radial-chart"></div>
-
       </div>
     </div>
   );

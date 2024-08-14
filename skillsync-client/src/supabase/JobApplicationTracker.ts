@@ -71,7 +71,7 @@ async function RemoveJob(jobId: string): Promise<boolean> {
 }
 
 async function CheckExists(jobId: string): Promise<boolean> {
-  console.log("Checking if job exists", jobId);
+  // console.log("Checking if job exists", jobId);
   try {
     const userID = await GetUserId();
     if (!userID) {

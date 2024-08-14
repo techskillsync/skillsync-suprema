@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   FaArrowRight,
   FaBookmark,
+  FaExclamationTriangle,
   FaLink,
   FaMapMarkerAlt,
+  FaMoneyBill,
   FaSave,
 } from "react-icons/fa";
-import { FaUserGroup } from "react-icons/fa6";
+import { FaExclamation, FaUserGroup } from "react-icons/fa6";
 import { IoBookmark, IoCashOutline } from "react-icons/io5";
 import { TiSpanner } from "react-icons/ti";
 import getGlassDoorRating from "../../utilities/get_glassdoor_rating";
@@ -17,21 +19,30 @@ import {
 } from "../../supabase/JobApplicationTracker.ts";
 import SharePopup from "./SharePopup.jsx";
 import { confirmWrapper } from "../common/Confirmation.jsx";
+import ReportPopup from "./ReportPopup.jsx";
 
 const JobDescriptionCard = ({
   jobDescription,
   className = "",
   mini = false,
+  trackerDisplay = false,
   showGlassdoorRating = true,
   action = () => {},
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
   const [saved, setSaved] = useState(false);
 
+
+  const salary = parseSalary(jobDescription.description);
+
   const handleSave = async () => {
     if (saved) {
       // Remove from saved
-      if (await confirmWrapper('Are you sure you want to remove this job from your tracker?')) {
+      if (
+        await confirmWrapper(
+          "Are you sure you want to remove this job from your tracker?"
+        )
+      ) {
         if (await RemoveJob(jobDescription.id)) {
           setSaved(false);
         }
@@ -64,10 +75,10 @@ const JobDescriptionCard = ({
       action: () => {
         navigator.clipboard.writeText(jobDescription.link);
       },
-    // },
-    // {
-    //   title: "Share",
-    //   icon: <FaUserGroup />,
+      // },
+      // {
+      //   title: "Share",
+      //   icon: <FaUserGroup />,
     },
   ];
 
@@ -91,7 +102,7 @@ const JobDescriptionCard = ({
         (mini ? "w-500px" : "")
       }
     >
-      {jobDescription.logo_url && !mini && (
+      {jobDescription.logo_url && !mini && false && (
         <div className={`company-logo bg-white rounded-lg`}>
           <img
             src={jobDescription.logo_url}
@@ -101,15 +112,29 @@ const JobDescriptionCard = ({
         </div>
       )}
       <div className=" relative job-details w-full py-4 pl-8 pr-5">
-        {mini && jobDescription.logo_url && (
+        {jobDescription.logo_url && (
           <img
             src={jobDescription.logo_url}
             alt={jobDescription.company}
-            className="absolute top-3 right-3 h-16 w-16 rounded"
+            className={
+              mini ? "absolute top-3 right-3 h-16 w-16 rounded"
+              : "absolute top-3 right-3 h-24 w-24 rounded"
+            }
           />
         )}
         <div className="flex justify-between">
-          <h2 className="w-2/3 text-xl text-wrap font-bold mb-2">{jobDescription.company}</h2>
+          <h2
+            className={
+              "w-2/3 text-wrap !font-bold mb-2 " + mini
+                ? "text-lg font-bold"
+                : "text-xl"
+            }
+          >
+            {mini
+              ? jobDescription.company.substring(0, 19) +
+                (jobDescription.company.length > 19 ? "..." : "")
+              : jobDescription.company}
+          </h2>
           <div className="w-1/3">
             {showGlassdoorRating && !mini && glassdoorRating && (
               <div className="flex">
@@ -124,7 +149,7 @@ const JobDescriptionCard = ({
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
 
-          <p className={mini ? "text-base" : "text-lg"}>
+          <p className={`max-w-[80%]  ${mini ? "text-base" : "text-lg"}`}>
             {" "}
             {mini
               ? jobDescription.title.substring(0, 26) +
@@ -146,8 +171,16 @@ const JobDescriptionCard = ({
           )}
         <div className="flex items-center">
           <FaMapMarkerAlt className="mr-2" />
-          <p className={mini ? "text-base" : 'text-lg'}>{jobDescription.location}</p>
+          <p className={mini ? "text-base" : "text-lg"}>
+            {jobDescription.location}
+          </p>
         </div>
+       {salary &&  <div className="flex items-center mt-2">
+          <FaMoneyBill className="mr-2" />
+          <p className={mini ? "text-base" : "text-lg"}>
+            {salary}
+          </p>
+        </div>}
         {/* <div>
           <p>{jobDescription.description.substring(0, 100) + '...'}</p>
         </div> */}
@@ -162,14 +195,20 @@ const JobDescriptionCard = ({
         </div> */}
         <div>
           <div className="flex mt-4">
-          <button
-                key="save"
-                onClick={handleSave}
-                className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${saved ? 'bg-blue-200 hover:bg-red-200' : 'bg-gray-200 hover:bg-gray-400'}`}
-              >
-                <IoBookmark />
-                {!mini && <span className="ml-2">{saved ? "Saved" : "Save"}</span>}
-              </button>
+            <button
+              key="save"
+              onClick={handleSave}
+              className={`flex items-center text-gray-700 transition-all duration-150 rounded-full px-4 py-2 mr-4 ${
+                saved
+                  ? "bg-blue-200 hover:bg-red-200"
+                  : "bg-gray-200 hover:bg-gray-400"
+              }`}
+            >
+              <IoBookmark />
+              {!mini && (
+                <span className="ml-2">{saved ? "Saved" : "Save"}</span>
+              )}
+            </button>
             {actions.map((action) => (
               <button
                 key={action.title}
@@ -186,6 +225,12 @@ const JobDescriptionCard = ({
                 {!mini && <span className="ml-2">Share</span>}
               </button>
             </SharePopup>
+            <ReportPopup content={jobDescription.id}>
+              <button className="ml-4 flex items-center bg-gray-200 text-gray-700 hover:bg-red-200 transition-all duration-150 rounded-full px-4 py-2">
+                <FaExclamationTriangle />
+                {!mini && <span className="ml-2">Report</span>}
+              </button>
+            </ReportPopup>
             {action && (
               <button
                 onClick={action}
@@ -201,5 +246,40 @@ const JobDescriptionCard = ({
     </div>
   );
 };
+
+function parseSalary(jobDescription) {
+  const salaryPatterns = [
+    /CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?per\s?month/gi,
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $115,100 - $161,200 CAN Annually
+    /\$?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD - 70,000 USD (annually)
+    /\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi, // Matches $135K/yr - $195K/yr
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?/gi, // Matches $112,000 - $140,000
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars - 70,000 dollars (annually)
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $50,000 USD (annually)
+    /£\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:GBP)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches £50,000 GBP (annually)
+    /€\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:EUR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches €50,000 EUR (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|rupees|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars (annually)
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:k|K)\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50k CAD (annually)
+    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi // Matches CA$115,000/yr - CA$150,000/yr
+];
+
+  for (const pattern of salaryPatterns) {
+    const match = jobDescription.match(pattern);
+    if (match) {
+      if (
+        /\$|\b(USD|CAD|GBP|EUR|CAN|INR)\b|\b(annually|monthly|yearly|\/yr|\/mo)\b/.test(
+          match[0]
+        )
+      ) {
+        {
+          return match[0];
+        }
+      }
+    }
+  }
+
+  return false;
+}
 
 export default JobDescriptionCard;

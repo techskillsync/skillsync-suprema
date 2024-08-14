@@ -2,6 +2,7 @@ import supabase from "./supabaseClient";
 import { JobListing } from "../types/types";
 import { PostgrestTransformBuilder } from "@supabase/postgrest-js";
 import axios from "axios";
+import { GetUserId } from "./GetUserId";
 
 // Fetches JobListings from Supabase.
 // Returns false on error and the job listings on success
@@ -74,6 +75,8 @@ async function ScrapeThenSearch(
  *  - Ranks listings based on how closely they match the query
  *  - Uses word stems to find any variation of the same query/location
  *  - Prioritizes matching words in the title than in the description
+ *  - By default returns jobs that aren't already saved
+ * 
  * @param {string} query - Space separated list of words to match
  * @param {string} location - Location keywords. eg: (Vancouver BC, Canada)
  * @param {number} from - pagination start index
@@ -90,12 +93,16 @@ async function SearchJobs(
     console.error("Invalid query parameter:", query);
     return;
   }
+
   console.log("Searching jobs...");
+  console.log(query);
   let query_terms = query
-    .replace(/ /g, " | ")
+  .trim()
+    .replace(/( )+/g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");
   let location_terms = location
+  .trim()
     .replace(/ /g, " | ")
     .trim()
     .replace(/^\|+|\|+$/g, "");

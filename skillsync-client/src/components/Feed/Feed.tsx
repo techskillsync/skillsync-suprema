@@ -10,9 +10,11 @@ import SearchFilters from "./SearchFilters"; // <---- Arman
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
-  const [locationKeys, setLocationKeys] = useState(""); // <---- Arman
-  const [jobModeKeys, setJobModeKeys] = useState<string[]>([]);
-  const [keywordKeys, setKeywordKeys] = useState<string[]>([]);
+  const [preferences, setPreferences] = useState({
+    location: "",
+    jobModes: [],
+    keywords: []
+  });
   const [searchValue, setSearchValue] = useState("");
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
@@ -26,32 +28,33 @@ function Feed() {
     if (preferencesLoaded) {
       fetchListings();
     }
-  }, [preferencesLoaded]);
+  }, [currentPage, preferencesLoaded]);
 
   useEffect(() => {
     console.log("Search value changed", searchValue);
   }, [searchValue]);
 
   useEffect(() => {
+    console.log("Filter or page changed:", currentPage, preferences);
     if (preferencesLoaded) {
-      console.log("Keys changed", locationKeys, jobModeKeys);
-      resetListings(); // Reset listings when filters change
+      fetchListings();
     }
-  }, [locationKeys, jobModeKeys, keywordKeys]);
+  }, [currentPage, preferences]);
 
   async function fetchListings() {
-    console.log("Fetching more listings...");
-    const limit = 10; // Number of listings to load at a time
-    const from = offset;
-    const to = offset + limit;
-
-    const response = await SearchJobs(
-      searchValue + keywordKeys.join(" ") + jobModeKeys.join(" "),
-      locationKeys,
-      from,
-      to
-    );
-
+    console.log("Refreshing listings...");
+    console.log(searchValue);
+    const pageSize = 3; // ? Number of listings per page minus 1
+    const from = (currentPage - 1) * pageSize;
+    const to = currentPage * pageSize;
+    // Todo: add location searching (parameter currently empty string)
+    let response;
+    response = await SearchJobs((
+      searchValue 
+      + keywordKeys.map((k) => k.value).join(" ")
+      + jobModeKeys.map((m) => m.value).join(" ")
+    ), locationKeys, from, to);
+    console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
     if (error) {
@@ -59,23 +62,29 @@ function Feed() {
       return;
     }
 
-    if (data && data.length > 0) {
-      setListings((prevListings) => [...prevListings, ...data]);
-      setOffset(offset + limit);
-    } else {
-      setHasMore(false); // No more items to load
-    }
+    setListings(data || []);
+    // setCurrentPage(1);
+    setTotalPages(Math.ceil(count ? count / pageSize : 0));
   }
 
-  function resetListings() {
-    setListings([]);
-    setOffset(0);
-    setHasMore(true);
-    fetchListings(); // Load the first batch with new filters
+  useEffect(() => {
+    setSelectedJob(listings[0]);
+  }, [listings]);
+
+  useEffect(() => {
+    console.log("Listings:", listings);
+  }, [listings]);
+
+  function handlePageChange(page: number) {
+    setCurrentPage(page);
   }
 
   function handleSearch() {
-    resetListings(); // Reset and load based on the search value
+    console.log("Handling Search...");
+    setCurrentPage(1);
+    setTotalPages(0);
+    setListings([]);
+    fetchListings();
   }
 
   return (
@@ -90,9 +99,8 @@ function Feed() {
         <div className="overflow-x-auto">
           <SearchFilters
             setPreferencesLoaded={setPreferencesLoaded}
-            setLocationKeys={setLocationKeys}
-            setJobModeKeys={setJobModeKeys}
-            setKeywordKeys={setKeywordKeys}
+            setPreferences={setPreferences}
+            preferences={preferences}
           />
         </div>
         {/*  ------------- Arman ------------- */}
@@ -117,9 +125,9 @@ function Feed() {
           ))}
         </InfiniteScroll>
       </div>
-      <div className="w-1/3 bg-[#1e1e1e]">
-        <div className="fixed right-0 top-0 h-screen w-[26.66%] overflow-y-scroll">
-          <JobDetailsSlide jobDescription={selectedJob} />
+      <div className="w-1/3 bg-[#1e1e1e] relative">
+        <div className="sticky right-0 top-0 h-screen w-full overflow-y-scroll">
+            <JobDetailsSlide jobDescription={selectedJob} />
         </div>
       </div>
     </div>

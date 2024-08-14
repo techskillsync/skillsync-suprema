@@ -13,13 +13,15 @@ function ProfilePicture({ height, width }) {
     fetchPfpUrl();
   }, []);
 
-  return avatarUrl ? (
-    <img className="fade-in" src={avatarUrl} />
-  ) : (
-    <div className="w-12 h-12">
-      <div className="rounded-full bg-gray-800 w-full h-full">
-        <FaUser className="text-gray-200 w-full h-full p-3" />
-      </div>
+  return (
+    <div className="w-12 h-12 rounded-full">
+      {avatarUrl ? (
+        <img className="fade-in rounded-full w-full h-full object-cover" src={avatarUrl} />
+      ) : (
+        <div className="rounded-full bg-gray-800 w-full h-full">
+          <FaUser className="text-gray-200 w-full h-full p-3" />
+        </div>
+      )}
     </div>
   );
 }
