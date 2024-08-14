@@ -91,7 +91,7 @@ const MenuBar = ({
 
   return (
     <div
-      className={`h-full z-[150] bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out z-auto ${
+      className={`h-full z-[150] bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out ${
         collapsed ? "w-20" : "w-64"
       }`}
       onMouseEnter={() => {

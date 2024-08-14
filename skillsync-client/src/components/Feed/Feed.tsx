@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import {
+  GetJobListingsPaginate,
   SearchJobs,
 } from "../../supabase/GetJobListings";
 import { JobListing } from "../../types/types";
 import JobDescriptionCard from "./JobDescriptionCard";
+import PaginationController from "./PaginationController";
 import SearchBar from "./SearchBar";
 import SearchFilters from "./SearchFilters"; // <---- Arman
+import Spacer from "../common/Spacer";
 import JobDetailsSlide from "./JobDetailsSlide";
 
 function Feed() {
@@ -19,16 +21,11 @@ function Feed() {
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
   const [listings, setListings] = useState<JobListing[]>([]);
-  const [offset, setOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
+  const [selectedJob, setSelectedJob] = useState<JobListing | null>();
 
-  useEffect(() => {
-    if (preferencesLoaded) {
-      fetchListings();
-    }
-  }, [currentPage, preferencesLoaded]);
 
   useEffect(() => {
     console.log("Search value changed", searchValue);
@@ -49,11 +46,19 @@ function Feed() {
     const to = currentPage * pageSize;
     // Todo: add location searching (parameter currently empty string)
     let response;
-    response = await SearchJobs((
-      searchValue 
-      + keywordKeys.map((k) => k.value).join(" ")
-      + jobModeKeys.map((m) => m.value).join(" ")
-    ), locationKeys, from, to);
+    console.log("Job mode keys:", preferences.jobModes);
+    const queryTerms =
+      searchValue +
+      " " +
+      preferences.keywords
+        .map((k) => (k as { label: string; value: string }).value)
+        .join(" ") +
+      " " +
+      preferences.jobModes
+        .map((m) => (m as { label: string; value: string }).value)
+        .join(" ");
+    console.log("Query terms:", queryTerms);
+    response = await SearchJobs(queryTerms, preferences.location, from, to);
     console.log("Response from search:", response);
     const { data, error, count } = response || {};
 
@@ -104,26 +109,28 @@ function Feed() {
           />
         </div>
         {/*  ------------- Arman ------------- */}
-        <InfiniteScroll
-          dataLength={listings.length}
-          next={fetchListings}
-          hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
-          endMessage={<p style={{ textAlign: "center" }}>No more jobs available</p>}
-        >
-          {listings.map((item, index) => (
-            <div
-              className="mb-4"
-              key={item.id || index}
-            >
-              <JobDescriptionCard
-                key={item.id}
-                jobDescription={item}
-                action={() => setSelectedJob(item)}
-              />
-            </div>
-          ))}
-        </InfiniteScroll>
+        <div className="my-3 ml-20">
+          {/* {PaginationController(handlePageChange, currentPage, totalPages)} */}
+          <PaginationController
+            key={listings.toString()}
+            handlePageChange={handlePageChange}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </div>
+        {listings.map((item, index) => (
+          <div
+            className="mb-4"
+            key={index}
+            // onClick={() => setSelectedJob(item)}
+          >
+            <JobDescriptionCard
+              key={item.id}
+              jobDescription={item}
+              action={() => setSelectedJob(item)}
+            />
+          </div>
+        ))}
       </div>
       <div className="w-1/3 bg-[#1e1e1e] relative">
         <div className="sticky right-0 top-0 h-screen w-full overflow-y-scroll">

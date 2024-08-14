@@ -166,4 +166,5 @@ button:focus-visible {
   animation: spin 5s linear infinite;
 }
 
+
 input[type='text']:focus { box-shadow: none; }

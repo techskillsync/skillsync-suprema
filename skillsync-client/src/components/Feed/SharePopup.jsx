@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef, useEffect} from "react";
 import { FindAvatar, FindUser } from "../../supabase/OtherUsers";
 import { FaUser } from "react-icons/fa";
 import { SendMessage } from "../../supabase/Messages";
@@ -12,6 +12,7 @@ const SharePopup = ({ children, content }) => {
   const [fadeIn, setFadeIn] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [empty, setEmpty] = React.useState(true);
+  const shareref= useRef(null);
 
   async function handleSendMessage(recepientId) {
     const message = {
@@ -70,6 +71,21 @@ const SharePopup = ({ children, content }) => {
     }
   }, [isOpen]);
 
+  // qit the menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (shareref.current && !shareref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [shareref]);
+
+
   return (
     <div className="text-black">
       <Toaster />
@@ -80,8 +96,8 @@ const SharePopup = ({ children, content }) => {
           });
         })}
         {isOpen && (
-          <div
-            className={`absolute bg-white shadow p-3 rounded-lg z-[99] top-12 left-0 ${
+          <div ref={shareref}
+            className={`absolute bg-white w-[400px] shadow p-3 rounded-lg z-[99] right-[10px] bottom-[0px] md:left-[0px] md:bottom-[1px]  ${
               fadeIn ? "fade-in" : ""
             }`}
           >

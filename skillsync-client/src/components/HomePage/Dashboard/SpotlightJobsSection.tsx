@@ -93,9 +93,9 @@ function SpotLightJobsSection({ setSelectedJob }) {
         </button>
       </div>
       <Spacer className={"!w-full !h-[0.5px] my-4"} />
-      <div className="flex w-full space-x-2 overflow-x-auto pb-3">
+      <div className="flex flex-col gap-4  md:flex-row w-full space-x-2 md:overflow-x-auto pb-3">
         {listings.map((item, index) => (
-          <div className="flex-col min-w-[400px] fade-in" key={index}>
+          <div className="md:min-w-[400px] fade-in" key={index}>
             <JobDescriptionCard
             className="h-full"
               mini={true}

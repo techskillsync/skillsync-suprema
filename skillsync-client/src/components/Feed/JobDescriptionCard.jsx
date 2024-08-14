@@ -20,6 +20,7 @@ import {
 import SharePopup from "./SharePopup.jsx";
 import { confirmWrapper } from "../common/Confirmation.jsx";
 import ReportPopup from "./ReportPopup.jsx";
+import MobileActionsMenu from "./MobileActionsMenu.jsx"; 
 
 const JobDescriptionCard = ({
   jobDescription,
@@ -31,7 +32,6 @@ const JobDescriptionCard = ({
 }) => {
   const [glassdoorRating, setGlassdoorRating] = useState(null);
   const [saved, setSaved] = useState(false);
-
 
   const salary = parseSalary(jobDescription.description);
 
@@ -64,35 +64,15 @@ const JobDescriptionCard = ({
   }, []);
 
   const actions = [
-    // {
-    //   title: !saved ? "Save" : "Saved",
-    //   icon: <IoBookmark />,
-    //   action: handleSave,
-    // },
     {
       title: "Copy Link",
       icon: <FaLink />,
       action: () => {
         navigator.clipboard.writeText(jobDescription.link);
       },
-      // },
-      // {
-      //   title: "Share",
-      //   icon: <FaUserGroup />,
     },
+    // Other actions can be added here as needed
   ];
-
-  // console.log('Job Description Card');
-  // console.log(jobDescription);
-
-  // Get glassdoor rating:
-  // useEffect(() => {
-  //   const fetchGlassdoorRating = async () => {
-  //     const rating = await getGlassDoorRating(jobDescription.company);
-  //     setGlassdoorRating(rating);
-  //   };
-  //   fetchGlassdoorRating();
-  // }, []);
 
   return (
     <div
@@ -102,16 +82,7 @@ const JobDescriptionCard = ({
         (mini ? "w-500px" : "")
       }
     >
-      {jobDescription.logo_url && !mini && false && (
-        <div className={`company-logo bg-white rounded-lg`}>
-          <img
-            src={jobDescription.logo_url}
-            alt={jobDescription.company}
-            className="h-full rounded-s-lg object-cover w-[182px]"
-          />
-        </div>
-      )}
-      <div className=" relative job-details w-full py-4 pl-8 pr-5">
+      <div className="relative job-details w-full py-4 pl-8 pr-5">
         {jobDescription.logo_url && (
           <img
             src={jobDescription.logo_url}
@@ -148,9 +119,7 @@ const JobDescriptionCard = ({
         </div>
         <div className="flex items-center mb-2">
           <TiSpanner className="mr-2" />
-
           <p className={`max-w-[80%]  ${mini ? "text-base" : "text-lg"}`}>
-            {" "}
             {mini
               ? jobDescription.title.substring(0, 26) +
                 (jobDescription.title.length > 26 ? "..." : "")
@@ -175,26 +144,20 @@ const JobDescriptionCard = ({
             {jobDescription.location}
           </p>
         </div>
-       {salary &&  <div className="flex items-center mt-2">
-          <FaMoneyBill className="mr-2" />
-          <p className={mini ? "text-base" : "text-lg"}>
-            {salary}
-          </p>
-        </div>}
-        {/* <div>
-          <p>{jobDescription.description.substring(0, 100) + '...'}</p>
-        </div> */}
-        {/* <div className="flex">
-          <a className="mt-3" href="https://www.glassdoor.com/index.htm">
-            powered by{' '}
-            <img
-              src="https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png"
-              title="Job Search"
-            />
-          </a>
-        </div> */}
-        <div>
-          <div className="flex mt-4">
+        {salary && (
+          <div className="flex items-center mt-2">
+            <FaMoneyBill className="mr-2" />
+            <p className={mini ? "text-base" : "text-lg"}>{salary}</p>
+          </div>
+        )}
+
+        <div className="mt-4">
+          <div className="block md:hidden">
+            {/* Show actions in vertical dots menu on mobile view */}
+            <MobileActionsMenu actions={actions} />
+          </div>
+          <div className="hidden md:flex">
+            {/* Show actions as buttons on desktop view */}
             <button
               key="save"
               onClick={handleSave}
@@ -250,19 +213,19 @@ const JobDescriptionCard = ({
 function parseSalary(jobDescription) {
   const salaryPatterns = [
     /CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?CAD\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?per\s?month/gi,
-    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $115,100 - $161,200 CAN Annually
-    /\$?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD - 70,000 USD (annually)
-    /\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi, // Matches $135K/yr - $195K/yr
-    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?/gi, // Matches $112,000 - $140,000
-    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars - 70,000 dollars (annually)
-    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches $50,000 USD (annually)
-    /£\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:GBP)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches £50,000 GBP (annually)
-    /€\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:EUR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches €50,000 EUR (annually)
-    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 USD (annually)
-    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|rupees|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50,000 dollars (annually)
-    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:k|K)\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi, // Matches 50k CAD (annually)
-    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi // Matches CA$115,000/yr - CA$150,000/yr
-];
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\$?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi,
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?-\s?\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?/gi,
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?-\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /£\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:GBP)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /€\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:EUR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:dollars|pounds|rupees|euros|CAD)\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s?(?:k|K)\s?(?:USD|CAD|GBP|EUR|CAN|INR)?\s?(?:annually|monthly|yearly|\/yr|\/mo)?\b/gi,
+    /CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\s?-\s?CA\$\d{1,3}(?:,\d{3})?(?:k|K)?\/yr\b/gi
+  ];
 
   for (const pattern of salaryPatterns) {
     const match = jobDescription.match(pattern);

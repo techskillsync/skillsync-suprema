@@ -54,7 +54,7 @@ const PreferencesSection = () => {
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
-    console.log(location)
+    console.log(location);
   };
 
   const handleSalaryRangeChange = (e) => {
@@ -71,7 +71,7 @@ const PreferencesSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const preferences = {
       location,
       salary_range: salaryRange,
@@ -85,25 +85,24 @@ const PreferencesSection = () => {
       success: "Your preferences were updated!",
       error: "Failed to update preferences",
     });
-
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow text-black h-72 w-[60%] overflow-y-auto scrollbar-hide">
+    <div className="p-4 bg-white rounded-lg shadow text-black h-auto w-full md:w-[60%] overflow-y-auto scrollbar-hide">
       <Toaster />
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-row justify-between items-center mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Job Search Preferences</h2>
           <button
             type="submit"
             disabled={!changes}
-            className=" !p-0 font-normal bg-transparent border-none text-gray-900 hover:text-green-500 transition-all duration-200 disabled:text-gray-300"
+            className="mt-2 md:mt-0 !p-0 font-normal bg-transparent border-none text-gray-900 hover:text-green-500 transition-all duration-200 disabled:text-gray-300"
           >
             Save Changes
           </button>
         </div>
-        <div className="flex space-x-6 flex-row mb-4">
-          <div className="w-1/2 flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="w-full">
             <InputField
               className="rounded-r-md"
               item={"Location"}
@@ -111,7 +110,7 @@ const PreferencesSection = () => {
               onChange={handleLocationChange}
             />
           </div>
-          <div className="w-1/2 flex">
+          <div className="w-full">
             <InputField
               className="rounded-r-md"
               item={"Salary Range"}
@@ -120,8 +119,8 @@ const PreferencesSection = () => {
             />
           </div>
         </div>
-        <div className="flex space-x-6 flex-row mb-4">
-          <div className="w-1/2 flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="w-full">
             <SelectField
               item={"Modes"}
               value={jobMode}
@@ -131,7 +130,7 @@ const PreferencesSection = () => {
               creatable={false}
             />
           </div>
-          <div className="w-1/2 flex">
+          <div className="w-full">
             <SelectField
               item={"Keywords"}
               value={keywords}
@@ -141,8 +140,8 @@ const PreferencesSection = () => {
             />
           </div>
         </div>
-        <div className="flex space-x-6 flex-row mb-4">
-          <div className="w-1/2 flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="w-full">
             <SelectField
               item={"Recency"}
               value={recency}
@@ -151,7 +150,7 @@ const PreferencesSection = () => {
               creatable={false}
             />
           </div>
-          <div className="w-1/2 flex">
+          <div className="w-full">
             <SelectField
               item={"Citizenship"}
               value={citizenship}

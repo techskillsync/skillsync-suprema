@@ -177,7 +177,7 @@ const ChartsSection = () => {
   }, [fetched]);
 
   return (
-    <div className="w-[40%] h-72">
+    <div className="w-full md:w-[40%] h-72">
       <div className="h-72 ml-3 w-full rounded-lg shadow bg-[#1e1e1e] !p-5 md:p-6">
         <div className="flex !text-white justify-between mb-3">
           <div className="flex items-center">

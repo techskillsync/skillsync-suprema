@@ -63,11 +63,11 @@ const SignUpPage = () => {
 
   return (
     <div className="flex h-screen bg-black">
-      <div className="w-1/2 bg-gray-100">
+      <div className="w-[0px] md:w-1/2 bg-gray-100">
         <InfoCarousel />
       </div>
-      <div className="w-1/2 flex items-center justify-center">
-        <div className="max-w-md w-full">
+      <div className="w-full md:w-1/2 flex items-center justify-center">
+        <div className="max-w-md w-full p-10">
           <h1 className="text-3xl font-bold text-left mb-2 bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent">
             SkillSync.
           </h1>

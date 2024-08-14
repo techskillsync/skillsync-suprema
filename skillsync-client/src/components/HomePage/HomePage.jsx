@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { MenuBar, menuItems } from "./MenuBar";
+import { BottomNavBar } from "./BottomNavBar";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
 import { redirectUser } from "../../utilities/redirect_user";
@@ -49,12 +50,23 @@ const HomePage = () => {
 
   const handleMenuItemClick = (page) => {
     navigate(`/home/${page.toLowerCase().replace(" ", "")}`);
+    setSelectedPage(page);
   };
 
   return (
     <div className="h-full w-full flex-1">
-      <div className="fixed left-0 top-0 h-screen">
+      <div className="hidden md:block md:fixed left-0 top-0 h-screen">
         <MenuBar
+          selectedPage={selectedPage}
+          handleMenuItemClick={handleMenuItemClick}
+          profileInfo={profileInfo}
+          setSidebarExpanded={setSidebarExpanded}
+        />
+      </div>
+
+      {/* Bottom navigation bar for mobile view */}
+      <div className="block md:hidden">
+        <BottomNavBar
           selectedPage={selectedPage}
           handleMenuItemClick={handleMenuItemClick}
           profileInfo={profileInfo}
@@ -83,10 +95,9 @@ const HomePage = () => {
           </div>
         )}
         <div
-          className={`flex-1 flex flex-col transition-all duration-300 ease-in-out  `}
-          style={
-            sidebarExpanded ? { marginLeft: "250px" } : { marginLeft: "80px" }
-          }
+          className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
+            sidebarExpanded ? "md:!ml-[250px]" : "md:!ml-[80px]"
+          }`}
         >
           <AnimatePresence mode="wait">
             <motion.div

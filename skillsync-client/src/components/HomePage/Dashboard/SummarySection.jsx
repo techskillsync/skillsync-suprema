@@ -46,8 +46,8 @@ const SummarySection = ({}) => {
   }, []);
 
   return (
-    <div className="flex w-full gap-4 text-white">
-      {stats.map((stat) => (
+<div className="grid grid-cols-2 md:flex w-full gap-4 text-white">
+  {stats.map((stat) => (
         <div
           key={stat.title}
           className="flex cursor-pointer w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700"
