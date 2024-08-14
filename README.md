@@ -2,6 +2,7 @@
 
 ## Endpoint Masterlist:
 **External Endpoints:**  
+https://skillsync.work  
 https://ss-api.skillsync.work  
 https://gpt-broker.skillsync.work  
 https://ss-api.drismir.ca (deprecated, use skillsync.work instead)  
