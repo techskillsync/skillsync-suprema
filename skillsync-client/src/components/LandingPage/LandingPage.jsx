@@ -77,17 +77,17 @@ const Home = () => {
             Stay ahead of the curve with advanced analytics, job trends, and
             goal-setting tools{" "}
           </p>
-          <div className="flex md:flex-row flex-col md:gap-2 p-1 justify-center  text-[black] md:bg-[white] w-[80%] md:w-[65%] bg-[black] rounded-md">
+          <div className="flex md:flex-row flex-col md:gap-2 p-1 justify-center items-center text-[black] md:bg-[white] w-[80%] md:w-[65%] bg-[black] rounded-md">
             <input
               type="text"
               id="search"
               placeholder="Search job by name / type / category"
-              className="p-2 rounded w-2/3 max-w-md border-0"
+              className="p-2 rounded w-full md:w-2/3 max-w-md border-0"
             />
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
             <CreatableSelect
-              className="p-2  w-48 rounded border-0"
+              className="p-2  w-full md:w-48 rounded border-0"
               isClearable
               options={countries.map((country) => ({
                 value: country,
@@ -101,7 +101,7 @@ const Home = () => {
             />
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
             <CreatableSelect
-              className="p-2 w-48 rounded border-0"
+              className="p-2  w-full md:w-48 rounded border-0"
               isClearable
               formatCreateLabel={(inputValue) => `${inputValue}`}
               options={(states[selectedCountry?.value] || []).map((state) => ({
@@ -115,7 +115,7 @@ const Home = () => {
             />
             <p className="md:border-l-2 text-[#1E1E1E] h-5 self-center"></p>
             <CreatableSelect
-              className="p-2  w-48 rounded border-0"
+              className="p-2   w-full md:w-48 rounded border-0"
               styles={selectFieldStyle}
               isClearable
               options={(
