@@ -26,6 +26,7 @@ const EditProfileDetails = ({}) => {
   const [industry, setIndustry] = useState("");
   const [linkedin, setLinkedIn] = useState("");
   const [github, setGithub] = useState("");
+  const [personal_website, setPersonalWebsite] = useState("");
   const [plumProfile, setPlumProfile] = useState("");
   const [workEligibility, setWorkEligibility] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
@@ -94,6 +95,7 @@ const EditProfileDetails = ({}) => {
       industry,
       linkedin,
       github,
+      personal_website,
       date_of_birth: dateOfBirth,
       gender,
       race,
@@ -252,6 +254,12 @@ const EditProfileDetails = ({}) => {
                 state: linkedin,
                 setState: setLinkedIn,
                 placeholder: "http://linkedin.com/in/john-doe-123/",
+              },
+              {
+                label: "Personal Website",
+                state: personal_website,
+                setState: setPersonalWebsite,
+                placeholder: "http://johndoe.com",
               },
             ].map((item) => (
               <div key={item.label}>
