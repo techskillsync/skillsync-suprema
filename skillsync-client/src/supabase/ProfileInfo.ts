@@ -2,13 +2,13 @@ import supabase from "./supabaseClient";
 import { GetUserId } from "./GetUserId";
 import { UserProfile } from "../types/types";
 
-const allowedKeys = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github,
+const allowedKeys = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github, personal_website,
 					date_of_birth, gender, race`;
 
 // Param: columns - the columns you want from supabase, seperated with commas eg:
 // `name, location, school, grad_year`
 // Returns: { data, error } pair
-async function GetProfileInfo(columns): Promise<UserProfile | null> {
+async function GetProfileInfo(columns:string): Promise<UserProfile | null> {
   try {
     if (!columns) {
       throw new Error("need columns to fetch");
@@ -46,6 +46,7 @@ async function GetUserEmail(): Promise<string | null> {
 // { name: "Jeff", location: "NewYork" }
 // Returns: { data, error } pair
 async function SetProfileInfo(updates): Promise<true | false> {
+  console.log(updates)
   try {
     if (!updates) {
       throw new Error("no updates passed");

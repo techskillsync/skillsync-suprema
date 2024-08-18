@@ -9,6 +9,9 @@ import { LoadGoogleClient } from "../../supabase/userLogin";
 import { GetUserId } from "../../supabase/GetUserId";
 import { redirectUser } from "../../utilities/redirect_user";
 import { toast, Toaster } from "react-hot-toast";
+import { GetProfileInfo } from '../../supabase/ProfileInfo';
+import { GetJobPreferences } from '../../supabase/JobPreferences';
+import { GetResumeCount } from '../../supabase/Resumes';
 
 const LogInPage = () => {
   /*
@@ -20,9 +23,10 @@ const LogInPage = () => {
       token: response.credential,
     });
     if (error) {
+      console.log("Error logging in with google 🙀")
       return;
     }
-    window.location.href = "/home";
+    SuccessfulLoginRedirect();
   }
 
   useEffect(() => {
@@ -46,8 +50,7 @@ const LogInPage = () => {
     try {
       const result = await EmailLogin(email, password);
       if (result.success) {
-        toast.success('Login successful!');
-        window.location.href = "/home";
+        SuccessfulLoginRedirect();
       } else {
         console.log(result)
         toast.error('Login failed: ' + result.data.message);
@@ -59,6 +62,50 @@ const LogInPage = () => {
     document.getElementById("password").value = "";
   }
 
+  /*
+   * Returns true if we should show the user the "/welcome"
+   * slideshow. False otherwise.
+   * @returns {bool} false if >60% of profile is setup.
+   */
+  async function UserNeedsOnboard() {
+    // Preferences are: name, lastName, resume, email, location, workAuthorization,
+    //                  startDate, level, selectedNewRoleOptions
+    // We need at least 5 of these to not show the onboarding page
+    const profile_preferences = await GetProfileInfo("name, last_name, email, location");
+    const job_preferences = await GetJobPreferences("job_mode, keywords, salary_range, desired_culture, work_authorization, start_time, experience_level");
+    const resume_count = await GetResumeCount();
+    let num_fields = 0;
+    for (const key in profile_preferences) {
+      if (profile_preferences[key]) { num_fields+=1; }
+    }
+    for (const key in job_preferences) {
+      if (Array.isArray(job_preferences[key])) {
+        if (job_preferences[key].length !== 0) {
+          num_fields +=1;
+        }
+        continue;
+      }
+      
+      if (job_preferences[key] !== "" && job_preferences[key] !== null) {
+        num_fields+=1;
+      }
+    }
+
+    if (resume_count > 0) { num_fields+=1; }
+  
+    // if (num_fields < 5) { return true; }
+    
+    return false;
+  }
+
+  async function SuccessfulLoginRedirect() {
+    if (await UserNeedsOnboard()) {
+      window.location.href = "/welcome";
+    } else {
+      window.location.href = "/home";
+    }
+  }
+  
   return (
     <div className="flex h-screen bg-black">
       <Toaster />
