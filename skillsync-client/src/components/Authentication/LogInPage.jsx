@@ -93,7 +93,7 @@ const LogInPage = () => {
 
     if (resume_count > 0) { num_fields+=1; }
   
-    // if (num_fields < 5) { return true; }
+    if (num_fields < 5) { return true; }
     
     return false;
   }
