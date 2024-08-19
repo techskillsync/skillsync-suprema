@@ -44,25 +44,29 @@ const FinishScreen = ({ preferences, page, resumeFile, setPage }) => {
     });
     if (resumeFile) {
       await AddResume(resumeFile, "Default Resume - " + preferences.name);
-      const resumeData = await JSON.parse(await parseResume(resumeFile));
-      console.log("Parsed resume data:", resumeData);
+      try {
+        const resumeData = await JSON.parse(await parseResume(resumeFile));
+        console.log("Parsed resume data:", resumeData);
 
-      const {work_experiences, certifications, ...profileData} = resumeData;
-      console.log("Profile data:", profileData);
-      await SetProfileInfo(profileData);
+        const { work_experiences, certifications, ...profileData } = resumeData;
+        console.log("Profile data:", profileData);
+        await SetProfileInfo(profileData);
 
-      for (let i = 0; i < work_experiences.length; i++) {
-        const workExperience = work_experiences[i];
-        console.log("Adding work experience:", workExperience);
-        await SaveNewWorkExperience({
-          id: "",
-          title: workExperience.title,
-          company: workExperience.company,
-          description: workExperience.description,
-          startDate: workExperience.start_date,
-          endDate: workExperience.end_date,
-          location: workExperience.location,
-        });
+        for (let i = 0; i < work_experiences.length; i++) {
+          const workExperience = work_experiences[i];
+          console.log("Adding work experience:", workExperience);
+          await SaveNewWorkExperience({
+            id: "",
+            title: workExperience.title,
+            company: workExperience.company,
+            description: workExperience.description,
+            startDate: workExperience.start_date,
+            endDate: workExperience.end_date,
+            location: workExperience.location,
+          });
+        }
+      } catch (error) {
+        console.warn("Unable to parse resume, likely invalid JSON");
       }
     }
     await SetProfileInfo({
