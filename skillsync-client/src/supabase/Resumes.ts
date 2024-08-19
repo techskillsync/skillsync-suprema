@@ -151,7 +151,6 @@ async function DeleteResume(
 }
 
 async function GetResumeCount(): Promise<Number | null> {
-  console.log("Getting resume count");
   const user_id = await GetUserId();
   const { data, error, count } = await supabase
     .from("user_resumes")
@@ -161,7 +160,6 @@ async function GetResumeCount(): Promise<Number | null> {
     console.warn(error);
     return null;
   }
-  console.log("Resume count: ", count);
   return count;
 }
 
