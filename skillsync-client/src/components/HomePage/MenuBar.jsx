@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard/Dashboard";
 import Feed from "../Feed/Feed";
-import ResumeBuilder from "./ResumeBuilder";
+import ResumeBuilder from "./ResumeBuilder.tsx";
 import Messages from "./Messages.tsx";
 import LogoDarkText from "../../assets/LogoDarkText.png";
 import ProfileCard from "./ProfileCard";
@@ -63,18 +63,10 @@ const MenuBar = ({
   const fetchMessagesCount = async () => {
     const newMessagesCount = await GetUnreadMessagesCount(); // Replace with your actual fetch logic
     setNotificationCounts((prevCounts) => {
-      if (newMessagesCount !== prevCounts.Messages) {
-        console.log(
-          "Messages count changed from",
-          prevCounts.Messages,
-          "to",
-          newMessagesCount
-        );
-        if (newMessagesCount > prevCounts.Messages) {
-          setTimeout(() => {
-            toast("You have new messages!", { icon: "📬" });
-          }, 2000);
-        }
+      if (newMessagesCount > prevCounts.Messages) {
+        setTimeout(() => {
+          toast("You have new messages!", { icon: "📬" });
+        }, 2000);
         return { Messages: newMessagesCount };
       }
       return prevCounts;
@@ -91,9 +83,8 @@ const MenuBar = ({
 
   return (
     <div
-      className={`h-full z-[150] bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out ${
-        collapsed ? "w-20" : "w-64"
-      }`}
+      className={`h-full z-[150] bg-[#1e1e1e] text-white flex flex-col py-3 justify-between transition-all duration-200 ease-in-out ${collapsed ? "w-20" : "w-64"
+        }`}
       onMouseEnter={() => {
         setCollapsed(false);
         setSidebarExpanded(true);
@@ -124,11 +115,10 @@ const MenuBar = ({
               item.show && (
                 <li
                   key={item.name}
-                  className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${
-                    location.pathname.includes(item.name.toLowerCase().replace(" ", ""))
+                  className={`px-4 py-4 mx-3 my-1 rounded-lg cursor-pointer transition-bg duration-300 flex items-center ${location.pathname.includes(item.name.toLowerCase().replace(" ", ""))
                       ? "bg-black"
                       : "hover:bg-[#2e2e2e]"
-                  }`}
+                    }`}
                   onClick={() => {
                     handleMenuItemClick(item.name);
                   }}
@@ -151,9 +141,8 @@ const MenuBar = ({
       </div>
       <div className="h-1/4 flex">
         <div
-          className={`mt-auto transition-all duration-300 py-4 ${
-            !collapsed && "px-4 "
-          }`}
+          className={`mt-auto transition-all duration-300 py-4 ${!collapsed && "px-4 "
+            }`}
         >
           <ProfileCard
             name={profileInfo?.name}
