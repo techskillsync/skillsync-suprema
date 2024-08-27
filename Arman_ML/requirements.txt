@@ -1,0 +1,9 @@
+tensorflow_hub
+torch
+nltk
+pandas
+numpy
+openai
+scikit-learn
+ipykernel
+memory_profiler

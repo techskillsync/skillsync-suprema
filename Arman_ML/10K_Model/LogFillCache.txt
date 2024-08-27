@@ -1,0 +1,427 @@
+Number of batches: 100
+FileObject(id='file-2h3NLMweQsCdSAcUbEWkGfsB', bytes=1015089, created_at=1720735759, filename='0_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+d6151306659472373daf19294c76eeb7,not qualified
+FileObject(id='file-YmVGvZwtKbSfUTUHvsIqbESZ', bytes=1117689, created_at=1720735823, filename='1_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+1850c9d223a3d534a88abe595237c041,not qualified
+FileObject(id='file-0zxOgtbIVL7PWGXLue3Jb7LS', bytes=807589, created_at=1720735886, filename='2_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+92f397a4656badba982ddd826e9d16c4,not qualified
+FileObject(id='file-dJnYqrfpqv1QwQSEdgJxkCOz', bytes=921589, created_at=1720736010, filename='3_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+774d119c76ba99f295f3779ea78f235b,not qualified
+FileObject(id='file-B9xeKgnnAY0qdFEVP79lGBRH', bytes=784289, created_at=1720736072, filename='4_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: validating
+Current status: completed
+da8f0c4845efff547457538e44a34d08,not qualified
+FileObject(id='file-E7bfoxegMRU5LAH9WgbwkOCh', bytes=1181489, created_at=1720736197, filename='5_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+db4da91c17cf36762144f37773015cb8,not qualified
+FileObject(id='file-U9VleGS6tdCXDsuSx6fCbG4E', bytes=819389, created_at=1720736259, filename='6_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+9db85de8daad2ae2ad2a4093dc730c55,not qualified
+FileObject(id='file-oURUwQBTrL032dU2ofNXTOlK', bytes=1303489, created_at=1720736322, filename='7_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+6bf929bf0a9b602277ebeafa2c8dc87b,not qualified
+FileObject(id='file-rIkCnyEz53BA1TjZpJ5zmJAy', bytes=1289489, created_at=1720736385, filename='8_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+bf73090bfb9446b82404005920a8c2cd,not qualified
+FileObject(id='file-yBkS8tddxNG9bILvucf6z3QJ', bytes=906289, created_at=1720736448, filename='9_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: in_progress
+Current status: completed
+86bdef22cc0a7973d198b7676d8a3b65,not qualified
+FileObject(id='file-wNIjvTR9DQ9Gwemq6cqJqiO5', bytes=958189, created_at=1720736812, filename='10_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+8b9e33f566ec9a3f3625cc8aad95fa4b,not qualified
+FileObject(id='file-eJe5X9Pxn4hf1rYQz6OWbh0k', bytes=951289, created_at=1720736875, filename='11_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+0f21ac0539c252abbb33b9e2fe331e26,not qualified
+FileObject(id='file-pCA9YGwXbHYj3rSIGGxiYFiU', bytes=1717389, created_at=1720736938, filename='12_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: failed
+batch job failed!
+Batch(id='batch_cdcbiRobbRz91gNbxZHbJ8kM', completion_window='24h', created_at=1720736939, endpoint='/v1/chat/completions', input_file_id='file-pCA9YGwXbHYj3rSIGGxiYFiU', object='batch', status='failed', cancelled_at=None, cancelling_at=None, completed_at=None, error_file_id=None, errors=Errors(data=[BatchError(code='token_limit_exceeded', line=None, message='Enqueued token limit reached for gpt-3.5-turbo in organization org-Mi1zgfjutzsV1OhKshQmCs0T. Limit: 400,000 enqueued tokens. Please try again once some in_progress batches have been completed.', param=None)], object='list'), expired_at=None, expires_at=1720823339, failed_at=1720736940, finalizing_at=None, in_progress_at=None, metadata=None, output_file_id=None, request_counts=BatchRequestCounts(completed=0, failed=0, total=0))
+FileObject(id='file-iI9SV9nM7NHpkvRQxC6c2p2B', bytes=807889, created_at=1720737000, filename='13_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+811b26f3e2fbdf73ff617b9ed13d5ff9,not qualified
+FileObject(id='file-JyLdCd1PRqFE71lqarhgCFcP', bytes=976889, created_at=1720737064, filename='14_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+d9da33e857d61789bbfd333e228fdd74,not qualified
+FileObject(id='file-6EqrRV8lYNyI0auLBBl5Oe5d', bytes=1197289, created_at=1720737127, filename='15_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+914c72fc6a2443a079de049a896af18d,not qualified
+FileObject(id='file-1hAd71AKYuPe2TW7F6bk1Ewu', bytes=1232189, created_at=1720737190, filename='16_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+c8182fa8c73a9d8b9ded96f799062009,not qualified
+FileObject(id='file-9OfCpFmtyOsPUglIN89GYKqo', bytes=979189, created_at=1720737253, filename='17_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+12f1476a41ee32b59d30f5f7702f7ef5,not qualified
+FileObject(id='file-VzsKwEuYdiU2zFuupMz8bAzU', bytes=1090989, created_at=1720737376, filename='18_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+1a367c2ee8c0206f4c083131d3b4908e,not qualified
+FileObject(id='file-FoK0tljWd0JgHXKu8f6PAgW1', bytes=1033289, created_at=1720737438, filename='19_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+23248812fc3ae9a93fc2e068c6cf8361,not qualified
+FileObject(id='file-Mk70ZuZsPWkQCldFdSWwwJmE', bytes=847789, created_at=1720737501, filename='20_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+95336671200d3dd6dc3af89c2f7c20ef,not qualified
+FileObject(id='file-woRwIHR7Rag0HfSPnrt5GSDn', bytes=1070789, created_at=1720737625, filename='21_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+fd1097101a71d67afd67fbacde3fed19,not qualified
+FileObject(id='file-9On8qf1Y1gXNJYfVGMw4UHuK', bytes=778389, created_at=1720737688, filename='22_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+1f1847e09c00a02dfa8164bd72e362e0,not qualified
+FileObject(id='file-qwYlZcrsOyN5DP8LNOqMyn9p', bytes=781689, created_at=1720737751, filename='23_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+cd2189219120e63ce606f3f29e1d9382,not qualified
+FileObject(id='file-4ad8hUztRaWSnnUyZ0JwVDWR', bytes=1020289, created_at=1720737814, filename='24_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+eca32a7c8e8b2624edfb10f03904a01b,not qualified
+FileObject(id='file-4xXsEpKFa7mT5Dsn9gsqT7vy', bytes=866589, created_at=1720737876, filename='25_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+991b957df4b7df1e151632a15e2ff3d7,not qualified
+FileObject(id='file-ZYz2UV6egWiclKEyIhX8pvsJ', bytes=931289, created_at=1720737939, filename='26_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+48ff0862d59bd0aca12739aa35aeac41,not qualified
+FileObject(id='file-PMA4qdry0gSctRxRx2n2EwQC', bytes=1012289, created_at=1720738002, filename='27_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+cef9710a5c7055758b9fd5b3d8480adb,not qualified
+FileObject(id='file-jyNfoDekbnD6EFovWfSP3nqP', bytes=1074389, created_at=1720738064, filename='28_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+ae3e41e19c74698a72137414a38bed6d,not qualified
+FileObject(id='file-cVUZ3CH078lG6kTRpsCOxmLV', bytes=800989, created_at=1720738127, filename='29_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+fbadb0d6da8b11e153f087d226f3de7d,not qualified
+FileObject(id='file-LJd9XsN4gey20OwmW5zbWhgC', bytes=1131589, created_at=1720738190, filename='30_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+ff7ed04fa9e7f036ca078f916a505c85,not qualified
+FileObject(id='file-688QMiafQ6c6aWsZvw00Dafb', bytes=945089, created_at=1720738313, filename='31_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+d3ca0b09b5308bf944d3c104776d94e2,not qualified
+FileObject(id='file-2SnbJJ7k5CFOABvleQLYuOvS', bytes=851889, created_at=1720738375, filename='32_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+343bcc96c2219e6ef652f84bfb5e97fd,not qualified
+FileObject(id='file-Dv5lA1H1xFnxlfE10N0qTFhm', bytes=790289, created_at=1720738437, filename='33_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+cbf21b3c887161b86d945d987c25498c,not qualified
+FileObject(id='file-USvz5IZ6Jj1gan2bC2OXdRsR', bytes=926289, created_at=1720738500, filename='34_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+d85780708a212b8ec1e3cb194cf69111,not qualified
+FileObject(id='file-kFOcDgQyRGYTFKGFcS4anPhP', bytes=1269289, created_at=1720738624, filename='35_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+b342952fc669955295f07d88cc0efc27,not qualified
+FileObject(id='file-Rcqt29pmXSuRpAiYtsz2QaX6', bytes=886289, created_at=1720738687, filename='36_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+11ff1182dd133c0b3c13b0b137fb7ec7,minimally qualified
+FileObject(id='file-1eUunt7Y5A0J8eKq0pKtFESQ', bytes=836389, created_at=1720738809, filename='37_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+f15b3ee7746024879526221b799ba59e,not qualified
+FileObject(id='file-TAD9MDhRLTMJw464Ukwol4Y3', bytes=788889, created_at=1720738872, filename='38_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+a0bbb2ff367209332e35f1975b0009b4,not qualified
+FileObject(id='file-Mxl86HbXlAXleMDjCbBRTrgc', bytes=1072489, created_at=1720738935, filename='39_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+523fb8befabdf859b07447d1b0181fd0,not qualified
+FileObject(id='file-SjYB001JOPvosihtfCkNUto8', bytes=1111689, created_at=1720738998, filename='40_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+e50ae5d28816d517863a3b9d02e49fa7,not qualified
+FileObject(id='file-jqqYqfo7CiXyM7zSIWvPfoGr', bytes=1094389, created_at=1720739060, filename='41_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+390830f88e5f62e9f57d5ec2a82efe92,not qualified
+FileObject(id='file-VcWX53ggvvb57p8Xhm9Uh0KS', bytes=881889, created_at=1720739184, filename='42_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+026738861c7247ea917c56918d255779,not qualified
+FileObject(id='file-vB2XemszKB1Meyeos7xVKzD7', bytes=782489, created_at=1720739246, filename='43_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+7a2692bb0069edeb14249a1e2431093f,not qualified
+FileObject(id='file-rhaZWDFyqtN1dWjbyqdqtlji', bytes=1427689, created_at=1720739309, filename='44_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+29b9e8f3a3ebb2f443c0730d89edc430,not qualified
+FileObject(id='file-5oNruWBALbxrEVqMXopsvOwj', bytes=827489, created_at=1720739371, filename='45_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+cb96710fec11c96de0fa321aa25077e3,not qualified
+FileObject(id='file-IbvSM0FvTQeJ15CwS8zAdTe7', bytes=923989, created_at=1720739434, filename='46_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+31d95c0c21a1c1e032e01ae1331e4ca6,not qualified
+FileObject(id='file-sGfAIQ2evF0DdzMl25TmjZqU', bytes=969389, created_at=1720739497, filename='47_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+2c217488d0af309c87d0ceba2f658210,not qualified
+FileObject(id='file-ZJuhiiWOwsiqQxCPrYvnT7h5', bytes=781089, created_at=1720739559, filename='48_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: in_progress
+Current status: completed
+e07042b65a3676b52c008651dc25e2ef,not qualified
+FileObject(id='file-tMQoig32x1AObMpsMXxWZV1G', bytes=928189, created_at=1720739623, filename='49_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+f6a9d262e0107641bb386f559a357c78,not qualified
+FileObject(id='file-WEamaVIP4H4kjeYxKVe5EpFO', bytes=886889, created_at=1720739751, filename='50_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+800e70f11c156a275734097007f83139,not qualified
+FileObject(id='file-8hi5H4dQGjOTlKeQBr33YwAo', bytes=1195289, created_at=1720739815, filename='51_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+6b4cfef64779dbf713ba19c2cf7fa957,not qualified
+FileObject(id='file-AUdKTublcOG43rJFmyItg4R3', bytes=1105489, created_at=1720739938, filename='52_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+e730b33d41a8770c7d28a885fd4b4cfa,not qualified
+FileObject(id='file-C4VH69Tcaup3298e6qxGJaYg', bytes=934489, created_at=1720740061, filename='53_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+c4de638f6217789bc5589484afeeea23,not qualified
+FileObject(id='file-FEXLdDSWKuMLAHdfOHD6xplx', bytes=1199089, created_at=1720740124, filename='54_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+83e7308316b588d7c10130878a7378e3,not qualified
+FileObject(id='file-GgAnm6ag0SVytvES2pJ2C9vq', bytes=911489, created_at=1720740207, filename='55_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+44c1e4f0ca4e67b5b22a19cf309de0a9,not qualified
+FileObject(id='file-ji4taKQhQrhiM0BH4c9TGyrr', bytes=1026089, created_at=1720740269, filename='56_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+576438b8c11b0d761a0fa697967afd94,not qualified
+FileObject(id='file-TZamnD8vUA0ou1YGjBzFVHpy', bytes=1072389, created_at=1720740332, filename='57_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+33fd229d426885dfd9f2934c66b181a4,not qualified
+FileObject(id='file-qoeAcVUvcWrYA1M3JAIUzw9d', bytes=953489, created_at=1720740395, filename='58_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+3d5bf857808dc653273fe02c21008f67,not qualified
+FileObject(id='file-jqd9cElQWaeUdSCdpaYrOGls', bytes=863689, created_at=1720741265, filename='59_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+891b96ae001d173b5c89cbb3489ef942,not qualified
+FileObject(id='file-4PA8pqDOuZPAvKDrCY9XBFPT', bytes=822389, created_at=1720741328, filename='60_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+a0ae557a281505b10e517d551baf082b,not qualified
+FileObject(id='file-nbb8bPWc8lDZivdl29bhpGAT', bytes=831189, created_at=1720741391, filename='61_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+40a554e0b7813b505e9cb1fb32e4ca85,not qualified
+FileObject(id='file-AnTmqkEW6htdO7vRAEOhECGy', bytes=1318189, created_at=1720741454, filename='62_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+cd82a9b12dcb7044203be51fb4d1efa1,not qualified
+FileObject(id='file-yj6XTOVyMRBLEHbEDyBziIoT', bytes=1056889, created_at=1720741516, filename='63_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+1899a5668de741c2d01555bdce637b27,not qualified
+FileObject(id='file-J5NtaFmoXf12v562lEtIOiWd', bytes=1119589, created_at=1720741579, filename='64_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+01b2f43549dbe5844d40ff2a2ec7af80,not qualified
+FileObject(id='file-kihRuDsSOtT1UAjgAPc0ZtLE', bytes=891989, created_at=1720741642, filename='65_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+7ff40421c82367e4ccc2105aa26624fc,not qualified
+FileObject(id='file-pBDFr5GoMmMFQ2COy4P68azJ', bytes=1155989, created_at=1720741704, filename='66_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+ec16039a6667d6d60bd9e6574a22b9df,not qualified
+FileObject(id='file-kwwVPrTPgIeaL6fZtIgyYovj', bytes=1308889, created_at=1720741767, filename='67_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+44838f80c92caaa339afdc14895fb970,not qualified
+FileObject(id='file-eYMFA11KeCWWxGstmtn92MUB', bytes=1012989, created_at=1720741830, filename='68_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+c72bfae42c7754fadcfcd4ff11e1c27b,not qualified
+FileObject(id='file-kHUlNfN0pgsUV9ydKRHkz6F8', bytes=1262089, created_at=1720741892, filename='69_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+c68f2b72bf74514d9b3bc774cb1c1094,not qualified
+FileObject(id='file-WoeOiforb0uYMFVCBpyKdzFx', bytes=898589, created_at=1720741955, filename='70_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+d5a60811abb64ca4bb756542d9f5d1b1,not qualified
+FileObject(id='file-rohHD0ix8USvLNkwOtnK51Tq', bytes=1282689, created_at=1720742079, filename='71_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+d7b5700ded20c5aefd217cb72e53394d,not qualified
+FileObject(id='file-6GkIJLKepOmfFnBqny89XyDK', bytes=1395289, created_at=1720742141, filename='72_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+d5788559f6c7d3cd192069de8bf66e7e,not qualified
+FileObject(id='file-SiB6wqCX2hUq5VzMrXO7kuru', bytes=976589, created_at=1720742264, filename='73_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+3df845b03a17942660d2c72744d7ae6d,not qualified
+FileObject(id='file-Zi0LGOybyPNZYN25ra7z4am7', bytes=967289, created_at=1720742327, filename='74_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+71308c91c2ce06eea2c45dafb064cc75,not qualified
+FileObject(id='file-uAJZxvsqOJsX0OjG2mOv9N11', bytes=1357089, created_at=1720742390, filename='75_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: finalizing
+Current status: completed
+e908157c415db1759a4788cedee8ad57,not qualified
+FileObject(id='file-AL1giGapmnzG0czxhxLvZLKP', bytes=1041989, created_at=1720742513, filename='76_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+4782723a19a196b9dffcbefa76780208,not qualified
+FileObject(id='file-QLZ24R94beeZnUgq7RFSpl8K', bytes=1350189, created_at=1720742576, filename='77_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+64ce4f1e6c8b7b5f73bce2efc16c0417,not qualified
+FileObject(id='file-yjJxpMkgRKMHTz3BaNSvG8BX', bytes=1132889, created_at=1720742639, filename='78_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+33ba8b35e6ad3a61848bd4aa393924b5,not qualified
+FileObject(id='file-3WFYvRmBdtwTVX7kje5HJCai', bytes=819189, created_at=1720742701, filename='79_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+28e9bfc16fd957e2e110d3f41ba1cf87,not qualified
+FileObject(id='file-i01Fa7PqaoqFiOOjNpZ0ZoEn', bytes=926989, created_at=1720742824, filename='80_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+8b9fb218119155a61e7df2ddd4e658b5,not qualified
+FileObject(id='file-hp6YsaLohUhRCo9ECQDsbVjQ', bytes=1097789, created_at=1720742886, filename='81_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+78608a5a6357ec0e9642904e9b6b81d7,not qualified
+FileObject(id='file-GRy7yQMVsZqFllqSFjjOdCSc', bytes=995089, created_at=1720742949, filename='82_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+bc9ec4d3da02d058f1dcdd7c582f51e1,not qualified
+FileObject(id='file-Wdfsb17Iv370UrVR33G8OIBn', bytes=914189, created_at=1720743012, filename='83_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+a551c0da6a61029bdae5fb5d5ffb45b7,not qualified
+FileObject(id='file-WogSpzYgu1tKqpyu748W3erO', bytes=1270889, created_at=1720743074, filename='84_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+03e804c6dfa222b00e89d22d44b37627,not qualified
+FileObject(id='file-mixY1ENekCdwbUGzEldB1wny', bytes=970389, created_at=1720743137, filename='85_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+54f5df8a80522ec04b7c6a4d57b88469,not qualified
+FileObject(id='file-G4enUFVIZq64b3L5HP5qiEwm', bytes=944089, created_at=1720743200, filename='86_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+a002532f7e0773ac7a0da32b814e1543,not qualified
+FileObject(id='file-AVhDHCieAtTYbUOXkMOvPehW', bytes=1456789, created_at=1720743262, filename='87_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+35af509ad176761339c1f1b9db1e7e77,not qualified
+FileObject(id='file-zvgwIJgzS2nrCDdH2YHr4Pic', bytes=990589, created_at=1720743325, filename='88_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+32e535c36fede11f270c4136b2d23f3a,not qualified
+FileObject(id='file-FkDfKCQG4P5NyVTDfzk0Hprk', bytes=1290189, created_at=1720743388, filename='89_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+da5811b83239bffd3295f129a6cada9b,not qualified
+FileObject(id='file-apjtiuVef6ZIDPyECTGTCmim', bytes=1226089, created_at=1720743451, filename='90_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+024ea361efc38ebfd22025befc3e643a,not qualified
+FileObject(id='file-Zr3eZ3wwTGTPpPlxYc5brJSi', bytes=966889, created_at=1720743513, filename='91_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+eefcca79ea7aee45a1deeb909054ad25,not qualified
+FileObject(id='file-3DWItQUtvfyfmboTnb59dahB', bytes=1376989, created_at=1720743636, filename='92_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+ae7309da1b0dd32f16c3924b073d1007,not qualified
+FileObject(id='file-ct1PUCQa4PGS0QTflQ0qkaZI', bytes=920889, created_at=1720743759, filename='93_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+0422db396f81948eccd13d6eff642ace,not qualified
+FileObject(id='file-EDTrKOnm4Tr9k9CL7xFli3Dl', bytes=1145189, created_at=1720743882, filename='94_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+6408d98fc694894559e1402f4cae7424,not qualified
+FileObject(id='file-6a1TInarsYF3v0rP2ozPfjel', bytes=1161589, created_at=1720743944, filename='95_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+123dd2a56d4c1dead3f609b24b121b7f,not qualified
+FileObject(id='file-2f4pWzuBXqhoJpifuzTvSJL1', bytes=992389, created_at=1720744007, filename='96_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+30ddf68f5f0d6266a3ed181518a9c55e,not qualified
+FileObject(id='file-bB2dDmh2jjfzVWIrEkYuuf0B', bytes=901189, created_at=1720744129, filename='97_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+c6336d25722a787cb2bb19a1f0b205c0,not qualified
+FileObject(id='file-DivwbQCFZxlGjzU0573k7dCh', bytes=945489, created_at=1720744192, filename='98_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: completed
+7e7ec145644059e1082fb327836b9b64,not qualified
+FileObject(id='file-uWsOGRzmajykA32RXDgpmgGx', bytes=1108689, created_at=1720744255, filename='99_batch.jsonl', object='file', purpose='batch', status='processed', status_details=None)
+Current status: validating
+Current status: in_progress
+Current status: completed
+e96ebadc0f07c610ef86b9389da5b641,not qualified

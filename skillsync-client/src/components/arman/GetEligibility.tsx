@@ -28,7 +28,7 @@ function GetEligibility() {
 
     return (
         <div className="w-[400px] border border-emerald-300 flex flex-col items-center justify-center rounded-md p-4">
-            	<p>{countries.toString()}</p>
+            	<p>{countries?.toString()}</p>
                 <button onClick={getEligibility}>Refresh</button>
         </div>
     )

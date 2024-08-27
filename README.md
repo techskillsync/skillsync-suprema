@@ -1,5 +1,28 @@
 # skillsync-suprema
 
+## Endpoint Masterlist:
+**External Endpoints:**  
+https://skillsync.work  
+https://ss-api.skillsync.work  
+https://gpt-broker.skillsync.work  
+https://ss-api.drismir.ca (deprecated, use skillsync.work instead)  
+https://gpt-broker.drismir.ca  
+**Inernal Endpoints:**  
+http://localhost:8011 (gpt-broker)  
+http://localhost:8012  (ss-api)  
+http://localhost:8013 (gpt-broker's redis)  
+http://localhost:8014 (gpt-broker's redis-redinsight)
+
+## Google Authentication
+I needed to make some changes for react. In general I followed this guide using the google pre build sign in.
+https://supabase.com/docs/guides/auth/social-login/auth-google?queryGroups=platform&platform=web
+
+Since you cannot use <script></script> tags in react jsx I needed to make the `LoadGoogleClient` function in the `supabase/userLogin.js` file. You must add the <LoadGoogleClient /> inside your component JSX for login with google to work.
+
+To customize the login with google button head to the guide above, there is a section that tells you how to use Google's HTML Code generator to make a new login component.
+
+Note that in the Google Cloud Project you need to authorize both `http://localhost` and `http://localhost:5174` for it to work in development. Only specifying the latter will not work.
+
 ## Supabase Documentation
 
 ### Authentication:
@@ -49,7 +72,7 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 
 `name`: (string) user's name
 
-`email`: (string) user's email. Is not currently synced with `auth.users.email` this should be fixed.
+`email`: (string) user's email. Do not let users change this
 
 `location`: (string) user's location
 
@@ -79,4 +102,4 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 
 `email_confirmed`: (bool) whether or not the user confirmed their email
 
-`avatar_url`: the filename of the user's avatar. The actual avatar is stored in the `avatars` bucket
+`avatar_url`: (string) the filename of the user's avatar. The actual avatar is stored in the `avatars` bucket

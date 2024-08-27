@@ -1,0 +1,161 @@
+/*
+ * This is copied from Atheeb's landingpage/index.css
+ *
+ */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    /* background-color: black; */
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    background-color: black;
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, #9cd9ed, #00BFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-subheading {
+    font-family: "Poppins", sans-serif;
+    font-size: 100px;
+    background-image: linear-gradient(90deg, #02e29e 0%, #36b7fe 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-heading {
+    background-image: linear-gradient(43deg,
+        #02e29e 0%,
+        #36b7fe 46%,
+        #ffcc70 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bolder;
+  }
+
+  .loader {
+    border-top-color: #3498db;
+    animation: spinner 1.5s linear infinite;
+  }
+
+  .animate-slide {
+    animation: 15s slide linear infinite;
+  }
+
+
+
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Cool infinite background scrolling animation. */
+  /* Background data (Original source: https://subtlepatterns.com/grid-me/) */
+  @import url(https://fonts.googleapis.com/css?family=Exo:100);
+
+  :root {
+    --bg-url: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
+    --bg-width: 50px;
+    --bg-height: 50px;
+  }
+
+  /* Animations */
+  @-webkit-keyframes bg-scrolling-reverse {
+    100% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @-moz-keyframes bg-scrolling-reverse {
+    100% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @-o-keyframes bg-scrolling-reverse {
+    100% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @keyframes bg-scrolling-reverse {
+    100% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @-webkit-keyframes bg-scrolling {
+    0% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @-moz-keyframes bg-scrolling {
+    0% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @-o-keyframes bg-scrolling {
+    0% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  @keyframes bg-scrolling {
+    0% {
+      background-position: var(--bg-width) var(--bg-height);
+    }
+  }
+
+  /* Main styles */
+  .bg-animated {
+    background: var(--bg-url) repeat 0 0;
+
+    -webkit-animation: bg-scrolling-reverse .92s infinite;
+    /* Safari 4+ */
+    -moz-animation: bg-scrolling-reverse .92s infinite;
+    /* Fx 5+ */
+    -o-animation: bg-scrolling-reverse .92s infinite;
+    /* Opera 12+ */
+    animation: bg-scrolling-reverse .92s infinite;
+    /* IE 10+ */
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    animation-timing-function: linear;
+  }
+
+}
+
+
+
+@media screen and (max-width: 415px) {
+  .spotlight {
+    overflow: scroll;
+  }
+}
