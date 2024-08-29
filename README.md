@@ -103,3 +103,7 @@ Profile Pictures are stored in the `avatars` bucket. To give a user a profile pi
 `email_confirmed`: (bool) whether or not the user confirmed their email
 
 `avatar_url`: (string) the filename of the user's avatar. The actual avatar is stored in the `avatars` bucket
+
+### resume_data
+
+Each row is a user's resume. See the RESUMBE BUILDER TYPES section in src/types/types.ts for more info.

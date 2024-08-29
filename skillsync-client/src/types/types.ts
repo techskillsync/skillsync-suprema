@@ -1,4 +1,61 @@
-// Interface for view public_user_profiles 
+/*
+ * START OF RESUME BUILDER TYPES
+ */
+export type NestedStringArray = string | NestedStringArray[];
+
+export interface EducationSection {
+    institution: string;
+    end_date: string;
+    degree: string;
+    // Highlights should be able to have 
+    // as many sub arrays as neccessary.
+    highlights: NestedStringArray;
+}
+
+export interface ExperienceSection {
+    job_title: string;
+    company: string;
+    start_day: string;
+    end_day: string;
+    location: string;
+    // Highlights should be able to have 
+    // as many sub arrays as neccessary.
+    highlights: NestedStringArray;
+}
+
+export interface ProjectsSection {
+    name: string;
+    github_url: string;
+    technologies: string[];
+    highlights: NestedStringArray;
+    start_day: string;
+    end_day: string;
+}
+
+export interface SkillsSection {
+    [key: string]: string[];
+}
+
+
+export interface Resume {
+    label: string; // Shown to the user to identify resume
+    full_name: string;
+    phone_number: string;
+    email: string;
+    personal_website: string;
+    linkedin: string;
+    github: string;
+    education: EducationSection[];
+    experience: ExperienceSection[];
+    projects: ProjectsSection[];
+    technical_skills: SkillsSection;
+}
+
+/*
+ * END OF RESUME BUILDER TYPES
+ */
+
+// Interface for view public_user_profiles
 export interface PublicUserProfiles {
     name: string;
     email: string;
@@ -25,6 +82,13 @@ export interface UserProfile {
     race: string;
     email_confirmed: boolean;
     avatar_url: string;
+    phone_number: string;
+    zip_code: string;
+    city: string;
+    state: string;
+    country: string;
+    address: string;
+    personal_website: string;
 }
 
 export interface JobListing {
@@ -49,8 +113,8 @@ export interface WorkExperience {
     title: string;
     company: string;
     description: string | null;
-    startDate: Date | null;
-    endDate: Date | null;
+    startDate: string | null;
+    endDate: string | null;
     location: string | null;
 }
 

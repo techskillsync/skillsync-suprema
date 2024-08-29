@@ -12,6 +12,9 @@ module.exports = {
       backgroundClip: {
         text: "text",
       },
+      fontFamily: {
+        CMU: ['CMU', 'serif']
+      }
     },
   },
   variants: {
