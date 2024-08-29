@@ -11,9 +11,7 @@ async function GetWorkExperiences(): Promise<WorkExperience[] | null> {
       .eq("user_id", await GetUserId());
 
     if (data) {
-      console.log(data);
       const workExperiences: WorkExperience[] = data.map((item: any) => {
-        console.log(item);
         const workExperience: WorkExperience = {
           id: item.work_experience_id,
           company: item.company_name,
