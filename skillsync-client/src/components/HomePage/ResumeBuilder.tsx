@@ -4,6 +4,8 @@ import { GetProfileInfo } from '../../supabase/ProfileInfo';
 import { GetWorkExperiences } from '../../supabase/WorkExperience';
 import supabase from '../../supabase/supabaseClient';
 import { GetUserId } from '../../supabase/GetUserId';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 type SyncStatus = 'good' | 'loading' | 'failed';
 
@@ -26,7 +28,7 @@ async function syncResume(resume:Resume, setSyncStatus:React.Dispatch<React.SetS
 	setSyncStatus('loading');
 	try
 	{
-		const { data, error } = await supabase
+		const { error } = await supabase
 			.from('resume_builder')
 			.upsert(
 				{ id: await GetUserId(), label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills, },
@@ -43,6 +45,8 @@ async function syncResume(resume:Resume, setSyncStatus:React.Dispatch<React.SetS
 		return false;
 	}
 }
+
+
 
 /*
  * Fetches user data and formats it into a Resume object.
@@ -129,7 +133,32 @@ async function assembleResume(): Promise<Resume> {
 			technical_skills: [],
 		}
 	}
+}
 
+
+
+/*
+ * Saves the Resume Preview as a pdf
+ */
+async function saveAsPdf():Promise<boolean> {
+	const resume_div = document.getElementById('ResumePreview');
+	if (!resume_div) { return false; }
+	const canvas = await html2canvas(resume_div, { scale: 2 });
+	const img_data = canvas.toDataURL('image/png');
+
+	const pdf = new jsPDF({
+		orientation: 'portrait',
+		unit: 'pt',
+		format: [612, 792], // 8.5x11 inches in points (72pt per inch)
+	});
+
+	const pdf_width = pdf.internal.pageSize.getWidth();
+	const pdf_height = pdf.internal.pageSize.getHeight();
+
+	pdf.addImage(img_data, 'PNG', 0, 0, pdf_width, pdf_height);
+	pdf.save('resume.pdf');
+
+	return true;
 }
 
 function PreviewResume({ label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume) {
@@ -151,8 +180,7 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 			<div id="ResumePreview" className="!w-[8.5in] !h-[11in] p-[0.5in] bg-white text-left text-black font-serif text-[11px]">
 				<h1 className="text-center text-[17px]">{full_name}</h1>
 				<h4 className="text-center underline">{phone_number} {email} {personal_website} {linkedin} {github}</h4>
-				<h2>EDUCATION</h2>
-				<div id="line" className="w-full h-[1px] bg-black" />
+				<h2 className="underline">EDUCATION</h2>
 				{education.map((ed, index:number) => (
 					<div key={index} className="ml-[0.15in]">
 						<p className="font-semibold">{ed.institution}</p>
@@ -161,8 +189,7 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 						<DisplayHighlights highlights={ed.highlights} />
 					</div>
 				))}
-				<h2>EXPERIENCE</h2>
-				<div id="line" className="w-full h-[1px] bg-black" />
+				<h2 className="underline">EXPERIENCE</h2>
 				{experience.map( (ex, index:number) => (
 					<div key={index} className="ml-[0.15in]">
 						<p className="font-semibold">{ex.job_title}</p>
@@ -542,7 +569,10 @@ function ResumeBuilder() {
 
 	return (
 		<div className="min-h-screen w-full">
-					<p className="text-right mx-12 mt-4">Sync Status: {sync_status}</p>
+			<div className="flex justify-around">
+				<p className="text-center mt-4">Sync Status: {sync_status}</p>
+				<button onClick={()=>saveAsPdf()}>Save Resume</button>
+			</div>
 			<div className="h-screen w-full flex">
 				<div className="box-border w-[50%] text-center m-4 border border-white">
 					<h1 className="m-4">Edit</h1>
