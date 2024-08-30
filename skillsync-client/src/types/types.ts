@@ -19,6 +19,7 @@ export interface UserProfile {
     skill_sets: JSON;
     linkedin: string;
     github: string;
+    personal_website: string;
     work_eligibility: JSON;
     date_of_birth: Date;
     gender: string;
