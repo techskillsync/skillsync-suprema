@@ -1,7 +1,7 @@
 import React from "react";
 import { Resume } from "../../types/types";
 
-function PreviewResume({ label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume) {
+function PreviewResume({ resume_id, label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume) {
 
 	// Properly formats the nested arrays in a highlights section :D
 	interface NestedStringArrayProps { highlights:string[]; };

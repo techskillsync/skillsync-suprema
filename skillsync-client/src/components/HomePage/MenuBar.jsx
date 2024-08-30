@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard/Dashboard";
 import Feed from "../Feed/Feed";
-import ResumeBuilder from "../ResumeBuilder/ResumeBuilder.tsx";
+import ResumeManager from "../ResumeBuilder/ResumeManager.tsx";
 import Messages from "./Messages.tsx";
 import LogoDarkText from "../../assets/LogoDarkText.png";
 import ProfileCard from "./ProfileCard";
@@ -29,7 +29,7 @@ const menuItems = [
   { name: "Jobs", component: Feed, icon: <MdNewspaper />, show: true },
   {
     name: "Resume Builder",
-    component: ResumeBuilder,
+    component: ResumeManager,
     icon: <IoDocument />,
     show: true,
   },

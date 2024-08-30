@@ -39,6 +39,7 @@ export interface SkillsSection {
 
 
 export interface Resume {
+    resume_id: string;
     label: string; // Shown to the user to identify resume
     full_name: string;
     phone_number: string;

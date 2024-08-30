@@ -10,46 +10,48 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 	return(
 		<div className="text-left text-black">
 			<div id="resumeInfo" className="m-4">
-				<h3>Resume Label:</h3>
+				<h3 className="text-white">Resume Label:</h3>
 				<input
 					placeholder='label'
 					onChange={(e) => setLabel(e.target.value)}
 					value={label}/>
 				<h3 className="text-white">Personal Info:</h3>
-				<input
-					placeholder='Full Name'
-					onChange={(e) => setFullName(e.target.value)}
-					value={full_name}/>
-				<input
-					placeholder='Phone Number'
-					onChange={(e) => setPhoneNumber(e.target.value)}
-					value={phone_number}/>
-				<input
-					placeholder='Email'
-					onChange={(e) => setEmail(e.target.value)}
-					value={email}/>
-				<input
-					placeholder='Website'
-					onChange={(e) => setPersonalWebsite(e.target.value)}
-					value={personal_website}/>
-				<input
-					placeholder='LinkedIn'
-					onChange={(e) => setLinkedin(e.target.value)}
-					value={linkedin}/>
-				<input
-					placeholder='Github'
-					onChange={(e) => setGithub(e.target.value)}
-					value={github}/>
+				<div className="flex flex-col">
+					<input
+						placeholder='Full Name'
+						onChange={(e) => setFullName(e.target.value)}
+						value={full_name}/>
+					<input
+						placeholder='Phone Number'
+						onChange={(e) => setPhoneNumber(e.target.value)}
+						value={phone_number}/>
+					<input
+						placeholder='Email'
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}/>
+					<input
+						placeholder='Website'
+						onChange={(e) => setPersonalWebsite(e.target.value)}
+						value={personal_website}/>
+					<input
+						placeholder='LinkedIn'
+						onChange={(e) => setLinkedin(e.target.value)}
+						value={linkedin}/>
+					<input
+						placeholder='Github'
+						onChange={(e) => setGithub(e.target.value)}
+						value={github}/>
+				</div>
 				<h3 className="text-white">EDUCATION:</h3>
 				{education.map( (edu, index) => (
-					<div key={index}>
+					<div key={index} className="flex flex-col my-4">
 						<button
 							onClick={() => {
 								const new_educations = [...education];
 								new_educations.splice(index, 1);
 								setEducation(new_educations);
 							}}>
-							rm education
+							remove this section
 						</button>
 						<input
 							placeholder='Institution'
@@ -94,7 +96,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							value={edu.end_date}/>
 						{edu.highlights.map( (hi:string, hi_index:number) => (
 							<div key={hi_index}>
-								<input
+								<textarea
 									placeholder="Highlight"
 									onChange={(e) => {
 										let new_highlights:string[] = [...edu.highlights];
@@ -139,7 +141,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 				</button>
 				<h3 className="text-white">EXPERIENCE:</h3>
 				{experience.map( (exp, index) => (
-					<div key={index}>
+					<div key={index} className="flex flex-col my-4">
 						<button
 							onClick={() => {
 								const new_experiences = [...experience];
@@ -186,7 +188,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							value={exp.end_day}/>
 						{exp.highlights.map( (hi:string, hi_index:number) => (
 							<div key={hi_index}>
-								<input
+								<textarea
 									placeholder="Highlight"
 									onChange={(e) => {
 										let new_highlights:string[] = [...exp.highlights];
@@ -233,7 +235,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 
 				<h3 className="text-white">PROJECTS:</h3>
 				{projects.map( (prj, index) => (
-					<div key={index}>
+					<div key={index} className="flex flex-col my-4">
 						<button
 							onClick={() => {
 								const new_projects = [...projects];
@@ -289,7 +291,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							value={prj.end_day}/>
 							{prj.highlights.map( (hi:string, hi_index:number) => (
 								<div key={hi_index}>
-									<input
+									<textarea
 										placeholder="Highlight"
 										onChange={(e) => {
 											let new_highlights:string[] = [...prj.highlights];
@@ -331,7 +333,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 					}}>
 						Add project
 					</button>
-				<h3>TECHNICAL SKILLS:</h3>
+				<h3 className="text-white">TECHNICAL SKILLS:</h3>
 				{technical_skills.map( (skl, index:number) => (
 					<div key={index}>
 						<input
@@ -343,7 +345,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								setTechnicalSkills(new_sklls);
 							}}
 							value={skl.category}/>
-						<input
+						<textarea
 							placeholder='Skills'
 							onChange={(e) => {
 								const new_skl:SkillsSection = { category: skl.category, skills: e.target.value };
