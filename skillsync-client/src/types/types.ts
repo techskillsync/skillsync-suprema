@@ -1,15 +1,13 @@
 /*
  * START OF RESUME BUILDER TYPES
  */
-export type NestedStringArray = string | NestedStringArray[];
-
 export interface EducationSection {
     institution: string;
     end_date: string;
     degree: string;
     // Highlights should be able to have 
     // as many sub arrays as neccessary.
-    highlights: NestedStringArray;
+    highlights: string[];
 }
 
 export interface ExperienceSection {
@@ -20,14 +18,14 @@ export interface ExperienceSection {
     location: string;
     // Highlights should be able to have 
     // as many sub arrays as neccessary.
-    highlights: NestedStringArray;
+    highlights: string[];
 }
 
 export interface ProjectsSection {
     name: string;
     github_url: string;
-    technologies: string[];
-    highlights: NestedStringArray;
+    technologies: string;
+    highlights: string[];
     start_day: string;
     end_day: string;
 }

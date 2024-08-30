@@ -1,5 +1,5 @@
 import React, { useState, useEffect, JSXElementConstructor } from 'react'
-import { Resume, EducationSection, ExperienceSection, ProjectsSection, SkillsSection, NestedStringArray } from '../../types/types';
+import { Resume, EducationSection, ExperienceSection, ProjectsSection, SkillsSection, } from '../../types/types';
 import { GetProfileInfo } from '../../supabase/ProfileInfo';
 import { GetWorkExperiences } from '../../supabase/WorkExperience';
 
@@ -94,19 +94,13 @@ async function assembleResume(): Promise<Resume> {
 function PreviewResume({ label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume) {
 
 	// Properly formats the nested arrays in a highlights section :D
-	interface NestedStringArrayProps { highlights:NestedStringArray; };
+	interface NestedStringArrayProps { highlights:string[]; };
 	function DisplayHighlights({ highlights }:NestedStringArrayProps):React.JSX.Element
 	{
 		let jsx_points:React.JSX.Element[] = [];
 		for (const hi of highlights)
 		{
-			if (hi instanceof Array) {
-				console.log("UNTESTED BEHAVIOUR, MAKE SURE THIS RECURSION WORKS!");
-				jsx_points.push(<DisplayHighlights highlights={hi}/>);
-			} else
-			{
-				jsx_points.push(<li key={jsx_points.length} className="">{hi}</li>);
-			}
+			jsx_points.push(<li key={jsx_points.length} className="">{hi}</li>);
 		}
 		return <ul className="list-disc list-inside ml-[0.15in]">{jsx_points}</ul>;
 	}
@@ -141,7 +135,10 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 				{projects.map( (pj, index:number) => (
 					<div key={index}>
 						<p>{pj.name}</p>
+						<p>{pj.github_url}</p>
 						<p>{pj.technologies}</p>
+						<p>{pj.start_day}</p>
+						<p>{pj.end_day}</p>
 						<DisplayHighlights highlights={pj.highlights} />
 					</div>
 				))}
@@ -154,8 +151,12 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 	);
 }
 
+// This ugly line is just to type the 3 million props for EditResume
+interface EditResumeProps { setLabel: React.Dispatch<React.SetStateAction<string>>; setFullName: React.Dispatch<React.SetStateAction<string>>; setPhoneNumber: React.Dispatch<React.SetStateAction<string>>; setEmail: React.Dispatch<React.SetStateAction<string>>; setPersonalWebsite: React.Dispatch<React.SetStateAction<string>>; setLinkedin: React.Dispatch<React.SetStateAction<string>>; setGithub: React.Dispatch<React.SetStateAction<string>>; setEducation: React.Dispatch<React.SetStateAction<EducationSection[]>>; setExperience: React.Dispatch<React.SetStateAction<ExperienceSection[]>>; setProjects: React.Dispatch<React.SetStateAction<ProjectsSection[]>>; setTechnicalSkills: React.Dispatch<React.SetStateAction<SkillsSection>>; label: string; full_name: string; phone_number: string; email: string; personal_website: string; linkedin: string; github: string; education: EducationSection[]; experience: ExperienceSection[]; projects: ProjectsSection[]; technical_skills: SkillsSection; }
+
 function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersonalWebsite, setLinkedin, setGithub, setEducation, setExperience, setProjects, setTechnicalSkills,
-										 label   , full_name  , phone_number  , email   , personal_website  , linkedin   , github   , education   , experience,    projects   , technical_skills  , }) {
+                     label   , full_name  , phone_number  , email   , personal_website  , linkedin   , github   , education   , experience,    projects   , technical_skills  , }:EditResumeProps):React.JSX.Element {
+
 	return(
 		<div className="text-left text-black">
 			<div id="resumeInfo" className="m-4">
@@ -185,10 +186,233 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 					onChange={(e) => setGithub(e.target.value)}
 					value={github}/>
 				<h3 className="text-white">EDUCATION:</h3>
-				<input
-					placeholder='Institution'
-					onChange={(e) => setEducation({...education, institution: e.target.value})}
-					/>
+				{education.map( (edu, index) => (
+					<div key={index}>
+						<input
+							placeholder='Institution'
+							onChange={(e) => {
+								// Here we create our new education object then
+								// create a copy of the old education array and
+								// replace the old index with our new one.
+								// ** We use [...education] to make a new array
+								//    so that react detects the state change **
+								const new_edu:EducationSection = { ...edu, institution: e.target.value };
+								let new_edus:EducationSection[] = [...education];
+								new_edus[index] = new_edu;
+								setEducation(new_edus);
+							}}
+							value={edu.institution}/>
+						<input
+							placeholder='Degree'
+							onChange={(e) => {
+								const new_edu:EducationSection = { ...edu, degree: e.target.value };
+								const new_edus:EducationSection[] = [...education];
+								new_edus[index] = new_edu;
+								setEducation(new_edus);
+							}}
+							value={edu.degree}/>
+						<input
+							placeholder='Grad Date'
+							onChange={(e) => {
+								const new_edu:EducationSection = { ...edu, end_date: e.target.value };
+								const new_edus:EducationSection[] = [...education];
+								new_edus[index] = new_edu;
+								setEducation(new_edus);
+							}}
+							value={edu.end_date}/>
+						{edu.highlights.map( (hi:string, hi_index:number) => (
+							<div key={hi_index}>
+								<input
+									placeholder="Highlight"
+									onChange={(e) => {
+										let new_highlights:string[] = [...edu.highlights];
+										new_highlights[hi_index] = e.target.value;
+										const new_edu:EducationSection = {...edu, highlights: new_highlights };
+										const new_edus:EducationSection[] = [...education];
+										new_edus[index] = new_edu;
+										setEducation(new_edus);
+									}}
+									value={hi}/>
+							</div>
+						))}
+						<button
+							onClick={() => {
+								const new_highlights:string[] = [...edu.highlights, ""];
+								const new_edu:EducationSection = { ...edu, highlights: new_highlights };
+								const new_edus:EducationSection[] = [...education];
+								new_edus[index] = new_edu;
+								setEducation(new_edus);
+							}}>
+							Add highlight
+						</button>
+					</div>
+				))}
+				<button
+					onClick={() => {
+						const new_edu:EducationSection = { institution:"Institution", degree:"Degree", end_date:"expected 2024", highlights:[] };
+						const new_edus:EducationSection[] = [...education, new_edu];
+						setEducation(new_edus);
+					}}>
+					Add education section
+				</button>
+				<h3 className="text-white">EXPERIENCE:</h3>
+				{experience.map( (exp, index) => (
+					<div key={index}>
+						<input
+							placeholder="Job Title"
+							onChange={(e) => {
+								const new_exp:ExperienceSection = { ...exp, job_title: e.target.value };
+								let new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);
+							}}
+							value={exp.job_title}/>
+						<input
+							placeholder="Compnay"
+							onChange={(e) => {
+								const new_exp:ExperienceSection = { ...exp, company: e.target.value };
+								let new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);				
+							}}
+							value={exp.company}/>
+						<input
+							placeholder="Start date"
+							onChange={(e) => {
+								const new_exp:ExperienceSection = { ...exp, start_day: e.target.value };
+								let new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);				
+							}}
+							value={exp.start_day}/>
+						<input
+							placeholder="End date"
+							onChange={(e) => {
+								const new_exp:ExperienceSection = { ...exp, end_day: e.target.value };
+								let new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);				
+							}}
+							value={exp.end_day}/>
+						{exp.highlights.map( (hi:string, hi_index:number) => (
+							<div key={hi_index}>
+								<input
+									placeholder="Highlight"
+									onChange={(e) => {
+										let new_highlights:string[] = [...exp.highlights];
+										new_highlights[hi_index] = e.target.value;
+										const new_exp:ExperienceSection= {...exp, highlights: new_highlights };
+										const new_exps:ExperienceSection[] = [...experience];
+										new_exps[index] = new_exp;
+										setExperience(new_exps);
+									}}
+									value={hi}/>
+							</div>
+						))}
+						<button
+							onClick={() => {
+								const new_highlights:string[] = [...exp.highlights, ""];
+								const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
+								const new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);
+							}}>
+							Add highlight
+						</button>
+					</div>
+				))}
+				<button
+					onClick={() => {
+						const new_exp:ExperienceSection= { job_title:"Job Title", company:"Company", location:"Location", start_day:"2023", end_day:"2024", highlights:[] };
+						const new_exps:ExperienceSection[] = [...experience, new_exp];
+						setExperience(new_exps);
+					}}>
+					Add experience section
+				</button>
+
+				<h3 className="text-white">PROJECTS:</h3>
+				{projects.map( (prj, index) => (
+				<div key={index}>
+					<input
+						placeholder='Name'
+						onChange={(e) => {
+							const new_prj:ProjectsSection = { ...prj, name: e.target.value };
+							let new_prjs:ProjectsSection[] = [...projects];
+							new_prjs[index] = new_prj;
+							setProjects(new_prjs);
+						}}
+						value={prj.name}/>
+					<input/>
+					<input
+						placeholder='Github URL'
+						onChange={(e) => {
+							const new_prj:ProjectsSection = { ...prj, github_url: e.target.value };
+							let new_prjs:ProjectsSection[] = [...projects];
+							new_prjs[index] = new_prj;
+							setProjects(new_prjs);
+						}}
+						value={prj.github_url}/>
+					<input
+						placeholder='Start date'
+						onChange={(e) => {
+							const new_prj:ProjectsSection = {...prj, technologies: e.target.value };
+							let new_prjs:ProjectsSection[] = [...projects];
+							new_prjs[index] = new_prj;
+							setProjects(new_prjs);
+						}}
+						value={prj.technologies}/>
+					<input
+						placeholder='Start date'
+						onChange={(e) => {
+							const new_prj:ProjectsSection = {...prj, start_day: e.target.value };
+							let new_prjs:ProjectsSection[] = [...projects];
+							new_prjs[index] = new_prj;
+							setProjects(new_prjs);
+						}}
+						value={prj.start_day}/>
+					<input
+						placeholder='End date'
+						onChange={(e) => {
+							const new_prj:ProjectsSection = {...prj, end_day: e.target.value };
+							let new_prjs:ProjectsSection[] = [...projects];
+							new_prjs[index] = new_prj;
+							setProjects(new_prjs);
+						}}
+						value={prj.end_day}/>
+						{prj.highlights.map( (hi:string, hi_index:number) => (
+							<div key={hi_index}>
+								<input
+									placeholder="Highlight"
+									onChange={(e) => {
+										let new_highlights:string[] = [...prj.highlights];
+										new_highlights[hi_index] = e.target.value;
+										const new_prj:ProjectsSection= {...prj, highlights: new_highlights };
+										const new_prjs:ProjectsSection[] = [...projects];
+										new_prjs[index] = new_prj;
+										setProjects(new_prjs);
+									}}
+									value={hi}/>
+							</div>
+						))}
+						<button
+							onClick={() => {
+								const new_highlights:string[] = [...exp.highlights, ""];
+								const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
+								const new_exps:ExperienceSection[] = [...experience];
+								new_exps[index] = new_exp;
+								setExperience(new_exps);
+							}}>
+							Add highlight
+						</button>
+					</div>
+				))}
+				<button onClick={(e) => {
+					const new_prj:ProjectsSection = { name:"Project", github_url:"https://github.com/", technologies:"JavaScript, OpenAI, Redux", start_day:"Feb 2020", end_day:"Jan 2024", highlights: [] };
+					let new_prjs:ProjectsSection[] = [...projects, new_prj];
+					setProjects(new_prjs);
+				}}>
+					Add project
+				</button>
 			</div>
 		</div>
 	);
