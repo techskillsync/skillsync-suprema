@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard/Dashboard";
 import Feed from "../Feed/Feed";
-import ResumeBuilder from "./ResumeBuilder.tsx";
+import ResumeBuilder from "../ResumeBuilder/ResumeBuilder.tsx";
 import Messages from "./Messages.tsx";
 import LogoDarkText from "../../assets/LogoDarkText.png";
 import ProfileCard from "./ProfileCard";
