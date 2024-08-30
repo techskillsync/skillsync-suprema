@@ -43,6 +43,14 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 				<h3 className="text-white">EDUCATION:</h3>
 				{education.map( (edu, index) => (
 					<div key={index}>
+						<button
+							onClick={() => {
+								const new_educations = [...education];
+								new_educations.splice(index, 1);
+								setEducation(new_educations);
+							}}>
+							rm education
+						</button>
 						<input
 							placeholder='Institution'
 							onChange={(e) => {
@@ -57,6 +65,15 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								setEducation(new_edus);
 							}}
 							value={edu.institution}/>
+						<input
+							placeholder='input'
+							onChange={(e) => {
+								const new_edu:EducationSection = { ...edu, location: e.target.value };
+								const new_edus:EducationSection[] = [...education];
+								new_edus[index] = new_edu;
+								setEducation(new_edus);
+							}}
+							value={edu.location}/>
 						<input
 							placeholder='Degree'
 							onChange={(e) => {
@@ -88,6 +105,16 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 										setEducation(new_edus);
 									}}
 									value={hi}/>
+								<button onClick={() => {
+										let new_highlights:string[] = [...edu.highlights];
+										new_highlights.splice(hi_index, 1);
+										const new_edu:EducationSection = {...edu, highlights: new_highlights };
+										const new_edus:EducationSection[] = [...education];
+										new_edus[index] = new_edu;
+										setEducation(new_edus);
+ 								}}>
+									rm
+								</button>
 							</div>
 						))}
 						<button
@@ -104,7 +131,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 				))}
 				<button
 					onClick={() => {
-						const new_edu:EducationSection = { institution:"Institution", degree:"Degree", end_date:"expected 2024", highlights:[] };
+						const new_edu:EducationSection = { institution:"Institution", location:"NY, USA", degree:"Degree", end_date:"expected 2024", highlights:[] };
 						const new_edus:EducationSection[] = [...education, new_edu];
 						setEducation(new_edus);
 					}}>
@@ -113,6 +140,14 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 				<h3 className="text-white">EXPERIENCE:</h3>
 				{experience.map( (exp, index) => (
 					<div key={index}>
+						<button
+							onClick={() => {
+								const new_experiences = [...experience];
+								new_experiences.splice(index, 1);
+								setExperience(new_experiences);
+							}}>
+							rm experience
+						</button>
 						<input
 							placeholder="Job Title"
 							onChange={(e) => {
@@ -162,6 +197,17 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 										setExperience(new_exps);
 									}}
 									value={hi}/>
+								<button onClick={() => {
+										let new_highlights:string[] = [...exp.highlights];
+										new_highlights.splice(hi_index, 1);
+										const new_edu:ExperienceSection= {...exp, highlights: new_highlights };
+										const new_exps:ExperienceSection[] = [...experience];
+										new_exps[index] = new_edu;
+										setExperience(new_exps);
+ 								}}>
+									rm
+								</button>
+
 							</div>
 						))}
 						<button
@@ -188,6 +234,14 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 				<h3 className="text-white">PROJECTS:</h3>
 				{projects.map( (prj, index) => (
 					<div key={index}>
+						<button
+							onClick={() => {
+								const new_projects = [...projects];
+								new_projects.splice(index, 1);
+								setProjects(new_projects);
+							}}>
+							rm project
+						</button>
 						<input
 							placeholder='Name'
 							onChange={(e) => {
@@ -197,7 +251,6 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								setProjects(new_prjs);
 							}}
 							value={prj.name}/>
-						<input/>
 						<input
 							placeholder='Github URL'
 							onChange={(e) => {
@@ -247,6 +300,16 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 											setProjects(new_prjs);
 										}}
 										value={hi}/>
+									<button onClick={() => {
+										let new_highlights:string[] = [...prj.highlights];
+										new_highlights.splice(hi_index, 1);
+										const new_prj:ProjectsSection= {...prj, highlights: new_highlights };
+										const new_prjs:ProjectsSection[] = [...projects];
+										new_prjs[index] = new_prj;
+										setProjects(new_prjs);
+ 									}}>
+										rm
+									</button>
 								</div>
 							))}
 							<button
@@ -287,7 +350,15 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								const new_sklls:SkillsSection[] = [...technical_skills];
 								new_sklls[index] = new_skl;
 								setTechnicalSkills(new_sklls);
-							}}/>
+							}}
+							value={skl.skills}/>
+						<button onClick={() => {
+							const new_skills:SkillsSection[] = [...technical_skills];
+							new_skills.splice(index, 1);
+							setTechnicalSkills(new_skills);
+						}}>
+							rm
+						</button>
 					</div>
 				))}
 				<button

@@ -1,12 +1,16 @@
 /*
  * START OF RESUME BUILDER TYPES
  */
+
+export interface HighlightSection {
+    highlights: string[];
+}
+
 export interface EducationSection {
     institution: string;
+    location: string;
     end_date: string;
     degree: string;
-    // Highlights should be able to have 
-    // as many sub arrays as neccessary.
     highlights: string[];
 }
 
@@ -16,8 +20,6 @@ export interface ExperienceSection {
     start_day: string;
     end_day: string;
     location: string;
-    // Highlights should be able to have 
-    // as many sub arrays as neccessary.
     highlights: string[];
 }
 
@@ -25,9 +27,9 @@ export interface ProjectsSection {
     name: string;
     github_url: string;
     technologies: string;
-    highlights: string[];
     start_day: string;
     end_day: string;
+    highlights: string[];
 }
 
 export interface SkillsSection {

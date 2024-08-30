@@ -7,10 +7,43 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 
-type SyncStatus = 'good' | 'loading' | 'failed';
+// When blocked will not attempt to sync. Used so
+// we dont sync values before they are loaded.
+type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
 
-async function syncResume(resume:Resume, setSyncStatus:React.Dispatch<React.SetStateAction<SyncStatus>>):Promise<boolean>
+/*
+ * Tries to load the user's saved resume. If
+ * none is found will call assembleResume() 
+ * and return that resume instead.
+ */
+async function loadResume():Promise<Resume>
 {
+	try {
+		const { data, error } = await supabase
+			.from('resume_builder')
+			.select('*')
+			.eq('id', await GetUserId())
+			.single();
+		
+		if (error) { throw Error(error.message); }
+
+		return data as Resume;
+	} catch (error) {
+		console.warn('Did not fin a saved resume');
+		return await assembleResume();
+	}
+}
+
+
+
+/*
+ * Upserts resume data to Supabase using user id.
+ * and updates sync_status accordingly.
+ */
+async function syncResume(resume:Resume, sync_status:SyncStatus, setSyncStatus:React.Dispatch<React.SetStateAction<SyncStatus>>):Promise<boolean>
+{
+	if (sync_status === 'blocked') { return false; }
+
 	const { label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills, } = resume;
 
 	setSyncStatus('loading');
@@ -60,7 +93,7 @@ async function assembleResume(): Promise<Resume> {
 
 	try
 	{
-		const profile_data = await GetProfileInfo('name, last_name, phone_number, email, personal_website, linkedin, github, school, grad_year, program, specialization');
+		const profile_data = await GetProfileInfo('name, last_name, phone_number, email, personal_website, linkedin, github, school, grad_year, program, specialization, location');
 		if (profile_data === null) { throw Error('Could not fetch profile'); }
 		const work_data = await GetWorkExperiences();
 		if (work_data === null) { throw Error('Could not get work_data'); }
@@ -68,6 +101,7 @@ async function assembleResume(): Promise<Resume> {
 		let educations: EducationSection[] = [];
 		let education: EducationSection = {
 			institution: profile_data.school,
+			location: profile_data.location,
 			end_date: profile_data.grad_year,
 			degree: profile_data.program + ' in ' + profile_data.specialization,
 			highlights: [],
@@ -126,8 +160,7 @@ async function assembleResume(): Promise<Resume> {
 
 
 function ResumeBuilder() {
-	type SyncStatus = 'good' | 'loading' | 'failed';
-	const [sync_status, setSyncStatus] = useState<SyncStatus>('good');
+	const [sync_status, setSyncStatus] = useState<SyncStatus>('blocked');
 	const [label, setLabel] = useState<string>('');
 	const [full_name, setFullName] = useState<string>('');
 	const [phone_number, setPhoneNumber] = useState<string>('');
@@ -144,7 +177,7 @@ function ResumeBuilder() {
 	{
 		async function doAsync()
 		{
-			const resume:Resume = await assembleResume();
+			const resume:Resume = await loadResume();
 			setLabel(resume.label);
 			setFullName(resume.full_name);
 			setPhoneNumber(resume.phone_number);
@@ -156,6 +189,8 @@ function ResumeBuilder() {
 			setExperience(resume.experience);
 			setProjects(resume.projects);
 			setTechnicalSkills(resume.technical_skills);
+
+			setSyncStatus('good');
 		}
 
 		doAsync();
@@ -166,7 +201,7 @@ function ResumeBuilder() {
 		async function doAsync()
 		{
 			const resume = { label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills };
-			syncResume(resume, setSyncStatus);
+			syncResume(resume, sync_status, setSyncStatus);
 		}
 
 		doAsync();
