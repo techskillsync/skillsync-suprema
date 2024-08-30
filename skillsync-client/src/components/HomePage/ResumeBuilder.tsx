@@ -1,7 +1,48 @@
-import React, { useState, useEffect, JSXElementConstructor } from 'react'
+import React, { useState, useEffect, } from 'react'
 import { Resume, EducationSection, ExperienceSection, ProjectsSection, SkillsSection, } from '../../types/types';
 import { GetProfileInfo } from '../../supabase/ProfileInfo';
 import { GetWorkExperiences } from '../../supabase/WorkExperience';
+import supabase from '../../supabase/supabaseClient';
+import { GetUserId } from '../../supabase/GetUserId';
+
+type SyncStatus = 'good' | 'loading' | 'failed';
+
+async function syncResume(resume:Resume, setSyncStatus:React.Dispatch<React.SetStateAction<SyncStatus>>):Promise<boolean>
+{
+	const {
+		label,
+		full_name,
+		phone_number,
+		email,
+		personal_website,
+		linkedin,
+		github,
+		education,
+		experience,
+		projects,
+		technical_skills,
+	} = resume;
+
+	setSyncStatus('loading');
+	try
+	{
+		const { data, error } = await supabase
+			.from('resume_builder')
+			.upsert(
+				{ id: await GetUserId(), label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills, },
+				{ onConflict: 'id'}
+			)
+			.select('id');
+		if (error) { throw Error(error.message); }
+		setSyncStatus('good');
+		return true;
+	} catch(error) 
+	{
+		console.warn("Error syncing resume - " + error);
+		setSyncStatus('failed');
+		return false;
+	}
+}
 
 /*
  * Fetches user data and formats it into a Resume object.
@@ -67,7 +108,7 @@ async function assembleResume(): Promise<Resume> {
 			education: educations,
 			experience: experiences,
 			projects: [],
-			technical_skills: {},
+			technical_skills: [],
 		}
 		
 	}
@@ -85,7 +126,7 @@ async function assembleResume(): Promise<Resume> {
 			education: [],
 			experience: [],
 			projects: [],
-			technical_skills: {}
+			technical_skills: [],
 		}
 	}
 
@@ -106,7 +147,7 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 	}
 	
 	return (
-		<div className="relative h-full w-full">
+		<div className="h-full">
 			<div id="ResumePreview" className="!w-[8.5in] !h-[11in] p-[0.5in] bg-white text-left text-black font-serif text-[11px]">
 				<h1 className="text-center text-[17px]">{full_name}</h1>
 				<h4 className="text-center underline">{phone_number} {email} {personal_website} {linkedin} {github}</h4>
@@ -143,8 +184,8 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 					</div>
 				))}
 				<h2>TECHNICAL SKILLS</h2>
-				{Object.entries(technical_skills).map(([category, skills]) => (
-					<p key={category}><strong>{category}:</strong>{skills}</p>
+				{technical_skills.map( (skl, index:number) => (
+					<p key={index}><strong>{skl.category}: </strong>{skl.skills}</p>
 				))}
 			</div>
 	</div>
@@ -152,7 +193,7 @@ function PreviewResume({ label, full_name, phone_number, email, personal_website
 }
 
 // This ugly line is just to type the 3 million props for EditResume
-interface EditResumeProps { setLabel: React.Dispatch<React.SetStateAction<string>>; setFullName: React.Dispatch<React.SetStateAction<string>>; setPhoneNumber: React.Dispatch<React.SetStateAction<string>>; setEmail: React.Dispatch<React.SetStateAction<string>>; setPersonalWebsite: React.Dispatch<React.SetStateAction<string>>; setLinkedin: React.Dispatch<React.SetStateAction<string>>; setGithub: React.Dispatch<React.SetStateAction<string>>; setEducation: React.Dispatch<React.SetStateAction<EducationSection[]>>; setExperience: React.Dispatch<React.SetStateAction<ExperienceSection[]>>; setProjects: React.Dispatch<React.SetStateAction<ProjectsSection[]>>; setTechnicalSkills: React.Dispatch<React.SetStateAction<SkillsSection>>; label: string; full_name: string; phone_number: string; email: string; personal_website: string; linkedin: string; github: string; education: EducationSection[]; experience: ExperienceSection[]; projects: ProjectsSection[]; technical_skills: SkillsSection; }
+interface EditResumeProps { setLabel: React.Dispatch<React.SetStateAction<string>>; setFullName: React.Dispatch<React.SetStateAction<string>>; setPhoneNumber: React.Dispatch<React.SetStateAction<string>>; setEmail: React.Dispatch<React.SetStateAction<string>>; setPersonalWebsite: React.Dispatch<React.SetStateAction<string>>; setLinkedin: React.Dispatch<React.SetStateAction<string>>; setGithub: React.Dispatch<React.SetStateAction<string>>; setEducation: React.Dispatch<React.SetStateAction<EducationSection[]>>; setExperience: React.Dispatch<React.SetStateAction<ExperienceSection[]>>; setProjects: React.Dispatch<React.SetStateAction<ProjectsSection[]>>; setTechnicalSkills: React.Dispatch<React.SetStateAction<SkillsSection[]>>; label: string; full_name: string; phone_number: string; email: string; personal_website: string; linkedin: string; github: string; education: EducationSection[]; experience: ExperienceSection[]; projects: ProjectsSection[]; technical_skills: SkillsSection[]; }
 
 function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersonalWebsite, setLinkedin, setGithub, setEducation, setExperience, setProjects, setTechnicalSkills,
                      label   , full_name  , phone_number  , email   , personal_website  , linkedin   , github   , education   , experience,    projects   , technical_skills  , }:EditResumeProps):React.JSX.Element {
@@ -160,6 +201,11 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 	return(
 		<div className="text-left text-black">
 			<div id="resumeInfo" className="m-4">
+				<h3>Resume Label:</h3>
+				<input
+					placeholder='label'
+					onChange={(e) => setLabel(e.target.value)}
+					value={label}/>
 				<h3 className="text-white">Personal Info:</h3>
 				<input
 					placeholder='Full Name'
@@ -332,93 +378,124 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 
 				<h3 className="text-white">PROJECTS:</h3>
 				{projects.map( (prj, index) => (
-				<div key={index}>
-					<input
-						placeholder='Name'
-						onChange={(e) => {
-							const new_prj:ProjectsSection = { ...prj, name: e.target.value };
-							let new_prjs:ProjectsSection[] = [...projects];
-							new_prjs[index] = new_prj;
-							setProjects(new_prjs);
-						}}
-						value={prj.name}/>
-					<input/>
-					<input
-						placeholder='Github URL'
-						onChange={(e) => {
-							const new_prj:ProjectsSection = { ...prj, github_url: e.target.value };
-							let new_prjs:ProjectsSection[] = [...projects];
-							new_prjs[index] = new_prj;
-							setProjects(new_prjs);
-						}}
-						value={prj.github_url}/>
-					<input
-						placeholder='Start date'
-						onChange={(e) => {
-							const new_prj:ProjectsSection = {...prj, technologies: e.target.value };
-							let new_prjs:ProjectsSection[] = [...projects];
-							new_prjs[index] = new_prj;
-							setProjects(new_prjs);
-						}}
-						value={prj.technologies}/>
-					<input
-						placeholder='Start date'
-						onChange={(e) => {
-							const new_prj:ProjectsSection = {...prj, start_day: e.target.value };
-							let new_prjs:ProjectsSection[] = [...projects];
-							new_prjs[index] = new_prj;
-							setProjects(new_prjs);
-						}}
-						value={prj.start_day}/>
-					<input
-						placeholder='End date'
-						onChange={(e) => {
-							const new_prj:ProjectsSection = {...prj, end_day: e.target.value };
-							let new_prjs:ProjectsSection[] = [...projects];
-							new_prjs[index] = new_prj;
-							setProjects(new_prjs);
-						}}
-						value={prj.end_day}/>
-						{prj.highlights.map( (hi:string, hi_index:number) => (
-							<div key={hi_index}>
-								<input
-									placeholder="Highlight"
-									onChange={(e) => {
-										let new_highlights:string[] = [...prj.highlights];
-										new_highlights[hi_index] = e.target.value;
-										const new_prj:ProjectsSection= {...prj, highlights: new_highlights };
-										const new_prjs:ProjectsSection[] = [...projects];
-										new_prjs[index] = new_prj;
-										setProjects(new_prjs);
-									}}
-									value={hi}/>
-							</div>
-						))}
-						<button
-							onClick={() => {
-								const new_highlights:string[] = [...exp.highlights, ""];
-								const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
-								const new_exps:ExperienceSection[] = [...experience];
-								new_exps[index] = new_exp;
-								setExperience(new_exps);
-							}}>
-							Add highlight
-						</button>
+					<div key={index}>
+						<input
+							placeholder='Name'
+							onChange={(e) => {
+								const new_prj:ProjectsSection = { ...prj, name: e.target.value };
+								let new_prjs:ProjectsSection[] = [...projects];
+								new_prjs[index] = new_prj;
+								setProjects(new_prjs);
+							}}
+							value={prj.name}/>
+						<input/>
+						<input
+							placeholder='Github URL'
+							onChange={(e) => {
+								const new_prj:ProjectsSection = { ...prj, github_url: e.target.value };
+								let new_prjs:ProjectsSection[] = [...projects];
+								new_prjs[index] = new_prj;
+								setProjects(new_prjs);
+							}}
+							value={prj.github_url}/>
+						<input
+							placeholder='Start date'
+							onChange={(e) => {
+								const new_prj:ProjectsSection = {...prj, technologies: e.target.value };
+								let new_prjs:ProjectsSection[] = [...projects];
+								new_prjs[index] = new_prj;
+								setProjects(new_prjs);
+							}}
+							value={prj.technologies}/>
+						<input
+							placeholder='Start date'
+							onChange={(e) => {
+								const new_prj:ProjectsSection = {...prj, start_day: e.target.value };
+								let new_prjs:ProjectsSection[] = [...projects];
+								new_prjs[index] = new_prj;
+								setProjects(new_prjs);
+							}}
+							value={prj.start_day}/>
+						<input
+							placeholder='End date'
+							onChange={(e) => {
+								const new_prj:ProjectsSection = {...prj, end_day: e.target.value };
+								let new_prjs:ProjectsSection[] = [...projects];
+								new_prjs[index] = new_prj;
+								setProjects(new_prjs);
+							}}
+							value={prj.end_day}/>
+							{prj.highlights.map( (hi:string, hi_index:number) => (
+								<div key={hi_index}>
+									<input
+										placeholder="Highlight"
+										onChange={(e) => {
+											let new_highlights:string[] = [...prj.highlights];
+											new_highlights[hi_index] = e.target.value;
+											const new_prj:ProjectsSection= {...prj, highlights: new_highlights };
+											const new_prjs:ProjectsSection[] = [...projects];
+											new_prjs[index] = new_prj;
+											setProjects(new_prjs);
+										}}
+										value={hi}/>
+								</div>
+							))}
+							<button
+								onClick={() => {
+									const new_highlights:string[] = [...prj.highlights, ""];
+									const new_prj:ProjectsSection= { ...prj, highlights: new_highlights };
+									const new_prjs:ProjectsSection[] = [...projects];
+									new_prjs[index] = new_prj;
+									setProjects(new_prjs);
+								}}>
+								Add highlight
+							</button>
+						</div>
+					))}
+					<button onClick={() => {
+						const new_prj:ProjectsSection = { name:"Project", github_url:"https://github.com/", technologies:"JavaScript, OpenAI, Redux", start_day:"Feb 2020", end_day:"Jan 2024", highlights: [] };
+						let new_prjs:ProjectsSection[] = [...projects, new_prj];
+						setProjects(new_prjs);
+					}}>
+						Add project
+					</button>
+				<h3>TECHNICAL SKILLS:</h3>
+				{technical_skills.map( (skl, index:number) => (
+					<div key={index}>
+						<input
+							placeholder='Category'
+							onChange={(e) => {
+								const new_skl:SkillsSection = { category: e.target.value, skills: skl.skills };
+								const new_sklls:SkillsSection[] = [...technical_skills];
+								new_sklls[index] = new_skl;
+								setTechnicalSkills(new_sklls);
+							}}
+							value={skl.category}/>
+						<input
+							placeholder='Skills'
+							onChange={(e) => {
+								const new_skl:SkillsSection = { category: skl.category, skills: e.target.value };
+								const new_sklls:SkillsSection[] = [...technical_skills];
+								new_sklls[index] = new_skl;
+								setTechnicalSkills(new_sklls);
+							}}/>
 					</div>
 				))}
-				<button onClick={(e) => {
-					const new_prj:ProjectsSection = { name:"Project", github_url:"https://github.com/", technologies:"JavaScript, OpenAI, Redux", start_day:"Feb 2020", end_day:"Jan 2024", highlights: [] };
-					let new_prjs:ProjectsSection[] = [...projects, new_prj];
-					setProjects(new_prjs);
-				}}>
-					Add project
+				<button
+					onClick={() => {
+						const new_skill:SkillsSection = { category:"Category", skills:""}
+						setTechnicalSkills([...technical_skills, new_skill]);
+					}}>
+					Add Category
 				</button>
+				</div>
 			</div>
-		</div>
-	);
+		);
 }
 
 function ResumeBuilder() {
+	type SyncStatus = 'good' | 'loading' | 'failed';
+	const [sync_status, setSyncStatus] = useState<SyncStatus>('good');
 	const [label, setLabel] = useState<string>('');
 	const [full_name, setFullName] = useState<string>('');
 	const [phone_number, setPhoneNumber] = useState<string>('');
@@ -429,7 +506,7 @@ function ResumeBuilder() {
 	const [education, setEducation] = useState<EducationSection[]>([]);
 	const [experience, setExperience] = useState<ExperienceSection[]>([]);
 	const [projects, setProjects] = useState<ProjectsSection[]>([]);
-	const [technical_skills, setTechnicalSkills] = useState<SkillsSection>({});
+	const [technical_skills, setTechnicalSkills] = useState<SkillsSection[]>([]);
 
 	useEffect( () =>
 	{
@@ -453,8 +530,19 @@ function ResumeBuilder() {
 		
 	}, []);
 
+	useEffect( () => {
+		async function doAsync()
+		{
+			const resume = { label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills };
+			syncResume(resume, setSyncStatus);
+		}
+
+		doAsync();
+	}, [label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills]);
+
 	return (
 		<div className="min-h-screen w-full">
+					<p className="text-right mx-12 mt-4">Sync Status: {sync_status}</p>
 			<div className="h-screen w-full flex">
 				<div className="box-border w-[50%] text-center m-4 border border-white">
 					<h1 className="m-4">Edit</h1>
@@ -473,8 +561,8 @@ function ResumeBuilder() {
 						/>
 				</div>
 				<div className="box-border w-[50%] text-center m-4 border border-white">
-					<h1 className="m-4">Preview</h1>
-					<div className="h-full">
+					<h1 className="m-4">{label}</h1>
+					<div className="h-full w-full bg-yellow-300">
 						<PreviewResume 
 							label={label}
 							full_name={full_name}

@@ -31,7 +31,8 @@ export interface ProjectsSection {
 }
 
 export interface SkillsSection {
-    [key: string]: string[];
+    category: string;
+    skills: string;
 }
 
 
@@ -46,7 +47,7 @@ export interface Resume {
     education: EducationSection[];
     experience: ExperienceSection[];
     projects: ProjectsSection[];
-    technical_skills: SkillsSection;
+    technical_skills: SkillsSection[];
 }
 
 /*
