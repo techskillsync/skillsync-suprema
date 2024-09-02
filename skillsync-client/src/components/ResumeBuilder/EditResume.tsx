@@ -3,7 +3,6 @@ import supabase from '../../supabase/supabaseClient';
 import { EducationSection, ExperienceSection, ProjectsSection, SkillsSection } from '../../types/types';
 import axios from 'axios';
 import './StyleEditResume.css';
-import { CgRemove } from "react-icons/cg";
 
 async function simpleGPT(messages:Array<Object>):Promise<string>
 {
@@ -109,7 +108,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 
 	return(
 		<div className="h-full w-full px-[5%] text-left text-black overflow-y-scroll">
-			<div id="resumeInfo" className="m-4">
+			<div id="resumeInfo" className="m-4 pb-32">
 				<div className="flex flex-col">
 					<input
 						placeholder='Full Name'
@@ -136,7 +135,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 						onChange={(e) => setGithub(e.target.value)}
 						value={github}/>
 				</div>
-				<h3 className="text-white text-xl font-semibold mt-4 mb-2">EDUCATION:</h3>
+				<h3>EDUCATION:</h3>
 				{education.map( (edu, index) => (
 					<div key={index} className="flex flex-col mb-4">
 						<div className="w-full h-full flex">
@@ -193,7 +192,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							}}
 							value={edu.end_date}/>
 						{edu.highlights.map( (hi:string, hi_index:number) => (
-							<div key={hi_index} className="flex">
+							<div key={hi_index} className="flex my-2">
 								<textarea
 									className="flex-grow bg-black h-auto text-white"
 									placeholder="Highlight"
@@ -220,7 +219,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								</button>
 							</div>
 						))}
-						<div className="flex w-full">
+						<div className="flex w-full mt-2">
 							<button
 								className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
 								onClick={() => {
@@ -256,26 +255,30 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 					}}>
 					+ Education section
 				</button>
-				<h3 className="text-white">EXPERIENCE:</h3>
+				<h3>EXPERIENCE:</h3>
 				{experience.map( (exp, index) => (
-					<div key={index} className="flex flex-col my-4">
-						<button
-							onClick={() => {
-								const new_experiences = [...experience];
-								new_experiences.splice(index, 1);
-								setExperience(new_experiences);
-							}}>
-							rm experience
-						</button>
-						<input
-							placeholder="Job Title"
-							onChange={(e) => {
-								const new_exp:ExperienceSection = { ...exp, job_title: e.target.value };
-								let new_exps:ExperienceSection[] = [...experience];
-								new_exps[index] = new_exp;
-								setExperience(new_exps);
-							}}
-							value={exp.job_title}/>
+					<div key={index} className="flex flex-col mb-4">
+						<div className="w-full h-full flex">
+							<input
+								className="flex-grow"
+								placeholder="Job Title"
+								onChange={(e) => {
+									const new_exp:ExperienceSection = { ...exp, job_title: e.target.value };
+									let new_exps:ExperienceSection[] = [...experience];
+									new_exps[index] = new_exp;
+									setExperience(new_exps);
+								}}
+								value={exp.job_title}/>
+							<button
+								className="bg-black p-0 px-4 hover:bg-slate-800 text-2xl"
+								onClick={() => {
+									const new_experiences = [...experience];
+									new_experiences.splice(index, 1);
+									setExperience(new_experiences);
+								}}>
+								❌
+							</button>
+						</div>
 						<input
 							placeholder="Compnay"
 							onChange={(e) => {
@@ -304,8 +307,9 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							}}
 							value={exp.end_day}/>
 						{exp.highlights.map( (hi:string, hi_index:number) => (
-							<div key={hi_index}>
+							<div key={hi_index} className="flex my-2">
 								<textarea
+									className="flex-grow bg-black h-auto text-white"
 									placeholder="Highlight"
 									onChange={(e) => {
 										let new_highlights:string[] = [...exp.highlights];
@@ -316,7 +320,9 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 										setExperience(new_exps);
 									}}
 									value={hi}/>
-								<button onClick={() => {
+								<button
+									className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
+									onClick={() => {
 										let new_highlights:string[] = [...exp.highlights];
 										new_highlights.splice(hi_index, 1);
 										const new_edu:ExperienceSection= {...exp, highlights: new_highlights };
@@ -324,64 +330,72 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 										new_exps[index] = new_edu;
 										setExperience(new_exps);
  								}}>
-									rm
+									🗑️
 								</button>
 
 							</div>
 						))}
-						<button
-							onClick={() => {
-								const new_highlights:string[] = [...exp.highlights, ""];
-								const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
-								const new_exps:ExperienceSection[] = [...experience];
-								new_exps[index] = new_exp;
-								setExperience(new_exps);
-							}}>
-							Add highlight
-						</button>
-						<button
-							className="bg-green-400"
-							onClick={async () => {
-								const new_hi = await genExperienceGptHighlight(exp);
-								const new_highlights:string[] = [...exp.highlights, new_hi];
-								const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
-								const new_exps:ExperienceSection[] = [...experience];
-								new_exps[index] = new_exp;
-								setExperience(new_exps);
-							}}>
-							Add GPT Generated highlight 🪄
-						</button>
+						<div className="flex w-full mt-2">
+							<button
+								className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
+ 								onClick={() => {
+									const new_highlights:string[] = [...exp.highlights, ""];
+									const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
+									const new_exps:ExperienceSection[] = [...experience];
+									new_exps[index] = new_exp;
+									setExperience(new_exps);
+								}}>
+								Add highlight
+							</button>
+							<button
+								className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
+								onClick={async () => {
+									const new_hi = await genExperienceGptHighlight(exp);
+									const new_highlights:string[] = [...exp.highlights, new_hi];
+									const new_exp:ExperienceSection = { ...exp, highlights: new_highlights };
+									const new_exps:ExperienceSection[] = [...experience];
+									new_exps[index] = new_exp;
+									setExperience(new_exps);
+								}}>
+								Add GPT Generated highlight 🪄
+							</button>
+						</div>
 					</div>
 				))}
 				<button
+					className="bg-black text-white my-4 w-full border-2 border-slate-700 hover:bg-slate-800 p-1"
 					onClick={() => {
 						const new_exp:ExperienceSection= { job_title:"Job Title", company:"Company", location:"Location", start_day:"2023", end_day:"2024", highlights:[] };
 						const new_exps:ExperienceSection[] = [...experience, new_exp];
 						setExperience(new_exps);
 					}}>
-					Add experience section
+					+ Experience section
 				</button>
 
 				<h3 className="text-white">PROJECTS:</h3>
 				{projects.map( (prj, index) => (
-					<div key={index} className="flex flex-col my-4">
-						<button
-							onClick={() => {
-								const new_projects = [...projects];
-								new_projects.splice(index, 1);
-								setProjects(new_projects);
-							}}>
-							rm project
-						</button>
-						<input
-							placeholder='Name'
-							onChange={(e) => {
-								const new_prj:ProjectsSection = { ...prj, name: e.target.value };
-								let new_prjs:ProjectsSection[] = [...projects];
-								new_prjs[index] = new_prj;
-								setProjects(new_prjs);
-							}}
-							value={prj.name}/>
+					<div key={index} className="flex flex-col mb-4">
+						<div className="w-full h-full flex">
+							<input
+								className="flex-grow"
+								placeholder='Name'
+								onChange={(e) => {
+									const new_prj:ProjectsSection = { ...prj, name: e.target.value };
+									let new_prjs:ProjectsSection[] = [...projects];
+									new_prjs[index] = new_prj;
+									setProjects(new_prjs);
+								}}
+								value={prj.name}/>
+							<button
+								className="bg-black p-0 px-4 hover:bg-slate text-2xl"
+								onClick={() => {
+									const new_projects = [...projects];
+									new_projects.splice(index, 1);
+									setProjects(new_projects);
+								}}>
+								❌
+							</button>
+						</div>
 						<input
 							placeholder='Github URL'
 							onChange={(e) => {
@@ -419,8 +433,9 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 							}}
 							value={prj.end_day}/>
 							{prj.highlights.map( (hi:string, hi_index:number) => (
-								<div key={hi_index}>
+								<div key={hi_index} className="flex my-2">
 									<textarea
+										className="flex-grow bg-black h-auto text-white"
 										placeholder="Highlight"
 										onChange={(e) => {
 											let new_highlights:string[] = [...prj.highlights];
@@ -431,7 +446,9 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 											setProjects(new_prjs);
 										}}
 										value={hi}/>
-									<button onClick={() => {
+									<button
+										className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
+										onClick={() => {
 										let new_highlights:string[] = [...prj.highlights];
 										new_highlights.splice(hi_index, 1);
 										const new_prj:ProjectsSection= {...prj, highlights: new_highlights };
@@ -439,35 +456,40 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 										new_prjs[index] = new_prj;
 										setProjects(new_prjs);
  									}}>
-										rm
+										🗑️
 									</button>
 								</div>
 							))}
-							<button
-								onClick={() => {
-									const new_highlights:string[] = [...prj.highlights, ""];
-									const new_prj:ProjectsSection= { ...prj, highlights: new_highlights };
-									const new_prjs:ProjectsSection[] = [...projects];
-									new_prjs[index] = new_prj;
-									setProjects(new_prjs);
-								}}>
-								Add highlight
-							</button>
-							<button
-								className="bg-green-400"
-								onClick={async()=> {
-									const new_hi = await genProjectGptHighlight(prj);
-									const new_highlights:string[] = [...prj.highlights, new_hi];
-									const new_prj:ProjectsSection = {...prj, highlights:new_highlights};
-									const new_prjs:ProjectsSection[] = [...projects];
-									new_prjs[index] = new_prj;
-									setProjects(new_prjs);
-								}}>
-								Add GPT Generated highlight 🪄
-							</button>
+							<div className="flex w-full">
+								<button
+									className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
+									onClick={() => {
+										const new_highlights:string[] = [...prj.highlights, ""];
+										const new_prj:ProjectsSection= { ...prj, highlights: new_highlights };
+										const new_prjs:ProjectsSection[] = [...projects];
+										new_prjs[index] = new_prj;
+										setProjects(new_prjs);
+									}}>
+									Add highlight
+								</button>
+								<button
+									className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
+									onClick={async()=> {
+										const new_hi = await genProjectGptHighlight(prj);
+										const new_highlights:string[] = [...prj.highlights, new_hi];
+										const new_prj:ProjectsSection = {...prj, highlights:new_highlights};
+										const new_prjs:ProjectsSection[] = [...projects];
+										new_prjs[index] = new_prj;
+										setProjects(new_prjs);
+									}}>
+									Add GPT Generated highlight 🪄
+								</button>
+							</div>
 						</div>
 					))}
-					<button onClick={() => {
+					<button
+						className="bg-black text-white my-4 w-full border-2 border-slate-700 hover:bg-slate-800 p-1"
+						onClick={() => {
 						const new_prj:ProjectsSection = { name:"Project", github_url:"https://github.com/", technologies:"JavaScript, OpenAI, Redux", start_day:"Feb 2020", end_day:"Jan 2024", highlights: [] };
 						let new_prjs:ProjectsSection[] = [...projects, new_prj];
 						setProjects(new_prjs);
@@ -476,7 +498,7 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 					</button>
 				<h3 className="text-white">TECHNICAL SKILLS:</h3>
 				{technical_skills.map( (skl, index:number) => (
-					<div key={index}>
+					<div key={index} className="flex flex-col mb-4">
 						<input
 							placeholder='Category'
 							onChange={(e) => {
@@ -486,41 +508,49 @@ function EditResume({setLabel, setFullName, setPhoneNumber, setEmail, setPersona
 								setTechnicalSkills(new_sklls);
 							}}
 							value={skl.category}/>
-						<textarea
-							placeholder='Skills'
-							onChange={(e) => {
-								const new_skl:SkillsSection = { category: skl.category, skills: e.target.value };
-								const new_sklls:SkillsSection[] = [...technical_skills];
-								new_sklls[index] = new_skl;
-								setTechnicalSkills(new_sklls);
-							}}
-							value={skl.skills}/>
-						<button onClick={() => {
-							const new_skills:SkillsSection[] = [...technical_skills];
-							new_skills.splice(index, 1);
-							setTechnicalSkills(new_skills);
-						}}>
-							rm
-						</button>
+						<div className="w-full h-full flex">
+							<textarea
+								className="flex-grow bg-black text-white"
+								placeholder='Skills'
+								onChange={(e) => {
+									const new_skl:SkillsSection = { category: skl.category, skills: e.target.value };
+									const new_sklls:SkillsSection[] = [...technical_skills];
+									new_sklls[index] = new_skl;
+									setTechnicalSkills(new_sklls);
+								}}
+								value={skl.skills}/>
+							<button
+								className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
+								onClick={() => {
+								const new_skills:SkillsSection[] = [...technical_skills];
+								new_skills.splice(index, 1);
+								setTechnicalSkills(new_skills);
+							}}>
+								🗑️
+							</button>
+						</div>
 					</div>
 				))}
-				<button
-					onClick={() => {
-						const new_skill:SkillsSection = { category:"Category", skills:""}
-						setTechnicalSkills([...technical_skills, new_skill]);
-					}}>
-					Add Category
-				</button>
-				<button
-					className="bg-green-400"
-					onClick={async () => {
-						const new_skill = await genSkillSection(technical_skills, experience, projects, education);
-						setTechnicalSkills([...technical_skills, new_skill]);
-					}}>
-					Add GPT Generated Category 🪄
-				</button>
+				<div className="flex w-full">
+					<button
+						className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
+						onClick={() => {
+							const new_skill:SkillsSection = { category:"Category", skills:""}
+							setTechnicalSkills([...technical_skills, new_skill]);
+						}}>
+						+ Category
+					</button>
+					<button
+						className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
+						onClick={async () => {
+							const new_skill = await genSkillSection(technical_skills, experience, projects, education);
+							setTechnicalSkills([...technical_skills, new_skill]);
+						}}>
+						+ GPT Generated Category 🪄
+					</button>
 				</div>
 			</div>
+		</div>
 		);
 }
 
