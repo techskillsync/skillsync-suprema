@@ -1,0 +1,13 @@
+#resumeInfo input {
+  background: black;
+  color: white;
+  padding: 0 4px;
+  font-size: 18px;
+  border-bottom: 2px dashed transparent;
+  margin: 8px 0;
+  transition: 500ms;
+}
+
+#resumeInfo input:hover {
+  border-color: #64748b;
+}

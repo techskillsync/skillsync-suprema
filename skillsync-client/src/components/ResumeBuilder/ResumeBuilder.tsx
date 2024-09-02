@@ -6,6 +6,7 @@ import supabase from '../../supabase/supabaseClient';
 import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
+import { PiFiles } from "react-icons/pi";
 
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
@@ -14,7 +15,7 @@ type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
 
 
 /*
- * Upserts resume data to Supabase using user id.
+ * Upsert resume data to Supabase using resume id.
  * and updates sync_status accordingly.
  */
 async function syncResume(resume:Resume, sync_status:SyncStatus, setSyncStatus:React.Dispatch<React.SetStateAction<SyncStatus>>):Promise<boolean>
@@ -91,18 +92,56 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 	}, [label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills]);
 
 	return (
-		<div className="min-h-screen w-full bg-black">
-			<div className="flex justify-center mt-4">
+		<div className="h-screen w-full bg-black flex flex-col">
+			<div className="h-20 flex-none flex">
 				<button
-					className="bg-white text-black mr-12"
+					className="bg-black hover:bg-slate-800 text-white m-2 ml-4 p-0 px-2 rounded-2xl flex justify-center items-center"
 					onClick={closeResume}>
-					file menu
+					<PiFiles size="38" />
 				</button>
-				<p className="text-center mt-4">Sync Status: {sync_status}</p>
+				<input
+					placeholder="Resume name"
+					className="bg-black hover:bg-slate-800 m-2 px-3 rounded-2xl text-2xl font-semibold"
+					
+					value={label}
+					onChange={(e)=>{setLabel(e.target.value)}}/>
+				<div className="ml-auto text-xl flex items-center mr-4 font-semibold">
+					{(() => {
+						switch (sync_status) {
+							case 'good':
+								return (
+									<>
+										<p>Saved</p>
+										<div className="w-6 h-6 bg-green-400 rounded-full ml-2" />
+									</>
+								);
+              case 'loading':
+              	return (
+              		<>
+              			<p>Saving</p>
+										<div className="w-6 h-6 bg-neutral-400 rounded-full ml-2" />
+									</>
+              	);
+              case 'blocked':
+              	return (
+              		<>
+              			<p>Blocked</p>
+										<div className="w-6 h-6 bg-orange-400 rounded-full ml-2" />
+									</>
+								);
+              case 'failed':
+              	return (
+              		<>
+              			<p>Failed</p>
+										<div className="w-6 h-6 bg-red-400 rounded-full ml-2" />
+									</>
+								);
+						}
+					})()}
+				</div>
 			</div>
-			<div className="h-full w-full flex">
-				<div className="box-border w-[50%] text-center m-4 border border-white">
-					<h1 className="m-4">Edit</h1>
+			<div className="flex-grow overflow-y-scroll w-full flex">
+				<div className="h-full overflow-y-scroll w-[50%]">
 					<EditResume
 						setLabel={setLabel} label={label}
 						setFullName={setFullName} full_name={full_name}
@@ -117,24 +156,21 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 						setTechnicalSkills={setTechnicalSkills} technical_skills={technical_skills}
 						/>
 				</div>
-				<div className="box-border w-[50%] text-center m-4 border border-white">
-					<h1 className="m-4">{label}</h1>
-					<div className="h-full w-full">
-						<PreviewResume
-							resume_id={resume_id}
-							label={label}
-							full_name={full_name}
-							phone_number={phone_number}
-							email={email}
-							personal_website={personal_website}
-							linkedin={linkedin}
-							github={github}
-							education={education}
-							experience={experience}
-							projects={projects}
-							technical_skills={technical_skills}
-							/>
-						</div>
+				<div className="h-full overflow-y-scroll w-[50%]">
+					<PreviewResume
+						resume_id={resume_id}
+						label={label}
+						full_name={full_name}
+						phone_number={phone_number}
+						email={email}
+						personal_website={personal_website}
+						linkedin={linkedin}
+						github={github}
+						education={education}
+						experience={experience}
+						projects={projects}
+						technical_skills={technical_skills}
+						/>
 				</div>
 			</div>
 		</div>
