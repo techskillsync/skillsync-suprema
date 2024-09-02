@@ -1,3 +1,11 @@
+#resumeInfo h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
 #resumeInfo input {
   background: black;
   color: white;
@@ -5,7 +13,7 @@
   font-size: 18px;
   border-bottom: 2px dashed transparent;
   margin: 8px 0;
-  transition: 500ms;
+  transition: 200ms;
 }
 
 #resumeInfo input:hover {
