@@ -10,7 +10,7 @@ import { Resume, EducationSection, ExperienceSection, ProjectsSection, SkillsSec
 /*
  * Returns a list of the users saved resumes.
  */
-async function getSavedResumes(): Promise<Resume[]> {
+async function getSavedResumes(): Promise<Resume[]|null> {
 	try {
 		const { data, error } = await supabase
 			.from('resume_builder')
@@ -22,7 +22,7 @@ async function getSavedResumes(): Promise<Resume[]> {
 		return data as Resume[];
 	} catch (error) {
 		console.warn("Could not get saved resumes - " + error);
-		return [];
+		return null;
 	}
 }
 
@@ -54,6 +54,7 @@ async function deleteResume(resume_id:string):Promise<boolean>
  */
 async function assembleNewResume(): Promise<Resume> {
 	const resume_id = uuidv4();
+	
 	// Returns the month abbr and year like: "Jun 2024"
 	function DateToMonthYear(date_str: string): string {
 		try {
@@ -71,6 +72,10 @@ async function assembleNewResume(): Promise<Resume> {
 		const work_data = await GetWorkExperiences();
 		if (work_data === null) { throw Error('Could not get work_data'); }
 
+		const saved_resumes = await getSavedResumes();
+		if (saved_resumes === null) { throw Error('Could not get saved resumes'); }
+		let resume_label = profile_data.name + "'s resume "+ saved_resumes.length;
+	
 		let educations: EducationSection[] = [];
 		let education: EducationSection = {
 			institution: profile_data.school,
@@ -97,7 +102,7 @@ async function assembleNewResume(): Promise<Resume> {
 
 		return {
 			resume_id: resume_id,
-			label: profile_data.name + "'s resume",
+			label: resume_label,
 			full_name: profile_data.name + ' ' + profile_data.last_name,
 			phone_number: profile_data.phone_number,
 			email: profile_data.email,
@@ -133,7 +138,7 @@ async function assembleNewResume(): Promise<Resume> {
 
 
 function ResumeManager() {
-	const [savedResumes, setSavedResumes] = useState<Resume[]>([]);
+	const [savedResumes, setSavedResumes] = useState<Resume[]|null>([]);
 
 	const [openedResume, setOpenedResume] = useState<Resume | null>(null);
 
@@ -155,23 +160,29 @@ function ResumeManager() {
 				<div className='flex flex-col items-center justify-center'>
 					<p>Select a resume:</p>
 					<ul>
-						{savedResumes.map((resume, index) => (
-							<li key={index}>
-								<button
-									className="bg-white text-black"
-									onClick={() => {
-									setOpenedResume(resume)
-								}}>
-									{resume.label}
-								</button>
-								<button
-									onClick={()=> {
-										deleteResume(resume.resume_id);
+						{savedResumes ? (
+							savedResumes.map((resume, index) => (
+								<li key={index}>
+									<button
+										className="bg-white text-black"
+										onClick={() => {
+										setOpenedResume(resume)
 									}}>
-									🗑️
-								</button>
-							</li>
-						))}
+										{resume.label}
+									</button>
+									<button
+										onClick={()=> {
+											deleteResume(resume.resume_id);
+										}}>
+										🗑️
+									</button>
+								</li>
+							))
+							):(
+							<p className="text-red-400 text-lg font-semibold">
+								Coud not load resumes 😟
+							</p>
+						)}
 					</ul>
 					<div>
 						<p>Create New</p>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Resume } from "../../types/types";
 
 function PreviewResume({ resume_id, label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume) {
 
+	const parentRef = useRef<HTMLDivElement>(null);
+	const [scale, setScale] = useState<number>(1);
 	// Properly formats the nested arrays in a highlights section :D
 	interface NestedStringArrayProps { highlights:string[]; };
 	function DisplayHighlights({ highlights }:NestedStringArrayProps):React.JSX.Element
@@ -14,10 +16,30 @@ function PreviewResume({ resume_id, label, full_name, phone_number, email, perso
 		}
 		return <ul className="list-disc list-outside ml-[0.30in]">{jsx_points}</ul>;
 	}
+
+	useEffect(() => {
+		function handleResize() {
+			if (!parentRef.current) { return; }
+			const parentWidth = parentRef.current.offsetWidth;
+			const resumeWidth = 8.5 * 96;
+			console.log(parentWidth + ', ' + resumeWidth + ', scale:' + resumeWidth/parentWidth);
+			setScale(parentWidth/resumeWidth);
+		}
+
+		handleResize();
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		}
+		
+	}, [])
 	
 	return (
-		<div className="h-full">
-			<div id="ResumePreview" className="!w-[8.5in] !h-[11in] p-[0.5in] bg-white text-left text-black font-serif text-[12px] overflow-y-hidden">
+		<div ref={parentRef} className="w-full h-full overflow-y-scroll">
+			<div id="ResumePreview" className="!w-[8.5in] !h-[11in] p-[0.5in] bg-white text-left text-black font-serif text-[12px] overflow-y-hidden"
+				   style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}>
 				<h1 className="text-center text-[28px] font-semibold">{full_name}</h1>
 				<h4 className="text-center">
 					<span className="underline">{phone_number}</span> | 
