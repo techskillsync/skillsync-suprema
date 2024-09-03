@@ -318,10 +318,10 @@ const Home = () => {
           className="
         bg-gradient-to-r font-medium flex items-center from-[#03BD6C] to-[#36B7FE] text-white  mx-auto text-2xl rounded-xl border-none p-6 hover:p-8 transition-all duration-300
         "
-          href="https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg?authuser=0&hl=en"
+          href="/signup"
           target="_blank"
         >
-          Get the Extension
+          Sign Up
           <FaArrowRight className="ml-2" />
         </a>
         {/* <Carousel
