@@ -197,7 +197,7 @@ const Home = () => {
       </section> */}
 
       {/*section 1 */}
-      <section className="text-[#fff] min-h-screen md:h-[100vh] pt-16 md:pt-32 px-4 md:px-10 flex flex-col md:flex-row items-center justify-center gap-y-5 md:mt-2 rounded-xl">
+      <section className="text-[#fff] min-h-screen md:h-[100vh] pt-32 md:pt-32 px-4 md:px-10 flex flex-col md:flex-row items-center justify-center gap-y-5 md:mt-2 rounded-xl">
         {/* Left Aside: Content */}
         <aside className="flex flex-col w-full md:w-7/12 justify-start items-start p-4 md:p-10 h-full md:mt-24">
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
