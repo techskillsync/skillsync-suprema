@@ -16,11 +16,11 @@ const Navbar = ({openNav, setOpenNav}) => {
                     <img src="https://skillsync.work/assets/LogoDark-CavYDmXP.png" alt="allotrix" className='max-h-full max-w-full' />
                 </Link>
             </div>
-            <ul className='flex flex-col items-center gap-4 font-allotrix-font px-6 py-4 rounded-xl md:flex-row md:gap-10 md:py-3 md:px-8 md:h-[55px]'>
+            {/* <ul className='flex flex-col items-center gap-4 font-allotrix-font px-6 py-4 rounded-xl md:flex-row md:gap-10 md:py-3 md:px-8 md:h-[55px]'>
                 <li className='hover:pb-2 transition-all duration-300 ease-out hover:text-allotrix-std underline decoration-[#36B7FE]'>
                     <a target="_blank" href="https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg">Get the Extension</a>
                 </li>
-            </ul>
+            </ul> */}
             <div className='flex flex-col md:flex-row gap-4 items-center'>
                     <Link to='/login' onClick={() => setOpenNav(!openNav)}>
                 <div className='bg-allotrix-std font-light py-2 px-8 rounded-lg font-allotrix-font-secondary text-[white] transition-all duration-300 ease-out hover:bg-[#161616] border-allotrix-std border-[1px] hover:border-solid hover:border-allotrix-std'>

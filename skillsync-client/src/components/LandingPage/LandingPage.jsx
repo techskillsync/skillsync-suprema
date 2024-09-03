@@ -202,7 +202,7 @@ const Home = () => {
         <aside className="flex flex-col w-7/12 justify-start items-start p-10 h-full mt-24">
           <h1 className="text-6xl font-bold text-white">Super power <br/> your job search with <br/><span className=" bg-gradient-to-r from-[#36B7FE] via-[#03BD6C] inline-block text-transparent bg-clip-text pr-20">Co-pilot</span></h1>
           <h5 className="pr-24 mt-5">Stop missing opportunities. Our AI Job Search Extension helps you find job openings in seconds.</h5>
-          <button className="bg-[#36B7FE] flex gap-2 items-center justify-center min-w-max max-w-min rounded-none mt-10">
+          <button onClick = {()=>{window.open("https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg")}}className="bg-[#36B7FE] flex gap-2 items-center justify-center min-w-max max-w-min rounded-none mt-10">
             <FaChrome/>Add to Chrome
           </button>
         </aside>
@@ -316,7 +316,7 @@ const Home = () => {
         </p>
         <a
           className="
-        bg-gradient-to-r font-medium flex items-center from-[#03BD6C] to-[#36B7FE] text-white  mx-auto text-2xl rounded-xl border-none p-6 hover:p-8 transition-all duration-300
+        bg-gradient-to-r font-medium flex items-center from-[#03BD6C] to-[#36B7FE] text-white  mx-auto text-2xl rounded-xl border-none p-6 hover:scale-105 transition-all duration-300
         "
           href="/signup"
           target="_blank"
