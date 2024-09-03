@@ -230,7 +230,7 @@ const Home = () => {
             <video
               draggable={false}
               className={`h-full w-full rounded-md`}
-              src="/video.webm"
+              src="/video.mp4"
               alt="logo"
               loop
               muted
