@@ -197,22 +197,38 @@ const Home = () => {
       </section> */}
 
       {/*section 1 */}
-      <section className=" text-[#fff] md:h-[100vh] pt-32 h-full lg:mx-10 sm:mx-5 flex items-center justify-center gap-y-5 md:mt-2 rounded-xl ">
-      
-        <aside className="flex flex-col w-7/12 justify-start items-start p-10 h-full mt-24">
-          <h1 className="text-6xl font-bold text-white">Super power <br/> your job search with <br/><span className=" bg-gradient-to-r from-[#36B7FE] via-[#03BD6C] inline-block text-transparent bg-clip-text pr-20">Co-pilot</span></h1>
-          <h5 className="pr-24 mt-5">Stop missing opportunities. Our AI Job Search Extension helps you find job openings in seconds.</h5>
-          <button onClick = {()=>{window.open("https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg")}}className="bg-[#36B7FE] flex gap-2 items-center justify-center min-w-max max-w-min rounded-none mt-10">
-            <FaChrome/>Add to Chrome
-          </button>
-        </aside>
-        <aside className="flex flex-col items-center justify-start w-5/12 p-10 h-full  mt-24">
-        <div className="bg-white min-h-[500px] min-w-[400px] rounded-md  py-5">
+      <section className="text-[#fff] min-h-screen md:h-[100vh] pt-16 md:pt-32 px-4 md:px-10 flex flex-col md:flex-row items-center justify-center gap-y-5 md:mt-2 rounded-xl">
+  {/* Left Aside: Content */}
+  <aside className="flex flex-col w-full md:w-7/12 justify-start items-start p-4 md:p-10 h-full md:mt-24">
+    <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+      Super power <br />
+      your job search with <br />
+      <span className="bg-gradient-to-r from-[#36B7FE] via-[#03BD6C] inline-block text-transparent bg-clip-text pr-20">
+        Co-pilot
+      </span>
+    </h1>
+    <h5 className="mt-5 text-base md:text-lg pr-4 md:pr-24">
+      Stop missing opportunities. Our AI Job Search Extension helps you find job openings in seconds.
+    </h5>
+    <button
+      onClick={() => {
+        window.open("https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg");
+      }}
+      className="bg-[#36B7FE] flex gap-2 items-center justify-center py-2 px-4 rounded-md mt-5 md:mt-10"
+    >
+      <FaChrome />
+      Add to Chrome
+    </button>
+  </aside>
 
-        </div>
-        </aside>
-      
-      </section>
+  {/* Right Aside: Placeholder for image or content */}
+  <aside className="flex flex-col items-center justify-start w-full md:w-5/12 p-4 md:p-10 h-full mt-10 md:mt-24">
+    <div className="bg-white min-h-[300px] md:min-h-[500px] min-w-full md:min-w-[400px] rounded-md py-5">
+      {/* Add your content here */}
+    </div>
+  </aside>
+</section>
+
 
 
       {/*section 2 */}
