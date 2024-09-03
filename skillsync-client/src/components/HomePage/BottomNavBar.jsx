@@ -45,12 +45,6 @@ const BottomNavBar = ({
     const newMessagesCount = await GetUnreadMessagesCount(); 
     setNotificationCounts((prevCounts) => {
       if (newMessagesCount !== prevCounts.Messages) {
-        console.log(
-          "Messages count changed from",
-          prevCounts.Messages,
-          "to",
-          newMessagesCount
-        );
         if (newMessagesCount > prevCounts.Messages) {
           setTimeout(() => {
             toast("You have new messages!", { icon: "📬" });

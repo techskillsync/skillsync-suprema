@@ -39,7 +39,7 @@ const EditProfileDetails = ({}) => {
     async function getProfile() {
       setLoading(true);
 
-      const columns = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github,
+      const columns = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github, personal_website,
 					date_of_birth, gender, race`;
 
       const email = await GetUserEmail();
@@ -65,6 +65,7 @@ const EditProfileDetails = ({}) => {
         setIndustry(data.industry);
         setLinkedIn(data.linkedin);
         setGithub(data.github);
+        setPersonalWebsite(data.personal_website);
         setDateOfBirth(data.date_of_birth);
         setGender(data.gender);
         setRace(data.race);
