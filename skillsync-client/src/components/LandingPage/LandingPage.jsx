@@ -225,9 +225,9 @@ const Home = () => {
         </aside>
 
         {/* Right Aside*/}
-        <aside className="flex flex-col items-center justify-start w-full md:w-5/12 p-4 md:p-10 h-full mt-10 md:mt-24">
-          <div className="bg-black min-h-[300px] md:min-h-[500px] min-w-full md:min-w-[400px] rounded-md  border-white border">
-            <video
+        <aside className="flex flex-col items-center justify-start w-full md:w-5/12 p-4 md:p-10 h-full mt-10 pr-20 ">
+          <div className=" bg-black  ">
+            {/* <video
               draggable={false}
               className={`h-full w-full rounded-md`}
               src="/video.mp4"
@@ -235,7 +235,8 @@ const Home = () => {
               loop
               muted
               autoPlay
-            />
+            /> */}
+            <img className=" " src="/copilot3.png"></img>
           </div>
         </aside>
       </section>
