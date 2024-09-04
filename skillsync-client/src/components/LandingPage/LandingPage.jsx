@@ -225,7 +225,7 @@ const Home = () => {
         </aside>
 
         {/* Right Aside*/}
-        <aside className="flex flex-col items-center justify-start w-full md:w-5/12 p-4 md:p-10 h-full mt-10 pr-20 ">
+        <aside className="flex flex-col items-center justify-start w-full md:w-5/12 p-4  h-full mt-10 md:mb-10 md:pr-20  ">
           <div className=" bg-black  ">
             {/* <video
               draggable={false}
