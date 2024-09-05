@@ -10,9 +10,7 @@ import { Timer } from "./components/Timer";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import ComingSoon from "./components/common/ComingSoon";
 import OnboardingPage from "./components/Onboarding/OnboardingPage";
-import ReceiveConfirmEmail from './components/Authentication/ReceiveConfirmEmail';
 import { useState, useEffect } from "react";
-import supabase from "./supabase/supabaseClient";
 
 function AppRoutes() {
 
@@ -34,7 +32,6 @@ function AppRoutes() {
       <Route path="/interface" element={<Timer Component={Interface} />} />
       <Route path="/feed" element={<Timer Component={Feed} />} />
       <Route path="/profile" element={<Timer Component={ProfilePage} />} />
-      <Route path="/ReceiveConfirmEmail" element={ <ReceiveConfirmEmail/> } />
     </Routes>
   );
 }
