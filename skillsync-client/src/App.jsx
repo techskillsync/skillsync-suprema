@@ -15,31 +15,16 @@ import { useState, useEffect } from "react";
 import supabase from "./supabase/supabaseClient";
 
 function AppRoutes() {
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     document.title = "SkillSync.";
-  }, []);
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const session = await supabase.auth.getSession();
-      setUser(session?.data?.session?.user ?? null);
-    };
-
-    checkUser();
   }, []);
 
   return (
     <Routes>
       <Route path="/login" element={<Timer Component={LogInPage} />} />
       <Route path="/signup" element={<Timer Component={SignUpPage} />} />
-      <Route
-        path="/"
-        element={user ? <Navigate to="/home" /> 
-          : <Navigate to="/landingpage" />
-        }
-      />
+      <Route path="/" element={<Navigate to="/landingpage"/> } />
       <Route path="/landingpage" element={<Timer Component={LandingPage} />} />
       <Route path="/welcome" element={<Timer Component={OnboardingPage} />} />
       <Route path="/home/*" element={<HomePage />} />

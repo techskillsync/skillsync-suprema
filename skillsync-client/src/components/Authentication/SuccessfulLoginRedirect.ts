@@ -38,11 +38,15 @@ async function UserNeedsOnboard():Promise<boolean> {
   return false;
 }
 
+/*
+ * Redirects the user to /home or /welcome depending on if
+ * they have completed > 60% of their onboarding.
+ */
 async function SuccessfulLoginRedirect() {
   if (await UserNeedsOnboard()) {
-    window.location.href = "/welcome";
+    window.location.href='/welcome';
   } else {
-    window.location.href = "/home";
+    window.location.href='/home';
   }
 }
 
