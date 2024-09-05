@@ -1,0 +1,20 @@
+#resumeInfo h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+#resumeInfo input {
+  color: white;
+  padding: 0 4px;
+  font-size: 18px;
+  border-bottom: 2px dashed transparent;
+  margin: 8px 0;
+  transition: 200ms;
+}
+
+#resumeInfo input:hover {
+  border-color: #64748b;
+}

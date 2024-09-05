@@ -16,11 +16,15 @@
     "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^2.2.7",
     "@supabase/supabase-js": "^2.45.1",
+    "@types/uuid": "^10.0.0",
     "apexcharts": "^3.52.0",
     "axios": "^1.7.4",
     "flowbite": "^2.5.1",
     "framer-motion": "^11.3.29",
     "gsap": "^3.12.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "lucide-react": "^0.438.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-confirm": "0.3.0-7",
@@ -38,7 +42,8 @@
     "redux-persist": "^6.0.0",
     "resume-parser-simple": "^1.0.3",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "tsparticles-slim": "^2.12.0"
+    "tsparticles-slim": "^2.12.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.4",

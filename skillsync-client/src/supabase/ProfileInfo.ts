@@ -2,7 +2,7 @@ import supabase from "./supabaseClient";
 import { GetUserId } from "./GetUserId";
 import { UserProfile } from "../types/types";
 
-const allowedKeys = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github, personal_website,
+const allowedKeys = `name, last_name, location, school, grad_year, program, specialization, industry, linkedin, github, personal_website, phone_number,
 					date_of_birth, gender, race`;
 
 // Param: columns - the columns you want from supabase, seperated with commas eg:

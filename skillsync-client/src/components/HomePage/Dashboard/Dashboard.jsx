@@ -32,7 +32,7 @@ const Dashboard = ({ profileInfo, setSelectedJob }) => {
           <div className="flex justify-between w-full">
             <SummarySection />
           </div>
-          <div className="flex flex-col gap-4 p-2 md:flex-row md:items-center min-h-[100px]">
+          <div className="flex flex-col gap-4  md:flex-row md:items-center min-h-[300px]">
           <PreferencesSection />
 
             <ChartsSection />

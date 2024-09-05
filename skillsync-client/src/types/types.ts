@@ -1,4 +1,63 @@
-// Interface for view public_user_profiles 
+/*
+ * START OF RESUME BUILDER TYPES
+ */
+
+export interface HighlightSection {
+    highlights: string[];
+}
+
+export interface EducationSection {
+    institution: string;
+    location: string;
+    end_date: string;
+    degree: string;
+    highlights: string[];
+}
+
+export interface ExperienceSection {
+    job_title: string;
+    company: string;
+    start_day: string;
+    end_day: string;
+    location: string;
+    highlights: string[];
+}
+
+export interface ProjectsSection {
+    name: string;
+    github_url: string;
+    technologies: string;
+    start_day: string;
+    end_day: string;
+    highlights: string[];
+}
+
+export interface SkillsSection {
+    category: string;
+    skills: string;
+}
+
+
+export interface Resume {
+    resume_id: string;
+    label: string; // Shown to the user to identify resume
+    full_name: string;
+    phone_number: string;
+    email: string;
+    personal_website: string;
+    linkedin: string;
+    github: string;
+    education: EducationSection[];
+    experience: ExperienceSection[];
+    projects: ProjectsSection[];
+    technical_skills: SkillsSection[];
+}
+
+/*
+ * END OF RESUME BUILDER TYPES
+ */
+
+// Interface for view public_user_profiles
 export interface PublicUserProfiles {
     name: string;
     email: string;
@@ -26,6 +85,13 @@ export interface UserProfile {
     race: string;
     email_confirmed: boolean;
     avatar_url: string;
+    phone_number: string;
+    zip_code: string;
+    city: string;
+    state: string;
+    country: string;
+    address: string;
+    personal_website: string;
 }
 
 export interface JobListing {
@@ -50,8 +116,8 @@ export interface WorkExperience {
     title: string;
     company: string;
     description: string | null;
-    startDate: Date | null;
-    endDate: Date | null;
+    startDate: string | null;
+    endDate: string | null;
     location: string | null;
 }
 
