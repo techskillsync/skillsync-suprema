@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import ResumeBuilder from "./ResumeBuilder";
+import PreviewResume from "./PreviewResume";
 import supabase from "../../supabase/supabaseClient";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import { GetWorkExperiences } from "../../supabase/WorkExperience";
@@ -12,10 +13,8 @@ import {
   ProjectsSection,
   SkillsSection,
 } from "../../types/types";
+import { Trash2Icon } from "lucide-react";
 
-/*
- * Returns a list of the users saved resumes.
- */
 async function getSavedResumes(): Promise<Resume[] | null> {
   try {
     const { data, error } = await supabase
@@ -34,9 +33,6 @@ async function getSavedResumes(): Promise<Resume[] | null> {
   }
 }
 
-/*
- * Sends a delete request to supabase based on resume_id
- */
 async function deleteResume(resume_id: string): Promise<boolean> {
   try {
     const { data, error } = await supabase
@@ -56,13 +52,9 @@ async function deleteResume(resume_id: string): Promise<boolean> {
   }
 }
 
-/*
- * Fetches user data and formats it into a Resume object.
- */
 async function assembleNewResume(): Promise<Resume> {
   const resume_id = uuidv4();
 
-  // Returns the month abbr and year like: "Jun 2024"
   function DateToMonthYear(date_str: string): string {
     try {
       const date = new Date(date_str);
@@ -162,7 +154,6 @@ async function assembleNewResume(): Promise<Resume> {
 
 function ResumeManager() {
   const [savedResumes, setSavedResumes] = useState<Resume[] | null>([]);
-
   const [openedResume, setOpenedResume] = useState<Resume | null>(null);
 
   useEffect(() => {
@@ -171,7 +162,7 @@ function ResumeManager() {
     }
 
     doAsync();
-  });
+  }, []); // Ensure useEffect has an empty dependency array to avoid infinite loop
 
   return (
     <>
@@ -182,19 +173,31 @@ function ResumeManager() {
         />
       ) : (
         <main className="flex flex-col h-screen mt-5 md:px-10 w-full">
-          <section className="flex flex-col gap-2  justify-center items-start">
-            <h1 className="font-bold mt-5">Select a resume:</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-              {savedResumes ? (
+          <section className="flex flex-col gap-2 justify-center items-start">
+            <h1 className="font-bold mt-5 text-white">Select a resume:</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
+              {savedResumes && savedResumes.length > 0 ? (
                 savedResumes.map((resume, index) => (
                   <div
                     key={index}
-                    className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white  max-h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
                   >
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                      {resume.label}
-                    </h3>
-                    <div className="flex space-x-4">
+                    <PreviewResume
+                      resume_id={resume.resume_id}
+                      label={resume.label}
+                      full_name={resume.full_name}
+                      phone_number={resume.phone_number}
+                      email={resume.email}
+                      personal_website={resume.personal_website}
+                      linkedin={resume.linkedin}
+                      github={resume.github}
+                      education={resume.education}
+                      experience={resume.experience}
+                      projects={resume.projects}
+                      technical_skills={resume.technical_skills}
+                    />
+                    <h6 className="mt-2 text-black"> {resume.label}</h6>
+                    <div className="flex space-x-4 mt-4">
                       <button
                         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300"
                         onClick={() => {
@@ -204,12 +207,25 @@ function ResumeManager() {
                         Open
                       </button>
                       <button
-                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
-                        onClick={() => {
-                          deleteResume(resume.resume_id);
+                        className="bg-red-500 flex min-w-max gap-2 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
+                        onClick={async () => {
+                          const confirmDelete = window.confirm(
+                            "Are you sure you want to delete this resume?"
+                          );
+                          if (confirmDelete) {
+                            if (await deleteResume(resume.resume_id)) {
+                              setSavedResumes((prev) =>
+                                prev
+                                  ? prev.filter(
+                                      (r) => r.resume_id !== resume.resume_id
+                                    )
+                                  : null
+                              );
+                            }
+                          }
                         }}
                       >
-                        🗑️ Delete
+                        <Trash2Icon /> Delete
                       </button>
                     </div>
                   </div>

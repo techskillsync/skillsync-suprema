@@ -734,7 +734,7 @@ function EditResume({
         </div>
 
         <h3 className="text-white mt-5 py-5">PROJECTS:</h3>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 border-b border-[green] pb-10">
           {projects.map((prj, index) => (
             <div
               key={index}
@@ -940,8 +940,8 @@ function EditResume({
           </button>
         </div>
 
-        <h3 className="text-white">TECHNICAL SKILLS:</h3>
-        <div className="flex flex-col gap-6">
+        <h3 className="text-white mt-5 py-5">TECHNICAL SKILLS:</h3>
+        <div className="flex flex-col gap-6 border-b border-[green] pb-10">
           {technical_skills.map((skl, index: number) => (
             <div
               key={index}

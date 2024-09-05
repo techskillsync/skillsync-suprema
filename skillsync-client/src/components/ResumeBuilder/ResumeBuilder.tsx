@@ -6,7 +6,7 @@ import supabase from '../../supabase/supabaseClient';
 import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
-import { PiFiles } from "react-icons/pi";
+import { PiArrowLeft } from "react-icons/pi";
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -96,7 +96,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 				<button
 					className="bg-black hover:bg-slate-800 text-white m-2 ml-4 p-0 px-2 rounded-2xl flex justify-center items-center"
 					onClick={closeResume}>
-					<PiFiles size="38" />
+					<PiArrowLeft size="38" />
 				</button>
 				<input
 					placeholder="Resume name"
