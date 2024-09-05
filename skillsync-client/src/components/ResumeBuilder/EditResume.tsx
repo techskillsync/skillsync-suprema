@@ -17,6 +17,10 @@ import {
   PlusIcon,
   BrainCircuit,
   Briefcase,
+  Code,
+  Link2,
+  HighlighterIcon,
+  Plus,
 } from "lucide-react";
 
 async function simpleGPT(messages: Array<Object>): Promise<string> {
@@ -452,7 +456,7 @@ function EditResume({
                       setEducation(new_edus);
                     }}
                   >
-                    <Trash2Icon className="w-4 h-4" />
+                    <Trash2Icon className="w-5 h-5" />
                   </button>
                 </div>
               ))}
@@ -493,7 +497,7 @@ function EditResume({
                   }}
                 >
                   <BrainCircuit />
-                  GPT Highlight
+                  Enhance with AI
                 </button>
               </div>
             </div>
@@ -519,343 +523,369 @@ function EditResume({
           </button>
         </div>
 
-        <h3 className="mt-5 py-5">EXPERIENCE:</h3>
-		<div className="flex flex-col gap-6">
-  {experience.map((exp, index) => (
-    <div key={index} className="border border-gray-200 rounded-lg p-6 shadow-md bg-[#161616]">
-      {/* Job Title Input */}
-      <div className="flex gap-4 items-center mb-4">
-        <div className="flex items-center border border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
-          <span className="text-gray-500 mr-2">
-            <Briefcase className="w-5 h-5" />
-          </span>
-          <input
-            className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-            placeholder="Job Title"
-            onChange={(e) => {
-              const new_exp: ExperienceSection = {
-                ...exp,
-                job_title: e.target.value,
-              };
-              let new_exps: ExperienceSection[] = [...experience];
-              new_exps[index] = new_exp;
-              setExperience(new_exps);
-            }}
-            value={exp.job_title}
-          />
-        </div>
-        <button
-          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
-          onClick={() => {
-            const new_experiences = [...experience];
-            new_experiences.splice(index, 1);
-            setExperience(new_experiences);
-          }}
-        >
-          <Trash2Icon className="w-5 h-5" />
-        </button>
-      </div>
+        <h3 className="mt-5 py-5 ">EXPERIENCE:</h3>
+        <div className="flex flex-col gap-6 border-b pb-10 border-[green]">
+          {experience.map((exp, index) => (
+            <div
+              key={index}
+              className="border border-gray-200 rounded-lg p-6 shadow-md bg-[#161616]"
+            >
+              {/* Job Title Input */}
+              <div className="flex gap-4 items-center mb-4">
+                <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
+                  <span className="text-gray-500 mr-2">
+                    <Briefcase className="w-5 h-5" />
+                  </span>
+                  <input
+                    className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                    placeholder="Job Title"
+                    onChange={(e) => {
+                      const new_exp: ExperienceSection = {
+                        ...exp,
+                        job_title: e.target.value,
+                      };
+                      let new_exps: ExperienceSection[] = [...experience];
+                      new_exps[index] = new_exp;
+                      setExperience(new_exps);
+                    }}
+                    value={exp.job_title}
+                  />
+                </div>
+                <button
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                  onClick={() => {
+                    const new_experiences = [...experience];
+                    new_experiences.splice(index, 1);
+                    setExperience(new_experiences);
+                  }}
+                >
+                  <Trash2Icon className="w-5 h-5" />
+                </button>
+              </div>
 
-      {/* Company Input */}
-      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-        <span className="text-gray-500 mr-2">
-          <Building2 className="w-5 h-5" />
-        </span>
-        <input
-          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="Company"
-          onChange={(e) => {
-            const new_exp: ExperienceSection = {
-              ...exp,
-              company: e.target.value,
-            };
-            let new_exps: ExperienceSection[] = [...experience];
-            new_exps[index] = new_exp;
-            setExperience(new_exps);
-          }}
-          value={exp.company}
-        />
-      </div>
+              {/* Company Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <Building2 className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Company"
+                  onChange={(e) => {
+                    const new_exp: ExperienceSection = {
+                      ...exp,
+                      company: e.target.value,
+                    };
+                    let new_exps: ExperienceSection[] = [...experience];
+                    new_exps[index] = new_exp;
+                    setExperience(new_exps);
+                  }}
+                  value={exp.company}
+                />
+              </div>
 
-      {/* Start Date Input */}
-      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-        <span className="text-gray-500 mr-2">
-          <Calendar className="w-5 h-5" />
-        </span>
-        <input
-          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="Start Date"
-          onChange={(e) => {
-            const new_exp: ExperienceSection = {
-              ...exp,
-              start_day: e.target.value,
-            };
-            let new_exps: ExperienceSection[] = [...experience];
-            new_exps[index] = new_exp;
-            setExperience(new_exps);
-          }}
-          value={exp.start_day}
-        />
-      </div>
+              {/* Start Date Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <Calendar className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Start Date"
+                  onChange={(e) => {
+                    const new_exp: ExperienceSection = {
+                      ...exp,
+                      start_day: e.target.value,
+                    };
+                    let new_exps: ExperienceSection[] = [...experience];
+                    new_exps[index] = new_exp;
+                    setExperience(new_exps);
+                  }}
+                  value={exp.start_day}
+                />
+              </div>
 
-      {/* End Date Input */}
-      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-        <span className="text-gray-500 mr-2">
-          <Calendar className="w-5 h-5" />
-        </span>
-        <input
-          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="End Date"
-          onChange={(e) => {
-            const new_exp: ExperienceSection = {
-              ...exp,
-              end_day: e.target.value,
-            };
-            let new_exps: ExperienceSection[] = [...experience];
-            new_exps[index] = new_exp;
-            setExperience(new_exps);
-          }}
-          value={exp.end_day}
-        />
-      </div>
+              {/* End Date Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <Calendar className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="End Date"
+                  onChange={(e) => {
+                    const new_exp: ExperienceSection = {
+                      ...exp,
+                      end_day: e.target.value,
+                    };
+                    let new_exps: ExperienceSection[] = [...experience];
+                    new_exps[index] = new_exp;
+                    setExperience(new_exps);
+                  }}
+                  value={exp.end_day}
+                />
+              </div>
 
-      {/* Highlights Section */}
-      {exp.highlights.map((hi: string, hi_index: number) => (
-        <div key={hi_index} className="flex items-center mb-2">
-          <textarea
-            className="flex-grow border border-gray-300 rounded-md p-2 mr-2 focus:ring-2 focus:ring-blue-500 outline-none"
-            placeholder="Highlight"
-            onChange={(e) => {
-              let new_highlights: string[] = [...exp.highlights];
-              new_highlights[hi_index] = e.target.value;
-              const new_exp: ExperienceSection = {
-                ...exp,
-                highlights: new_highlights,
-              };
-              const new_exps: ExperienceSection[] = [...experience];
-              new_exps[index] = new_exp;
-              setExperience(new_exps);
-            }}
-            value={hi}
-          />
+              {/* Highlights Section */}
+              {exp.highlights.map((hi: string, hi_index: number) => (
+                <div key={hi_index} className="flex items-center mb-2">
+                  <textarea
+                    className="flex-grow border border-gray-300 rounded-md p-2 mr-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Highlight"
+                    onChange={(e) => {
+                      let new_highlights: string[] = [...exp.highlights];
+                      new_highlights[hi_index] = e.target.value;
+                      const new_exp: ExperienceSection = {
+                        ...exp,
+                        highlights: new_highlights,
+                      };
+                      const new_exps: ExperienceSection[] = [...experience];
+                      new_exps[index] = new_exp;
+                      setExperience(new_exps);
+                    }}
+                    value={hi}
+                  />
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                    onClick={() => {
+                      let new_highlights: string[] = [...exp.highlights];
+                      new_highlights.splice(hi_index, 1);
+                      const new_exp: ExperienceSection = {
+                        ...exp,
+                        highlights: new_highlights,
+                      };
+                      const new_exps: ExperienceSection[] = [...experience];
+                      new_exps[index] = new_exp;
+                      setExperience(new_exps);
+                    }}
+                  >
+                    <Trash2Icon className="w-5 h-5" />
+                  </button>
+                </div>
+              ))}
+
+              {/* Add Highlight Buttons */}
+              <div className="flex gap-2 mt-4">
+                <button
+                  className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
+                  onClick={() => {
+                    const new_highlights: string[] = [...exp.highlights, ""];
+                    const new_exp: ExperienceSection = {
+                      ...exp,
+                      highlights: new_highlights,
+                    };
+                    const new_exps: ExperienceSection[] = [...experience];
+                    new_exps[index] = new_exp;
+                    setExperience(new_exps);
+                  }}
+                >
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                  Add Highlight
+                </button>
+                <button
+                  className="flex-grow bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+                  onClick={async () => {
+                    const new_hi = await genExperienceGptHighlight(exp);
+                    const new_highlights: string[] = [
+                      ...exp.highlights,
+                      new_hi,
+                    ];
+                    const new_exp: ExperienceSection = {
+                      ...exp,
+                      highlights: new_highlights,
+                    };
+                    const new_exps: ExperienceSection[] = [...experience];
+                    new_exps[index] = new_exp;
+                    setExperience(new_exps);
+                  }}
+                >
+                  <BrainCircuit />
+                  Enhance with AI
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Add New Experience Section */}
           <button
-            className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
             onClick={() => {
-              let new_highlights: string[] = [...exp.highlights];
-              new_highlights.splice(hi_index, 1);
               const new_exp: ExperienceSection = {
-                ...exp,
-                highlights: new_highlights,
+                job_title: "Job Title",
+                company: "Company",
+                location: "Location",
+                start_day: "2023",
+                end_day: "2024",
+                highlights: [],
               };
-              const new_exps: ExperienceSection[] = [...experience];
-              new_exps[index] = new_exp;
+              const new_exps: ExperienceSection[] = [...experience, new_exp];
               setExperience(new_exps);
             }}
           >
-            <Trash2Icon className="w-4 h-4" />
+            <PlusIcon />
+            Add Experience Section
           </button>
         </div>
-      ))}
 
-      {/* Add Highlight Buttons */}
-      <div className="flex gap-2 mt-4">
-        <button
-          className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
-          onClick={() => {
-            const new_highlights: string[] = [...exp.highlights, ""];
-            const new_exp: ExperienceSection = {
-              ...exp,
-              highlights: new_highlights,
-            };
-            const new_exps: ExperienceSection[] = [...experience];
-            new_exps[index] = new_exp;
-            setExperience(new_exps);
-          }}
-        >
-          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-          Add Highlight
-        </button>
-        <button
-          className="flex-grow bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
-          onClick={async () => {
-            setIsLoading(true); // Set loading state to true
-            try {
-              const new_hi = await genExperienceGptHighlight(exp);
-              const new_highlights: string[] = [...exp.highlights, new_hi];
-              const new_exp: ExperienceSection = {
-                ...exp,
-                highlights: new_highlights,
-              };
-              const new_exps: ExperienceSection[] = [...experience];
-              new_exps[index] = new_exp;
-              setExperience(new_exps);
-            } catch (error) {
-              console.error("Error generating highlight:", error);
-            } finally {
-              setIsLoading(false); // Revert loading state back to false
-            }
-          }}
-          disabled={isLoading} // Disable button while loading
-        >
-          {isLoading ? (
-            <svg
-              className="animate-spin h-5 w-5 mr-2 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
+        <h3 className="text-white mt-5 py-5">PROJECTS:</h3>
+        <div className="flex flex-col gap-6">
+          {projects.map((prj, index) => (
+            <div
+              key={index}
+              className="border bg-[#161616] border-gray-300 rounded-lg p-6 shadow-md "
             >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4l-3 3-3-3v-4a8 8 0 018 8h-4l3 3 3-3h4a8 8 0 01-8 8v-4l3-3-3 3v4a8 8 0 01-8-8z"
-              ></path>
-            </svg>
-          ) : (
-            <>
-              Add GPT Generated Highlight 🪄
-            </>
-          )}
-        </button>
-      </div>
-    </div>
-  ))}
+              {/* Project Name Input */}
+              <div className="flex gap-4 items-center mb-4">
+                <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                    placeholder="Name"
+                    onChange={(e) => {
+                      const new_prj: ProjectsSection = {
+                        ...prj,
+                        name: e.target.value,
+                      };
+                      let new_prjs: ProjectsSection[] = [...projects];
+                      new_prjs[index] = new_prj;
+                      setProjects(new_prjs);
+                    }}
+                    value={prj.name}
+                  />
+                </div>
+                <button
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                  onClick={() => {
+                    const new_projects = [...projects];
+                    new_projects.splice(index, 1);
+                    setProjects(new_projects);
+                  }}
+                >
+                  <Trash2Icon className="w-5 h-5" />
+                </button>
+              </div>
 
-  {/* Add New Experience Section */}
-  <button
-    className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
-    onClick={() => {
-      const new_exp: ExperienceSection = {
-        job_title: "Job Title",
-        company: "Company",
-        location: "Location",
-        start_day: "2023",
-        end_day: "2024",
-        highlights: [],
-      };
-      const new_exps: ExperienceSection[] = [...experience, new_exp];
-      setExperience(new_exps);
-    }}
-  >
-    <PlusIcon/>
-    Add Experience Section
-  </button>
-</div>
-
-
-        <h3 className="text-white">PROJECTS:</h3>
-        {projects.map((prj, index) => (
-          <div key={index} className="flex flex-col mb-4">
-            <div className="w-full h-full flex">
-              <input
-                className="flex-grow"
-                placeholder="Name"
-                onChange={(e) => {
-                  const new_prj: ProjectsSection = {
-                    ...prj,
-                    name: e.target.value,
-                  };
-                  let new_prjs: ProjectsSection[] = [...projects];
-                  new_prjs[index] = new_prj;
-                  setProjects(new_prjs);
-                }}
-                value={prj.name}
-              />
-              <button
-                className="bg-black p-0 px-4 hover:bg-slate text-2xl"
-                onClick={() => {
-                  const new_projects = [...projects];
-                  new_projects.splice(index, 1);
-                  setProjects(new_projects);
-                }}
-              >
-                ❌
-              </button>
-            </div>
-            <input
-              placeholder="Github URL"
-              onChange={(e) => {
-                const new_prj: ProjectsSection = {
-                  ...prj,
-                  github_url: e.target.value,
-                };
-                let new_prjs: ProjectsSection[] = [...projects];
-                new_prjs[index] = new_prj;
-                setProjects(new_prjs);
-              }}
-              value={prj.github_url}
-            />
-            <input
-              placeholder="Start date"
-              onChange={(e) => {
-                const new_prj: ProjectsSection = {
-                  ...prj,
-                  technologies: e.target.value,
-                };
-                let new_prjs: ProjectsSection[] = [...projects];
-                new_prjs[index] = new_prj;
-                setProjects(new_prjs);
-              }}
-              value={prj.technologies}
-            />
-            <input
-              placeholder="Start date"
-              onChange={(e) => {
-                const new_prj: ProjectsSection = {
-                  ...prj,
-                  start_day: e.target.value,
-                };
-                let new_prjs: ProjectsSection[] = [...projects];
-                new_prjs[index] = new_prj;
-                setProjects(new_prjs);
-              }}
-              value={prj.start_day}
-            />
-            <input
-              placeholder="End date"
-              onChange={(e) => {
-                const new_prj: ProjectsSection = {
-                  ...prj,
-                  end_day: e.target.value,
-                };
-                let new_prjs: ProjectsSection[] = [...projects];
-                new_prjs[index] = new_prj;
-                setProjects(new_prjs);
-              }}
-              value={prj.end_day}
-            />
-            {prj.highlights.map((hi: string, hi_index: number) => (
-              <div key={hi_index} className="flex my-2">
-                <textarea
-                  className="flex-grow bg-black h-auto text-white"
-                  placeholder="Highlight"
+              {/* Github URL Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Github URL"
                   onChange={(e) => {
-                    let new_highlights: string[] = [...prj.highlights];
-                    new_highlights[hi_index] = e.target.value;
                     const new_prj: ProjectsSection = {
                       ...prj,
-                      highlights: new_highlights,
+                      github_url: e.target.value,
                     };
-                    const new_prjs: ProjectsSection[] = [...projects];
+                    let new_prjs: ProjectsSection[] = [...projects];
                     new_prjs[index] = new_prj;
                     setProjects(new_prjs);
                   }}
-                  value={hi}
+                  value={prj.github_url}
                 />
+              </div>
+
+              {/* Technologies Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Technologies Used"
+                  onChange={(e) => {
+                    const new_prj: ProjectsSection = {
+                      ...prj,
+                      technologies: e.target.value,
+                    };
+                    let new_prjs: ProjectsSection[] = [...projects];
+                    new_prjs[index] = new_prj;
+                    setProjects(new_prjs);
+                  }}
+                  value={prj.technologies}
+                />
+              </div>
+
+              {/* Start Date Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Start date"
+                  onChange={(e) => {
+                    const new_prj: ProjectsSection = {
+                      ...prj,
+                      start_day: e.target.value,
+                    };
+                    let new_prjs: ProjectsSection[] = [...projects];
+                    new_prjs[index] = new_prj;
+                    setProjects(new_prjs);
+                  }}
+                  value={prj.start_day}
+                />
+              </div>
+
+              {/* End Date Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="End date"
+                  onChange={(e) => {
+                    const new_prj: ProjectsSection = {
+                      ...prj,
+                      end_day: e.target.value,
+                    };
+                    let new_prjs: ProjectsSection[] = [...projects];
+                    new_prjs[index] = new_prj;
+                    setProjects(new_prjs);
+                  }}
+                  value={prj.end_day}
+                />
+              </div>
+
+              {/* Highlights Section */}
+              {prj.highlights.map((hi: string, hi_index: number) => (
+                <div key={hi_index} className="flex items-center mb-2">
+                  <textarea
+                    className="flex-grow border border-gray-300 rounded-md p-2 mr-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Highlight"
+                    onChange={(e) => {
+                      let new_highlights: string[] = [...prj.highlights];
+                      new_highlights[hi_index] = e.target.value;
+                      const new_prj: ProjectsSection = {
+                        ...prj,
+                        highlights: new_highlights,
+                      };
+                      const new_prjs: ProjectsSection[] = [...projects];
+                      new_prjs[index] = new_prj;
+                      setProjects(new_prjs);
+                    }}
+                    value={hi}
+                  />
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                    onClick={() => {
+                      let new_highlights: string[] = [...prj.highlights];
+                      new_highlights.splice(hi_index, 1);
+                      const new_prj: ProjectsSection = {
+                        ...prj,
+                        highlights: new_highlights,
+                      };
+                      const new_prjs: ProjectsSection[] = [...projects];
+                      new_prjs[index] = new_prj;
+                      setProjects(new_prjs);
+                    }}
+                  >
+                    <Trash2Icon className="w-5 h-5" />
+                  </button>
+                </div>
+              ))}
+
+              {/* Add Highlight Buttons */}
+              <div className="flex gap-2 mt-4">
                 <button
-                  className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
+                  className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
                   onClick={() => {
-                    let new_highlights: string[] = [...prj.highlights];
-                    new_highlights.splice(hi_index, 1);
+                    const new_highlights: string[] = [...prj.highlights, ""];
                     const new_prj: ProjectsSection = {
                       ...prj,
                       highlights: new_highlights,
@@ -865,121 +895,125 @@ function EditResume({
                     setProjects(new_prjs);
                   }}
                 >
-                  🗑️
+                  <HighlighterIcon className="w-5 h-5 mr-2" />
+                  Add Highlight
+                </button>
+                <button
+                  className="flex-grow bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+                  onClick={async () => {
+                    const new_hi = await genProjectGptHighlight(prj);
+                    const new_highlights: string[] = [
+                      ...prj.highlights,
+                      new_hi,
+                    ];
+                    const new_prj: ProjectsSection = {
+                      ...prj,
+                      highlights: new_highlights,
+                    };
+                    const new_prjs: ProjectsSection[] = [...projects];
+                    new_prjs[index] = new_prj;
+                    setProjects(new_prjs);
+                  }}
+                >
+                  <BrainCircuit className="w-5 h-5 mr-2" />
+                  Enhance with AI
                 </button>
               </div>
-            ))}
-            <div className="flex w-full">
-              <button
-                className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
-                onClick={() => {
-                  const new_highlights: string[] = [...prj.highlights, ""];
-                  const new_prj: ProjectsSection = {
-                    ...prj,
-                    highlights: new_highlights,
-                  };
-                  const new_prjs: ProjectsSection[] = [...projects];
-                  new_prjs[index] = new_prj;
-                  setProjects(new_prjs);
-                }}
-              >
-                Add highlight
-              </button>
-              <button
-                className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
-                onClick={async () => {
-                  const new_hi = await genProjectGptHighlight(prj);
-                  const new_highlights: string[] = [...prj.highlights, new_hi];
-                  const new_prj: ProjectsSection = {
-                    ...prj,
-                    highlights: new_highlights,
-                  };
-                  const new_prjs: ProjectsSection[] = [...projects];
-                  new_prjs[index] = new_prj;
-                  setProjects(new_prjs);
-                }}
-              >
-                Add GPT Generated highlight 🪄
-              </button>
             </div>
-          </div>
-        ))}
-        <button
-          className="bg-black text-white my-4 w-full border-2 border-slate-700 hover:bg-slate-800 p-1"
-          onClick={() => {
-            const new_prj: ProjectsSection = {
-              name: "Project",
-              github_url: "https://github.com/",
-              technologies: "JavaScript, OpenAI, Redux",
-              start_day: "Feb 2020",
-              end_day: "Jan 2024",
-              highlights: [],
-            };
-            let new_prjs: ProjectsSection[] = [...projects, new_prj];
-            setProjects(new_prjs);
-          }}
-        >
-          Add project
-        </button>
-        <h3 className="text-white">TECHNICAL SKILLS:</h3>
-        {technical_skills.map((skl, index: number) => (
-          <div key={index} className="flex flex-col mb-4">
-            <input
-              placeholder="Category"
-              onChange={(e) => {
-                const new_skl: SkillsSection = {
-                  category: e.target.value,
-                  skills: skl.skills,
-                };
-                const new_sklls: SkillsSection[] = [...technical_skills];
-                new_sklls[index] = new_skl;
-                setTechnicalSkills(new_sklls);
-              }}
-              value={skl.category}
-            />
-            <div className="w-full h-full flex">
-              <textarea
-                className="flex-grow bg-black text-white"
-                placeholder="Skills"
-                onChange={(e) => {
-                  const new_skl: SkillsSection = {
-                    category: skl.category,
-                    skills: e.target.value,
-                  };
-                  const new_sklls: SkillsSection[] = [...technical_skills];
-                  new_sklls[index] = new_skl;
-                  setTechnicalSkills(new_sklls);
-                }}
-                value={skl.skills}
-              />
-              <button
-                className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
-                onClick={() => {
-                  const new_skills: SkillsSection[] = [...technical_skills];
-                  new_skills.splice(index, 1);
-                  setTechnicalSkills(new_skills);
-                }}
-              >
-                🗑️
-              </button>
-            </div>
-          </div>
-        ))}
-        <div className="flex w-full">
+          ))}
           <button
-            className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
+            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
+            onClick={() => {
+              const new_prj: ProjectsSection = {
+                name: "Project",
+                github_url: "https://github.com/",
+                technologies: "JavaScript, OpenAI, Redux",
+                start_day: "Feb 2020",
+                end_day: "Jan 2024",
+                highlights: [],
+              };
+              let new_prjs: ProjectsSection[] = [...projects, new_prj];
+              setProjects(new_prjs);
+            }}
+          >
+            <PlusIcon /> Add project
+          </button>
+        </div>
+
+        <h3 className="text-white">TECHNICAL SKILLS:</h3>
+        <div className="flex flex-col gap-6">
+          {technical_skills.map((skl, index: number) => (
+            <div
+              key={index}
+              className="border border-gray-300 rounded-lg p-6 shadow-md bg-[#161616]"
+            >
+              {/* Category Input */}
+              <div className="flex gap-4 items-center mb-4">
+                <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                    placeholder="Category"
+                    onChange={(e) => {
+                      const new_skl: SkillsSection = {
+                        category: e.target.value,
+                        skills: skl.skills,
+                      };
+                      const new_sklls: SkillsSection[] = [...technical_skills];
+                      new_sklls[index] = new_skl;
+                      setTechnicalSkills(new_sklls);
+                    }}
+                    value={skl.category}
+                  />
+                </div>
+                <button
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                  onClick={() => {
+                    const new_skills: SkillsSection[] = [...technical_skills];
+                    new_skills.splice(index, 1);
+                    setTechnicalSkills(new_skills);
+                  }}
+                >
+                  <Trash2Icon className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Skills Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <textarea
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Skills (comma separated)"
+                  onChange={(e) => {
+                    const new_skl: SkillsSection = {
+                      category: skl.category,
+                      skills: e.target.value,
+                    };
+                    const new_sklls: SkillsSection[] = [...technical_skills];
+                    new_sklls[index] = new_skl;
+                    setTechnicalSkills(new_sklls);
+                  }}
+                  value={skl.skills}
+                />
+              </div>
+            </div>
+          ))}
+
+          {/* Add New Skills Section */}
+		  <div className="flex gap-2 ">
+          <button
+            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
             onClick={() => {
               const new_skill: SkillsSection = {
-                category: "Category",
+                category: "New Category",
                 skills: "",
               };
               setTechnicalSkills([...technical_skills, new_skill]);
             }}
           >
-            + Category
+            <PlusIcon/>
+            Add Technical Skill
           </button>
-          <button
-            className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
+		  <button
+            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex gap-2 items-center justify-center"
             onClick={async () => {
               const new_skill = await genSkillSection(
                 technical_skills,
@@ -990,8 +1024,9 @@ function EditResume({
               setTechnicalSkills([...technical_skills, new_skill]);
             }}
           >
-            + GPT Generated Category 🪄
+            <BrainCircuit/> AI Category
           </button>
+		  </div>
         </div>
       </div>
     </div>
