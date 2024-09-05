@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import supabase from "../../supabase/supabaseClient";
 import {
   EducationSection,
@@ -8,8 +8,16 @@ import {
 } from "../../types/types";
 import axios from "axios";
 import "./StyleEditResume.css";
-import { Trash2Icon, Building2, MapPin, GraduationCap, Calendar, PlusIcon, BrainCircuit } from "lucide-react";
-
+import {
+  Trash2Icon,
+  Building2,
+  MapPin,
+  GraduationCap,
+  Calendar,
+  PlusIcon,
+  BrainCircuit,
+  Briefcase,
+} from "lucide-react";
 
 async function simpleGPT(messages: Array<Object>): Promise<string> {
   try {
@@ -211,6 +219,8 @@ function EditResume({
   projects,
   technical_skills,
 }: EditResumeProps): React.JSX.Element {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <div className="h-full w-full px-[5%] text-left text-black overflow-y-scroll">
       <div id="resumeInfo" className="m-4 pb-32">
@@ -307,136 +317,339 @@ function EditResume({
         </div>
 
         <h3 className="mt-5 py-5">EDUCATION:</h3>
-        <div className="flex flex-col gap-6">
-  {education.map((edu, index) => (
+        <div className="flex flex-col gap-6 border-b pb-10 border-[green]">
+          {education.map((edu, index) => (
+            <div
+              key={index}
+              className="border border-gray-200 rounded-lg p-6 shadow-md bg-[#161616]"
+            >
+              {/* Institution Input */}
+              <div className="flex gap-4 items-center mb-4">
+                <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
+                  <span className="text-gray-500 mr-2">
+                    <Building2 className="w-5 h-5" />
+                  </span>
+                  <input
+                    className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                    placeholder="Institution"
+                    onChange={(e) => {
+                      const new_edu: EducationSection = {
+                        ...edu,
+                        institution: e.target.value,
+                      };
+                      let new_edus: EducationSection[] = [...education];
+                      new_edus[index] = new_edu;
+                      setEducation(new_edus);
+                    }}
+                    value={edu.institution}
+                  />
+                </div>
+                <button
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                  onClick={() => {
+                    const new_educations = [...education];
+                    new_educations.splice(index, 1);
+                    setEducation(new_educations);
+                  }}
+                >
+                  <Trash2Icon className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Location Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <MapPin className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Location"
+                  onChange={(e) => {
+                    const new_edu: EducationSection = {
+                      ...edu,
+                      location: e.target.value,
+                    };
+                    const new_edus: EducationSection[] = [...education];
+                    new_edus[index] = new_edu;
+                    setEducation(new_edus);
+                  }}
+                  value={edu.location}
+                />
+              </div>
+
+              {/* Degree Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <GraduationCap className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Degree"
+                  onChange={(e) => {
+                    const new_edu: EducationSection = {
+                      ...edu,
+                      degree: e.target.value,
+                    };
+                    const new_edus: EducationSection[] = [...education];
+                    new_edus[index] = new_edu;
+                    setEducation(new_edus);
+                  }}
+                  value={edu.degree}
+                />
+              </div>
+
+              {/* Graduation Date Input */}
+              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="text-gray-500 mr-2">
+                  <Calendar className="w-5 h-5" />
+                </span>
+                <input
+                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  placeholder="Grad Date"
+                  onChange={(e) => {
+                    const new_edu: EducationSection = {
+                      ...edu,
+                      end_date: e.target.value,
+                    };
+                    const new_edus: EducationSection[] = [...education];
+                    new_edus[index] = new_edu;
+                    setEducation(new_edus);
+                  }}
+                  value={edu.end_date}
+                />
+              </div>
+
+              {/* Highlights Section */}
+              {edu.highlights.map((hi: string, hi_index: number) => (
+                <div key={hi_index} className="flex items-center mb-2">
+                  <textarea
+                    className="flex-grow border border-gray-300 rounded-md p-2 mr-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Highlight"
+                    onChange={(e) => {
+                      let new_highlights: string[] = [...edu.highlights];
+                      new_highlights[hi_index] = e.target.value;
+                      const new_edu: EducationSection = {
+                        ...edu,
+                        highlights: new_highlights,
+                      };
+                      const new_edus: EducationSection[] = [...education];
+                      new_edus[index] = new_edu;
+                      setEducation(new_edus);
+                    }}
+                    value={hi}
+                  />
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                    onClick={() => {
+                      let new_highlights: string[] = [...edu.highlights];
+                      new_highlights.splice(hi_index, 1);
+                      const new_edu: EducationSection = {
+                        ...edu,
+                        highlights: new_highlights,
+                      };
+                      const new_edus: EducationSection[] = [...education];
+                      new_edus[index] = new_edu;
+                      setEducation(new_edus);
+                    }}
+                  >
+                    <Trash2Icon className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+
+              {/* Add Highlight Buttons */}
+              <div className="flex gap-2 mt-4">
+                <button
+                  className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
+                  onClick={() => {
+                    const new_highlights: string[] = [...edu.highlights, ""];
+                    const new_edu: EducationSection = {
+                      ...edu,
+                      highlights: new_highlights,
+                    };
+                    const new_edus: EducationSection[] = [...education];
+                    new_edus[index] = new_edu;
+                    setEducation(new_edus);
+                  }}
+                >
+                  <PlusIcon />
+                  Add Highlight
+                </button>
+                <button
+                  className="flex-grow bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+                  onClick={async () => {
+                    const new_hi = await genEducationGptHighlight(edu);
+                    const new_highlights: string[] = [
+                      ...edu.highlights,
+                      new_hi,
+                    ];
+                    const new_edu: EducationSection = {
+                      ...edu,
+                      highlights: new_highlights,
+                    };
+                    const new_edus: EducationSection[] = [...education];
+                    new_edus[index] = new_edu;
+                    setEducation(new_edus);
+                  }}
+                >
+                  <BrainCircuit />
+                  GPT Highlight
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Add New Education Section */}
+          <button
+            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
+            onClick={() => {
+              const new_edu: EducationSection = {
+                institution: "Institution",
+                location: "NY, USA",
+                degree: "Degree",
+                end_date: "expected 2024",
+                highlights: [],
+              };
+              const new_edus: EducationSection[] = [...education, new_edu];
+              setEducation(new_edus);
+            }}
+          >
+            <PlusIcon />
+            Add Education Section
+          </button>
+        </div>
+
+        <h3 className="mt-5 py-5">EXPERIENCE:</h3>
+		<div className="flex flex-col gap-6">
+  {experience.map((exp, index) => (
     <div key={index} className="border border-gray-200 rounded-lg p-6 shadow-md bg-[#161616]">
-      {/* Institution Input */}
+      {/* Job Title Input */}
       <div className="flex gap-4 items-center mb-4">
-        <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
+        <div className="flex items-center border border-gray-300 rounded-md p-2 w-full focus-within:ring-2 focus-within:ring-blue-500">
           <span className="text-gray-500 mr-2">
-            <Building2 className="w-5 h-5" />
+            <Briefcase className="w-5 h-5" />
           </span>
           <input
             className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-            placeholder="Institution"
+            placeholder="Job Title"
             onChange={(e) => {
-              const new_edu: EducationSection = {
-                ...edu,
-                institution: e.target.value,
+              const new_exp: ExperienceSection = {
+                ...exp,
+                job_title: e.target.value,
               };
-              let new_edus: EducationSection[] = [...education];
-              new_edus[index] = new_edu;
-              setEducation(new_edus);
+              let new_exps: ExperienceSection[] = [...experience];
+              new_exps[index] = new_exp;
+              setExperience(new_exps);
             }}
-            value={edu.institution}
+            value={exp.job_title}
           />
         </div>
         <button
           className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
           onClick={() => {
-            const new_educations = [...education];
-            new_educations.splice(index, 1);
-            setEducation(new_educations);
+            const new_experiences = [...experience];
+            new_experiences.splice(index, 1);
+            setExperience(new_experiences);
           }}
         >
           <Trash2Icon className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Location Input */}
-      <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+      {/* Company Input */}
+      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
         <span className="text-gray-500 mr-2">
-          <MapPin className="w-5 h-5" />
+          <Building2 className="w-5 h-5" />
         </span>
         <input
           className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="Location"
+          placeholder="Company"
           onChange={(e) => {
-            const new_edu: EducationSection = {
-              ...edu,
-              location: e.target.value,
+            const new_exp: ExperienceSection = {
+              ...exp,
+              company: e.target.value,
             };
-            const new_edus: EducationSection[] = [...education];
-            new_edus[index] = new_edu;
-            setEducation(new_edus);
+            let new_exps: ExperienceSection[] = [...experience];
+            new_exps[index] = new_exp;
+            setExperience(new_exps);
           }}
-          value={edu.location}
+          value={exp.company}
         />
       </div>
 
-      {/* Degree Input */}
-      <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-        <span className="text-gray-500 mr-2">
-          <GraduationCap className="w-5 h-5" />
-        </span>
-        <input
-          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="Degree"
-          onChange={(e) => {
-            const new_edu: EducationSection = {
-              ...edu,
-              degree: e.target.value,
-            };
-            const new_edus: EducationSection[] = [...education];
-            new_edus[index] = new_edu;
-            setEducation(new_edus);
-          }}
-          value={edu.degree}
-        />
-      </div>
-
-      {/* Graduation Date Input */}
-      <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+      {/* Start Date Input */}
+      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
         <span className="text-gray-500 mr-2">
           <Calendar className="w-5 h-5" />
         </span>
         <input
           className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-          placeholder="Grad Date"
+          placeholder="Start Date"
           onChange={(e) => {
-            const new_edu: EducationSection = {
-              ...edu,
-              end_date: e.target.value,
+            const new_exp: ExperienceSection = {
+              ...exp,
+              start_day: e.target.value,
             };
-            const new_edus: EducationSection[] = [...education];
-            new_edus[index] = new_edu;
-            setEducation(new_edus);
+            let new_exps: ExperienceSection[] = [...experience];
+            new_exps[index] = new_exp;
+            setExperience(new_exps);
           }}
-          value={edu.end_date}
+          value={exp.start_day}
+        />
+      </div>
+
+      {/* End Date Input */}
+      <div className="flex items-center border border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+        <span className="text-gray-500 mr-2">
+          <Calendar className="w-5 h-5" />
+        </span>
+        <input
+          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+          placeholder="End Date"
+          onChange={(e) => {
+            const new_exp: ExperienceSection = {
+              ...exp,
+              end_day: e.target.value,
+            };
+            let new_exps: ExperienceSection[] = [...experience];
+            new_exps[index] = new_exp;
+            setExperience(new_exps);
+          }}
+          value={exp.end_day}
         />
       </div>
 
       {/* Highlights Section */}
-      {edu.highlights.map((hi: string, hi_index: number) => (
+      {exp.highlights.map((hi: string, hi_index: number) => (
         <div key={hi_index} className="flex items-center mb-2">
           <textarea
             className="flex-grow border border-gray-300 rounded-md p-2 mr-2 focus:ring-2 focus:ring-blue-500 outline-none"
             placeholder="Highlight"
             onChange={(e) => {
-              let new_highlights: string[] = [...edu.highlights];
+              let new_highlights: string[] = [...exp.highlights];
               new_highlights[hi_index] = e.target.value;
-              const new_edu: EducationSection = {
-                ...edu,
+              const new_exp: ExperienceSection = {
+                ...exp,
                 highlights: new_highlights,
               };
-              const new_edus: EducationSection[] = [...education];
-              new_edus[index] = new_edu;
-              setEducation(new_edus);
+              const new_exps: ExperienceSection[] = [...experience];
+              new_exps[index] = new_exp;
+              setExperience(new_exps);
             }}
             value={hi}
           />
           <button
             className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors duration-300"
             onClick={() => {
-              let new_highlights: string[] = [...edu.highlights];
+              let new_highlights: string[] = [...exp.highlights];
               new_highlights.splice(hi_index, 1);
-              const new_edu: EducationSection = {
-                ...edu,
+              const new_exp: ExperienceSection = {
+                ...exp,
                 highlights: new_highlights,
               };
-              const new_edus: EducationSection[] = [...education];
-              new_edus[index] = new_edu;
-              setEducation(new_edus);
+              const new_exps: ExperienceSection[] = [...experience];
+              new_exps[index] = new_exp;
+              setExperience(new_exps);
             }}
           >
             <Trash2Icon className="w-4 h-4" />
@@ -449,216 +662,95 @@ function EditResume({
         <button
           className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
           onClick={() => {
-            const new_highlights: string[] = [...edu.highlights, ""];
-            const new_edu: EducationSection = {
-              ...edu,
+            const new_highlights: string[] = [...exp.highlights, ""];
+            const new_exp: ExperienceSection = {
+              ...exp,
               highlights: new_highlights,
             };
-            const new_edus: EducationSection[] = [...education];
-            new_edus[index] = new_edu;
-            setEducation(new_edus);
+            const new_exps: ExperienceSection[] = [...experience];
+            new_exps[index] = new_exp;
+            setExperience(new_exps);
           }}
         >
-         <PlusIcon/>
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
           Add Highlight
         </button>
         <button
           className="flex-grow bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
           onClick={async () => {
-            const new_hi = await genEducationGptHighlight(edu);
-            const new_highlights: string[] = [...edu.highlights, new_hi];
-            const new_edu: EducationSection = {
-              ...edu,
-              highlights: new_highlights,
-            };
-            const new_edus: EducationSection[] = [...education];
-            new_edus[index] = new_edu;
-            setEducation(new_edus);
+            setIsLoading(true); // Set loading state to true
+            try {
+              const new_hi = await genExperienceGptHighlight(exp);
+              const new_highlights: string[] = [...exp.highlights, new_hi];
+              const new_exp: ExperienceSection = {
+                ...exp,
+                highlights: new_highlights,
+              };
+              const new_exps: ExperienceSection[] = [...experience];
+              new_exps[index] = new_exp;
+              setExperience(new_exps);
+            } catch (error) {
+              console.error("Error generating highlight:", error);
+            } finally {
+              setIsLoading(false); // Revert loading state back to false
+            }
           }}
+          disabled={isLoading} // Disable button while loading
         >
-          <BrainCircuit/>
-          GPT Highlight
+          {isLoading ? (
+            <svg
+              className="animate-spin h-5 w-5 mr-2 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4l-3 3-3-3v-4a8 8 0 018 8h-4l3 3 3-3h4a8 8 0 01-8 8v-4l3-3-3 3v4a8 8 0 01-8-8z"
+              ></path>
+            </svg>
+          ) : (
+            <>
+              Add GPT Generated Highlight 🪄
+            </>
+          )}
         </button>
       </div>
     </div>
-  ))} 
+  ))}
 
-  {/* Add New Education Section */}
+  {/* Add New Experience Section */}
   <button
     className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
     onClick={() => {
-      const new_edu: EducationSection = {
-        institution: "Institution",
-        location: "NY, USA",
-        degree: "Degree",
-        end_date: "expected 2024",
+      const new_exp: ExperienceSection = {
+        job_title: "Job Title",
+        company: "Company",
+        location: "Location",
+        start_day: "2023",
+        end_day: "2024",
         highlights: [],
       };
-      const new_edus: EducationSection[] = [...education, new_edu];
-      setEducation(new_edus);
+      const new_exps: ExperienceSection[] = [...experience, new_exp];
+      setExperience(new_exps);
     }}
   >
     <PlusIcon/>
-    Add Education Section
+    Add Experience Section
   </button>
 </div>
 
-        <h3>EXPERIENCE:</h3>
-        {experience.map((exp, index) => (
-          <div key={index} className="flex flex-col mb-4">
-            <div className="w-full h-full flex">
-              <input
-                className="flex-grow"
-                placeholder="Job Title"
-                onChange={(e) => {
-                  const new_exp: ExperienceSection = {
-                    ...exp,
-                    job_title: e.target.value,
-                  };
-                  let new_exps: ExperienceSection[] = [...experience];
-                  new_exps[index] = new_exp;
-                  setExperience(new_exps);
-                }}
-                value={exp.job_title}
-              />
-              <button
-                className="bg-black p-0 px-4 hover:bg-slate-800 text-2xl"
-                onClick={() => {
-                  const new_experiences = [...experience];
-                  new_experiences.splice(index, 1);
-                  setExperience(new_experiences);
-                }}
-              >
-                ❌
-              </button>
-            </div>
-            <input
-              placeholder="Compnay"
-              onChange={(e) => {
-                const new_exp: ExperienceSection = {
-                  ...exp,
-                  company: e.target.value,
-                };
-                let new_exps: ExperienceSection[] = [...experience];
-                new_exps[index] = new_exp;
-                setExperience(new_exps);
-              }}
-              value={exp.company}
-            />
-            <input
-              placeholder="Start date"
-              onChange={(e) => {
-                const new_exp: ExperienceSection = {
-                  ...exp,
-                  start_day: e.target.value,
-                };
-                let new_exps: ExperienceSection[] = [...experience];
-                new_exps[index] = new_exp;
-                setExperience(new_exps);
-              }}
-              value={exp.start_day}
-            />
-            <input
-              placeholder="End date"
-              onChange={(e) => {
-                const new_exp: ExperienceSection = {
-                  ...exp,
-                  end_day: e.target.value,
-                };
-                let new_exps: ExperienceSection[] = [...experience];
-                new_exps[index] = new_exp;
-                setExperience(new_exps);
-              }}
-              value={exp.end_day}
-            />
-            {exp.highlights.map((hi: string, hi_index: number) => (
-              <div key={hi_index} className="flex my-2">
-                <textarea
-                  className="flex-grow bg-black h-auto text-white"
-                  placeholder="Highlight"
-                  onChange={(e) => {
-                    let new_highlights: string[] = [...exp.highlights];
-                    new_highlights[hi_index] = e.target.value;
-                    const new_exp: ExperienceSection = {
-                      ...exp,
-                      highlights: new_highlights,
-                    };
-                    const new_exps: ExperienceSection[] = [...experience];
-                    new_exps[index] = new_exp;
-                    setExperience(new_exps);
-                  }}
-                  value={hi}
-                />
-                <button
-                  className="bg-black p-0 px-4 text-xl hover:bg-slate-800"
-                  onClick={() => {
-                    let new_highlights: string[] = [...exp.highlights];
-                    new_highlights.splice(hi_index, 1);
-                    const new_edu: ExperienceSection = {
-                      ...exp,
-                      highlights: new_highlights,
-                    };
-                    const new_exps: ExperienceSection[] = [...experience];
-                    new_exps[index] = new_edu;
-                    setExperience(new_exps);
-                  }}
-                >
-                  🗑️
-                </button>
-              </div>
-            ))}
-            <div className="flex w-full mt-2">
-              <button
-                className="mr-2 flex-grow bg-black border-2 border-slate-700 hover:bg-slate-800 text-white"
-                onClick={() => {
-                  const new_highlights: string[] = [...exp.highlights, ""];
-                  const new_exp: ExperienceSection = {
-                    ...exp,
-                    highlights: new_highlights,
-                  };
-                  const new_exps: ExperienceSection[] = [...experience];
-                  new_exps[index] = new_exp;
-                  setExperience(new_exps);
-                }}
-              >
-                Add highlight
-              </button>
-              <button
-                className="ml-2 flex-grow bg-green-500 hover:bg-green-400"
-                onClick={async () => {
-                  const new_hi = await genExperienceGptHighlight(exp);
-                  const new_highlights: string[] = [...exp.highlights, new_hi];
-                  const new_exp: ExperienceSection = {
-                    ...exp,
-                    highlights: new_highlights,
-                  };
-                  const new_exps: ExperienceSection[] = [...experience];
-                  new_exps[index] = new_exp;
-                  setExperience(new_exps);
-                }}
-              >
-                Add GPT Generated highlight 🪄
-              </button>
-            </div>
-          </div>
-        ))}
-        <button
-          className="bg-black text-white my-4 w-full border-2 border-slate-700 hover:bg-slate-800 p-1"
-          onClick={() => {
-            const new_exp: ExperienceSection = {
-              job_title: "Job Title",
-              company: "Company",
-              location: "Location",
-              start_day: "2023",
-              end_day: "2024",
-              highlights: [],
-            };
-            const new_exps: ExperienceSection[] = [...experience, new_exp];
-            setExperience(new_exps);
-          }}
-        >
-          + Experience section
-        </button>
 
         <h3 className="text-white">PROJECTS:</h3>
         {projects.map((prj, index) => (
