@@ -68,7 +68,7 @@ export class Tutorial  extends React.Component {
               width: 500
             },
             buttonNext: {
-                backgroundColor: '#36b7ff',  
+                backgroundImage: 'linear-gradient(to right, #31c48d, #36b7ff)',  
                 color: '#fff', 
               },
               buttonBack: {
@@ -77,10 +77,7 @@ export class Tutorial  extends React.Component {
               buttonSkip: {
                 color: '#36b7ff'  
               },
-              beacon: {
-                inner: '#36b7ff',  
-                outer: '#A5D6A7',  
-              }
+             
           }}
           
         />
