@@ -76,10 +76,10 @@ export class Tutorial  extends React.Component {
               },
               buttonSkip: {
                 color: '#36b7ff'  
-              }
+              },
               beacon: {
-                inner: '#4CAF50',  // Inner beacon color set to green
-                outer: '#A5D6A7',  // Outer beacon color, a lighter shade of green
+                inner: '#36b7ff',  
+                outer: '#A5D6A7',  
               }
           }}
           
