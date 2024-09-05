@@ -11,27 +11,27 @@ function ReceiveConfirmEmail() {
   const email = queryParams.get('email');
   const token = queryParams.get('token');
 
-  useEffect(() => {
-    async function doAsync() {
-      try {
-        if (!email || !token) { throw Error(); }
+  // useEffect(() => {
+  //   async function doAsync() {
+  //     try {
+  //       if (!email || !token) { throw Error(); }
 
-        const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email'});
+  //       const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email'});
         
-        if (error) { throw Error(); }
+  //       if (error) { throw Error(); }
 
-        alert('about to call successful login redirect');
-        SuccessfulLoginRedirect();
+  //       alert('about to call successful login redirect');
+  //       SuccessfulLoginRedirect();
 
-      } catch (error) {
-          console.warn('Error logging you in 🙀');
-          window.location.href="/";
-          return;
-      }
-    }
+  //     } catch (error) {
+  //         console.warn('Error logging you in 🙀');
+  //         window.location.href="/";
+  //         return;
+  //     }
+  //   }
 
-    doAsync();
-  }, [])
+  //   doAsync();
+  // }, [])
   
   useEffect(() => {
     function updateDots() {
