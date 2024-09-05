@@ -51,3 +51,4 @@ async function SuccessfulLoginRedirect() {
 }
 
 export default SuccessfulLoginRedirect;
+export { UserNeedsOnboard };
