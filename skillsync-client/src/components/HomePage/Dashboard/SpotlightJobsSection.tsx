@@ -77,7 +77,7 @@ function SpotLightJobsSection({ setSelectedJob }) {
   }, [preferencesLoaded]);
 
   return (
-    <div className="p-5 rounded-lg bg-[#1e1e1e] mt-6 min-h-[17rem]">
+    <div className="p-5 rounded-lg bg-[#1e1e1e] mt-6 min-h-[17rem] my-eighth-step">
       <div className="flex justify-between">
         <h1 className="text-xl text-white">Spotlight Jobs</h1>
         <button

@@ -25,28 +25,35 @@ const menuItems = [
     component: Dashboard,
     icon: <MdSpaceDashboard />,
     show: true,
+    class: "my-nav-dashboard"
   },
-  { name: "Jobs", component: Feed, icon: <MdNewspaper />, show: true },
+  { name: "Jobs", component: Feed, icon: <MdNewspaper />, show: true, class : "my-nav-jobs"},
   {
     name: "Resume Builder",
     component: ResumeManager,
     icon: <IoDocument />,
     show: true,
+    class: "my-nav-resumes"
+
   },
   {
     name: "Tracker",
     component: JobApplicationTracker,
     icon: <BiSpreadsheet />,
     show: true,
+    class: "my-nav-calendar"
   },
-  { name: "Messages", component: Messages, icon: <MdInbox />, show: true },
+  { name: "Messages", component: Messages, icon: <MdInbox />, show: true,     class: "my-nav-messages"
+  },
   {
     name: "Feedback",
     icon: <IoChatbox />,
     component: FeedbackPage,
-    show: false,
+    show: false,    class: "my-nav-feedback"
+
   },
-  { name: "Profile", component: ProfilePage, show: false },
+  { name: "Profile", component: ProfilePage, show: false,     class: "my-nav-profile"
+  },
 ];
 
 const MenuBar = ({
@@ -94,7 +101,8 @@ const MenuBar = ({
         setSidebarExpanded(false);
       }}
     >
-      <Toaster />
+      <Toaster />        
+
       <div className="w-full p-5 ml-0.5 flex flex-row items-center">
         <img className="w-10 h-10" src="/icon-128.png" alt="SkillSync. Logo" />
         <div className={`flex items-center fade-in ${collapsed && "hidden"}`}>

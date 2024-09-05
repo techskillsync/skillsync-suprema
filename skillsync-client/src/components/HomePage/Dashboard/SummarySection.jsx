@@ -13,11 +13,11 @@ const SummarySection = ({}) => {
   const [resumesCount, setResumesCount] = useState(0);
 
   const stats = [
-    { title: "Jobs Saved", value: jobsSavedCount, icon: FaSave },
-    { title: "Jobs Applied", value: jobsAppliedCount, icon: BsFillSendFill },
-    { title: "Interviews", value: jobsInterviewingCount, icon: BsPeopleFill },
-    { title: "Job Offers", value: jobOffersCount, icon: FaFlag },
-    { title: "Resumes", value: resumesCount, icon: FaFileAlt },
+    { title: "Jobs Saved", value: jobsSavedCount, icon: FaSave, class: "my-first-step"},
+    { title: "Jobs Applied", value: jobsAppliedCount, icon: BsFillSendFill, class: "my-second-step" },
+    { title: "Interviews", value: jobsInterviewingCount, icon: BsPeopleFill, class: "my-third-step"},
+    { title: "Job Offers", value: jobOffersCount, icon: FaFlag, class: "my-fourth-step" },
+    { title: "Resumes", value: resumesCount, icon: FaFileAlt, class: "my-fifth-step" },
   ];
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const SummarySection = ({}) => {
   {stats.map((stat) => (
         <div
           key={stat.title}
-          className="flex cursor-pointer w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700"
+          className={`flex cursor-pointer w-full items-center gap-4 p-5 bg-[#1e1e1e] rounded-lg  border-2 border-cyan-700 ${stat.class}`}
           onClick={() => {
             window.location.href = "/home/tracker";
           }}

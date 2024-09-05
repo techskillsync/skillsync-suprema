@@ -85,7 +85,7 @@ const PreferencesSection = () => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow  min-h-[300px] text-black h-full w-full md:w-[60%] overflow-y-auto scrollbar-hide">
+    <div className="p-4 bg-white rounded-lg shadow  min-h-[300px] text-black h-full w-full md:w-[60%] overflow-y-auto scrollbar-hide my-sixth-step">
       <Toaster />
       <div className="flex  mb-4 w-full justify-between items-center">
         <h2 className="text-lg font-medium">Job Search Preferences</h2>
