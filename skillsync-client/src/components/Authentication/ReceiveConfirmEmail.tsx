@@ -4,8 +4,6 @@ import { useLocation } from 'react-router-dom';
 import SuccessfulLoginRedirect from './SuccessfulLoginRedirect';
 
 function ReceiveConfirmEmail() {
-  type Dots = '' | '.' | '..' | '...';
-  const [dots, setDots] = useState<Dots>('');
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get('email');
@@ -33,32 +31,9 @@ function ReceiveConfirmEmail() {
     doAsync();
   }, [])
   
-  useEffect(() => {
-    function updateDots() {
-      switch (dots) {
-        case '':
-          setDots('.');
-          return;
-        case '.':
-          setDots('..');
-          return;
-        case '..':
-          setDots('...');
-          return;
-        case '...':
-          setDots('');
-          return;
-      }
-    }
-
-    const interval = setInterval(updateDots, 500);
-
-    return () => clearInterval(interval);
-  }, [dots]);
-
   return (
     <div className="h-screen w-screen flex justify-center items-center">
-      <h1 className="text-white text-2xl font-semibold">Logging you in {dots}</h1>
+      <h1 className="text-white text-2xl font-semibold">Logging you in</h1>
     </div>);
 }
 
