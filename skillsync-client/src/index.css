@@ -212,3 +212,13 @@ button:focus-visible {
 input[type='text']:focus {
   box-shadow: none;
 }
+
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 1;
+}

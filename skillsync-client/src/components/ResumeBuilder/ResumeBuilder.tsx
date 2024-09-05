@@ -7,7 +7,6 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiFiles } from "react-icons/pi";
-
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -92,7 +91,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 	}, [label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills]);
 
 	return (
-		<div className="h-screen w-full bg-black flex flex-col">
+		<div className="h-screen w-full bg-black flex flex-col ">
 			<div className="h-20 flex-none flex">
 				<button
 					className="bg-black hover:bg-slate-800 text-white m-2 ml-4 p-0 px-2 rounded-2xl flex justify-center items-center"
@@ -132,7 +131,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
               case 'failed':
               	return (
               		<>
-              			<p>Failed</p>
+              			<p>Not saved</p>
 										<div className="w-6 h-6 bg-red-400 rounded-full ml-2" />
 									</>
 								);
@@ -141,7 +140,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 				</div>
 			</div>
 			<div className="flex-grow overflow-y-scroll w-full flex">
-				<div className="h-full overflow-y-scroll w-[50%]">
+				<div className="h-full  w-[50%]">
 					<EditResume
 						setLabel={setLabel} label={label}
 						setFullName={setFullName} full_name={full_name}
@@ -156,7 +155,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 						setTechnicalSkills={setTechnicalSkills} technical_skills={technical_skills}
 						/>
 				</div>
-				<div className="h-full overflow-y-scroll w-[50%]">
+				<div className="h-full  w-[50%]">
 					<PreviewResume
 						resume_id={resume_id}
 						label={label}
