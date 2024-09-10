@@ -36,7 +36,7 @@ const PreferencesSection = () => {
         setJobMode(preferences.jobMode);
         setKeywords(preferences.keywords);
         setCitizenship(preferences.citizenship);
-        setRecency(preferences.recency);
+        setRecency(recency);
         setInitialPreferences(preferences);
       } catch (error) {
         console.error(error);
@@ -70,15 +70,15 @@ const PreferencesSection = () => {
       job_mode: jobMode,
       keywords,
       citizenship,
-      recency,
+      recency: recency.value,
     };
 
-    const updateJobPreferencesPromise = UpdateJobPreferences(preferences);
-    toast.promise(updateJobPreferencesPromise, {
-      loading: "Saving changes...",
-      success: "Your preferences were updated!",
-      error: "Failed to update preferences",
-    });
+    const updateJobPreferencesResult = await UpdateJobPreferences(preferences);
+    if (updateJobPreferencesResult) {
+      toast.success("Your preferences were updated!");
+    } else {
+      toast.error("Failed to update preferences");
+    }
 
     // Close modal on successful update
     setShowModal(false);
@@ -138,7 +138,7 @@ const PreferencesSection = () => {
         </div>
         <div className="w-full">
           <p className="border rounded-md p-2">
-            <strong>Recency:</strong> {recency || "Not specified"}
+            <strong>Recency:</strong> {recency ? recency.value : "Not specified"}
           </p>
         </div>
         <div className="w-full">
