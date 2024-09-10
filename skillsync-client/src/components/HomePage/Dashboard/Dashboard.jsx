@@ -15,20 +15,16 @@ const Dashboard = ({ profileInfo, setSelectedJob }) => {
   return (
     <main className="bg-allotrix-setup font-allotrix-font min-h-[100vh] md:h-[100%] w-full text-[white] overflow-y-scroll">
       {runTutorial && <Tutorial/> }
-      <section className="pt-20 pb-8 w-full md:h-full md:px-8 px-3 flex flex-col gap-2">
-        <div className="p-2 mb-3">
+      <section className="pt-10 pb-8 w-full md:h-full md:px-8 px-3 flex flex-col gap-2">
+        <div className="p-2 mb-4 flex justify-between">
           <h1 className="text-white text-left text-2xl font-medium">
             Welcome, {profileInfo?.name}
           </h1>
-          <div className="absolute flex gap-4 top-4 right-8">
-            
-            <button onClick={() => setRunTutorial(!runTutorial)}  className="bg-[#1e1e1e] text-white rounded-lg py-2 px-3 flex items-center gap-2">
+          <div className="flex">
+            <button onClick={() => setRunTutorial(!runTutorial)}  className="bg-[#1e1e1e] text-white rounded-lg mx-4 py-2 px-3 flex items-center gap-2">
               {" "}
               <IoHelp /> Tutorial
             </button>
-
-
-
             <button
               className="bg-[#1e1e1e] text-white rounded-lg py-2 px-3 flex items-center gap-2"
               onClick={() => {
