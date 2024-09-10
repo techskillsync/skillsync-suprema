@@ -119,7 +119,7 @@ async function assembleNewResume(): Promise<Resume> {
       experiences.push(experience);
     }
 
-    return {
+    let custom_resume:Resume = {
       resume_id: resume_id,
       label: resume_label,
       full_name: profile_data.name + " " + profile_data.last_name,
@@ -133,9 +133,22 @@ async function assembleNewResume(): Promise<Resume> {
       projects: [],
       technical_skills: [],
     };
+
+    if (typeof custom_resume.label !== "string")            { custom_resume.label = "My Resume"; }
+    if (typeof custom_resume.full_name !== "string")        { custom_resume.full_name = "John Doe"; }
+    if (typeof custom_resume.phone_number !== "string")     { custom_resume.phone_number = "+1 234 567 8900"; }
+    if (typeof custom_resume.email !== "string")            { custom_resume.email = "example@gmail.com"; }
+    if (typeof custom_resume.personal_website !== "string") { custom_resume.personal_website = "https://example.com"; }
+    if (typeof custom_resume.linkedin !== "string")         { custom_resume.linkedin = "https://linkedin.com/example" }
+    if (typeof custom_resume.github !== "string")           { custom_resume.github = "https://github.com/example" }
+    if (!Array.isArray(custom_resume.education))            { custom_resume.education = []; }
+    if (!Array.isArray(custom_resume.experience))           { custom_resume.experience = []; }
+
+    return custom_resume;
+
   } catch (error) {
     console.warn("Error arranging resume info - " + error);
-    return {
+    const default_resume:Resume = {
       resume_id: resume_id,
       label: "My Resume",
       full_name: "John Doe",
@@ -148,7 +161,9 @@ async function assembleNewResume(): Promise<Resume> {
       experience: [],
       projects: [],
       technical_skills: [],
-    };
+    }
+
+    return default_resume;
   }
 }
 
