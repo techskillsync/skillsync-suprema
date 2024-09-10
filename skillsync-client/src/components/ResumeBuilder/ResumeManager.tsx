@@ -177,7 +177,7 @@ function ResumeManager() {
     }
 
     doAsync();
-  }, []); // Ensure useEffect has an empty dependency array to avoid infinite loop
+  }, [openedResume]);
 
   return (
     <>
