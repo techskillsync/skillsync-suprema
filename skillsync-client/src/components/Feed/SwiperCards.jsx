@@ -194,30 +194,27 @@ const SwiperCard = ({ job, onSwipeLeft, onSwipeRight }) => {
           </article>
 
           <div className="w-full py-2 flex flex-wrap gap-2">
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
-              {" "}
-              AI-ML
+          <span className="bg-[#c8c8c8] px-2 py-1 text-black rounded-md">
+          {" "}
+              Node Js
             </span>
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
+            <span className="bg-[#c8c8c8] px-2 py-1 text-black rounded-md">
               {" "}
-              AI-ML
+              Python
             </span>
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
+            <span className="bg-[#c8c8c8] px-2 py-1 text-black rounded-md">
               {" "}
-              AI-ML
+              Kafka
             </span>
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
+            <span className="bg-[#c8c8c8] px-2 py-1 text-black rounded-md">
               {" "}
-              AI-ML
+              Postgre SQL
             </span>
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
+            <span className="bg-[#c8c8c8] px-2 py-1 text-black rounded-md">
               {" "}
-              AI-ML
+              Microservices
             </span>
-            <span className="bg-[#aaaaaa] px-2 py-1 text-black rounded-md">
-              {" "}
-              AI-ML
-            </span>
+           
           </div>
 
           {/* rate competency bar*/}
