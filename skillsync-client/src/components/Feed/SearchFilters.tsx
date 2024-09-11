@@ -114,7 +114,7 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
         preferences={userPreferences}
         setPreferences={setUserPreferences}
       >
-        <div className="bg-[#1E1E1E] h-10 p-2 cursor-pointer rounded-md text-white border-[#03BD6C] border-[1px] flex justify-center items-center mr-3">
+        <div className="bg-[#1E1E1E] h-10 p-2 min-w-max cursor-pointer rounded-md text-white border-[#03BD6C] border-[1px] flex justify-center items-center mr-3">
           Add Filters <GoPlus className="ml-1" />
         </div>
       </FilterPopup>
