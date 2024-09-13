@@ -208,7 +208,7 @@ const Home = () => {
             </span>
           </h1>
           <h5 className="mt-5 text-base md:text-lg pr-4 md:pr-24">
-            Stop missing opportunities. AI job search extension allows you to apply for jobs in 30 seconds.
+            Stop missing opportunities. Our AI job search extension allows you to apply for jobs in 30 seconds.
           </h5>
           <button
             onClick={() => {
