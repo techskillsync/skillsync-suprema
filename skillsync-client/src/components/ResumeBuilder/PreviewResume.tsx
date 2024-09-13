@@ -57,7 +57,6 @@ const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) 
 		fontFamily: 'ui-serif,Georgia,Cambria,Times New Roman,Times,serif',
 		fontSize: '12px',
 		overflowY: 'hidden',
-		transform: `scale(${scale})`,
 		transformOrigin: 'top left'
 	};
 
@@ -91,7 +90,8 @@ const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) 
 		 * interfering with the rest of the documents css using the 
 		 * ResumePreview tag.
 		 */
-		<div ref={parentRef} className="w-full h-full">
+		<div ref={parentRef} className="w-full h-full"
+		     style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}>
 			<div ref={resumeRef} id="ResumePreview" style={resumePreviewStyle}>
 				<h1 style={headerStyle}>{full_name}</h1>
 				<h4 style={{ textAlign: 'center' }}>
