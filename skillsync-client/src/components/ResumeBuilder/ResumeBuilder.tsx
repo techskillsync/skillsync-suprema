@@ -216,7 +216,7 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 					/>
 				</div>
 				<div className="h-full w-[50%] overflow-y-scroll">
-					<button className="block text-center mx-auto mb-6 border-2 border-gray-500 bg-black text-white" 
+					<button className="block text-center mx-auto mb-4 w-[50%] bg-[#03BD6C] text-white" 
 					        onClick={() => {
 								const resumeHTML = getResumeHTML();
 								console.log(resumeHTML);

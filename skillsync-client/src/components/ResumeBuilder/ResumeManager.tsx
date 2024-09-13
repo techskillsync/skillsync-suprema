@@ -187,7 +187,7 @@ function ResumeManager() {
           closeResume={() => setOpenedResume(null)}
         />
       ) : (
-        <main className="flex flex-col h-screen mt-5 md:px-10 w-full">
+        <main className="flex flex-col min-h-screen mt-5 md:px-10 w-full">
           <section className="flex flex-col gap-2 justify-center items-start">
             <h1 className="font-bold mt-5 text-white">Select a resume:</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
@@ -195,22 +195,24 @@ function ResumeManager() {
                 savedResumes.map((resume, index) => (
                   <div
                     key={index}
-                    className="bg-white  max-h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white h-[375px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
                   >
-                    <PreviewResume
-                      resume_id={resume.resume_id}
-                      label={resume.label}
-                      full_name={resume.full_name}
-                      phone_number={resume.phone_number}
-                      email={resume.email}
-                      personal_website={resume.personal_website}
-                      linkedin={resume.linkedin}
-                      github={resume.github}
-                      education={resume.education}
-                      experience={resume.experience}
-                      projects={resume.projects}
-                      technical_skills={resume.technical_skills}
-                    />
+                    <div className="w-full h-full overflow-y-scroll">
+                      <PreviewResume
+                        resume_id={resume.resume_id}
+                        label={resume.label}
+                        full_name={resume.full_name}
+                        phone_number={resume.phone_number}
+                        email={resume.email}
+                        personal_website={resume.personal_website}
+                        linkedin={resume.linkedin}
+                        github={resume.github}
+                        education={resume.education}
+                        experience={resume.experience}
+                        projects={resume.projects}
+                        technical_skills={resume.technical_skills}
+                      />
+                      </div>
                     <h6 className="mt-2 text-black"> {resume.label}</h6>
                     <div className="flex space-x-4 mt-4">
                       <button

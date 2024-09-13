@@ -1,3 +1,10 @@
+/*
+ * NOTE TO ANYONE IMPORTING THIS
+ * Preview resume will dynamically scale to with width of the parent.
+ * This is important for nice previews, so its the parents responsibility
+ * to set the width and height and to specify a height overflow setting.
+ */
+
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import { Resume } from "../../types/types";
 
