@@ -17,8 +17,7 @@ type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
  * Upsert resume data to Supabase using resume id.
  * and updates sync_status accordingly.
  */
-async function syncResume(resume:Resume, sync_status:SyncStatus, setSyncStatus:React.Dispatch<React.SetStateAction<SyncStatus>>):Promise<boolean>
-{
+async function syncResume(resume: Resume, sync_status: SyncStatus, setSyncStatus: React.Dispatch<React.SetStateAction<SyncStatus>>): Promise<boolean> {
 	if (sync_status === 'blocked') { return false; }
 
 	const { label, resume_id, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills, } = resume;
@@ -30,14 +29,13 @@ async function syncResume(resume:Resume, sync_status:SyncStatus, setSyncStatus:R
 			.from('resume_builder')
 			.upsert(
 				{ id: await GetUserId(), resume_id, label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills, },
-				{ onConflict: 'resume_id'}
+				{ onConflict: 'resume_id' }
 			)
 			.select('resume_id');
 		if (error) { throw Error(error.message); }
 		setSyncStatus('good');
 		return true;
-	} catch(error) 
-	{
+	} catch (error) {
 		console.warn("Error syncing resume - " + error);
 		setSyncStatus('failed');
 		return false;
@@ -46,8 +44,8 @@ async function syncResume(resume:Resume, sync_status:SyncStatus, setSyncStatus:R
 
 
 
-type ResumeBuilderProps = { resume:Resume, closeResume:()=>void };
-function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
+type ResumeBuilderProps = { resume: Resume, closeResume: () => void };
+function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	const resume_id = resume.resume_id;
 	const [sync_status, setSyncStatus] = useState<SyncStatus>('blocked');
 	const [label, setLabel] = useState<string>('');
@@ -62,8 +60,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 	const [projects, setProjects] = useState<ProjectsSection[]>([]);
 	const [technical_skills, setTechnicalSkills] = useState<SkillsSection[]>([]);
 
-	useEffect( () =>
-	{
+	useEffect(() => {
 		setLabel(resume.label);
 		setFullName(resume.full_name);
 		setPhoneNumber(resume.phone_number);
@@ -77,12 +74,11 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 		setTechnicalSkills(resume.technical_skills);
 
 		setSyncStatus('good');
-		
+
 	}, []);
 
-	useEffect( () => {
-		async function doAsync()
-		{
+	useEffect(() => {
+		async function doAsync() {
 			const resume = { resume_id, label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills };
 			syncResume(resume, sync_status, setSyncStatus);
 		}
@@ -101,9 +97,9 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 				<input
 					placeholder="Resume name"
 					className="bg-black hover:bg-slate-800 m-2 px-3 rounded-2xl text-2xl font-semibold"
-					
+
 					value={label}
-					onChange={(e)=>{setLabel(e.target.value)}}/>
+					onChange={(e) => { setLabel(e.target.value) }} />
 				<div className="ml-auto text-xl flex items-center mr-4 font-semibold">
 					{(() => {
 						switch (sync_status) {
@@ -114,24 +110,24 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 										<div className="w-6 h-6 bg-green-400 rounded-full ml-2" />
 									</>
 								);
-              case 'loading':
-              	return (
-              		<>
-              			<p>Saving</p>
+							case 'loading':
+								return (
+									<>
+										<p>Saving</p>
 										<div className="w-6 h-6 bg-neutral-400 rounded-full ml-2" />
 									</>
-              	);
-              case 'blocked':
-              	return (
-              		<>
-              			<p>Blocked</p>
+								);
+							case 'blocked':
+								return (
+									<>
+										<p>Blocked</p>
 										<div className="w-6 h-6 bg-orange-400 rounded-full ml-2" />
 									</>
 								);
-              case 'failed':
-              	return (
-              		<>
-              			<p>Not saved</p>
+							case 'failed':
+								return (
+									<>
+										<p>Not saved</p>
 										<div className="w-6 h-6 bg-red-400 rounded-full ml-2" />
 									</>
 								);
@@ -153,7 +149,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 						setExperience={setExperience} experience={experience}
 						setProjects={setProjects} projects={projects}
 						setTechnicalSkills={setTechnicalSkills} technical_skills={technical_skills}
-						/>
+					/>
 				</div>
 				<div className="h-full  w-[50%]">
 					<PreviewResume
@@ -169,7 +165,7 @@ function ResumeBuilder({resume, closeResume}:ResumeBuilderProps) {
 						experience={experience}
 						projects={projects}
 						technical_skills={technical_skills}
-						/>
+					/>
 				</div>
 			</div>
 		</div>

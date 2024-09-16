@@ -22,7 +22,6 @@ function PreviewResume({ resume_id, label, full_name, phone_number, email, perso
 			if (!parentRef.current) { return; }
 			const parentWidth = parentRef.current.offsetWidth;
 			const resumeWidth = 8.5 * 96;
-			console.log(parentWidth + ', ' + resumeWidth + ', scale:' + resumeWidth/parentWidth);
 			setScale(parentWidth/resumeWidth);
 		}
 

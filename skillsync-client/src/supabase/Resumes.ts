@@ -150,7 +150,7 @@ async function DeleteResume(
   return true;
 }
 
-async function GetResumeCount(): Promise<Number | null> {
+async function GetResumeCount(): Promise<number | null> {
   const user_id = await GetUserId();
   const { data, error, count } = await supabase
     .from("user_resumes")

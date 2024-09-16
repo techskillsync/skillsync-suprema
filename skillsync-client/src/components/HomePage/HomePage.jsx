@@ -6,6 +6,7 @@ import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import JobDetailsSlide from "../Feed/JobDetailsSlide";
 import { redirectUser } from "../../utilities/redirect_user";
 import { motion, AnimatePresence } from "framer-motion";
+import { UserNeedsOnboard } from '../Authentication/SuccessfulLoginRedirect';
 
 const HomePage = () => {
   const [selectedPage, setSelectedPage] = useState("Dashboard");
@@ -30,8 +31,20 @@ const HomePage = () => {
     }
   }, [selectedJob, selectedPage]);
 
+  /*
+   * Routes signed out users to the login screen
+   * and users who needs onboarding to the welcome
+   * screen.
+   */
   useEffect(() => {
-    redirectUser("/login", false);
+    async function doAsync() {
+      await redirectUser("/login", false);
+      if (await UserNeedsOnboard()) {
+        await redirectUser("/welcome", true);
+      }
+    }
+
+    doAsync();
   }, []);
 
   useEffect(() => {
