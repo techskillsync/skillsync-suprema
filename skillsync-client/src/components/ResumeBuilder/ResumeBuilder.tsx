@@ -1,12 +1,11 @@
-import React, { useState, useEffect, } from 'react'
+import React, { useState, useEffect, useRef, } from 'react'
 import { Resume, EducationSection, ExperienceSection, ProjectsSection, SkillsSection, } from '../../types/types';
-import { GetProfileInfo } from '../../supabase/ProfileInfo';
-import { GetWorkExperiences } from '../../supabase/WorkExperience';
 import supabase from '../../supabase/supabaseClient';
 import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
+import toast, { Toaster } from "react-hot-toast";
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -44,6 +43,65 @@ async function syncResume(resume: Resume, sync_status: SyncStatus, setSyncStatus
 
 
 
+/*
+ * Calls js-api to generate a PDF version of the resume, then
+ * prompts the user to download the PDF resume.
+ */
+async function downloadResumePDF(label:string, htmlContent: string) {
+	const resume = await generateResumePDF(htmlContent);
+	if (!resume) {
+		console.warn("downloadResumePDF did not receive a valid PDF 😵");
+		return;
+	}
+
+	const url = window.URL.createObjectURL(resume);
+	const link = document.createElement('a');
+	link.href = url;
+	link.download = label;
+	document.body.appendChild(link); // Required for Firefox
+	link.click();
+	document.body.removeChild(link);
+	window.URL.revokeObjectURL(url);
+}
+
+
+
+async function generateResumePDF(htmlContent: string):Promise<null|Blob>
+{
+	if (!htmlContent) {
+		console.warn('Attempt to generate resume with no content');
+		return null;
+	}
+
+	try {
+		const response = await fetch('https://js-api.skillsync.work/htmlToPdf', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ htmlContent })
+		});
+
+		const body = await response.json();
+		if (body.error) { return null; }
+		// Convert Base64 encoded PDF to a Uint8Array
+		const base64Pdf = body.data;
+
+		const binaryString = atob(base64Pdf);
+		const len = binaryString.length;
+		const bytes = new Uint8Array(len);
+
+		for (let i = 0; i < len; i++) {
+			bytes[i] = binaryString.charCodeAt(i);
+		}
+
+		// Create a Blob from the ArrayBuffer
+		const blob = new Blob([bytes], { type: 'application/pdf' });
+		return blob;
+	} catch (error) {
+		console.error('Error:', error);
+        return null;
+	}
+}
+
 type ResumeBuilderProps = { resume: Resume, closeResume: () => void };
 function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	const resume_id = resume.resume_id;
@@ -59,6 +117,10 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	const [experience, setExperience] = useState<ExperienceSection[]>([]);
 	const [projects, setProjects] = useState<ProjectsSection[]>([]);
 	const [technical_skills, setTechnicalSkills] = useState<SkillsSection[]>([]);
+
+	type PreviewResumeRef = { getResumeHTML: () => string|undefined; };
+	const previewResumeRef = useRef<PreviewResumeRef | undefined>(undefined); // So we can access PreviewResume's getResumeHTML function
+	const [downloadButtonText, setDownloadButtonText] = useState<string>("Download PDF");
 
 	useEffect(() => {
 		setLabel(resume.label);
@@ -86,6 +148,10 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 		doAsync();
 	}, [label, full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills]);
 
+	function getResumeHTML() {
+		if (!previewResumeRef.current) { return undefined; }
+		return previewResumeRef.current.getResumeHTML();
+	}
 	return (
 		<div className="h-screen w-full bg-black flex flex-col ">
 			<div className="h-20 flex-none flex">
@@ -151,8 +217,19 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 						setTechnicalSkills={setTechnicalSkills} technical_skills={technical_skills}
 					/>
 				</div>
-				<div className="h-full  w-[50%]">
+				<div className="h-full w-[50%] overflow-y-scroll">
+					<button className="block text-center mx-auto mb-4 w-[50%] bg-[#03BD6C] text-white" 
+							onClick={async () => {
+								setDownloadButtonText("Downloading...")
+								const resumeHTML = getResumeHTML();
+								if (!resumeHTML) { return; }
+								await downloadResumePDF(label, resumeHTML);
+								setDownloadButtonText("Download PDF")
+							}}>
+						{downloadButtonText}
+					</button>
 					<PreviewResume
+						ref={previewResumeRef}
 						resume_id={resume_id}
 						label={label}
 						full_name={full_name}

@@ -7,12 +7,18 @@
 }
 
 #resumeInfo input {
+  background: black;
   color: white;
   padding: 0 4px;
   font-size: 18px;
   border-bottom: 2px dashed transparent;
   margin: 8px 0;
   transition: 200ms;
+}
+
+#resumeInfo textarea {
+  background: black;
+  color: white;
 }
 
 #resumeInfo input:hover {

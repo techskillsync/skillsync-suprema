@@ -5,13 +5,14 @@
 https://skillsync.work  
 https://ss-api.skillsync.work  
 https://gpt-broker.skillsync.work  
-https://ss-api.drismir.ca (deprecated, use skillsync.work instead)  
-https://gpt-broker.drismir.ca  
+https://gpt-broker.skillsync.work  
+https://js-api.skillsync.work
 **Inernal Endpoints:**  
 http://localhost:8011 (gpt-broker)  
-http://localhost:8012  (ss-api)  
+http://localhost:8012 (ss-api)  
 http://localhost:8013 (gpt-broker's redis)  
 http://localhost:8014 (gpt-broker's redis-redinsight)
+http://localhost:8015 (js-api)
 
 ## Google Authentication
 I needed to make some changes for react. In general I followed this guide using the google pre build sign in.
