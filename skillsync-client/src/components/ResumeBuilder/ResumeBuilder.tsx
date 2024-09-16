@@ -74,7 +74,7 @@ async function generateResumePDF(htmlContent: string):Promise<null|Blob>
 	}
 
 	try {
-		const response = await fetch('http://localhost:8015/htmlToPdf', {
+		const response = await fetch('https://js-api.skillsync.work/htmlToPdf', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ htmlContent })
@@ -104,8 +104,6 @@ async function generateResumePDF(htmlContent: string):Promise<null|Blob>
 
 type ResumeBuilderProps = { resume: Resume, closeResume: () => void };
 function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
-	type PreviewResumeRef = { getResumeHTML: () => string|undefined; };
-	const previewResumeRef = useRef<PreviewResumeRef | undefined>(undefined); // So we can access PreviewResume's getResumeHTML function
 	const resume_id = resume.resume_id;
 	const [sync_status, setSyncStatus] = useState<SyncStatus>('blocked');
 	const [label, setLabel] = useState<string>('');
@@ -119,6 +117,10 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	const [experience, setExperience] = useState<ExperienceSection[]>([]);
 	const [projects, setProjects] = useState<ProjectsSection[]>([]);
 	const [technical_skills, setTechnicalSkills] = useState<SkillsSection[]>([]);
+
+	type PreviewResumeRef = { getResumeHTML: () => string|undefined; };
+	const previewResumeRef = useRef<PreviewResumeRef | undefined>(undefined); // So we can access PreviewResume's getResumeHTML function
+	const [downloadButtonText, setDownloadButtonText] = useState<string>("Download PDF");
 
 	useEffect(() => {
 		setLabel(resume.label);
@@ -217,13 +219,14 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 				</div>
 				<div className="h-full w-[50%] overflow-y-scroll">
 					<button className="block text-center mx-auto mb-4 w-[50%] bg-[#03BD6C] text-white" 
-					        onClick={() => {
+							onClick={async () => {
+								setDownloadButtonText("Downloading...")
 								const resumeHTML = getResumeHTML();
-								console.log(resumeHTML);
 								if (!resumeHTML) { return; }
-								downloadResumePDF(label, resumeHTML);
+								await downloadResumePDF(label, resumeHTML);
+								setDownloadButtonText("Download PDF")
 							}}>
-						Download PDF
+						{downloadButtonText}
 					</button>
 					<PreviewResume
 						ref={previewResumeRef}
