@@ -220,5 +220,5 @@ input[type='text']:focus {
 }
 
 *::-webkit-scrollbar {
-    width: 1;
+  width: 1;
 }
