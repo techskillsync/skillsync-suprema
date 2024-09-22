@@ -74,7 +74,7 @@ async function generateResumePDF(htmlContent: string):Promise<null|Blob>
 	}
 
 	try {
-		const response = await fetch('http://localhost:8015/htmlToPdf', {
+		const response = await fetch('https://js-api.skillsync.work/htmlToPdf', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ htmlContent })
