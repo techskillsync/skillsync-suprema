@@ -6,6 +6,7 @@ import ChartsSection from "./ChartsSection";
 import { IoChatbox, IoHelp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Tutorial from "./Tutorial";
+import {LayoutDashboard} from "lucide-react"
 
 const Dashboard = ({ profileInfo, setSelectedJob }) => {
   const navigate = useNavigate();
@@ -20,8 +21,15 @@ const Dashboard = ({ profileInfo, setSelectedJob }) => {
           <h1 className="text-white text-left text-2xl font-medium">
             Welcome, {profileInfo?.name}
           </h1>
-          <div className="flex">
-            <button onClick={() => setRunTutorial(!runTutorial)}  className="bg-[#1e1e1e] text-white rounded-lg mx-4 py-2 px-3 flex items-center gap-2">
+          <div className="absolute flex gap-4 top-4 right-8">
+
+          <button onClick={() => window.open("https://chromewebstore.google.com/detail/skillsync/lboeblhlbmaefeiehpifgiceemiledcg")}  
+          className=" text-white rounded-lg py-2 px-3 flex items-center gap-2 bg-gradient-to-r from-[#36B7FE] to-[#03BD6C]">
+              {" "}
+              <LayoutDashboard /> Get the extension
+            </button>
+            
+            <button onClick={() => setRunTutorial(!runTutorial)}  className="bg-[#1e1e1e] text-white rounded-lg py-2 px-3 flex items-center gap-2">
               {" "}
               <IoHelp /> Tutorial
             </button>
