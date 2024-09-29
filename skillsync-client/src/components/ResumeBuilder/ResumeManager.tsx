@@ -119,7 +119,7 @@ async function assembleNewResume(): Promise<Resume> {
       experiences.push(experience);
     }
 
-    let custom_resume:Resume = {
+    let custom_resume: Resume = {
       resume_id: resume_id,
       label: resume_label,
       full_name: profile_data.name + " " + profile_data.last_name,
@@ -134,21 +134,21 @@ async function assembleNewResume(): Promise<Resume> {
       technical_skills: [],
     };
 
-    if (typeof custom_resume.label !== "string")            { custom_resume.label = "My Resume"; }
-    if (typeof custom_resume.full_name !== "string")        { custom_resume.full_name = "John Doe"; }
-    if (typeof custom_resume.phone_number !== "string")     { custom_resume.phone_number = "+1 234 567 8900"; }
-    if (typeof custom_resume.email !== "string")            { custom_resume.email = "example@gmail.com"; }
+    if (typeof custom_resume.label !== "string") { custom_resume.label = "My Resume"; }
+    if (typeof custom_resume.full_name !== "string") { custom_resume.full_name = "John Doe"; }
+    if (typeof custom_resume.phone_number !== "string") { custom_resume.phone_number = "+1 234 567 8900"; }
+    if (typeof custom_resume.email !== "string") { custom_resume.email = "example@gmail.com"; }
     if (typeof custom_resume.personal_website !== "string") { custom_resume.personal_website = "https://example.com"; }
-    if (typeof custom_resume.linkedin !== "string")         { custom_resume.linkedin = "https://linkedin.com/example" }
-    if (typeof custom_resume.github !== "string")           { custom_resume.github = "https://github.com/example" }
-    if (!Array.isArray(custom_resume.education))            { custom_resume.education = []; }
-    if (!Array.isArray(custom_resume.experience))           { custom_resume.experience = []; }
+    if (typeof custom_resume.linkedin !== "string") { custom_resume.linkedin = "https://linkedin.com/example" }
+    if (typeof custom_resume.github !== "string") { custom_resume.github = "https://github.com/example" }
+    if (!Array.isArray(custom_resume.education)) { custom_resume.education = []; }
+    if (!Array.isArray(custom_resume.experience)) { custom_resume.experience = []; }
 
     return custom_resume;
 
   } catch (error) {
     console.warn("Error arranging resume info - " + error);
-    const default_resume:Resume = {
+    const default_resume: Resume = {
       resume_id: resume_id,
       label: "My Resume",
       full_name: "John Doe",
@@ -195,8 +195,36 @@ function ResumeManager() {
                 savedResumes.map((resume, index) => (
                   <div
                     key={index}
-                    className="bg-white  max-h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white cursor-pointer max-h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
+                    onClick={() => {
+                      setOpenedResume(resume);
+                    }}
                   >
+                    <div className="flex justify-between items-center w-full">
+                      <h6 className="text-[#3f83f8] font-semibold text-left text-xl w-full "> {resume.label}</h6>
+                      <button
+                        className="bg-red-500 flex min-w-max gap-2 text-white px-1 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
+                        onClick={async (event) => {
+                          event.stopPropagation();
+                          const confirmDelete = window.confirm(
+                            "Are you sure you want to delete this resume?"
+                          );
+                          if (confirmDelete) {
+                            if (await deleteResume(resume.resume_id)) {
+                              setSavedResumes((prev) =>
+                                prev
+                                  ? prev.filter(
+                                    (r) => r.resume_id !== resume.resume_id
+                                  )
+                                  : null
+                              );
+                            }
+                          }
+                        }}
+                      >
+                        <Trash2Icon />
+                      </button>
+                    </div>
                     <PreviewResume
                       resume_id={resume.resume_id}
                       label={resume.label}
@@ -211,38 +239,6 @@ function ResumeManager() {
                       projects={resume.projects}
                       technical_skills={resume.technical_skills}
                     />
-                    <h6 className="mt-2 text-black"> {resume.label}</h6>
-                    <div className="flex space-x-4 mt-4">
-                      <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-                        onClick={() => {
-                          setOpenedResume(resume);
-                        }}
-                      >
-                        Open
-                      </button>
-                      <button
-                        className="bg-red-500 flex min-w-max gap-2 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
-                        onClick={async () => {
-                          const confirmDelete = window.confirm(
-                            "Are you sure you want to delete this resume?"
-                          );
-                          if (confirmDelete) {
-                            if (await deleteResume(resume.resume_id)) {
-                              setSavedResumes((prev) =>
-                                prev
-                                  ? prev.filter(
-                                      (r) => r.resume_id !== resume.resume_id
-                                    )
-                                  : null
-                              );
-                            }
-                          }
-                        }}
-                      >
-                        <Trash2Icon /> Delete
-                      </button>
-                    </div>
                   </div>
                 ))
               ) : (
