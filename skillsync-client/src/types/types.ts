@@ -91,7 +91,6 @@ export interface UserProfile {
     state: string;
     country: string;
     address: string;
-    personal_website: string;
 }
 
 export interface JobListing {
