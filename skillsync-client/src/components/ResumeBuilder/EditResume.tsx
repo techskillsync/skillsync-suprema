@@ -23,7 +23,6 @@ import {
   HighlighterIcon,
   Plus,
 } from "lucide-react";
-import DatePicker from 'react-date-picker'
 
 async function simpleGPT(messages: Array<Object>): Promise<string> {
   try {
