@@ -195,8 +195,28 @@ function ResumeManager() {
                 savedResumes.map((resume, index) => (
                   <div
                     key={index}
-                    className="bg-white h-[375px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white cursor-pointer max-h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
+                    onClick={() => {
+                      setOpenedResume(resume);
+                    }}
                   >
+                    <div className="flex justify-between items-center w-full mb-2">
+                      <h6 className="text-[#3f83f8] font-semibold text-left text-xl w-full ml-2"> {resume.label}</h6>
+                      <button
+                        className="bg-red-500 flex min-w-max gap-2 text-white px-1 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
+                        onClick={async(event) => {
+                          event.stopPropagation();
+                          const confirmDelete = window.confirm(
+                            "Are you sure you want to delete this resume?"
+                          );
+                          if (!confirmDelete) { return }
+                          if (!await deleteResume(resume.resume_id)) { return }
+                          await setSavedResumes(await getSavedResumes()) // Refresh list of resumes
+                        }}
+                      >
+                        <Trash2Icon />
+                      </button>
+                    </div>
                     <div className="w-full h-full overflow-y-scroll">
                       <PreviewResume
                         resume_id={resume.resume_id}
@@ -213,38 +233,6 @@ function ResumeManager() {
                         technical_skills={resume.technical_skills}
                       />
                       </div>
-                    <h6 className="mt-2 text-black"> {resume.label}</h6>
-                    <div className="flex space-x-4 mt-4">
-                      <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-                        onClick={() => {
-                          setOpenedResume(resume);
-                        }}
-                      >
-                        Open
-                      </button>
-                      <button
-                        className="bg-red-500 flex min-w-max gap-2 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
-                        onClick={async () => {
-                          const confirmDelete = window.confirm(
-                            "Are you sure you want to delete this resume?"
-                          );
-                          if (confirmDelete) {
-                            if (await deleteResume(resume.resume_id)) {
-                              setSavedResumes((prev) =>
-                                prev
-                                  ? prev.filter(
-                                      (r) => r.resume_id !== resume.resume_id
-                                    )
-                                  : null
-                              );
-                            }
-                          }
-                        }}
-                      >
-                        <Trash2Icon /> Delete
-                      </button>
-                    </div>
                   </div>
                 ))
               ) : (
