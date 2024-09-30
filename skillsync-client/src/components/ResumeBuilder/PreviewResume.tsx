@@ -7,7 +7,7 @@
  * This component also exports a function getResumtHTML that returns the HTML of the resume.
  */
 
-import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef, CSSProperties } from "react";
 import { Resume } from "../../types/types";
 import ReactDOM from "react-dom";
 
@@ -16,7 +16,7 @@ export type PreviewResumeRef = {
 };
 
 const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) {
-	const { full_name, phone_number, email, personal_website, linkedin, github, education, experience, projects, technical_skills }: Resume = props;
+	const { full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills }: Resume = props;
 	const parentRef = useRef<HTMLDivElement>(null); // This is used to scale the resume to the parent div
 	const resumeRef = useRef<HTMLDivElement>(null); // Passed to parent for generating PDF
 	const [scale, setScale] = useState<number>(1);
@@ -45,7 +45,7 @@ const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) 
 
 	/* -- Styles used for Backend resume parsing -- */
 
-	const resumePreviewStyle = {
+	const resumePreviewStyle:CSSProperties = {
 		width: '8.5in',
 		height: '11in',
 		padding: '0.5in',
@@ -59,30 +59,30 @@ const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) 
 		lineHeight: '20px',
 	};
 
-	const headerStyle = {
+	const headerStyle:CSSProperties = {
 		textAlign: 'center',
 		fontSize: '28px',
 		fontWeight: '600',
 		marginBottom: '0.05in'
 	};
 
-	const linkStyle = {
+	const linkStyle:CSSProperties = {
 		textDecoration: 'underline',
 		color: 'black',
 	};
 
-	const sectionHeader = {
+	const sectionHeader:CSSProperties = {
 		width: 'full',
 		borderBottom: '1px solid black',
 		margin: '8px 0',
 	}
 
-	const sectionElementHeader = {
+	const sectionElementHeader:CSSProperties = {
 		display: 'flex',
 		justifyContent: 'space-between',
 	}
 
-	const bulletPoint = {
+	const bulletPoint:CSSProperties = {
 		listStyleType: 'disc',
 		listStylePosition: 'outside',
 		marginLeft: '0.30in'
@@ -116,9 +116,9 @@ const PreviewResume = forwardRef<PreviewResumeRef, Resume>(function(props, ref) 
 				<h4 style={{ textAlign: 'center' }}>
 					<span style={linkStyle}>{phone_number}</span>&nbsp;&nbsp;&nbsp;
 					<a style={linkStyle} href={`mailto:${email}`} >{email}</a>&nbsp;&nbsp;&nbsp;
-					<a style={linkStyle} href={personal_website} target="_blank">Portfolio</a>&nbsp;&nbsp;&nbsp;
-					<a style={linkStyle} href={linkedin} target="_blank">LinkedIn</a>&nbsp;&nbsp;&nbsp;
-					<a style={linkStyle} href={github} target="_blank">GitHub</a>
+					{custom_contact.map( (contact, index) => (
+						<span key={index}><a style={linkStyle} href={contact.url} target="_blank">{contact.label}</a>&nbsp;&nbsp;&nbsp;</span>
+					))}
 				</h4>
 				<h2 style={sectionHeader}>EDUCATION</h2>
 				{education.map((ed, index:number) => (

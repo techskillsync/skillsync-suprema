@@ -80,7 +80,7 @@ async function assembleNewResume(): Promise<Resume> {
 
   try {
     const profile_data = await GetProfileInfo(
-      "name, last_name, phone_number, email, personal_website, linkedin, github, school, grad_year, program, specialization, location"
+      "name, last_name, phone_number, email, school, grad_year, program, specialization, location"
     );
     if (profile_data === null) {
       throw Error("Could not fetch profile");
@@ -125,9 +125,7 @@ async function assembleNewResume(): Promise<Resume> {
       full_name: profile_data.name + " " + profile_data.last_name,
       phone_number: profile_data.phone_number,
       email: profile_data.email,
-      personal_website: profile_data.personal_website,
-      linkedin: profile_data.linkedin,
-      github: profile_data.github,
+      custom_contact: [],
       education: educations,
       experience: experiences,
       projects: [],
@@ -138,9 +136,6 @@ async function assembleNewResume(): Promise<Resume> {
     if (typeof custom_resume.full_name !== "string")        { custom_resume.full_name = "John Doe"; }
     if (typeof custom_resume.phone_number !== "string")     { custom_resume.phone_number = "+1 234 567 8900"; }
     if (typeof custom_resume.email !== "string")            { custom_resume.email = "example@gmail.com"; }
-    if (typeof custom_resume.personal_website !== "string") { custom_resume.personal_website = "https://example.com"; }
-    if (typeof custom_resume.linkedin !== "string")         { custom_resume.linkedin = "https://linkedin.com/example" }
-    if (typeof custom_resume.github !== "string")           { custom_resume.github = "https://github.com/example" }
     if (!Array.isArray(custom_resume.education))            { custom_resume.education = []; }
     if (!Array.isArray(custom_resume.experience))           { custom_resume.experience = []; }
 
@@ -154,9 +149,7 @@ async function assembleNewResume(): Promise<Resume> {
       full_name: "John Doe",
       phone_number: "+1 234 567 8900",
       email: "example@gmail.com",
-      personal_website: "example.github.io",
-      linkedin: "https://linkedin.com/example",
-      github: "https://github.com/example",
+      custom_contact: [],
       education: [],
       experience: [],
       projects: [],
@@ -224,9 +217,7 @@ function ResumeManager() {
                         full_name={resume.full_name}
                         phone_number={resume.phone_number}
                         email={resume.email}
-                        personal_website={resume.personal_website}
-                        linkedin={resume.linkedin}
-                        github={resume.github}
+                        custom_contact={resume.custom_contact}
                         education={resume.education}
                         experience={resume.experience}
                         projects={resume.projects}

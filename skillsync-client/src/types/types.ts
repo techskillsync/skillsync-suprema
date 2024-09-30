@@ -37,6 +37,11 @@ export interface SkillsSection {
     skills: string;
 }
 
+export interface CustomContact {
+    label: string;
+    url: string;
+}
+
 
 export interface Resume {
     resume_id: string;
@@ -44,9 +49,7 @@ export interface Resume {
     full_name: string;
     phone_number: string;
     email: string;
-    personal_website: string;
-    linkedin: string;
-    github: string;
+    custom_contact: CustomContact[];
     education: EducationSection[];
     experience: ExperienceSection[];
     projects: ProjectsSection[];

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import supabase from "../../supabase/supabaseClient";
 import {
+  CustomContact,
   EducationSection,
   ExperienceSection,
   ProjectsSection,
@@ -179,9 +180,7 @@ interface EditResumeProps {
   setFullName: React.Dispatch<React.SetStateAction<string>>;
   setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
-  setPersonalWebsite: React.Dispatch<React.SetStateAction<string>>;
-  setLinkedin: React.Dispatch<React.SetStateAction<string>>;
-  setGithub: React.Dispatch<React.SetStateAction<string>>;
+  setCustomContact: React.Dispatch<React.SetStateAction<CustomContact[]>>;
   setEducation: React.Dispatch<React.SetStateAction<EducationSection[]>>;
   setExperience: React.Dispatch<React.SetStateAction<ExperienceSection[]>>;
   setProjects: React.Dispatch<React.SetStateAction<ProjectsSection[]>>;
@@ -190,9 +189,7 @@ interface EditResumeProps {
   full_name: string;
   phone_number: string;
   email: string;
-  personal_website: string;
-  linkedin: string;
-  github: string;
+  custom_contact: CustomContact[];
   education: EducationSection[];
   experience: ExperienceSection[];
   projects: ProjectsSection[];
@@ -204,9 +201,7 @@ function EditResume({
   setFullName,
   setPhoneNumber,
   setEmail,
-  setPersonalWebsite,
-  setLinkedin,
-  setGithub,
+  setCustomContact,
   setEducation,
   setExperience,
   setProjects,
@@ -215,9 +210,7 @@ function EditResume({
   full_name,
   phone_number,
   email,
-  personal_website,
-  linkedin,
-  github,
+  custom_contact,
   education,
   experience,
   projects,
@@ -274,50 +267,73 @@ function EditResume({
             />
           </div>
 
-          {/* Website Input */}
-          <div className="flex items-center border border-gray-300 rounded-md p-2 hover:border-gray-400 focus-within:border-gray-500">
-            <span className="text-gray-500 mr-3">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm-.5-11h-1v4h4v-1.5h-3z" />
-              </svg>
-            </span>
-            <input
-              className="flex-grow outline-none text-gray-700 placeholder-gray-400"
-              placeholder="Website"
-              onChange={(e) => setPersonalWebsite(e.target.value)}
-              value={personal_website}
-            />
-          </div>
+          {/* Custom Contact Info */}
+          {custom_contact.map((cc, index) => (
+            <div key={index} className="flex items-stretch">
+              <div className="flex-grow border border-gray-300 rounded-md p-2 hover:border-gray-400 focus-within:border-gray-500">
+                <div className="flex rounded-none items-center border-b border-gray-500">
+                  <span className="text-gray-500 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg>
+                  </span>
+                  <input
+                    className="flex-grow outline-none text-gray-700 placeholder-gray-400"
+                    placeholder="Label"
+                    onChange={(e) => {
+                      const new_cc = { label: e.target.value, url: cc.url }
+                      let new_custom_contact = [...custom_contact]
+                      new_custom_contact[index] = new_cc
+                      setCustomContact(new_custom_contact)
+                    }}
+                    value={cc.label}
+                  />
+                </div>
+                <div className="flex items-center">
+                  <span className="text-gray-500 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                  </span>
+                  <input
+                    className="flex-grow outline-none text-gray-700 placeholder-gray-400"
+                    placeholder="https://example.com"
+                    onChange={(e) => {
+                      let new_url = e.target.value;
+                      if (new_url === 'https:/') {
+                        new_url = new_url + '/';
+                      }
+                      else if (!new_url.startsWith('https://')) {
+                        new_url = 'https://' + new_url;
+                      }
+                      const new_cc = { label: cc.label, url: new_url }
+                      let new_custom_contact = [...custom_contact]
+                      new_custom_contact[index] = new_cc
+                      setCustomContact(new_custom_contact)
+                    }}
+                    value={cc.url}
+                  />
+                </div>
+              </div>
+              <div 
+              className="ml-2 p-2 text-white rounded-md flex justify-center items-center bg-red-500 hover:bg-red-600"
+              onClick={() => {
+                let new_custom_contact = [...custom_contact]
+                new_custom_contact.splice(index, 1)
+                setCustomContact(new_custom_contact)
+              }}>
+                <Trash2Icon className="w-5 h-5" />
+              </div>
+            </div>
+          ))}
 
-          {/* LinkedIn Input */}
-          <div className="flex items-center border border-gray-300 rounded-md p-2 hover:border-gray-400 focus-within:border-gray-500">
-            <span className="text-gray-500 mr-3">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8 18H5V10H8M6.5 9A1.5 1.5 0 0 1 5 7.5A1.5 1.5 0 0 1 6.5 6A1.5 1.5 0 0 1 8 7.5A1.5 1.5 0 0 1 6.5 9M18 18H15V13C15 11.9 14.1 11 13 11A2 2 0 0 0 11 13V18H8V10H11V11H11.1C11.5 10.4 12.1 10 13 10A3 3 0 0 1 16 13V18Z" />
-              </svg>
-            </span>
-            <input
-              className="flex-grow outline-none text-gray-700 placeholder-gray-400"
-              placeholder="LinkedIn"
-              onChange={(e) => setLinkedin(e.target.value)}
-              value={linkedin}
-            />
-          </div>
+          {/* Add Custom Contact button */}
+          <button
+            className="flex-grow bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
+            onClick={() => {
+              setCustomContact([...custom_contact, { label: '', url: 'https://' }])
+            }}
+          >
+            <PlusIcon />
+            Add Contact
+          </button>
 
-          {/* Github Input */}
-          <div className="flex items-center border border-gray-300 rounded-md p-2 hover:border-gray-400 focus-within:border-gray-500">
-            <span className="text-gray-500 mr-3">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12C2 16.42 5.19 20.17 9.17 21.5C9.57 21.55 9.72 21.34 9.72 21.15C9.72 20.98 9.71 20.42 9.71 19.72C6.56 20.39 5.91 18.57 5.91 18.57C5.54 17.56 5.04 17.25 5.04 17.25C4.34 16.77 5.17 16.79 5.17 16.79C6.03 16.85 6.48 17.78 6.48 17.78C7.24 19.02 8.46 18.66 9 18.43C9.07 17.86 9.27 17.49 9.5 17.29C7.13 17.09 4.67 16.12 4.67 12.93C4.67 11.94 5.07 11.14 5.7 10.55C5.59 10.35 5.25 9.3 5.78 7.87C5.78 7.87 6.47 7.66 9.72 9.33C10.7 9.07 11.73 8.94 12.76 8.93C13.79 8.94 14.82 9.07 15.8 9.33C19.04 7.66 19.73 7.87 19.73 7.87C20.26 9.3 19.92 10.35 19.81 10.55C20.44 11.14 20.84 11.94 20.84 12.93C20.84 16.13 18.38 17.09 16 17.29C16.33 17.56 16.62 18.12 16.62 18.96C16.62 20.21 16.61 21.11 16.61 21.15C16.61 21.34 16.76 21.55 17.16 21.5C21.14 20.17 24.33 16.42 24.33 12C24.33 6.48 19.52 2 14 2H12Z" />
-              </svg>
-            </span>
-            <input
-              className="flex-grow outline-none text-gray-700 placeholder-gray-400"
-              placeholder="Github"
-              onChange={(e) => setGithub(e.target.value)}
-              value={github}
-            />
-          </div>
         </div>
 
         <h3 className="mt-5 py-5">EDUCATION:</h3>
@@ -998,35 +1014,35 @@ function EditResume({
           ))}
 
           {/* Add New Skills Section */}
-		  <div className="flex gap-2 ">
-          <button
-            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
-            onClick={() => {
-              const new_skill: SkillsSection = {
-                category: "New Category",
-                skills: "",
-              };
-              setTechnicalSkills([...technical_skills, new_skill]);
-            }}
-          >
-            <PlusIcon/>
-            Add Technical Skill
-          </button>
-		  <button
-            className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex gap-2 items-center justify-center"
-            onClick={async () => {
-              const new_skill = await genSkillSection(
-                technical_skills,
-                experience,
-                projects,
-                education
-              );
-              setTechnicalSkills([...technical_skills, new_skill]);
-            }}
-          >
-            <BrainCircuit/> AI Category
-          </button>
-		  </div>
+          <div className="flex gap-2 ">
+            <button
+              className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
+              onClick={() => {
+                const new_skill: SkillsSection = {
+                  category: "New Category",
+                  skills: "",
+                };
+                setTechnicalSkills([...technical_skills, new_skill]);
+              }}
+            >
+              <PlusIcon />
+              Add Technical Skill
+            </button>
+            <button
+              className="bg-black border-dashed border-white text-white mt-6 w-full p-3 rounded-md hover:bg-gray-800 transition-colors duration-300 flex gap-2 items-center justify-center"
+              onClick={async () => {
+                const new_skill = await genSkillSection(
+                  technical_skills,
+                  experience,
+                  projects,
+                  education
+                );
+                setTechnicalSkills([...technical_skills, new_skill]);
+              }}
+            >
+              <BrainCircuit /> AI Category
+            </button>
+          </div>
         </div>
       </div>
     </div>
