@@ -194,7 +194,7 @@ function ResumeManager() {
                     }}
                   >
                     <div className="flex justify-between items-center w-full mb-2">
-                      <h6 className="text-[#3f83f8] font-semibold text-left text-xl w-full ml-2"> {resume.label}</h6>
+                      <h6 className="text-black font-semibold text-left text-xl w-full ml-2"> {resume.label}</h6>
                       <button
                         className="bg-red-500 flex min-w-max gap-2 text-white px-1 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
                         onClick={async(event) => {
