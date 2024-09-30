@@ -9,7 +9,6 @@
 
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef, CSSProperties } from "react";
 import { Resume } from "../../types/types";
-import ReactDOM from "react-dom";
 
 export type PreviewResumeRef = {
 	getResumeHTML: () => string|undefined;
