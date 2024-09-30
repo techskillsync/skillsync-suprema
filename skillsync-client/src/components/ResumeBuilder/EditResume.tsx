@@ -23,6 +23,7 @@ import {
   HighlighterIcon,
   Plus,
 } from "lucide-react";
+import DatePicker from 'react-date-picker'
 
 async function simpleGPT(messages: Array<Object>): Promise<string> {
   try {
@@ -218,6 +219,23 @@ function EditResume({
 }: EditResumeProps): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
 
+  // Converts a date in the format "Jul 2024"
+  // to the format yyyy-mm, so that they can be 
+  // set as the value attribute on an input of 
+  // type="month"
+  function convertFromResumeDate(human_date: string): string {
+    const [monthStr, year] = human_date.split(" ")
+    const monthMap: { [key: string]: string } = { Jan: "01", Feb: "02", Mar: "03", Apr: "04", May: "05", Jun: "06", Jul: "07", Aug: "08", Sep: "09", Oct: "10", Nov: "11", Dec: "12" };
+    const month = monthMap[monthStr]
+    return `${year}-${month}`
+  }
+
+  function convertToResumeDate(html_date: string): string {
+    const [year, month] = html_date.split("-");
+    const date = new Date(parseInt(year), parseInt(month) - 1)
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
+  }
+
   return (
     <div className="h-full w-full px-[5%] text-left text-black overflow-y-scroll">
       <div id="resumeInfo" className="m-4 pb-32">
@@ -311,13 +329,13 @@ function EditResume({
                   />
                 </div>
               </div>
-              <div 
-              className="ml-2 p-2 text-white rounded-md flex justify-center items-center bg-red-500 hover:bg-red-600"
-              onClick={() => {
-                let new_custom_contact = [...custom_contact]
-                new_custom_contact.splice(index, 1)
-                setCustomContact(new_custom_contact)
-              }}>
+              <div
+                className="ml-2 p-2 text-white rounded-md flex justify-center items-center bg-red-500 hover:bg-red-600"
+                onClick={() => {
+                  let new_custom_contact = [...custom_contact]
+                  new_custom_contact.splice(index, 1)
+                  setCustomContact(new_custom_contact)
+                }}>
                 <Trash2Icon className="w-5 h-5" />
               </div>
             </div>
@@ -420,22 +438,20 @@ function EditResume({
 
               {/* Graduation Date Input */}
               <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-                <span className="text-gray-500 mr-2">
-                  <Calendar className="w-5 h-5" />
-                </span>
                 <input
-                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+                  type="month"
+                  className="flex-grow border-none bg-transparent outline-none text-white placeholder-gray-400"
                   placeholder="Grad Date"
                   onChange={(e) => {
                     const new_edu: EducationSection = {
                       ...edu,
-                      end_date: e.target.value,
+                      end_date: convertToResumeDate(e.target.value),
                     };
                     const new_edus: EducationSection[] = [...education];
                     new_edus[index] = new_edu;
                     setEducation(new_edus);
                   }}
-                  value={edu.end_date}
+                  value={convertFromResumeDate(edu.end_date)}
                 />
               </div>
 
@@ -600,46 +616,65 @@ function EditResume({
                 />
               </div>
 
-              {/* Start Date Input */}
+              {/* Location Input */}
               <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
                 <span className="text-gray-500 mr-2">
-                  <Calendar className="w-5 h-5" />
+                  <MapPin className="w-5 h-5" />
                 </span>
                 <input
                   className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-                  placeholder="Start Date"
+                  placeholder="Location"
                   onChange={(e) => {
                     const new_exp: ExperienceSection = {
                       ...exp,
-                      start_day: e.target.value,
+                      location: e.target.value,
                     };
                     let new_exps: ExperienceSection[] = [...experience];
                     new_exps[index] = new_exp;
                     setExperience(new_exps);
                   }}
-                  value={exp.start_day}
+                  value={exp.location}
                 />
               </div>
 
-              {/* End Date Input */}
-              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-                <span className="text-gray-500 mr-2">
-                  <Calendar className="w-5 h-5" />
-                </span>
-                <input
-                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-                  placeholder="End Date"
-                  onChange={(e) => {
-                    const new_exp: ExperienceSection = {
-                      ...exp,
-                      end_day: e.target.value,
-                    };
-                    let new_exps: ExperienceSection[] = [...experience];
-                    new_exps[index] = new_exp;
-                    setExperience(new_exps);
-                  }}
-                  value={exp.end_day}
-                />
+              {/* Start Date Input */}
+              <div className="flex justify-between">
+                <div className="bg-black flex-grow mr-2 border decoration-slate-200 border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    type="month"
+                    className="w-full bg-transparent border-none outline-none text-white placeholder-gray-400"
+                    placeholder="Start Date"
+                    onChange={(e) => {
+                      const new_exp: ExperienceSection = {
+                        ...exp,
+                        start_day: convertToResumeDate(e.target.value),
+                      };
+                      let new_exps: ExperienceSection[] = [...experience];
+                      new_exps[index] = new_exp;
+                      setExperience(new_exps);
+                    }}
+                    value={convertFromResumeDate(exp.start_day)}
+                  />
+                </div>
+
+                {/* End Date Input */}
+                <div className="border flex-grow ml-2 bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    type="month"
+                    className="w-full border-none bg-transparent outline-none text-white placeholder-gray-400"
+                    placeholder="End Date"
+                    onChange={(e) => {
+                      const new_exp: ExperienceSection = {
+                        ...exp,
+                        end_day: convertToResumeDate(e.target.value),
+                      };
+                      let new_exps: ExperienceSection[] = [...experience];
+                      new_exps[index] = new_exp;
+                      setExperience(new_exps);
+                    }}
+                    value={convertFromResumeDate(exp.end_day)}
+                  />
+                </div>
               </div>
 
               {/* Highlights Section */}
@@ -823,39 +858,43 @@ function EditResume({
               </div>
 
               {/* Start Date Input */}
-              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-                <input
-                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-                  placeholder="Start date"
-                  onChange={(e) => {
-                    const new_prj: ProjectsSection = {
-                      ...prj,
-                      start_day: e.target.value,
-                    };
-                    let new_prjs: ProjectsSection[] = [...projects];
-                    new_prjs[index] = new_prj;
-                    setProjects(new_prjs);
-                  }}
-                  value={prj.start_day}
-                />
-              </div>
+              <div className="flex justify-between">
+                <div className="w-full mr-2 flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    type="month"
+                    className="flex-grow bg-transparent border-none outline-none text-white placeholder-gray-400"
+                    placeholder="Start date"
+                    onChange={(e) => {
+                      const new_prj: ProjectsSection = {
+                        ...prj,
+                        start_day: convertToResumeDate(e.target.value),
+                      };
+                      let new_prjs: ProjectsSection[] = [...projects];
+                      new_prjs[index] = new_prj;
+                      setProjects(new_prjs);
+                    }}
+                    value={convertFromResumeDate(prj.start_day)}
+                  />
+                </div>
 
-              {/* End Date Input */}
-              <div className="flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
-                <input
-                  className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
-                  placeholder="End date"
-                  onChange={(e) => {
-                    const new_prj: ProjectsSection = {
-                      ...prj,
-                      end_day: e.target.value,
-                    };
-                    let new_prjs: ProjectsSection[] = [...projects];
-                    new_prjs[index] = new_prj;
-                    setProjects(new_prjs);
-                  }}
-                  value={prj.end_day}
-                />
+                {/* End Date Input */}
+                <div className="w-full ml-2 flex items-center border bg-black border-gray-300 rounded-md p-2 mb-4 focus-within:ring-2 focus-within:ring-blue-500">
+                  <input
+                    type="month"
+                    className="flex-grow bg-transparent border-none outline-none text-white placeholder-gray-400"
+                    placeholder="End date"
+                    onChange={(e) => {
+                      const new_prj: ProjectsSection = {
+                        ...prj,
+                        end_day: convertToResumeDate(e.target.value),
+                      };
+                      let new_prjs: ProjectsSection[] = [...projects];
+                      new_prjs[index] = new_prj;
+                      setProjects(new_prjs);
+                    }}
+                    value={convertFromResumeDate(prj.end_day)}
+                  />
+                </div>
               </div>
 
               {/* Highlights Section */}
@@ -1050,3 +1089,4 @@ function EditResume({
 }
 
 export default EditResume;
+
