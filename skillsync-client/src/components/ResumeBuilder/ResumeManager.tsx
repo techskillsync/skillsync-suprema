@@ -3,13 +3,12 @@ import ResumeBuilder from "./ResumeBuilder";
 import PreviewResume from "./PreviewResume";
 import supabase from "../../supabase/supabaseClient";
 import { GetUserId } from "../../supabase/GetUserId";
-import {
-  Resume,
-} from "../../types/types";
+import { Resume } from "../../types/types";
 import { Trash2Icon } from "lucide-react";
-import { GetResumes } from '../../supabase/Resumes'
+import { GetResumes } from "../../supabase/Resumes";
 import { SlNote } from "react-icons/sl";
-import { assembleNewResume } from "./AssembleResumes";
+import { assembleNewResume, assembleForeignResume } from "./AssembleResumes";
+import toast, { Toaster } from "react-hot-toast";
 
 async function getSavedResumes(): Promise<Resume[] | null> {
   try {
@@ -49,7 +48,6 @@ async function deleteResume(resume_id: string): Promise<boolean> {
 }
 
 function ResumeManager() {
-
   const [savedResumes, setSavedResumes] = useState<Resume[] | null>([]);
   const [existingResumes, setExistingResumes] = useState<any[] | null>([]);
   const [openedResume, setOpenedResume] = useState<Resume | null>(null);
@@ -85,17 +83,24 @@ function ResumeManager() {
                     }}
                   >
                     <div className="flex justify-between items-center w-full mb-2">
-                      <h6 className="text-black font-semibold text-left text-xl w-full ml-2"> {resume.label}</h6>
+                      <h6 className="text-black font-semibold text-left text-xl w-full ml-2">
+                        {" "}
+                        {resume.label}
+                      </h6>
                       <button
                         className="bg-red-500 flex min-w-max gap-2 text-white px-1 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
-                        onClick={async(event) => {
+                        onClick={async (event) => {
                           event.stopPropagation();
                           const confirmDelete = window.confirm(
-                            "Are you sure you want to delete this resume?"
+                            "Are you sure you want to delete this resume?",
                           );
-                          if (!confirmDelete) { return }
-                          if (!await deleteResume(resume.resume_id)) { return }
-                          await setSavedResumes(await getSavedResumes()) // Refresh list of resumes
+                          if (!confirmDelete) {
+                            return;
+                          }
+                          if (!(await deleteResume(resume.resume_id))) {
+                            return;
+                          }
+                          await setSavedResumes(await getSavedResumes()); // Refresh list of resumes
                         }}
                       >
                         <Trash2Icon />
@@ -114,7 +119,7 @@ function ResumeManager() {
                         projects={resume.projects}
                         technical_skills={resume.technical_skills}
                       />
-                      </div>
+                    </div>
                   </div>
                 ))
               ) : (
@@ -134,22 +139,29 @@ function ResumeManager() {
                 <p className="text-sm text-gray-500">Create New Resume</p>
               </div>
             </div>
-            <h1 className="font-bold mt-5 text-white">Or import an existing Resume:</h1>
+            <h1 className="font-bold mt-5 mb-4 text-white">
+              Or import an existing Resume:
+            </h1>
             {existingResumes?.map((res, index) => (
-                <div
-                  key={index}
-                  className="bg-white text-black cursor-pointer w-[250px] h-[350px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
-                  onClick={() => {
-                    // CALL ASSEMBLE FOREIGN RESUME HERE THEN OPEN IT
-                    const new_resume = null
-                    setOpenedResume(new_resume);
-                  }}
-                  >
-                    <h6 className="text-black font-semibold text-left text-xl w-full ml-2"> {res.resume_label}</h6>
-                    <div className="w-full h-full flex justify-center items-center">
-                      <SlNote size={128} />
-                    </div>
+              <div
+                key={index}
+                className="bg-white text-black cursor-pointer w-[250px] h-[300px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
+                onClick={async () => {
+                  const loadingToastId = toast.loading("Importing resume...")
+                  const resume = await assembleForeignResume(res.resume_id)
+                  toast.dismiss(loadingToastId)
+                  setOpenedResume(resume)
+                }}
+              >
+                <Toaster />
+                <h6 className="text-black font-semibold text-left text-xl w-full ml-2">
+                  {" "}
+                  {res.resume_label}
+                </h6>
+                <div className="w-full h-full flex justify-center items-center">
+                  <SlNote size={96} />
                 </div>
+              </div>
             ))}
           </section>
         </main>
@@ -159,4 +171,4 @@ function ResumeManager() {
 }
 
 export default ResumeManager;
-export { getSavedResumes }
+export { getSavedResumes };

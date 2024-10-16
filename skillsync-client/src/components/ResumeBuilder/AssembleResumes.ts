@@ -1,18 +1,14 @@
 /*
- * This file holds functions that take info from SkillSync profiles and 
+ * This file holds functions that take info from SkillSync profiles and
  * assemble them into resume objects.
  */
 import { v4 as uuidv4 } from "uuid";
 import { GetProfileInfo } from "../../supabase/ProfileInfo";
 import { GetWorkExperiences } from "../../supabase/WorkExperience";
 import { getSavedResumes } from "./ResumeManager";
-import {
-	Resume,
-	EducationSection,
-	ExperienceSection,
-	SkillsSection,
-  } from "../../types/types";
+import { Resume, EducationSection, ExperienceSection, SkillsSection, WorkExperience, } from "../../types/types";
 import { GetResume, GetResumes } from '../../supabase/Resumes'
+import { parseResume } from "../../api/ResumeParser";
 
 async function assembleNewResume(): Promise<Resume> {
 	const resume_id = uuidv4();
@@ -110,20 +106,69 @@ async function assembleNewResume(): Promise<Resume> {
 }
 
 /*
- * Given the resume_id of a user's imported resume. Will return the 
+ * Given the resume_id of a user's imported resume. Will return the
  * imported resume as a recognizable object.
  */
 async function assembleForeignResume(foreign_resume_id: string): Promise<Resume> {
 
-	// CALL BACKEND RESUME PARSER HERE THEN TURN IT INTO A RESUME
 	const resume_id = uuidv4();
-
-
 
 	try {
 
 
-		throw Error("lol");
+		const resume_details = await GetResume(foreign_resume_id);
+
+		if (resume_details === null) { throw Error("Failed to get resume from supabase storage") }
+
+		const resume_blob_request = await fetch(resume_details.resume_url)
+		const blob = await resume_blob_request.blob()
+		const file = new File([blob], "resume.pdf", { type: blob.type })
+		const parsed_resume = await parseResume(file)
+		const json_resume = JSON.parse(parsed_resume)
+
+		const education:EducationSection = {
+			institution: json_resume.school,
+			location: json_resume.location,
+			end_date: "Jan " + json_resume.grad_year,
+			degree: json_resume.program + " " + json_resume.specialization,
+			highlights: [],
+		}
+
+		const work_experiences: ExperienceSection[] = []
+
+		for (const exp of json_resume.work_experiences) {
+			const new_exp:ExperienceSection = {
+				  job_title: exp.title,
+    			company: exp.company,
+    			start_day: exp.start_date,
+    			end_day: exp.end_date,
+    			location: exp.location,
+    			highlights: [exp.description],
+			}
+			work_experiences.push(new_exp)
+		}
+
+		const technical_skills:SkillsSection[] = []
+		const skill:SkillsSection = {
+			category: "Skills",
+			skills: json_resume.skills
+		}
+		technical_skills.push(skill)
+
+		const foreign_resume: Resume = {
+			resume_id:resume_id,
+			label: resume_details.resume_label,
+			full_name: json_resume.name + " " + json_resume.last_name,
+			phone_number: json_resume.phone_number,
+			email: json_resume.email,
+			custom_contact: [],
+			education: [education],
+			experience: work_experiences,
+			projects: [],
+			technical_skills: technical_skills,	
+		}
+	
+		return foreign_resume
 
 	} catch (error) {
 		console.warn("Error arranging resume info - " + error);
@@ -144,4 +189,4 @@ async function assembleForeignResume(foreign_resume_id: string): Promise<Resume>
 	}
 }
 
-export { assembleNewResume }
+export { assembleNewResume, assembleForeignResume }
