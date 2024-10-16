@@ -142,27 +142,29 @@ function ResumeManager() {
             <h1 className="font-bold mt-5 mb-4 text-white">
               Or import an existing Resume:
             </h1>
-            {existingResumes?.map((res, index) => (
-              <div
-                key={index}
-                className="bg-white text-black cursor-pointer w-[250px] h-[300px] shadow-md  rounded-lg p-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
-                onClick={async () => {
-                  const loadingToastId = toast.loading("Importing resume...")
-                  const resume = await assembleForeignResume(res.resume_id)
-                  toast.dismiss(loadingToastId)
-                  setOpenedResume(resume)
-                }}
-              >
-                <Toaster />
-                <h6 className="text-black font-semibold text-left text-xl w-full ml-2">
-                  {" "}
-                  {res.resume_label}
-                </h6>
-                <div className="w-full h-full flex justify-center items-center">
-                  <SlNote size={96} />
+            <div className="flex">
+              {existingResumes?.map((res, index) => (
+                <div
+                  key={index}
+                  className="bg-white text-black cursor-pointer w-[250px] h-[300px] shadow-md  rounded-lg p-4 m-4 flex flex-col justify-between items-center hover:shadow-lg transition-shadow duration-300"
+                  onClick={async () => {
+                    const loadingToastId = toast.loading("Importing resume...")
+                    const resume = await assembleForeignResume(res.resume_id)
+                    toast.dismiss(loadingToastId)
+                    setOpenedResume(resume)
+                  }}
+                >
+                  <Toaster />
+                  <h6 className="text-black font-semibold text-left text-xl w-full ml-2">
+                    {" "}
+                    {res.resume_label}
+                  </h6>
+                  <div className="w-full h-full flex justify-center items-center">
+                    <SlNote size={96} />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </section>
         </main>
       )}
