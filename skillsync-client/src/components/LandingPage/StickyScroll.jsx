@@ -1,62 +1,62 @@
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import JobCard from "./JobCard"; // Assuming JobCard is a separate component
 
 gsap.registerPlugin(ScrollTrigger);
 
 function StickyScroll({ OBJECT }) {
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.set(".photo:not(:first-child)", { opacity: 0});
+    gsap.utils.toArray(".job-card").forEach((card, index) => {
+      // Animate each job card to appear smoothly
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 100, // Start the card offscreen
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top center+=100", // Trigger when the card is near the center
+            end: "bottom center", // Keep the animation until it's out of view
+            scrub: true, // Smooth scrubbing while scrolling
+            toggleActions: "play none none none", // No re-triggering
+            markers: false, // Set to true if you want to debug
+          },
+        }
+      );
 
-      const animation = gsap.to(".photo:not(:first-child)", {
-        opacity: 1,
-        duration: 1,
-        stagger: 1,
-      });
-
-      ScrollTrigger.create({
-        trigger: ".gallery",
-        start: "top top",
-        end: "bottom bottom",
-        pin: ".rightblock",
-        animation: animation,
-        scrub: true,
-        markers: false,
+      // Once a card has left the screen, it fades out and doesn't come back
+      gsap.to(card, {
+        opacity: 0,
+        y: -100,
+        scrollTrigger: {
+          trigger: card,
+          start: "bottom center", // Fade out when the bottom of the card reaches the center
+          end: "bottom center-=100",
+          scrub: true,
+          markers: false,
+        },
       });
     });
-
-    return () => ctx.revert();
-  }, []);
+  }, [OBJECT]);
 
   return (
-    <div className="gallery flex w-[90%] mx-auto pt-[150px]">
-      <div className="left w-[90%] ml-auto">
-        {OBJECT.map((element, index) => (
-          <article
+    <div className="gallery flex w-full min-h-screen items-center justify-center relative">
+      {/* Container to center content vertically */}
+      <div className="center w-full">
+        {OBJECT.map((job, index) => (
+          <div
             key={index}
-            className="flex flex-col gap-3 md:w-[70%] mb-[500px]"
+            className={`job-card flex flex-col gap-3 mb-10 md:w-full opacity-0 items-center justify-center`}
           >
-            <h5 className="text-xl font-bold gradient-text">
-              {element.title}
-            </h5>
-            <h4 className="text-4xl font-bold text-[white]">{element.heading}</h4>
-
-            <p className="text-xl text-justify text-[#cccaca]">{element.description}</p>
-          </article>
+            <JobCard job={job} />
+          </div>
         ))}
-      </div>
-      <div className="rightblock w-1/2 h-screen flex flex-col items-center">
-        <div className="relative w-[30vw] h-[30vw]">
-          {OBJECT.map((element, index) => (
-            <div key={index} className="photo flex items-center justify-center absolute w-full h-full ">
-
-              <img id='munVideo' className="w-[300px] h-[300px] rounded-full" src={element.video} />
-
-
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { GetJobPreferences } from "../../supabase/JobPreferences";
 import FilterPopup from "./FilterPopup";
+import { FilterIcon, LocateFixedIcon, MapIcon, MapPin, Navigation, Wrench } from "lucide-react";
 
 interface UserPreferences {
   location: string;
@@ -108,23 +109,23 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
   return (
     <div
       id="filters"
-      className="mt-4 mb-2 flex flex-nowrap overflow-x-auto space-x-2 h-10 w-screen !scrollbar-hide"
+      className=" flex flex-nowrap overflow-x-auto space-x-2 w-screen !scrollbar-hide justify-start"
     >
       <FilterPopup
         preferences={userPreferences}
         setPreferences={setUserPreferences}
       >
-        <div className="bg-[#1E1E1E] h-10 p-2 min-w-max cursor-pointer rounded-md text-white border-[#03BD6C] border-[1px] flex justify-center items-center mr-3">
-          Add Filters <GoPlus className="ml-1" />
+        <div className="  p-2 min-w-max cursor-pointer rounded-md text-white border flex justify-center items-center gap-2">
+          <FilterIcon /> Add Filters 
         </div>
       </FilterPopup>
       {userPreferences.location === "" ? (
         <></>
       ) : (
-        <div className="bg-[#1E1E1E] p-2 rounded-md text-white border-[#8080ff] border-[1px]">
-          {userPreferences.location}{" "}
+        <div className=" p-2 rounded-md text-white  border flex items-center justify-center gap-2" >
+          <MapPin /> {userPreferences.location}
           <IoMdClose
-            className="inline mb-1 cursor-pointer"
+            className="inline cursor-pointer hover:text-[red]"
             onClick={removeLocation}
           />
         </div>
@@ -133,12 +134,11 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
         (mode: { label: string; value: string }, index) => (
           <div
             key={index}
-            className="bg-[#1E1E1E] p-2 rounded-md text-white border-[#36B7FE] border-[1px] ml-3"
-          >
-            {mode.label}{" "}
+            className=" p-2 rounded-md text-white  border flex items-center justify-center gap-2"          >
+           <Navigation /> {mode.label}
             <IoMdClose
-              className="inline mb-1 cursor-pointer"
-              onClick={() => removeJobMode(mode)}
+            className="inline cursor-pointer hover:text-[red]"
+            onClick={() => removeJobMode(mode)}
             />
           </div>
         )
@@ -147,16 +147,17 @@ function SearchFilters({ preferences, setPreferences, setPreferencesLoaded }) {
         (keyword: { label: string; value: string }, index) => (
           <div
             key={index}
-            className="bg-[#1E1E1E] p-2 rounded-md text-white border-[#1de8bb] border-[1px] ml-3"
-          >
+            className=" p-2 rounded-md text-white border  flex items-center justify-center gap-2"          >
+          <Wrench />
             {keyword.label}{" "}
             <IoMdClose
-              className="inline mb-1 cursor-pointer"
-              onClick={() => removeKeyword(keyword)}
+            className="inline cursor-pointer hover:text-[red]"
+            onClick={() => removeKeyword(keyword)}
             />
           </div>
         )
       )}
+      
     </div>
   );
 }

@@ -1,23 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SearchJobs } from "../../supabase/GetJobListings";
-import { JobListing } from "../../types/types";
-import SearchBar from "./SearchBar";
+import { JobListing } from "../../types/types"; // Assuming you have a `JobListing` type defined in your `types` file
 import SearchFilters from "./SearchFilters";
 import SwiperCard from "./SwiperCards";
 import LoadingCard from "./LoadingCard";
+import { BookmarkPlus, GalleryHorizontal, ListTree, Save } from "lucide-react";
+import { Eye, Bookmark, MapPin, ArrowRight } from "lucide-react";
+
+interface Preferences {
+  location: string;
+  jobModes: {
+    label: string;
+    value: string;
+  }[];
+  keywords: {
+    label: string;
+    value: string;
+  }[];
+}
 
 function Feed() {
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<Preferences>({
     location: "",
     jobModes: [],
     keywords: [],
   });
-  const [searchValue, setSearchValue] = useState("");
-  const [preferencesLoaded, setPreferencesLoaded] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [preferencesLoaded, setPreferencesLoaded] = useState<boolean>(false);
   const [listings, setListings] = useState<JobListing[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMoreJobs, setHasMoreJobs] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasMoreJobs, setHasMoreJobs] = useState<boolean>(true);
+  const [swipeMode, setSwipeMode] = useState<boolean>(true);
 
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -40,13 +54,9 @@ function Feed() {
     const queryTerms =
       searchValue +
       " " +
-      preferences.keywords
-        .map((k) => (k as { label: string; value: string }).value)
-        .join(" ") +
+      preferences.keywords.map((k) => k.value).join(" ") +
       " " +
-      preferences.jobModes
-        .map((m) => (m as { label: string; value: string }).value)
-        .join(" ");
+      preferences.jobModes.map((m) => m.value).join(" ");
 
     try {
       const response = await SearchJobs(
@@ -85,27 +95,26 @@ function Feed() {
     fetchListings();
   }
 
-  function handleSwipeLeft(job) {
+  function handleSwipeLeft(job: JobListing) {
     if (currentIndex < listings.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       console.log(job, " not liked");
     } else if (hasMoreJobs) {
       setCurrentIndex(listings.length);
-      setIsLoading(true)
+      setIsLoading(true);
       fetchListings(true);
     } else {
       console.log("No more jobs to load.");
     }
   }
 
-  function handleSwipeRight(job) {
+  function handleSwipeRight(job: JobListing) {
     if (currentIndex < listings.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       console.log(job, " liked");
     } else if (hasMoreJobs) {
       setCurrentIndex(listings.length);
-      setIsLoading(true)
-
+      setIsLoading(true);
       fetchListings(true);
     } else {
       console.log("No more jobs to load.");
@@ -131,7 +140,7 @@ function Feed() {
     if (listings.length > 0) {
       const lastCard = document.querySelector(".swiper--card:last-child");
       if (lastCard) {
-        loadMoreObserver.observe(lastCard); // Observe the last card
+        loadMoreObserver.observe(lastCard);
       }
     }
 
@@ -143,27 +152,103 @@ function Feed() {
   }, [listings, hasMoreJobs, isLoading]);
 
   return (
-    <div className="flex flex-col bg-gray-900 w-full h-full min-h-screen ">
+    <div className="flex flex-col bg-black w-full h-full min-h-screen ">
       <div className="px-10 py-8 h-full w-full">
-        {/* <SearchBar
-          handleSearch={handleSearch}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        /> */}
-        <div className="flex flex-wrap mb-4">
+        <div className="flex  mb-4 gap-3 items-center justify-center ">
           <SearchFilters
             setPreferencesLoaded={setPreferencesLoaded}
             setPreferences={setPreferences}
             preferences={preferences}
           />
+
+          <button
+            onClick={() => {
+              setSwipeMode(!swipeMode);
+            }}
+            className="flex gap-2 items-center justify-center min-w-max border rounded-lg px-4 py-2 max-h-min"
+          >
+            {swipeMode ? <GalleryHorizontal /> : <ListTree />}{" "}
+            {swipeMode ? "Swipe Mode" : "List Mode"}
+          </button>
         </div>
-        <aside className="flex flex-col w-full h-full  mt-20 justify-center">
-          {listings.length > 0 && currentIndex < listings.length && (
-            <SwiperCard
-              job={listings[currentIndex]}
-              onSwipeLeft={handleSwipeLeft}
-              onSwipeRight={handleSwipeRight}
-            />
+        <aside className="flex flex-col w-full h-full  items-center mt-20 justify-center">
+          <div className="w-8/12 flex gap-"></div>
+          {swipeMode ? (
+            listings.length > 0 &&
+            currentIndex < listings.length && (
+              <SwiperCard
+                job={listings[currentIndex]}
+                onSwipeLeft={handleSwipeLeft}
+                onSwipeRight={handleSwipeRight}
+              />
+            )
+          ) : (
+            // List Mode
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 w-9/12 relative mb-20">
+              {listings.map((job, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col bg-[#0B243F] p-6 rounded-lg shadow-md justify-between transition-all hover:shadow-xl hover:bg-[#102D53]"
+                >
+                  <div className="flex items-start justify-between">
+                    {/* Company Logo */}
+                    <img
+                      src={
+                        job?.logo_url ??
+                        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                      }
+                      alt={job.company ?? "Unknown company"}
+                      className="w-16 h-16 mr-4 rounded-md border border-gray-200"
+                    />
+                    <div className="ml-3">
+                      {/* Job Title */}
+                      <h2 className="text-lg font-semibold text-white">
+                        {job.title}
+                      </h2>
+                      {/* Company Name */}
+                      <p className="text-gray-400">{job.company}</p>
+                      {/* Location */}
+                      <div className="flex items-center mt-1 text-gray-400 min-w-max">
+                        <MapPin className="w-4 h-4 mr-1" />
+                        <p>{job.location}</p>
+                      </div>
+                    </div>
+                    {/* Full-Time/Part-Time Tag */}
+                    <span className="text-xs px-3 py-1 bg-gray-700 rounded-full text-white ml-auto min-w-max">
+                      {job.type ?? "Full-Time"}
+                    </span>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center justify-between mt-6 space-x-4">
+                    <button className="flex items-center bg-transparent border-2 min-w-max border-green-400 px-4 py-2 rounded-lg text-white hover:bg-green-400 hover:text-white transition-all">
+                      <Eye className="w-5 h-5 mr-2" />
+                      View Details
+                    </button>
+                    <button className="flex items-center bg-transparent border-2 min-w-max border-green-400 px-4 py-2 rounded-lg text-white hover:bg-green-400 hover:text-white transition-all">
+                      Save
+                      <BookmarkPlus className="w-5 h-5 ml-2" />
+                    </button>
+
+                    <button className="flex items-center px-4 py-2 bg-gradient-to-r min-w-max from-blue-400 to-green-400 text-white font-semibold rounded-lg shadow-lg hover:opacity-80 transition-all">
+                      Apply
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              {hasMoreJobs && !isLoading && (
+                <div className="flex justify-center items-center mt-5 absolute bottom-[-52px] right-[40%]">
+                  <button
+                    onClick={() => fetchListings(true)}
+                    className="px-6 py-2 bg-rezerv-dark text-white rounded-md border border-green-400 hover:bg-blue-400"
+                  >
+                    Load More Jobs
+                  </button>
+                </div>
+              )}
+            </div>
           )}
 
           {isLoading && currentIndex === listings.length && (
@@ -172,18 +257,6 @@ function Feed() {
             </div>
           )}
         </aside>
-
-        {/* Load More Button
-        {hasMoreJobs && !isLoading && (
-          <div className="flex justify-center items-center mt-5">
-            <button
-              onClick={() => fetchListings(true)}
-              className="px-6 py-2 bg-rezerv-dark text-white rounded-md hover:bg-purple-600"
-            >
-              Load More Jobs
-            </button>
-          </div>
-        )} */}
 
         {/* No More Jobs Indicator */}
         {!hasMoreJobs && !isLoading && (
