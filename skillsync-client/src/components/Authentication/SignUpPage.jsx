@@ -14,6 +14,7 @@ import {
 import InputField from "./InputField";
 import InfoCarousel from "./InfoCarousel.jsx";
 import { redirectUser } from "../../utilities/redirect_user.js";
+import { initUser } from "../../DynamoDb/fetchCardData.js";
 
 const SignUpPage = () => {
   /*
@@ -52,6 +53,7 @@ const SignUpPage = () => {
 
     if (userGotSignedUp) {
       window.location.href = "/confirm";
+      await initUser();
     } else {
       alert("Error signing up 😵");
     }

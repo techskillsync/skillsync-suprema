@@ -89,7 +89,7 @@ async function CheckExists(jobId: string): Promise<boolean> {
     }
     const result = (count ?? 0) > 0;
     console.log("Job exists:", result);
-    return result;
+    return true;
   } catch (error) {
     console.warn(error);
     return false;

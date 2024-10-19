@@ -33,7 +33,7 @@ const JobDescriptionCard = ({
   const [glassdoorRating, setGlassdoorRating] = useState(null);
   const [saved, setSaved] = useState(false);
 
-  const salary = parseSalary(jobDescription.description);
+  const salary = parseSalary(jobDescription.jobDescription);
 
   const handleSave = async () => {
     if (saved) {
@@ -55,13 +55,13 @@ const JobDescriptionCard = ({
     }
   };
 
-  useEffect(() => {
-    async function checkExists(id) {
-      const saved = await CheckExists(id);
-      setSaved(saved);
-    }
-    checkExists(jobDescription.id);
-  }, []);
+  // useEffect(() => {
+  //   async function checkExists(id) {
+  //     const saved = await CheckExists(id);
+  //     setSaved(saved);
+  //   }
+  //   checkExists(jobDescription.id);
+  // }, []);
 
   const actions = [
     {
@@ -86,7 +86,7 @@ const JobDescriptionCard = ({
         {jobDescription.logo_url && (
           <img
             src={jobDescription.logo_url}
-            alt={jobDescription.company}
+            alt={jobDescription.companyName}
             className={
               mini ? "absolute top-3 right-3 h-16 w-16 rounded"
               : "absolute top-3 right-3 h-24 w-24 rounded"
@@ -102,9 +102,9 @@ const JobDescriptionCard = ({
             }
           >
             {mini
-              ? jobDescription.company.substring(0, 19) +
-                (jobDescription.company.length > 19 ? "..." : "")
-              : jobDescription.company}
+              ? jobDescription.companyName.substring(0, 19) +
+                (jobDescription.companyName.length > 19 ? "..." : "")
+              : jobDescription.companyName}
           </h2>
           <div className="w-1/3">
             {showGlassdoorRating && !mini && glassdoorRating && (
@@ -121,9 +121,9 @@ const JobDescriptionCard = ({
           <TiSpanner className="mr-2" />
           <p className={`max-w-[80%]  ${mini ? "text-base" : "text-lg"}`}>
             {mini
-              ? jobDescription.title.substring(0, 26) +
-                (jobDescription.title.length > 26 ? "..." : "")
-              : jobDescription.title}
+              ? jobDescription.jobTitle.substring(0, 26) +
+                (jobDescription.jobTitle.length > 26 ? "..." : "")
+              : jobDescription.jobTitle}
           </p>
         </div>
         {jobDescription.salary &&

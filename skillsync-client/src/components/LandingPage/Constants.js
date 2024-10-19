@@ -36,52 +36,46 @@ export const skills = [
 
 export const serviceDetails = [
   {
-      id: 1,
-      title: "AI-POWERED RESUME & COVER LETTER GENERATOR",
-      heading: "A better way to nail your first impressions",
-      description: "Generate tailor made resumés and cover letters for each position with the power of AI. ",
-      video: "/v4.gif"
+    id: 1,
+    company: "SkillSync",
+    title: "AI-Powered Resume & Cover Letter Generator",
+    salaryRange: "$50k - $80k",
+    location: "Remote",
+    jobType: "Full-Time",
+    description: "Generate tailor-made resumés and cover letters for each position with the power of AI.",
+    logo: "/v4.gif",
   },
   {
-      id: 2,
-      title: "ONE CLICK - APPLY",
-      heading: "A faster way to apply.",
-      description: "Apply to your preferred job opportunities in just one click using SkillSync.",
-      video: "/v2.gif"
-
+    id: 2,
+    company: "SkillSync",
+    title: "One Click - Apply",
+    salaryRange: "$60k - $100k",
+    location: "Remote",
+    jobType: "Part-Time",
+    description: "Apply to your preferred job opportunities in just one click using SkillSync.",
+    logo: "/v2.gif",
   },
   {
-      id: 3,
-      title: "ACCURATE RECOMMENDATIONS",
-      heading: "Find the right opportunities in just a few steps.",
-      description: "Find the best possible job opportunities in Canada with our advanced algorithm, personalized to your skills, interests, qualifications, and goals.",
-      video: "/v3.gif"
-
+    id: 3,
+    company: "SkillSync",
+    title: "Accurate Recommendations",
+    salaryRange: "$70k - $120k",
+    location: "Remote",
+    jobType: "Contract",
+    description: "Find the best possible job opportunities with our advanced algorithm, personalized to your skills.",
+    logo: "/v3.gif",
   },
   {
     id: 4,
-    title: "APPLICATION PROCESS TRACKER",
-    heading: "Stay in the loop",
+    company: "SkillSync",
+    title: "Application Process Tracker",
+    salaryRange: "$50k - $80k",
+    location: "Remote",
+    jobType: "Full-Time",
     description: "Stay updated on your job-finding journey and plan applications accordingly.",
-    video: "/v1.gif"
-
-},
-{
-  id: 5,
-  title: "EXCLUSIVE COMPARITIVE ANALYTICS",
-  heading: "Get ahead of the curve.",
-  description: "Take advantage of SkillSync’s comparative analytics to know your likelihood of landing an interview.",
-  video: "/v2.gif"
-
-},
-{
-id: 6,
-title: "A SIMPLER UI",
-heading: "Navigate the application process with ease.",
-description: "SkillSync will display only the information that you need to ace your job-finding journey. No thought leadership. No extra BS.",
-video: "/v4.gif"
-
-}
+    logo: "/v1.gif",
+  },
+ 
 ];
 
 

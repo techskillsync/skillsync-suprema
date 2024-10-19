@@ -53,13 +53,13 @@ const JobDescriptionCard = ({
     }
   };
 
-  useEffect(() => {
-    async function checkExists(id) {
-      const saved = await CheckExists(id);
-      setSaved(saved);
-    }
-    checkExists(jobDescription.id);
-  }, []);
+  // useEffect(() => {
+  //   async function checkExists(id) {
+  //     const saved = await CheckExists(id);
+  //     setSaved(saved);
+  //   }
+  //   checkExists(jobDescription.id);
+  // }, []);
 
   return (
     <div

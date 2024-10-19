@@ -9,6 +9,7 @@ import Spacer from "../../common/Spacer";
 import { JobListing } from "../../../types/types";
 import { GetJobPreferences } from "../../../supabase/JobPreferences";
 import { IoRefresh } from "react-icons/io5";
+import { fetchJobs } from "../../../DynamoDb/fetchCardData.js";
 
 function SpotLightJobsSection({ setSelectedJob }) {
   const [listings, setListings] = useState<JobListing[]>([]);
@@ -48,24 +49,27 @@ function SpotLightJobsSection({ setSelectedJob }) {
   async function fetchListings() {
     const pageSize = 2; // ? Number of listings per page minus 1
     // Todo: add location searching (parameter currently empty string)
-    const response = await SearchJobs(
-      jobPreferences.keywords
-        .map((k) => (k as { label: string; value: string }).value)
-        .join(" ") +
-        jobPreferences.jobMode
-          .map((m) => (m as { label: string; value: string }).value)
-          .join(" "),
-      jobPreferences.location,
-      0,
-      3
-    );
-    console.log("Response from search:", response);
-    const { data, error, count } = response || {};
+    // const response = await SearchJobs(
+    //   jobPreferences.keywords
+    //     .map((k) => (k as { label: string; value: string }).value)
+    //     .join(" ") +
+    //     jobPreferences.jobMode
+    //       .map((m) => (m as { label: string; value: string }).value)
+    //       .join(" "),
+    //   jobPreferences.location,
+    //   0,
+    //   3
+    // );
+    // console.log("Response from search:", response);
+    //const { data, error, count } = response || {};
 
-    if (error) {
-      console.warn("Error getting job listings:", error);
-      return;
-    }
+    const data = await fetchJobs(jobPreferences.keywords[0].value, jobPreferences.location, 4);
+
+
+    // if (error) {
+    //   console.warn("Error getting job listings:", error);
+    //   return;
+    // }
 
     setListings(data || []);
   }

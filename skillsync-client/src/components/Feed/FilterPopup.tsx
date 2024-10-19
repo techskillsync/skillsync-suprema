@@ -59,7 +59,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
     <div className="relative inline-block">
       <div onClick={() => setIsOpen(!isOpen)}>{children}</div>
       {isOpen && (
-        <div className="fixed top-32 left-40 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg p-4 z-[200] mx-auto">
+        <div className="fixed top-20 left-40 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg p-4 z-[200] mx-auto">
           <h3 className="text-lg text-black font-semibold mb-2">Add Filters</h3>
           <div>
             <label className="block text-sm font-medium text-gray-700">

@@ -2,6 +2,11 @@
  * START OF RESUME BUILDER TYPES
  */
 
+export interface Data {
+    id: number;
+    name: string;
+}
+
 export interface HighlightSection {
     highlights: string[];
 }

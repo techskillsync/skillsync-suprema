@@ -40,13 +40,13 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
     }
   };
 
-  useEffect(() => {
-    async function checkExists(id) {
-      const saved = id && await CheckExists(id);
-      setSaved(saved);
-    }
-    checkExists(jobDescription?.id);
-  }, [jobDescription?.id]);
+  // useEffect(() => {
+  //   async function checkExists(id) {
+  //     const saved = id && await CheckExists(id);
+  //     setSaved(saved);
+  //   }
+  //   checkExists(jobDescription?.id);
+  // }, [jobDescription?.id]);
 
   const actions = [
     // {
@@ -67,7 +67,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
     },
   ];
 
-  if (jobDescription?.company || jobDescription?.title) {
+  if (jobDescription?.companyName || jobDescription?.jobTitle) {
     return (
       <div
         className={
@@ -86,24 +86,24 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           <div className="py-6"></div>
         )}
         <h3 className="mr-2 text-2xl text-center bg-clip-text bg-gradient-to-r from-green-400 to-blue-700 text-transparent font-semibold">
-          {jobDescription.title}
+          {jobDescription.jobTitle}
         </h3>
         <div className={`job-details w-full pt-2 pb-4`}>
           <div
             className={
-              jobDescription.company.length > 20 ||
+              jobDescription.companyName.length > 20 ||
               jobDescription.location.length > 20
                 ? ""
                 : "flex justify-between"
             }
           >
             <div className="w-full">
-              <h2 className="text-xl font-bold">{jobDescription.company}</h2>
+              <h2 className="text-xl font-bold">{jobDescription.companyName}</h2>
             </div>
             <div className="w-full">
               <div
                 className={`flex flex-row items-center ${
-                  jobDescription.company.length > 20 ||
+                  jobDescription.companyName.length > 20 ||
                   jobDescription.location.length > 20
                     ? "justify-start"
                     : "justify-end"
@@ -116,7 +116,7 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           </div>
           {jobDescription.salary &&
             (jobDescription.salary.toString().length > 0 ||
-              parseSalary(jobDescription.description)) && (
+              parseSalary(jobDescription.jobDescription)) && (
               <div className="flex items-center mb-2">
                 <IoCashOutline className="mr-2" />
                 <p>
@@ -129,14 +129,14 @@ const JobDetailsSlide = ({ jobDescription, className = "" }) => {
           <div>
             <div className="relative mt-2">
               <p className={`text-sm text-justify ${descriptionClass}`}>
-                {jobDescription.description}
+                {jobDescription.jobDescription}
               </p>
               {!expanded && (
                 <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-[#1e1e1e] to-transparent"></div>
               )}
             </div>
           </div>
-          {jobDescription.description.length > 200 && (
+          {jobDescription.jobDescription.length > 200 && (
             <div className="">
               <a
                 className="cursor-pointer text-blue-500 p-1 border-none font-semibold"
