@@ -20,21 +20,18 @@ function BentoComponent() {
         "Stay updated on your job-finding journey and plan applications accordingly.",
       image: "/Block3.gif",
     },
-
     {
       title: "Navigate the application process with ease",
       description:
         "SkillSync will display only the information that you need to ace your job-finding journey.",
       image: "/Block6.gif",
     },
-
     {
       title: "Find the right opportunities",
       description:
         "Find the best possible job opportunities personalized to your skills, interests, and goals.",
       image: "/Block4.gif",
     },
-
     {
       title: "Unlocking hiring insights",
       description:
@@ -45,16 +42,16 @@ function BentoComponent() {
 
   return (
     <>
-      <h1 className="mb-12 font-bold text-center">
+      <h1 className="mb-12 font-bold text-center text-4xl px-4 md:text-6xl">
         A 21st Century Platform <br />
         For 21st Century Seekers
       </h1>
 
       <div className="flex justify-center w-full">
         {/* Two Columns */}
-        <div className="flex w-10/12 gap-6">
+        <div className="flex flex-col md:flex-row w-10/12 gap-6">
           {/* Left Column: Even Index Blocks */}
-          <div className="flex flex-col gap-6 w-1/2">
+          <div className="flex flex-col gap-6 w-full md:w-1/2">
             {blockInfo
               .filter((_, index) => index % 2 === 0)
               .map((block, index) => (
@@ -77,13 +74,13 @@ function BentoComponent() {
                       alt={block.title}
                       className="w-10/12 h-auto object-contain rounded-lg mb-6"
                     />
-                  </div>{" "}
+                  </div>
                 </div>
               ))}
           </div>
 
           {/* Right Column: Odd Index Blocks */}
-          <div className="flex flex-col  gap-6 w-1/2">
+          <div className="flex flex-col gap-6 w-full md:w-1/2">
             {blockInfo
               .filter((_, index) => index % 2 !== 0)
               .map((block, index) => (
@@ -105,7 +102,7 @@ function BentoComponent() {
                       src={block.image}
                       alt={block.title}
                       className="w-10/12 h-auto object-cover rounded-lg mb-6"
-                    />{" "}
+                    />
                   </div>
                 </div>
               ))}

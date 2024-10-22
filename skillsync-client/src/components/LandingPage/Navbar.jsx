@@ -22,7 +22,7 @@ const Navbar = ({ openNav, setOpenNav }) => {
   };
   return (
     <nav
-      className={`sticky top-0 flex items-center justify-between border rounded-full w-11/12 py-3 px-10 mt-10 bg-black z-50 `}
+      className={`sticky top-0  items-center justify-between border rounded-full w-11/12 py-3 px-10 mt-10 bg-black z-50  hidden md:flex`}
     >
       <div className="md:hidden">
         <button
@@ -35,8 +35,8 @@ const Navbar = ({ openNav, setOpenNav }) => {
       <div className="w-[150px] mr-[162px]  ">
         <Link to={"/"} onClick={() => setOpenNav(!openNav)}>
           <img
-            src="https://skillsync.work/assets/LogoDark-CavYDmXP.png"
-            alt="allotrix"
+            src="/LogoDark.png"
+            alt="Skillsync"
             className="max-h-full max-w-full"
           />
         </Link>
