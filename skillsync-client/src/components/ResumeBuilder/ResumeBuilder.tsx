@@ -5,7 +5,7 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
-import toast, { Toaster } from "react-hot-toast";
+import { get_ats_score } from './AtsScanner';
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -119,6 +119,8 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	type PreviewResumeRef = { getResumeHTML: () => string|undefined; };
 	const previewResumeRef = useRef<PreviewResumeRef | null>(null); // So we can access PreviewResume's getResumeHTML function
 	const [downloadButtonText, setDownloadButtonText] = useState<string>("Download PDF");
+	const [ats_score, set_ats_score] = useState<number|null>(null)
+	const last_ats_call = useRef(0); // so we only call chatgpt to grade resume every 5s
 
 	useEffect(() => {
 		setLabel(resume.label);
@@ -144,6 +146,26 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 		doAsync();
 	}, [label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills]);
 
+	useEffect(() => {
+		async function doAsync() {
+			const currentTime = Date.now();
+			if (sync_status !== "good") { return }
+			if (currentTime - last_ats_call.current < 5000) {
+				set_ats_score(null)
+				// Schedule a call to `doAsync` after the remaining time
+				const remainingTime = 5000 - (currentTime - last_ats_call.current);
+				setTimeout(doAsync, remainingTime);
+				return
+			}
+			console.log("EXECUTING")
+			last_ats_call.current = currentTime;
+			const resume = { resume_id, label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills };
+			set_ats_score(await get_ats_score(resume))
+		}
+
+		doAsync()
+	}, [sync_status])
+
 	function getResumeHTML() {
 		if (!previewResumeRef.current) { return undefined; }
 		return previewResumeRef.current.getResumeHTML();
@@ -163,6 +185,17 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 					value={label}
 					onChange={(e) => { setLabel(e.target.value) }} />
 				<div className="ml-auto text-xl flex items-center mr-4 font-semibold">
+					<p className="">ATS Score: 
+						<span className="text-green-400 font-bold">
+							{ats_score ? (
+								<> {ats_score}</>
+								) : (
+								<> NA</>
+							)}
+						</span>
+					</p>
+				</div>
+				<div className="ml-4 text-xl flex items-center mr-4 font-semibold">
 					{(() => {
 						switch (sync_status) {
 							case 'good':
