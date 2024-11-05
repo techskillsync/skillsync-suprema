@@ -1,6 +1,39 @@
+import React from 'react' // For the types lol
 import query_gpt_broker from "./QueryGptBroker"
 import { Resume } from "../../types/types"
 
+let ats_on_cooldown:boolean = false
+let most_recent_resume:Resume|null = null
+
+
+/*
+ * This function will ensure that get_ats score is called at 
+ * most once every 5 seconds. If called many times quickly 
+ * then after the 5 seconds is up it will call get_ats_score 
+ * with the most recent resume and use set_ats_score to update
+ * the ats score.
+ * This is done to prevent get_ats_score from being spammed 
+ * which would cause the user to hit their gpt-broker limit 
+ * very quickly.
+ */
+async function queue_ats_score(
+	resume:Resume,
+	set_ats_score:React.Dispatch<React.SetStateAction<number | null>>
+) {
+	most_recent_resume = resume
+
+	if (ats_on_cooldown) { return }
+
+	ats_on_cooldown = true
+	await new Promise((resolve) => setTimeout(resolve, 5000))
+	set_ats_score(await get_ats_score(most_recent_resume))
+	ats_on_cooldown = false
+}
+
+/*
+ * Extracts the text from a resume object and 
+ * uses chat gpt to rate it from 0 - 100
+ */
 async function get_ats_score(resume: Resume): Promise<number> {
 	// Now we make one big string with all the Resume fields
 	let custom_contact:string = ""
@@ -40,7 +73,7 @@ ${projects}
 ${technical_skills}
 `
 	const messages = [
-		{ "role": "system", "content": "I would like you to score this persons resume from 0 to 100 (including both 0 and 100).Return a number in the range [0, 100], do not include any explanations, only provide a number." },
+		{ "role": "system", "content": "You are an advanced Applicant Tracking System (ATS) designed to evaluate resumes based on overall quality and effectiveness in the job market. Analyze the following resume and assign a score between 0 and 100 (inclusive), where 0 indicates a very weak resume and 100 indicates an exceptional resume. Consider factors such as clarity, organization, relevant skills, experience, education, keywords, and professional achievements. Do not include any explanations or additional text; only provide a single numerical score" },
   	{ "role": "user", "content": `Here is my resume: \n ${resume_text}`}
 	]
 	const response = await query_gpt_broker(messages)
@@ -48,4 +81,4 @@ ${technical_skills}
 	return Number(response)
 }
 
-export { get_ats_score }
+export { queue_ats_score }

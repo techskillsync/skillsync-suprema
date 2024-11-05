@@ -65,7 +65,7 @@ function ResumeManager() {
     <>
       {openedResume ? (
         <ResumeBuilder
-          resume={openedResume}
+          imported_resume={openedResume}
           closeResume={() => setOpenedResume(null)}
         />
       ) : (

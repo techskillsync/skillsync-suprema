@@ -5,7 +5,7 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
-import { get_ats_score } from './AtsScanner';
+import { queue_ats_score } from './AtsScanner';
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -102,9 +102,9 @@ async function generateResumePDF(htmlContent: string):Promise<null|Blob>
 	}
 }
 
-type ResumeBuilderProps = { resume: Resume, closeResume: () => void };
-function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
-	const resume_id = resume.resume_id;
+type ResumeBuilderProps = { imported_resume: Resume, closeResume: () => void };
+function ResumeBuilder({ imported_resume, closeResume }: ResumeBuilderProps) {
+	const resume_id = imported_resume.resume_id;
 	const [sync_status, setSyncStatus] = useState<SyncStatus>('blocked');
 	const [label, setLabel] = useState<string>('');
 	const [full_name, setFullName] = useState<string>('');
@@ -120,18 +120,17 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	const previewResumeRef = useRef<PreviewResumeRef | null>(null); // So we can access PreviewResume's getResumeHTML function
 	const [downloadButtonText, setDownloadButtonText] = useState<string>("Download PDF");
 	const [ats_score, set_ats_score] = useState<number|null>(null)
-	const last_ats_call = useRef(0); // so we only call chatgpt to grade resume every 5s
 
 	useEffect(() => {
-		setLabel(resume.label);
-		setFullName(resume.full_name);
-		setPhoneNumber(resume.phone_number);
-		setEmail(resume.email);
-		setCustomContact(resume.custom_contact);
-		setEducation(resume.education);
-		setExperience(resume.experience);
-		setProjects(resume.projects);
-		setTechnicalSkills(resume.technical_skills);
+		setLabel(imported_resume.label);
+		setFullName(imported_resume.full_name);
+		setPhoneNumber(imported_resume.phone_number);
+		setEmail(imported_resume.email);
+		setCustomContact(imported_resume.custom_contact);
+		setEducation(imported_resume.education);
+		setExperience(imported_resume.experience);
+		setProjects(imported_resume.projects);
+		setTechnicalSkills(imported_resume.technical_skills);
 
 		setSyncStatus('good');
 
@@ -146,24 +145,14 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 		doAsync();
 	}, [label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills]);
 
+	/*
+	 * Use SyncStatus to queue a ATS score on every change only
+	 * when the resume has been loaded
+	 */
 	useEffect(() => {
-		async function doAsync() {
-			const currentTime = Date.now();
-			if (sync_status !== "good") { return }
-			if (currentTime - last_ats_call.current < 5000) {
-				set_ats_score(null)
-				// Schedule a call to `doAsync` after the remaining time
-				const remainingTime = 5000 - (currentTime - last_ats_call.current);
-				setTimeout(doAsync, remainingTime);
-				return
-			}
-			console.log("EXECUTING")
-			last_ats_call.current = currentTime;
-			const resume = { resume_id, label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills };
-			set_ats_score(await get_ats_score(resume))
-		}
-
-		doAsync()
+		if (sync_status !== "good") { return }
+		const resume = { resume_id, label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills };
+		queue_ats_score(resume, set_ats_score)
 	}, [sync_status])
 
 	function getResumeHTML() {
