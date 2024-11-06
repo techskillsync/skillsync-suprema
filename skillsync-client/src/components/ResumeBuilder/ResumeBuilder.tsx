@@ -5,7 +5,9 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
-import toast, { Toaster } from "react-hot-toast";
+// @ts-ignore (since ts cannot understand gif's)
+import spinner from '../../assets/spinner.gif'
+import { queue_ats_score } from './AtsScanner';
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
 type SyncStatus = 'good' | 'loading' | 'blocked' | 'failed';
@@ -102,9 +104,9 @@ async function generateResumePDF(htmlContent: string):Promise<null|Blob>
 	}
 }
 
-type ResumeBuilderProps = { resume: Resume, closeResume: () => void };
-function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
-	const resume_id = resume.resume_id;
+type ResumeBuilderProps = { imported_resume: Resume, closeResume: () => void };
+function ResumeBuilder({ imported_resume, closeResume }: ResumeBuilderProps) {
+	const resume_id = imported_resume.resume_id;
 	const [sync_status, setSyncStatus] = useState<SyncStatus>('blocked');
 	const [label, setLabel] = useState<string>('');
 	const [full_name, setFullName] = useState<string>('');
@@ -119,17 +121,18 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 	type PreviewResumeRef = { getResumeHTML: () => string|undefined; };
 	const previewResumeRef = useRef<PreviewResumeRef | null>(null); // So we can access PreviewResume's getResumeHTML function
 	const [downloadButtonText, setDownloadButtonText] = useState<string>("Download PDF");
+	const [ats_score, set_ats_score] = useState<number|null>(null)
 
 	useEffect(() => {
-		setLabel(resume.label);
-		setFullName(resume.full_name);
-		setPhoneNumber(resume.phone_number);
-		setEmail(resume.email);
-		setCustomContact(resume.custom_contact);
-		setEducation(resume.education);
-		setExperience(resume.experience);
-		setProjects(resume.projects);
-		setTechnicalSkills(resume.technical_skills);
+		setLabel(imported_resume.label);
+		setFullName(imported_resume.full_name);
+		setPhoneNumber(imported_resume.phone_number);
+		setEmail(imported_resume.email);
+		setCustomContact(imported_resume.custom_contact);
+		setEducation(imported_resume.education);
+		setExperience(imported_resume.experience);
+		setProjects(imported_resume.projects);
+		setTechnicalSkills(imported_resume.technical_skills);
 
 		setSyncStatus('good');
 
@@ -143,6 +146,17 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 
 		doAsync();
 	}, [label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills]);
+
+	/*
+	 * Use SyncStatus to queue a ATS score on every change only
+	 * when the resume has been loaded
+	 */
+	useEffect(() => {
+		if (sync_status !== "good") { return }
+		set_ats_score(null)
+		const resume = { resume_id, label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills };
+		queue_ats_score(resume, set_ats_score)
+	}, [sync_status])
 
 	function getResumeHTML() {
 		if (!previewResumeRef.current) { return undefined; }
@@ -163,6 +177,17 @@ function ResumeBuilder({ resume, closeResume }: ResumeBuilderProps) {
 					value={label}
 					onChange={(e) => { setLabel(e.target.value) }} />
 				<div className="ml-auto text-xl flex items-center mr-4 font-semibold">
+					<p className="">ATS Score: 
+						<span className="text-green-400 font-bold">
+							{ats_score ? (
+								<> {ats_score}</>
+								) : (
+								<img src={spinner} width={32} height={32} className=" pl-2 inline" />
+							)}
+						</span>
+					</p>
+				</div>
+				<div className="ml-4 text-xl flex items-center mr-4 font-semibold">
 					{(() => {
 						switch (sync_status) {
 							case 'good':

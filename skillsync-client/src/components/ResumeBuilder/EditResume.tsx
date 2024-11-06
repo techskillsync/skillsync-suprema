@@ -14,14 +14,10 @@ import {
   Building2,
   MapPin,
   GraduationCap,
-  Calendar,
   PlusIcon,
   BrainCircuit,
   Briefcase,
-  Code,
-  Link2,
   HighlighterIcon,
-  Plus,
 } from "lucide-react";
 
 async function simpleGPT(messages: Array<Object>): Promise<string> {
