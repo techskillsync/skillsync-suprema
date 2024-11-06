@@ -5,6 +5,7 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
+import spinner from '../../assets/spinner.gif'
 import { queue_ats_score } from './AtsScanner';
 // When blocked will not attempt to sync. Used so
 // we dont sync values before they are loaded.
@@ -151,6 +152,7 @@ function ResumeBuilder({ imported_resume, closeResume }: ResumeBuilderProps) {
 	 */
 	useEffect(() => {
 		if (sync_status !== "good") { return }
+		set_ats_score(null)
 		const resume = { resume_id, label, full_name, phone_number, email, custom_contact, education, experience, projects, technical_skills };
 		queue_ats_score(resume, set_ats_score)
 	}, [sync_status])
@@ -179,7 +181,7 @@ function ResumeBuilder({ imported_resume, closeResume }: ResumeBuilderProps) {
 							{ats_score ? (
 								<> {ats_score}</>
 								) : (
-								<> NA</>
+								<img src={spinner} width={32} height={32} className=" pl-2 inline" />
 							)}
 						</span>
 					</p>
