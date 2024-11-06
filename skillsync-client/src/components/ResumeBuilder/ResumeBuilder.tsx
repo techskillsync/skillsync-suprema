@@ -5,6 +5,7 @@ import { GetUserId } from '../../supabase/GetUserId';
 import PreviewResume from './PreviewResume';
 import EditResume from './EditResume';
 import { PiArrowLeft } from "react-icons/pi";
+// @ts-ignore (since ts cannot understand gif's)
 import spinner from '../../assets/spinner.gif'
 import { queue_ats_score } from './AtsScanner';
 // When blocked will not attempt to sync. Used so
