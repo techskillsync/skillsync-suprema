@@ -6,7 +6,7 @@ https://skillsync.work
 https://ss-api.skillsync.work  
 https://gpt-broker.skillsync.work  
 https://gpt-broker.skillsync.work  
-https://js-api.skillsync.work
+https://js-api.skillsync.work  
 **Inernal Endpoints:**  
 http://localhost:8011 (gpt-broker)  
 http://localhost:8012 (ss-api)  
