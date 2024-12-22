@@ -14,6 +14,7 @@ http://localhost:8014 (gpt-broker's redis-redinsight)
 http://localhost:8015 (js-api)  
 http://localhost:8020 (sk_prometheus)  
 http://localhost:8021 (sk_grafana)  
+http://localhost:8022 (export_metrics)  
 
 ## Google Authentication
 I needed to make some changes for react. In general I followed this guide using the google pre build sign in.
